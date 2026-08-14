@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080A12">
+<title>AuraQR — Premium QR Generator</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+        onerror="this.onerror=null;this.src='https://unpkg.com/qrcodejs@1.0.0/qrcode.min.js'"></script>
+
+<style>
+/* =========================================================
+   AUR AQR — PREMIUM STANDALONE BUILD
+   No Tailwind. No icon library dependency.
+========================================================= */
+:root{
+  --bg:#f4f6ff;--bg2:#eef2ff;--card:rgba(255,255,255,.84);--solid:#fff;
+  --text:#111827;--muted:#64748b;--line:rgba(15,23,42,.10);
+  --accent:#635bff;--accent2:#8b5cf6;--glow:rgba(99,91,255,.20);
+  --ok:#16a34a;--bad:#ef4444;--shadow:0 20px 60px rgba(31,41,55,.13);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --smooth:cubic-bezier(.22,.8,.25,1);
+}
+html.dark{
+  --bg:#080a12;--bg2:#0c1020;--card:rgba(17,21,34,.88);--solid:#111624;
+  --text:#f7f8ff;--muted:#9aa5b8;--line:rgba(255,255,255,.10);
+  --accent:#8b7cff;--accent2:#c084fc;--glow:rgba(139,124,255,.24);
+  --shadow:0 24px 75px rgba(0,0,0,.40);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 4% 0%,var(--glow),transparent 28rem),
+    radial-gradient(circle at 100% 18%,rgba(192,132,252,.10),transparent 27rem),
+    linear-gradient(180deg,var(--bg2),var(--bg));
+  transition:background .4s ease,color .4s ease;overflow-x:hidden;
+}
+body.modal-open{overflow:hidden}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:3px solid var(--glow);outline-offset:2px
+}
+.wrap{width:min(1120px,calc(100% - 24px));margin:auto}
+
+/* Header */
+.header{
+  position:sticky;top:10px;z-index:30;width:min(1120px,calc(100% - 16px));
+  margin:10px auto 0;padding:10px 12px 10px 16px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--card);border:1px solid var(--line);border-radius:22px;
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:var(--shadow);
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:950;font-size:21px;letter-spacing:-.05em}
+.brand-mark{
+  width:40px;height:40px;border-radius:13px;display:grid;place-items:center;color:#fff;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 9px 25px var(--glow)
+}
+.brand span{color:var(--accent)}
+.header-actions{display:flex;align-items:center;gap:8px}
+.select,.icon-btn{
+  min-height:42px;border:1px solid var(--line);border-radius:13px;background:var(--solid);color:var(--text);
+  transition:transform .35s var(--spring),box-shadow .35s var(--spring),border-color .25s
+}
+.select{padding:0 12px}.icon-btn{width:42px;display:grid;place-items:center;font-size:20px}
+.select:hover,.icon-btn:hover{transform:translateY(-2px);box-shadow:0 9px 25px var(--glow)}
+.select:active,.icon-btn:active{transform:scale(.93)}
+
+/* Hero */
+.hero{text-align:center;padding:74px 0 42px}
+.eyebrow{
+  display:inline-flex;padding:7px 12px;border:1px solid var(--line);border-radius:999px;
+  background:var(--card);color:var(--accent);font-size:11px;font-weight:950;letter-spacing:.12em
+}
+.hero h1{max-width:850px;margin:18px auto 14px;font-size:clamp(44px,8vw,78px);line-height:.94;letter-spacing:-.07em}
+.gradient{background:linear-gradient(135deg,var(--accent),var(--accent2),#d946ef);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:680px;margin:auto;color:var(--muted);line-height:1.7;font-size:15px}
+
+/* Cards/layout */
+.app{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(330px,.95fr);gap:18px;margin-bottom:70px}
+.stack{display:grid;gap:18px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:26px;
+  box-shadow:var(--shadow);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)
+}
+.panel{padding:20px}.preview-card{padding:20px;position:sticky;top:82px}
+.section{margin-bottom:20px}.section:last-child{margin-bottom:0}
+.title{font-size:15px;font-weight:950;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+.label{display:block;color:var(--muted);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+textarea,.input{
+  width:100%;border:1px solid var(--line);border-radius:15px;padding:13px 14px;
+  background:var(--solid);color:var(--text);outline:0;transition:border-color .25s,box-shadow .25s,transform .25s
+}
+textarea{min-height:112px;resize:vertical}
+textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--glow)}
+.tabs{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:5px;
+  border:1px solid var(--line);border-radius:15px;background:var(--solid);margin-bottom:11px
+}
+.tab{
+  border:0;background:transparent;color:var(--muted);border-radius:11px;padding:10px 6px;
+  font-size:12px;font-weight:950;transition:all .35s var(--spring)
+}
+.tab:hover{transform:translateY(-2px)}.tab:active{transform:scale(.95)}
+.tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 8px 22px var(--glow)}
+.input-row{display:flex;gap:8px;margin-top:8px}
+.small,.secondary{
+  border:1px solid var(--line);background:var(--solid);color:var(--text);
+  border-radius:12px;padding:9px 12px;font-size:12px;font-weight:900;
+  transition:all .35s var(--spring)
+}
+.small:hover,.secondary:hover{transform:translateY(-3px);box-shadow:0 10px 24px var(--glow)}
+.small:active,.secondary:active{transform:translateY(1px) scale(.95)}
+.primary{
+  width:100%;border:0;border-radius:15px;padding:14px;font-weight:950;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;
+  box-shadow:0 13px 32px var(--glow);margin-top:10px;
+  transition:all .35s var(--spring);position:relative;overflow:hidden
+}
+.primary:hover{transform:translateY(-3px) scale(1.01);box-shadow:0 18px 38px var(--glow)}
+.primary:active{transform:translateY(1px) scale(.96)}
+.primary::after{
+  content:"";position:absolute;inset:-80% -20%;background:linear-gradient(110deg,transparent 42%,rgba(255,255,255,.25) 50%,transparent 58%);
+  transform:translateX(-70%);transition:transform .7s ease
+}
+.primary:hover::after{transform:translateX(70%)}
+
+/* Theme bundle */
+.theme-bundle{
+  display:flex;align-items:center;gap:14px;padding:14px;border:1px solid var(--line);
+  border-radius:19px;background:var(--solid);transition:all .4s var(--spring);cursor:pointer
+}
+.theme-bundle:hover{transform:translateY(-3px) scale(1.01);box-shadow:0 14px 35px var(--glow);border-color:rgba(139,124,255,.45)}
+.theme-bundle:active{transform:scale(.97)}
+.bundle-preview{display:flex;width:108px;height:54px;border-radius:13px;overflow:hidden;flex-shrink:0;border:1px solid var(--line);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.bundle-half{width:50%;position:relative}.bundle-half::after{content:"";position:absolute;width:25px;height:25px;border:3px solid rgba(255,255,255,.8);border-radius:4px;left:12px;top:14px}
+.bundle-info{min-width:0;flex:1}.bundle-title{font-weight:950;font-size:13px}.bundle-sub{color:var(--muted);font-size:10px;margin-top:3px;line-height:1.4}
+.bundle-arrow{font-size:22px;color:var(--muted);transition:transform .35s var(--spring)}.theme-bundle:hover .bundle-arrow{transform:translateX(5px);color:var(--accent)}
+.design-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:stretch}
+.design-choice{min-width:0;display:flex;flex-direction:column}
+.design-choice>.title{margin-bottom:9px}
+.design-choice .theme-bundle{
+  height:100%;min-height:176px;padding:14px;display:flex;flex-direction:column;
+  align-items:stretch;justify-content:space-between;gap:12px;border-radius:22px
+}
+.design-choice .bundle-preview{width:100%;height:82px;border-radius:16px;flex:none}
+.design-choice .bundle-half::after{width:28px;height:28px;left:15px;top:24px}
+.design-choice .bundle-info{width:100%}
+.design-choice .bundle-title{font-size:14px}
+.design-choice .bundle-sub{font-size:10px}
+.design-choice .bundle-arrow{position:absolute;right:16px;bottom:18px}
+.structure-preview{
+  width:100%;height:82px;border-radius:16px;flex-shrink:0;border:1px solid var(--line);
+  padding:10px;background:#fff;display:grid;grid-template-columns:repeat(9,1fr);
+  grid-template-rows:repeat(9,1fr);gap:2px;overflow:hidden
+}
+.structure-preview span{display:block;background:#111827;border-radius:0;transition:all .35s var(--spring)}
+.structure-preview span.round{border-radius:50%}
+.structure-preview span.soft{border-radius:4px}
+.structure-preview span.compact{transform:scale(.72);border-radius:3px}
+.structure-preview span.diamond{transform:rotate(45deg) scale(.72);border-radius:1px}
+.structure-preview span.pixel{transform:scale(.88);border-radius:2px}
+.result-pop{animation:resultPop .7s var(--spring)}
+@keyframes resultPop{0%{opacity:.35;transform:translateY(28px) scale(.92)}60%{opacity:1;transform:translateY(-7px) scale(1.025)}100%{opacity:1;transform:none}}
+
+
+/* Modal */
+.modal-backdrop{
+  position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:18px;
+  background:rgba(4,6,15,.64);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease
+}
+.modal-backdrop.open{opacity:1;visibility:visible}
+.theme-modal{
+  width:min(760px,100%);max-height:min(760px,calc(100dvh - 30px));overflow:auto;
+  background:var(--card);border:1px solid var(--line);border-radius:28px;box-shadow:0 35px 100px rgba(0,0,0,.45);
+  transform:translateY(45px) scale(.86);opacity:0;transition:transform .55s var(--spring),opacity .35s ease
+}
+.modal-backdrop.open .theme-modal{transform:translateY(0) scale(1);opacity:1}
+.modal-head{
+  position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:18px 18px 14px;background:var(--card);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)
+}
+.modal-title{font-size:18px;font-weight:950}.modal-sub{font-size:10px;color:var(--muted);margin-top:3px}
+.close-btn{
+  width:40px;height:40px;border:1px solid var(--line);background:var(--solid);color:var(--text);
+  border-radius:12px;font-size:20px;transition:all .35s var(--spring)
+}
+.close-btn:hover{transform:rotate(8deg) scale(1.06)}.close-btn:active{transform:scale(.88)}
+.modal-body{padding:18px}.theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:560px){.theme-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.swatch{height:116px}.structure-art{width:92px;height:92px}}
+.theme{
+  padding:12px;text-align:left;border:1px solid var(--line);border-radius:18px;background:var(--solid);color:var(--text);
+  transition:all .38s var(--spring);animation:themePop .45s var(--spring) both;cursor:pointer;min-width:0
+}
+.theme:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.theme:hover{transform:translateY(-5px) scale(1.025);box-shadow:0 14px 32px var(--glow);border-color:var(--accent)}
+.theme:active{transform:scale(.95)}
+.theme.active{border-color:var(--accent);box-shadow:0 0 0 3px var(--glow)}
+.swatch{height:112px;border-radius:14px;margin-bottom:9px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff}
+.structure-art{width:88px;height:88px;display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(11,1fr);gap:2px;padding:6px}
+.structure-art .m{background:#111827}
+.structure-art .m.round{border-radius:50%}
+.structure-art .m.soft{border-radius:5px}
+.structure-art .m.compact{transform:scale(.68);border-radius:3px}
+.structure-art .m.diamond{transform:rotate(45deg) scale(.68);border-radius:1px}
+.structure-art .m.pixel{transform:scale(.86);border-radius:2px}
+.structure-art .finder{background:#111827!important;border-radius:0!important;transform:none!important;position:relative}
+.structure-art .finder::after{content:"";position:absolute;inset:24%;background:#fff}
+.structure-art .finder::before{content:"";position:absolute;inset:38%;background:#111827;z-index:1}
+.theme-name{font-size:11px;font-weight:950}.theme-code{font-size:9px;color:var(--muted);margin-top:2px}
+@keyframes themePop{from{opacity:0;transform:translateY(15px) scale(.94)}to{opacity:1;transform:none}}
+
+/* Customize */
+.style-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.style{
+  border:1px solid var(--line);border-radius:13px;padding:10px;background:var(--solid);color:var(--text);
+  font-size:11px;font-weight:900;transition:all .35s var(--spring)
+}
+.style:hover{transform:translateY(-3px)}.style:active{transform:scale(.94)}
+.style.active{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 3px var(--glow)}
+.colors{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.colorbox{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--solid);padding:7px;border-radius:14px}
+.colorbox input{width:42px;height:34px;border:0;background:transparent;padding:2px;cursor:pointer}
+.hex{font:800 11px ui-monospace,monospace}.range{display:flex;align-items:center;gap:10px}.range input{width:100%;accent-color:var(--accent)}.range span{width:40px;text-align:right;font-size:11px;font-weight:900}
+.logo-row{display:flex;align-items:center;gap:9px}.upload{
+  flex:1;min-height:72px;border:1px dashed var(--accent);border-radius:15px;background:var(--solid);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:850;cursor:pointer;
+  transition:all .35s var(--spring)
+}
+.upload:hover{transform:translateY(-3px);box-shadow:0 10px 25px var(--glow)}.upload:active{transform:scale(.97)}.upload input{display:none}
+#logoPreview{display:none;width:58px;height:58px;object-fit:contain;background:#fff;padding:5px;border-radius:12px;border:1px solid var(--line)}
+.remove{display:none;width:40px;height:40px;border:0;border-radius:12px;background:rgba(239,68,68,.1);color:var(--bad);transition:all .35s var(--spring)}.remove:hover{transform:rotate(8deg) scale(1.05)}.remove:active{transform:scale(.88)}
+
+/* Preview */
+.preview-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.preview-label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:950;color:var(--muted)}
+.status{font-size:11px;font-weight:900;color:var(--ok);margin-top:3px}.badge{padding:6px 9px;border-radius:999px;background:rgba(22,163,74,.1);color:var(--ok);font-size:9px;font-weight:950}
+.qr-stage{
+  width:100%;min-height:360px;display:grid;place-items:center;padding:18px;border-radius:20px;border:1px solid var(--line);
+  background:radial-gradient(circle at 50% 25%,var(--glow),transparent 60%),var(--solid);overflow:hidden;
+  transition:transform .4s var(--spring),box-shadow .4s var(--spring)
+}
+.qr-stage:hover{box-shadow:0 14px 35px var(--glow)}
+#qrCanvas{display:block;width:min(320px,100%);height:auto;max-width:100%;image-rendering:pixelated;border-radius:8px}
+.downloads{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.note{text-align:center;color:var(--muted);font-size:10px;line-height:1.5;margin-top:10px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding-bottom:70px}.feature{padding:20px}.feature h3{font-size:14px;margin:9px 0 5px}.feature p{color:var(--muted);font-size:11px;line-height:1.6;margin:0}
+
+/* Scroll reveals */
+.reveal{opacity:0;transform:translateY(30px) scale(.97);transition:opacity .7s var(--spring),transform .7s var(--spring)}
+.reveal.visible{opacity:1;transform:none}
+
+/* Toast */
+.toast{position:fixed;z-index:200;left:50%;bottom:22px;transform:translate(-50%,28px) scale(.9);opacity:0;pointer-events:none;background:var(--text);color:var(--bg);padding:11px 15px;border-radius:13px;font-size:12px;font-weight:900;transition:all .35s var(--spring)}
+.toast.show{opacity:1;transform:translate(-50%,0) scale(1)}
+#engineError{display:none;text-align:center;color:var(--bad);font-size:12px;font-weight:800;line-height:1.5;max-width:260px}
+
+/* Ripple */
+.ripple{position:relative;overflow:hidden}.ripple-wave{position:absolute;border-radius:50%;background:rgba(255,255,255,.35);transform:scale(0);animation:ripple .55s ease-out;pointer-events:none}@keyframes ripple{to{transform:scale(4);opacity:0}}
+
+@media(max-width:860px){
+  .app{grid-template-columns:1fr}
+  .stack{display:contents}
+  .stack > section:nth-child(1){order:1}
+  .preview-card{position:static;order:2}
+  .stack > section:nth-child(2){order:3}
+  .stack > section:nth-child(3){order:4}
+  .features{grid-template-columns:1fr}
+  .design-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .design-choice .theme-bundle{min-height:158px;padding:10px}
+  .design-choice .bundle-preview,.structure-preview{height:70px}
+  .design-choice .bundle-title{font-size:12px}
+  .design-choice .bundle-sub{font-size:9px}
+}
+@media(max-width:520px){
+  .wrap{width:calc(100% - 16px)}.header{width:calc(100% - 12px)}.hero{padding:55px 0 32px}.hero h1{font-size:48px}
+  .panel,.preview-card{padding:16px}.qr-stage{min-height:310px;padding:12px}
+  .theme-grid{grid-template-columns:repeat(2,1fr)}.modal-backdrop{padding:8px;align-items:end}
+  .theme-modal{max-height:88dvh;border-radius:26px 26px 0 0;transform:translateY(100%) scale(.96)}
+  .modal-backdrop.open .theme-modal{transform:translateY(0) scale(1)}
+  .modal-head{padding:15px 15px 12px}.modal-body{padding:14px}.bundle-preview{width:88px;height:48px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+
+<body>
+<header class="header reveal">
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+        <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+        <rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM18 18h3v3h-3zM14 20h2"/>
+      </svg>
+    </div>
+    <div>Aura<span>QR</span></div>
+  </div>
+  <div class="header-actions">
+    <select id="language" class="select ripple" aria-label="Language">
+      <option value="en">🌐 English</option><option value="hi">🌐 हिन्दी</option>
+      <option value="es">🌐 Español</option><option value="fr">🌐 Français</option>
+    </select>
+    <button id="themeToggle" class="icon-btn ripple" aria-label="Toggle theme">☾</button>
+  </div>
+</header>
+
+<main class="wrap">
+<section class="hero reveal">
+  <div class="eyebrow">PRIVATE • FAST • FREE</div>
+  <h1>Make QR codes<br><span class="gradient">that actually work.</span></h1>
+  <p id="heroText">Create reliable QR codes from links, text and Wi-Fi data. Choose a premium color theme, add your logo and download instantly.</p>
+</section>
+
+<section class="app">
+<div class="stack">
+
+<section class="card panel reveal">
+  <div class="section">
+    <div class="title" id="contentTitle">⌁ Enter QR Data</div>
+    <div class="tabs">
+      <button class="tab active ripple" data-type="url">URL</button>
+      <button class="tab ripple" data-type="text">Text</button>
+      <button class="tab ripple" data-type="wifi">Wi-Fi</button>
+    </div>
+    <textarea id="qrInput" placeholder="https://example.com" spellcheck="false"></textarea>
+    <div class="input-row"><button id="pasteBtn" class="small ripple">Paste</button><button id="clearBtn" class="small ripple">Clear</button></div>
+    <div id="inputHint" style="color:var(--muted);font-size:10px;margin-top:7px">Paste a website link. https:// will be added automatically if needed.</div>
+    <button id="generateBtn" class="primary ripple">✦ Generate QR Code</button>
+  </div>
+</section>
+
+<section class="card panel reveal design-row">
+  <div class="design-choice">
+    <div class="title">🎨 QR Theme</div>
+    <div class="theme-bundle ripple" id="themeBundle" role="button" tabindex="0" aria-label="Open QR themes">
+      <div class="bundle-preview"><div id="bundleFg" class="bundle-half"></div><div id="bundleBg" class="bundle-half"></div></div>
+      <div class="bundle-info"><div id="bundleName" class="bundle-title">Classic</div><div class="bundle-sub">16 premium palettes</div></div>
+      <div class="bundle-arrow">›</div>
+    </div>
+  </div>
+  <div class="design-choice">
+    <div class="title">▦ QR Structure</div>
+    <div class="theme-bundle ripple" id="structureBundle" role="button" tabindex="0" aria-label="Open QR structures">
+      <div id="structurePreview" class="structure-preview"><span></span><span></span><span></span><span></span></div>
+      <div class="bundle-info"><div id="structureName" class="bundle-title">Square</div><div class="bundle-sub">Choose module shape</div></div>
+      <div class="bundle-arrow">›</div>
+    </div>
+  </div>
+</section>
+
+<section class="card panel reveal">
+  <div class="title">✦ Customize</div>
+
+  <div class="section" style="display:none" aria-hidden="true"><button class="style active" data-style="square">Square</button></div>
+
+  <div class="section colors">
+    <div><div class="label">QR Color</div><div class="colorbox"><input id="fgColor" type="color" value="#111827"><span id="fgHex" class="hex">#111827</span></div></div>
+    <div><div class="label">Background</div><div class="colorbox"><input id="bgColor" type="color" value="#FFFFFF"><span id="bgHex" class="hex">#FFFFFF</span></div></div>
+  </div>
+
+  <div class="section">
+    <div class="label">Center Logo</div>
+    <div class="logo-row">
+      <label class="upload ripple"><span style="font-size:21px">＋</span><span>Choose image from gallery</span><input id="logoInput" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml"></label>
+      <img id="logoPreview" alt="Logo preview"><button id="removeLogo" class="remove ripple" aria-label="Remove logo">✕</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="label">Error Correction</div>
+    <select id="errorCorrection" class="input">
+      <option value="L">Low — smallest</option><option value="M">Medium — balanced</option>
+      <option value="Q" selected>High — recommended</option><option value="H">Maximum — best for logos</option>
+    </select>
+  </div>
+
+  <div><div class="label">Export Size</div><div class="range"><input id="qrSize" type="range" min="220" max="800" value="420"><span id="sizeValue">420</span></div></div>
+</section>
+</div>
+
+<aside class="card preview-card reveal">
+  <div class="preview-top">
+    <div><div class="preview-label">Live Preview</div><div id="status" class="status">Ready to scan ✓</div></div>
+    <div class="badge">SCANNABLE</div>
+  </div>
+  <div class="qr-stage"><canvas id="qrCanvas" width="420" height="420"></canvas><div id="engineError">The QR engine could not load.<br>Connect to the internet and reload the page.</div></div>
+  <button id="downloadPng" class="primary ripple">↓ Download PNG</button>
+  <div class="downloads"><button id="downloadSvg" class="secondary ripple">Download SVG</button><button id="copyBtn" class="secondary ripple">Copy Data</button></div>
+  <div class="note">Your QR data is processed in your browser. This page does not upload it.</div>
+</aside>
+</section>
+
+<section class="features">
+  <div class="card feature reveal"><div style="font-size:22px">🎨</div><h3>Premium themes</h3><p>Open the compact theme studio and choose from curated combinations.</p></div>
+  <div class="card feature reveal"><div style="font-size:22px">🖼️</div><h3>Logo support</h3><p>Add a small center logo while preserving error correction.</p></div>
+  <div class="card feature reveal"><div style="font-size:22px">⚡</div><h3>Instant generation</h3><p>Paste a URL and the QR updates automatically in your browser.</p></div>
+</section>
+</main>
+
+<!-- Theme studio -->
+<div id="themeModal" class="modal-backdrop" aria-hidden="true">
+  <div class="theme-modal" role="dialog" aria-modal="true" aria-labelledby="themeModalTitle">
+    <div class="modal-head">
+      <div><div class="modal-title" id="themeModalTitle">Premium QR Themes</div><div class="modal-sub">Pick a palette. Your QR structure stays intact.</div></div>
+      <button id="closeThemes" class="close-btn ripple" aria-label="Close themes">×</button>
+    </div>
+    <div class="modal-body"><div id="themeGrid" class="theme-grid"></div></div>
+  </div>
+</div>
+
+<div id="structureModal" class="modal-backdrop" aria-hidden="true">
+  <div class="theme-modal" role="dialog" aria-modal="true" aria-labelledby="structureModalTitle">
+    <div class="modal-head">
+      <div><div class="modal-title" id="structureModalTitle">QR Structures</div><div class="modal-sub">Choose a module shape while keeping finder patterns scan-friendly.</div></div>
+      <button id="closeStructures" class="close-btn ripple" aria-label="Close structures">×</button>
+    </div>
+    <div class="modal-body"><div id="structureGrid" class="theme-grid"></div></div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+let currentType="url", currentStyle="square", logoData=null, generating=false, activeThemeName="Classic";
+
+const structures=[
+  ["Square","Classic block modules","square"],
+  ["Dots","Rounded dot modules","dots"],
+  ["Soft Round","Soft rounded modules","rounded"],
+  ["Compact","Tighter rounded modules","compact"],
+  ["Diamond","Angular decorative modules","diamond"],
+  ["Pixel Soft","Small softened pixels","pixel"]
+];
+
+const themes=[
+["Classic","#111827","#FFFFFF"],["Midnight","#111827","#E0E7FF"],["Royal","#4C1D95","#EDE9FE"],
+["Ocean","#075985","#E0F2FE"],["Cyber","#0F172A","#67E8F9"],["Neon","#581C87","#F0ABFC"],
+["Forest","#14532D","#DCFCE7"],["Emerald","#064E3B","#D1FAE5"],["Sunset","#7C2D12","#FFEDD5"],
+["Rose","#881337","#FFE4E6"],["Luxury Gold","#422006","#FEF3C7"],["Ice","#164E63","#CFFAFE"],
+["Coffee","#451A03","#FEF3C7"],["Lavender","#4C1D95","#F5F3FF"],["Crimson","#7F1D1D","#FEE2E2"],["Mono","#000000","#FFFFFF"]
+];
+const $=id=>document.getElementById(id);
+
+function toast(msg){const e=$("toast");e.textContent=msg;e.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>e.classList.remove("show"),1800)}
+function ripple(e){
+  const b=e.currentTarget;if(!b)return;
+  const r=document.createElement("span"),rect=b.getBoundingClientRect(),size=Math.max(rect.width,rect.height);
+  r.className="ripple-wave";r.style.width=r.style.height=size+"px";
+  r.style.left=(e.clientX-rect.left-size/2)+"px";r.style.top=(e.clientY-rect.top-size/2)+"px";
+  b.appendChild(r);setTimeout(()=>r.remove(),600);
+}
+document.querySelectorAll(".ripple").forEach(b=>b.addEventListener("pointerdown",ripple));
+
+function updateBundle(name,fg,bg){
+  activeThemeName=name;$("bundleName").textContent=name;
+  $("bundleFg").style.background=fg;$("bundleBg").style.background=bg;
+}
+function renderThemes(){
+  const grid=$("themeGrid"),fg=$("fgColor").value.toUpperCase(),bg=$("bgColor").value.toUpperCase();
+  grid.innerHTML="";
+  themes.forEach(([name,f,b],i)=>{
+    const x=document.createElement("button");x.className="theme"+(fg===f&&bg===b?" active":"");
+    x.style.animationDelay=(i*22)+"ms";
+    x.innerHTML=`<div class="swatch" style="background:linear-gradient(135deg,${f} 50%,${b} 50%)"></div><div class="theme-name">${name}</div><div class="theme-code">${f} / ${b}</div>`;
+    x.addEventListener("click",()=>{ $("fgColor").value=f;$("bgColor").value=b;updateHex();updateBundle(name,f,b);renderThemes();generateQR();toast(name+" theme applied");setTimeout(closeThemes,180)});
+    grid.appendChild(x);
+  });
+}
+function updateHex(){$("fgHex").textContent=$("fgColor").value.toUpperCase();$("bgHex").textContent=$("bgColor").value.toUpperCase()}
+function openThemes(){
+  renderThemes();$("themeModal").classList.add("open");$("themeModal").setAttribute("aria-hidden","false");document.body.classList.add("modal-open");
+  setTimeout(()=>$("closeThemes").focus(),100);
+}
+function closeThemes(){
+  $("themeModal").classList.remove("open");$("themeModal").setAttribute("aria-hidden","true");document.body.classList.remove("modal-open");
+}
+$("themeBundle").addEventListener("click",openThemes);
+$("themeBundle").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openThemes()}});
+$("closeThemes").addEventListener("click",closeThemes);
+$("themeModal").addEventListener("click",e=>{if(e.target===$("themeModal"))closeThemes()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeThemes();closeStructures()}});
+
+
+function updateStructureBundle(){
+  const found=structures.find(x=>x[2]===currentStyle);
+  $("structureName").textContent=found?found[0]:"Square";
+  const p=$("structurePreview");p.innerHTML="";
+  const type=structureCellType(currentStyle);
+  const size=9;
+  const finder=(r,c,fr,fc)=>r>=fr&&r<fr+3&&c>=fc&&c<fc+3;
+  for(let r=0;r<size;r++){
+    for(let c=0;c<size;c++){
+      const s=document.createElement("span");s.className=type;
+      const inF=finder(r,c,0,0)||finder(r,c,6,0)||finder(r,c,0,6);
+      if(inF){
+        s.style.background="#111827";
+        s.style.borderRadius="0";
+        s.style.transform="none";
+      }else{
+        const on=((r*13+c*19+r*c*5)%4)<2;
+        s.style.opacity=on?"1":"0";
+      }
+      p.appendChild(s);
+    }
+  }
+}
+function structureCellType(key){
+  if(key==="dots")return "round";
+  if(key==="rounded")return "soft";
+  if(key==="compact")return "compact";
+  if(key==="diamond")return "diamond";
+  if(key==="pixel")return "pixel";
+  return "";
+}
+function makeMiniQR(key){
+  const art=document.createElement("div");art.className="structure-art";
+  const type=structureCellType(key);
+  const size=11;
+  const finder=(r,c,fr,fc)=>{
+    return r>=fr&&r<fr+5&&c>=fc&&c<fc+5;
+  };
+  for(let r=0;r<size;r++){
+    for(let c=0;c<size;c++){
+      const s=document.createElement("span");s.className="m "+type;
+      const inFinder=finder(r,c,0,0)||finder(r,c,6,0)||finder(r,c,0,6);
+      const finderBorder=inFinder && (
+        ((r===0||r===4)&&(c>=0&&c<=4)) ||
+        ((c===0||c===4)&&(r>=0&&r<=4)) ||
+        ((r===6||r===10)&&(c>=0&&c<=4)) ||
+        ((c===0||c===4)&&(r>=6&&r<=10)) ||
+        ((r===0||r===4)&&(c>=6&&c<=10)) ||
+        ((c===6||c===10)&&(r>=0&&r<=4))
+      );
+      if(inFinder){
+        s.classList.add("finder");
+        // Finder center is handled by pseudo-elements.
+      }else{
+        const on=((r*17+c*31+r*c*7)%5)<2 || (r===5&&c%2===0) || (c===5&&r%3===0);
+        s.style.opacity=on?"1":"0";
+      }
+      if(finderBorder) s.style.opacity="1";
+      art.appendChild(s);
+    }
+  }
+  return art;
+}
+function renderStructures(){
+  const grid=$("structureGrid");grid.innerHTML="";
+  structures.forEach(([name,desc,key],i)=>{
+    const x=document.createElement("button");
+    x.className="theme"+(currentStyle===key?" active":"");
+    x.style.animationDelay=(i*35)+"ms";
+    const sw=document.createElement("div");sw.className="swatch";
+    sw.appendChild(makeMiniQR(key));x.appendChild(sw);
+    const nm=document.createElement("div");nm.className="theme-name";nm.textContent=name;x.appendChild(nm);
+    const ds=document.createElement("div");ds.className="theme-code";ds.textContent=desc;x.appendChild(ds);
+    x.addEventListener("click",()=>{
+      currentStyle=key;updateStructureBundle();renderStructures();generateQR();
+      toast(name+" structure applied");setTimeout(closeStructures,180)
+    });
+    grid.appendChild(x);
+  });
+}
+function openStructures(){
+  closeThemes();renderStructures();$("structureModal").classList.add("open");
+  $("structureModal").setAttribute("aria-hidden","false");document.body.classList.add("modal-open");
+  setTimeout(()=>$("closeStructures").focus(),100);
+}
+function closeStructures(){
+  $("structureModal").classList.remove("open");$("structureModal").setAttribute("aria-hidden","true");document.body.classList.remove("modal-open");
+}
+$("structureBundle").addEventListener("click",openStructures);
+$("structureBundle").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openStructures()}});
+$("closeStructures").addEventListener("click",closeStructures);
+$("structureModal").addEventListener("click",e=>{if(e.target===$("structureModal"))closeStructures()});
+
+function getData(){
+  let v=$("qrInput").value.trim();if(!v)return null;
+  if(currentType==="url"&&!/^[a-z][a-z0-9+.-]*:/i.test(v))v="https://"+v;
+  return v;
+}
+function qrLevel(v){if(typeof QRCode==="undefined")return 2;return v==="L"?QRCode.CorrectLevel.L:v==="M"?QRCode.CorrectLevel.M:v==="H"?QRCode.CorrectLevel.H:QRCode.CorrectLevel.Q}
+function clearQR(){const c=$("qrCanvas"),ctx=c.getContext("2d");ctx.clearRect(0,0,c.width,c.height)}
+
+function focusGeneratedResult(){
+  const card=$("qrCanvas").closest(".preview-card");
+  card.classList.remove("result-pop");void card.offsetWidth;card.classList.add("result-pop");
+  setTimeout(()=>card.scrollIntoView({behavior:"smooth",block:window.innerWidth<=860?"center":"nearest"}),90);
+}
+function generateQR(){
+  if(generating)return;
+  const data=getData();
+  if(!data){clearQR();$("status").textContent="Enter something to generate";$("status").style.color="var(--muted)";return}
+  if(typeof QRCode==="undefined"){$("engineError").style.display="block";$("status").textContent="QR engine loading…";$("status").style.color="var(--bad)";return}
+
+  generating=true;$("engineError").style.display="none";
+  const holder=document.createElement("div");
+  holder.style.cssText="position:fixed;left:-10000px;top:-10000px;width:420px;height:420px";
+  document.body.appendChild(holder);
+
+  try{
+    // Let qrcodejs build the real QR matrix. We then draw that exact matrix ourselves.
+    // This avoids trying to reverse-engineer the QR from pixels, which was the source
+    // of the broken/non-scannable codes in the previous version.
+    const qr=new QRCode(holder,{
+      text:data,
+      width:420,
+      height:420,
+      colorDark:"#000000",
+      colorLight:"#ffffff",
+      correctLevel:qrLevel($("errorCorrection").value)
+    });
+
+    setTimeout(()=>{
+      const out=$("qrCanvas"),ctx=out.getContext("2d"),size=+$("qrSize").value;
+      out.width=size;out.height=size;ctx.imageSmoothingEnabled=false;
+      const matrix=qr && qr._oQRCode && qr._oQRCode.modules;
+
+      if(!matrix || !matrix.length){
+        $("status").textContent="QR generation failed";$("status").style.color="var(--bad)";
+        holder.remove();generating=false;return;
+      }
+
+      ctx.fillStyle=$("bgColor").value;ctx.fillRect(0,0,size,size);
+      drawStyledMatrix(matrix,ctx,size,$("fgColor").value,$("bgColor").value,currentStyle);
+
+      // Logo is drawn synchronously when possible, so it is included in downloads.
+      if(logoData){
+        const img=new Image();
+        img.onload=()=>{
+          drawLogoImage(ctx,img,size,$("bgColor").value);
+          finishQR();
+        };
+        img.onerror=finishQR;
+        img.src=logoData;
+      }else finishQR();
+
+      function finishQR(){
+        $("status").textContent="Ready to scan ✓";$("status").style.color="var(--ok)";
+        holder.remove();generating=false;focusGeneratedResult();
+      }
+    },40);
+  }catch(err){
+    console.error(err);holder.remove();$("status").textContent="Could not generate this QR";$("status").style.color="var(--bad)";generating=false;
+  }
+}
+
+function drawStyledMatrix(matrix,ctx,size,fg,bg,style){
+  const grid=matrix.length;
+  const margin=Math.max(4,Math.round(grid*0.12));
+  const total=grid+margin*2;
+  const cell=size/total;
+  const finderZones=[[0,0],[grid-7,0],[0,grid-7]];
+  const inFinder=(r,c)=>finderZones.some(([fr,fc])=>r>=fr&&r<fr+7&&c>=fc&&c<fc+7);
+
+  ctx.fillStyle=bg;ctx.fillRect(0,0,size,size);
+  ctx.fillStyle=fg;
+
+  for(let r=0;r<grid;r++){
+    for(let c=0;c<grid;c++){
+      if(!matrix[r][c])continue;
+      const x=(c+margin)*cell;
+      const y=(r+margin)*cell;
+      const w=cell+0.35;
+
+      // Finder patterns stay square. They are essential to reliable detection.
+      if(inFinder(r,c)){
+        ctx.fillRect(Math.floor(x),Math.floor(y),Math.ceil(w),Math.ceil(w));
+        continue;
+      }
+
+      ctx.beginPath();
+      if(style==="dots"){
+        // Large enough to remain scan-friendly.
+        ctx.arc(x+cell/2,y+cell/2,cell*0.43,0,Math.PI*2);
+      }else if(style==="rounded"){
+        round(ctx,x+cell*.055,y+cell*.055,cell*.89,cell*.89,cell*.20);
+      }else if(style==="compact"){
+        round(ctx,x+cell*.11,y+cell*.11,cell*.78,cell*.78,cell*.12);
+      }else if(style==="diamond"){
+        ctx.moveTo(x+cell/2,y+cell*.04);
+        ctx.lineTo(x+cell*.96,y+cell/2);
+        ctx.lineTo(x+cell/2,y+cell*.96);
+        ctx.lineTo(x+cell*.04,y+cell/2);
+        ctx.closePath();
+      }else if(style==="pixel"){
+        round(ctx,x+cell*.025,y+cell*.025,cell*.95,cell*.95,cell*.06);
+      }else{
+        ctx.fillRect(Math.floor(x),Math.floor(y),Math.ceil(w),Math.ceil(w));
+        continue;
+      }
+      ctx.fill();
+    }
+  }
+}
+
+function drawLogoImage(ctx,img,size,bg){
+  const s=Math.floor(size*.16),x=(size-s)/2,y=(size-s)/2;
+  ctx.save();ctx.fillStyle=bg;round(ctx,x-8,y-8,s+16,s+16,12);ctx.fill();
+  ctx.beginPath();round(ctx,x,y,s,s,9);ctx.clip();ctx.drawImage(img,x,y,s,s);ctx.restore();
+}
+
+function drawLogo(ctx,src,size,bg){
+  const img=new Image();img.onload=()=>drawLogoImage(ctx,img,size,bg);img.src=src;
+}
+function round(ctx,x,y,w,h,r){if(ctx.roundRect)ctx.roundRect(x,y,w,h,r);else ctx.rect(x,y,w,h)}
+
+function setType(t){
+  currentType=t;document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.type===t));
+  const i=$("qrInput");
+  if(t==="url"){i.placeholder="https://example.com";$("inputHint").textContent="Paste a website link. https:// will be added automatically if needed."}
+  else if(t==="text"){i.placeholder="Write anything you want...";$("inputHint").textContent="Any text can be encoded into the QR."}
+  else{i.placeholder="WIFI:T:WPA;S:MyWiFi;P:MyPassword;;";$("inputHint").textContent="Use the standard Wi-Fi QR format."}
+  generateQR();
+}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>setType(b.dataset.type)));
+document.querySelectorAll(".style").forEach(b=>b.addEventListener("click",()=>{currentStyle=b.dataset.style;document.querySelectorAll(".style").forEach(x=>x.classList.toggle("active",x===b));generateQR()}));
+
+$("qrInput").addEventListener("input",()=>{clearTimeout(window.__inputTimer);window.__inputTimer=setTimeout(generateQR,120)});
+$("generateBtn").addEventListener("click",generateQR);
+$("fgColor").addEventListener("input",()=>{updateHex();renderThemes();updateBundle("Custom",$("fgColor").value,$("bgColor").value);generateQR()});
+$("bgColor").addEventListener("input",()=>{updateHex();renderThemes();updateBundle("Custom",$("fgColor").value,$("bgColor").value);generateQR()});
+$("errorCorrection").addEventListener("change",generateQR);
+$("qrSize").addEventListener("input",()=>{$("sizeValue").textContent=$("qrSize").value;clearTimeout(window.__sizeTimer);window.__sizeTimer=setTimeout(generateQR,80)});
+
+$("clearBtn").addEventListener("click",()=>{$("qrInput").value="";clearQR();$("status").textContent="Enter something to generate";$("status").style.color="var(--muted)";$("qrInput").focus()});
+$("pasteBtn").addEventListener("click",async()=>{try{$("qrInput").value=await navigator.clipboard.readText();generateQR();toast("Pasted")}catch{toast("Paste permission blocked")}});
+
+$("logoInput").addEventListener("change",e=>{
+  const f=e.target.files?.[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{logoData=r.result;$("logoPreview").src=logoData;$("logoPreview").style.display="block";$("removeLogo").style.display="grid";generateQR();toast("Logo added")};r.readAsDataURL(f)
+});
+$("removeLogo").addEventListener("click",()=>{logoData=null;$("logoInput").value="";$("logoPreview").style.display="none";$("removeLogo").style.display="none";generateQR();toast("Logo removed")});
+
+$("downloadPng").addEventListener("click",()=>{const a=document.createElement("a");a.download="auraqr.png";a.href=$("qrCanvas").toDataURL("image/png");a.click();toast("PNG downloaded")});
+$("downloadSvg").addEventListener("click",()=>{
+  const c=$("qrCanvas"),s=c.width,p=c.toDataURL("image/png");
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><image href="${p}" width="${s}" height="${s}"/></svg>`;
+  const u=URL.createObjectURL(new Blob([svg],{type:"image/svg+xml"})),a=document.createElement("a");a.href=u;a.download="auraqr.svg";a.click();setTimeout(()=>URL.revokeObjectURL(u),500);toast("SVG downloaded")
+});
+$("copyBtn").addEventListener("click",async()=>{const d=getData();if(!d){toast("Nothing to copy");return}try{await navigator.clipboard.writeText(d);toast("Copied")}catch{toast("Copy failed")}});
+
+/* Theme */
+function applyMode(m){
+  document.documentElement.classList.toggle("dark",m==="dark");document.documentElement.classList.toggle("light",m!=="dark");
+  $("themeToggle").textContent=m==="dark"?"☀":"☾";localStorage.setItem("auraqr-mode",m)
+}
+$("themeToggle").addEventListener("click",()=>applyMode(document.documentElement.classList.contains("dark")?"light":"dark"));
+
+/* Language */
+const texts={
+en:["Enter QR Data","Create reliable QR codes from links, text and Wi-Fi data. Choose a premium color theme, add your logo and download instantly."],
+hi:["QR डेटा दर्ज करें","लिंक, टेक्स्ट और Wi-Fi डेटा से भरोसेमंद QR कोड बनाएं। प्रीमियम थीम चुनें, लोगो जोड़ें और तुरंत डाउनलोड करें।"],
+es:["Introducir datos QR","Crea códigos QR fiables para enlaces, texto y Wi-Fi. Elige un tema premium, añade tu logo y descarga al instante."],
+fr:["Entrer les données QR","Créez des QR fiables pour les liens, le texte et le Wi-Fi. Choisissez un thème premium, ajoutez votre logo et téléchargez instantanément."]
+};
+$("language").addEventListener("change",()=>{const t=texts[$("language").value]||texts.en;$("contentTitle").textContent="⌁ "+t[0];$("heroText").textContent=t[1]});
+
+/* Scroll reveal */
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")}),{threshold:.08});
+document.querySelectorAll(".reveal").forEach(e=>observer.observe(e));
+
+/* Startup */
+(function init(){
+  applyMode(localStorage.getItem("auraqr-mode")==="dark"?"dark":"light");
+  updateHex();updateBundle("Classic",$("fgColor").value,$("bgColor").value);updateStructureBundle();renderThemes();
+  setTimeout(()=>{
+    if(typeof QRCode==="undefined"){$("engineError").style.display="block";$("status").textContent="QR engine unavailable";$("status").style.color="var(--bad)"}
+    else generateQR();
+  },350);
+})();
+</script>
+</body>
+</html>
