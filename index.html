@@ -305,10 +305,7 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
 <header class="header reveal">
   <div class="brand">
     <div class="brand-mark" aria-hidden="true">
-      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
-        <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-        <rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM18 18h3v3h-3zM14 20h2"/>
-      </svg>
+    <img src="/logo.png" alt="AuraQR Logo" style="width:38px;height:38px;object-fit:contain;border-radius:10px;">
     </div>
     <div>Aura<span>QR</span></div>
   </div>
@@ -749,11 +746,11 @@ $("logoInput").addEventListener("change",e=>{
 });
 $("removeLogo").addEventListener("click",()=>{logoData=null;$("logoInput").value="";$("logoPreview").style.display="none";$("removeLogo").style.display="none";generateQR();toast("Logo removed")});
 
-$("downloadPng").addEventListener("click",()=>{const a=document.createElement("a");a.download="auraqr.png";a.href=$("qrCanvas").toDataURL("image/png");a.click();toast("PNG downloaded")});
+$("downloadPng").addEventListener("click",()=>{const a=document.createElement("a");a.download=".png";a.href=$("qrCanvas").toDataURL("image/png");a.click();toast("PNG downloaded")});
 $("downloadSvg").addEventListener("click",()=>{
   const c=$("qrCanvas"),s=c.width,p=c.toDataURL("image/png");
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><image href="${p}" width="${s}" height="${s}"/></svg>`;
-  const u=URL.createObjectURL(new Blob([svg],{type:"image/svg+xml"})),a=document.createElement("a");a.href=u;a.download="auraqr.svg";a.click();setTimeout(()=>URL.revokeObjectURL(u),500);toast("SVG downloaded")
+  const u=URL.createObjectURL(new Blob([svg],{type:"image/svg+xml"})),a=document.createElement("a");a.href=u;a.download=".svg";a.click();setTimeout(()=>URL.revokeObjectURL(u),500);toast("SVG downloaded")
 });
 $("copyBtn").addEventListener("click",async()=>{const d=getData();if(!d){toast("Nothing to copy");return}try{await navigator.clipboard.writeText(d);toast("Copied")}catch{toast("Copy failed")}});
 
