@@ -13,32 +13,57 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#080A12">
-<title>AuraQR — Premium QR Generator</title>
+<title>AuraQR — Free Custom QR Code Generator with Logo, Colors & Vector SVG</title>
 <link rel="icon" type="image/png" href="/logo.png">
-<meta name="description" content="AuraQR is a free online QR code generator. Create QR codes for URLs, text and more quickly and easily.">
-
+<meta name="description" content="AuraQR is a free, privacy-first QR code generator. Create custom scannable QR codes for URLs, WiFi, WhatsApp, UPI, vCard contacts, Social Media, and Events in high-resolution PNG, SVG, JPG, and PDF.">
+<meta name="keywords" content="QR code generator, free QR code generator, custom QR code generator, WiFi QR code, WhatsApp QR code, UPI QR code, QR code with logo, QR code generator online, SVG QR generator">
 <meta name="robots" content="index, follow">
-
 <link rel="canonical" href="https://auraqr.in/">
-s
-<meta property="og:title" content="AuraQR – Premium QR Generator">
-<meta property="og:description" content="Create free QR codes for URLs, text and more with AuraQR.">
+
+<!-- Open Graph / Social Media -->
+<meta property="og:site_name" content="AuraQR">
+<meta property="og:title" content="AuraQR — Premium & Free QR Code Generator">
+<meta property="og:description" content="Generate customizable, high-resolution QR codes for links, WhatsApp, Wi-Fi, UPI, vCard, and more. 100% private and client-side.">
 <meta property="og:url" content="https://auraqr.in/">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://auraqr.in/logo.png">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AuraQR — Premium QR Code Generator">
+<meta name="twitter:description" content="Generate customizable, high-resolution QR codes for links, WhatsApp, Wi-Fi, UPI, vCard, and more.">
+<meta name="twitter:image" content="https://auraqr.in/logo.png">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AuraQR",
+  "url": "https://auraqr.in/",
+  "description": "Free, privacy-first custom QR code generator with vector SVG, PNG, PDF download, colors, logos, and multiple QR payload structures.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "All",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
         onerror="this.onerror=null;this.src='https://unpkg.com/qrcodejs@1.0.0/qrcode.min.js'"></script>
 
 <style>
 /* =========================================================
-   AUR AQR — PREMIUM STANDALONE BUILD
-   No Tailwind. No icon library dependency.
+   AURAQR VERSION 2.1 — PRODUCTION SYSTEM
 ========================================================= */
 :root{
-  --bg:#f4f6ff;--bg2:#eef2ff;--card:rgba(255,255,255,.84);--solid:#fff;
+  --bg:#f4f6ff;--bg2:#eef2ff;--card:rgba(255,255,255,.88);--solid:#fff;
   --text:#111827;--muted:#64748b;--line:rgba(15,23,42,.10);
   --accent:#635bff;--accent2:#8b5cf6;--glow:rgba(99,91,255,.20);
-  --ok:#16a34a;--bad:#ef4444;--shadow:0 20px 60px rgba(31,41,55,.13);
+  --ok:#16a34a;--bad:#ef4444;--shadow:0 20px 60px rgba(31,41,55,.12);
   --spring:cubic-bezier(.34,1.56,.64,1);
   --smooth:cubic-bezier(.22,.8,.25,1);
 }
@@ -46,7 +71,7 @@ html.dark{
   --bg:#080a12;--bg2:#0c1020;--card:rgba(17,21,34,.88);--solid:#111624;
   --text:#f7f8ff;--muted:#9aa5b8;--line:rgba(255,255,255,.10);
   --accent:#8b7cff;--accent2:#c084fc;--glow:rgba(139,124,255,.24);
-  --shadow:0 24px 75px rgba(0,0,0,.40);
+  --shadow:0 24px 75px rgba(0,0,0,.45);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -55,7 +80,7 @@ body{
   font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:
     radial-gradient(circle at 4% 0%,var(--glow),transparent 28rem),
-    radial-gradient(circle at 100% 18%,rgba(192,132,252,.10),transparent 27rem),
+    radial-gradient(circle at 100% 18%,rgba(192,132,252,.12),transparent 27rem),
     linear-gradient(180deg,var(--bg2),var(--bg));
   transition:background .4s ease,color .4s ease;overflow-x:hidden;
 }
@@ -65,130 +90,208 @@ button{cursor:pointer;-webkit-tap-highlight-color:transparent}
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
   outline:3px solid var(--glow);outline-offset:2px
 }
-.wrap{width:min(1120px,calc(100% - 24px));margin:auto}
+.wrap{width:min(1140px,calc(100% - 24px));margin:auto}
 
 /* Header */
 .header{
-  position:sticky;top:10px;z-index:30;width:min(1120px,calc(100% - 16px));
-  margin:10px auto 0;padding:10px 12px 10px 16px;
+  position:sticky;top:10px;z-index:30;width:min(1140px,calc(100% - 16px));
+  margin:10px auto 0;padding:10px 14px;
   display:flex;align-items:center;justify-content:space-between;gap:12px;
   background:var(--card);border:1px solid var(--line);border-radius:22px;
   backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:var(--shadow);
 }
-.brand{display:flex;align-items:center;gap:10px;font-weight:950;font-size:21px;letter-spacing:-.05em}
+.brand{display:flex;align-items:center;gap:10px;font-weight:950;font-size:21px;letter-spacing:-.05em;text-decoration:none;color:inherit}
 .brand-mark{
   width:40px;height:40px;border-radius:13px;display:grid;place-items:center;color:#fff;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 9px 25px var(--glow)
+  background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 9px 25px var(--glow);
+  overflow:hidden;
 }
 .brand span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:18px}
+.nav-link{color:var(--muted);text-decoration:none;font-size:13px;font-weight:700;transition:color .2s}
+.nav-link:hover{color:var(--accent)}
 .header-actions{display:flex;align-items:center;gap:8px}
 .select,.icon-btn{
   min-height:42px;border:1px solid var(--line);border-radius:13px;background:var(--solid);color:var(--text);
   transition:transform .35s var(--spring),box-shadow .35s var(--spring),border-color .25s
 }
-.select{padding:0 12px}.icon-btn{width:42px;display:grid;place-items:center;font-size:20px}
+.select{padding:0 12px}.icon-btn{width:42px;display:grid;place-items:center;font-size:18px}
 .select:hover,.icon-btn:hover{transform:translateY(-2px);box-shadow:0 9px 25px var(--glow)}
 .select:active,.icon-btn:active{transform:scale(.93)}
 
 /* Hero */
-.hero{text-align:center;padding:74px 0 42px}
+.hero{text-align:center;padding:64px 0 38px}
 .eyebrow{
-  display:inline-flex;padding:7px 12px;border:1px solid var(--line);border-radius:999px;
-  background:var(--card);color:var(--accent);font-size:11px;font-weight:950;letter-spacing:.12em
+  display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;
+  background:var(--card);color:var(--accent);font-size:11px;font-weight:950;letter-spacing:.1em;
 }
-.hero h1{max-width:850px;margin:18px auto 14px;font-size:clamp(44px,8vw,78px);line-height:.94;letter-spacing:-.07em}
+.hero h1{max-width:890px;margin:18px auto 14px;font-size:clamp(40px,7vw,74px);line-height:.96;letter-spacing:-.06em}
 .gradient{background:linear-gradient(135deg,var(--accent),var(--accent2),#d946ef);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero p{max-width:680px;margin:auto;color:var(--muted);line-height:1.7;font-size:15px}
 
-/* Cards/layout */
-.app{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(330px,.95fr);gap:18px;margin-bottom:70px}
-.stack{display:grid;gap:18px}
+/* App Core Grid */
+.app{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);gap:20px;margin-bottom:60px}
+.stack{display:grid;gap:20px}
 .card{
   background:var(--card);border:1px solid var(--line);border-radius:26px;
   box-shadow:var(--shadow);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)
 }
-.panel{padding:20px}.preview-card{padding:20px;position:sticky;top:82px}
+.panel{padding:22px}.preview-card{padding:22px;position:sticky;top:82px}
 .section{margin-bottom:20px}.section:last-child{margin-bottom:0}
-.title{font-size:15px;font-weight:950;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+.title{font-size:15px;font-weight:950;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
 .label{display:block;color:var(--muted);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+
+/* Type Grid */
+.type-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:6px;margin-bottom:16px
+}
+.type-btn{
+  border:1px solid var(--line);border-radius:13px;background:var(--solid);color:var(--text);
+  padding:9px 4px;font-size:11px;font-weight:800;display:flex;flex-direction:column;align-items:center;gap:5px;
+  transition:all .3s var(--spring)
+}
+.type-btn span.emoji{font-size:16px}
+.type-btn:hover{transform:translateY(-2px);border-color:var(--accent)}
+.type-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 8px 20px var(--glow);border-color:transparent}
+
+/* Form layouts */
+.form-group{display:grid;gap:10px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 textarea,.input{
-  width:100%;border:1px solid var(--line);border-radius:15px;padding:13px 14px;
-  background:var(--solid);color:var(--text);outline:0;transition:border-color .25s,box-shadow .25s,transform .25s
+  width:100%;border:1px solid var(--line);border-radius:14px;padding:12px 14px;
+  background:var(--solid);color:var(--text);outline:0;transition:border-color .25s,box-shadow .25s
 }
-textarea{min-height:112px;resize:vertical}
+textarea{min-height:98px;resize:vertical}
 textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--glow)}
-.tabs{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:5px;
-  border:1px solid var(--line);border-radius:15px;background:var(--solid);margin-bottom:11px
-}
-.tab{
-  border:0;background:transparent;color:var(--muted);border-radius:11px;padding:10px 6px;
-  font-size:12px;font-weight:950;transition:all .35s var(--spring)
-}
-.tab:hover{transform:translateY(-2px)}.tab:active{transform:scale(.95)}
-.tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 8px 22px var(--glow)}
-.input-row{display:flex;gap:8px;margin-top:8px}
+.input-row{display:flex;gap:8px;margin-top:10px}
+
+/* Action Buttons */
 .small,.secondary{
   border:1px solid var(--line);background:var(--solid);color:var(--text);
-  border-radius:12px;padding:9px 12px;font-size:12px;font-weight:900;
-  transition:all .35s var(--spring)
+  border-radius:13px;padding:10px 14px;font-size:12px;font-weight:900;
+  transition:all .35s var(--spring);display:inline-flex;align-items:center;justify-content:center;gap:6px
 }
-.small:hover,.secondary:hover{transform:translateY(-3px);box-shadow:0 10px 24px var(--glow)}
+.small:hover,.secondary:hover{transform:translateY(-2px);box-shadow:0 10px 24px var(--glow);border-color:var(--accent)}
 .small:active,.secondary:active{transform:translateY(1px) scale(.95)}
 .primary{
   width:100%;border:0;border-radius:15px;padding:14px;font-weight:950;
   background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;
-  box-shadow:0 13px 32px var(--glow);margin-top:10px;
-  transition:all .35s var(--spring);position:relative;overflow:hidden
+  box-shadow:0 13px 32px var(--glow);margin-top:12px;
+  transition:all .35s var(--spring);position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;gap:8px
 }
 .primary:hover{transform:translateY(-3px) scale(1.01);box-shadow:0 18px 38px var(--glow)}
 .primary:active{transform:translateY(1px) scale(.96)}
-.primary::after{
-  content:"";position:absolute;inset:-80% -20%;background:linear-gradient(110deg,transparent 42%,rgba(255,255,255,.25) 50%,transparent 58%);
-  transform:translateX(-70%);transition:transform .7s ease
-}
-.primary:hover::after{transform:translateX(70%)}
 
-/* Theme bundle */
-.theme-bundle{
-  display:flex;align-items:center;gap:14px;padding:14px;border:1px solid var(--line);
-  border-radius:19px;background:var(--solid);transition:all .4s var(--spring);cursor:pointer
+/* Template Row */
+.template-scroll{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-top:4px
 }
-.theme-bundle:hover{transform:translateY(-3px) scale(1.01);box-shadow:0 14px 35px var(--glow);border-color:rgba(139,124,255,.45)}
-.theme-bundle:active{transform:scale(.97)}
-.bundle-preview{display:flex;width:108px;height:54px;border-radius:13px;overflow:hidden;flex-shrink:0;border:1px solid var(--line);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
-.bundle-half{width:50%;position:relative}.bundle-half::after{content:"";position:absolute;width:25px;height:25px;border:3px solid rgba(255,255,255,.8);border-radius:4px;left:12px;top:14px}
-.bundle-info{min-width:0;flex:1}.bundle-title{font-weight:950;font-size:13px}.bundle-sub{color:var(--muted);font-size:10px;margin-top:3px;line-height:1.4}
-.bundle-arrow{font-size:22px;color:var(--muted);transition:transform .35s var(--spring)}.theme-bundle:hover .bundle-arrow{transform:translateX(5px);color:var(--accent)}
+.template-chip{
+  border:1px solid var(--line);border-radius:14px;background:var(--solid);padding:10px 10px;
+  display:flex;align-items:center;gap:8px;font-size:11px;font-weight:850;cursor:pointer;
+  transition:all .3s var(--spring);text-align:left;color:var(--text)
+}
+.template-chip:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 8px 20px var(--glow)}
+.template-chip .icon{font-size:16px}
+
+/* Theme & Structure Rows */
 .design-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:stretch}
 .design-choice{min-width:0;display:flex;flex-direction:column}
-.design-choice>.title{margin-bottom:9px}
-.design-choice .theme-bundle{
-  height:100%;min-height:176px;padding:14px;display:flex;flex-direction:column;
-  align-items:stretch;justify-content:space-between;gap:12px;border-radius:22px
+.theme-bundle{
+  height:100%;min-height:160px;padding:14px;display:flex;flex-direction:column;
+  align-items:stretch;justify-content:space-between;gap:10px;border-radius:20px;
+  border:1px solid var(--line);background:var(--solid);transition:all .4s var(--spring);cursor:pointer;position:relative
 }
-.design-choice .bundle-preview{width:100%;height:82px;border-radius:16px;flex:none}
-.design-choice .bundle-half::after{width:28px;height:28px;left:15px;top:24px}
-.design-choice .bundle-info{width:100%}
-.design-choice .bundle-title{font-size:14px}
-.design-choice .bundle-sub{font-size:10px}
-.design-choice .bundle-arrow{position:absolute;right:16px;bottom:18px}
+.theme-bundle:hover{transform:translateY(-3px) scale(1.01);box-shadow:0 14px 35px var(--glow);border-color:rgba(139,124,255,.45)}
+.bundle-preview{display:flex;width:100%;height:75px;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.bundle-half{width:50%;position:relative}
+.bundle-half::after{content:"";position:absolute;width:26px;height:26px;border:3px solid rgba(255,255,255,.8);border-radius:4px;left:14px;top:22px}
+.bundle-info{width:100%}.bundle-title{font-weight:950;font-size:13px}.bundle-sub{color:var(--muted);font-size:10px;margin-top:2px}
+.bundle-arrow{position:absolute;right:14px;bottom:14px;font-size:20px;color:var(--muted)}
 .structure-preview{
-  width:100%;height:82px;border-radius:16px;flex-shrink:0;border:1px solid var(--line);
-  padding:10px;background:#fff;display:grid;grid-template-columns:repeat(9,1fr);
+  width:100%;height:75px;border-radius:14px;border:1px solid var(--line);
+  padding:8px;background:#fff;display:grid;grid-template-columns:repeat(9,1fr);
   grid-template-rows:repeat(9,1fr);gap:2px;overflow:hidden
 }
-.structure-preview span{display:block;background:#111827;border-radius:0;transition:all .35s var(--spring)}
+.structure-preview span{display:block;background:#111827;transition:all .35s var(--spring)}
 .structure-preview span.round{border-radius:50%}
 .structure-preview span.soft{border-radius:4px}
 .structure-preview span.compact{transform:scale(.72);border-radius:3px}
 .structure-preview span.diamond{transform:rotate(45deg) scale(.72);border-radius:1px}
 .structure-preview span.pixel{transform:scale(.88);border-radius:2px}
-.result-pop{animation:resultPop .7s var(--spring)}
-@keyframes resultPop{0%{opacity:.35;transform:translateY(28px) scale(.92)}60%{opacity:1;transform:translateY(-7px) scale(1.025)}100%{opacity:1;transform:none}}
 
+/* Advanced Customization Controls */
+.custom-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.colorbox{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--solid);padding:7px 10px;border-radius:14px}
+.colorbox input[type="color"]{width:36px;height:32px;border:0;background:transparent;padding:0;cursor:pointer;border-radius:6px}
+.hex{font:800 11px ui-monospace,monospace}
+.range{display:flex;align-items:center;gap:10px}.range input{width:100%;accent-color:var(--accent)}.range span{width:45px;text-align:right;font-size:11px;font-weight:900}
+.checkbox-row{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;cursor:pointer;user-select:none;margin-top:4px}
+.checkbox-row input{width:16px;height:16px;accent-color:var(--accent)}
 
-/* Modal */
+/* Logo Section */
+.logo-row{display:flex;align-items:center;gap:10px}
+.upload{
+  flex:1;min-height:68px;border:1px dashed var(--accent);border-radius:15px;background:var(--solid);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;font-weight:850;cursor:pointer;
+  transition:all .35s var(--spring);text-align:center;padding:6px
+}
+.upload:hover{transform:translateY(-2px);box-shadow:0 10px 25px var(--glow)}.upload input{display:none}
+#logoPreview{display:none;width:58px;height:58px;object-fit:contain;background:#fff;padding:4px;border-radius:12px;border:1px solid var(--line)}
+.remove{display:none;width:40px;height:40px;border:0;border-radius:12px;background:rgba(239,68,68,.1);color:var(--bad);transition:all .35s var(--spring)}.remove:hover{transform:rotate(8deg) scale(1.05)}
+
+/* Preview Section */
+.preview-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.preview-label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:950;color:var(--muted)}
+.status{font-size:11px;font-weight:900;color:var(--ok);margin-top:3px}
+.badge{padding:5px 9px;border-radius:999px;background:rgba(22,163,74,.12);color:var(--ok);font-size:9px;font-weight:950}
+.qr-stage{
+  width:100%;min-height:330px;display:grid;place-items:center;padding:16px;border-radius:20px;border:1px solid var(--line);
+  background:radial-gradient(circle at 50% 25%,var(--glow),transparent 60%),var(--solid);overflow:hidden;
+  transition:transform .4s var(--spring),box-shadow .4s var(--spring)
+}
+.qr-stage:hover{box-shadow:0 14px 35px var(--glow)}
+#qrCanvas{display:block;width:min(300px,100%);height:auto;max-width:100%;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.06)}
+.download-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.note{text-align:center;color:var(--muted);font-size:10px;line-height:1.5;margin-top:10px}
+
+/* History Section */
+.history-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.history-list{display:grid;gap:8px;max-height:300px;overflow-y:auto;padding-right:4px}
+.history-item{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;
+  background:var(--solid);border:1px solid var(--line);border-radius:14px;font-size:12px
+}
+.history-info{min-width:0;flex:1}
+.history-title{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.history-meta{font-size:10px;color:var(--muted);margin-top:2px}
+.history-actions{display:flex;gap:6px}
+.history-btn{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:8px;padding:4px 8px;font-size:10px;font-weight:800}
+.history-btn:hover{background:var(--line)}
+.empty-history{text-align:center;padding:24px 10px;color:var(--muted);font-size:12px}
+
+/* Landing & Marketing Sections */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:60px}
+.feature-card{padding:22px}
+.feature-card h3{font-size:15px;margin:10px 0 6px}
+.feature-card p{color:var(--muted);font-size:12px;line-height:1.6;margin:0}
+
+.how-it-works{margin-bottom:60px}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px}
+.step-card{padding:20px;position:relative}
+.step-num{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;display:grid;place-items:center;font-weight:950;font-size:13px;margin-bottom:12px}
+.step-card h3{font-size:14px;margin:0 0 4px}
+.step-card p{font-size:12px;color:var(--muted);line-height:1.5;margin:0}
+
+.faq-section{margin-bottom:70px}
+.faq-grid{display:grid;gap:10px;margin-top:18px}
+.faq-item{padding:18px 20px;cursor:pointer}
+.faq-item summary{font-weight:900;font-size:14px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item p{margin:12px 0 0;color:var(--muted);font-size:12px;line-height:1.6}
+
+/* Modals */
 .modal-backdrop{
   position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:18px;
   background:rgba(4,6,15,.64);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
@@ -203,26 +306,23 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
 .modal-backdrop.open .theme-modal{transform:translateY(0) scale(1);opacity:1}
 .modal-head{
   position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;
-  gap:12px;padding:18px 18px 14px;background:var(--card);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)
+  gap:12px;padding:18px;background:var(--card);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)
 }
 .modal-title{font-size:18px;font-weight:950}.modal-sub{font-size:10px;color:var(--muted);margin-top:3px}
 .close-btn{
   width:40px;height:40px;border:1px solid var(--line);background:var(--solid);color:var(--text);
   border-radius:12px;font-size:20px;transition:all .35s var(--spring)
 }
-.close-btn:hover{transform:rotate(8deg) scale(1.06)}.close-btn:active{transform:scale(.88)}
+.close-btn:hover{transform:rotate(8deg) scale(1.06)}
 .modal-body{padding:18px}.theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-@media(max-width:560px){.theme-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.swatch{height:116px}.structure-art{width:92px;height:92px}}
 .theme{
   padding:12px;text-align:left;border:1px solid var(--line);border-radius:18px;background:var(--solid);color:var(--text);
-  transition:all .38s var(--spring);animation:themePop .45s var(--spring) both;cursor:pointer;min-width:0
+  transition:all .38s var(--spring);cursor:pointer;min-width:0
 }
-.theme:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.theme:hover{transform:translateY(-5px) scale(1.025);box-shadow:0 14px 32px var(--glow);border-color:var(--accent)}
-.theme:active{transform:scale(.95)}
+.theme:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 12px 28px var(--glow)}
 .theme.active{border-color:var(--accent);box-shadow:0 0 0 3px var(--glow)}
-.swatch{height:112px;border-radius:14px;margin-bottom:9px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff}
-.structure-art{width:88px;height:88px;display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(11,1fr);gap:2px;padding:6px}
+.swatch{height:105px;border-radius:14px;margin-bottom:8px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff}
+.structure-art{width:86px;height:86px;display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(11,1fr);gap:2px;padding:6px}
 .structure-art .m{background:#111827}
 .structure-art .m.round{border-radius:50%}
 .structure-art .m.soft{border-radius:5px}
@@ -233,208 +333,361 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
 .structure-art .finder::after{content:"";position:absolute;inset:24%;background:#fff}
 .structure-art .finder::before{content:"";position:absolute;inset:38%;background:#111827;z-index:1}
 .theme-name{font-size:11px;font-weight:950}.theme-code{font-size:9px;color:var(--muted);margin-top:2px}
-@keyframes themePop{from{opacity:0;transform:translateY(15px) scale(.94)}to{opacity:1;transform:none}}
-
-/* Customize */
-.style-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.style{
-  border:1px solid var(--line);border-radius:13px;padding:10px;background:var(--solid);color:var(--text);
-  font-size:11px;font-weight:900;transition:all .35s var(--spring)
-}
-.style:hover{transform:translateY(-3px)}.style:active{transform:scale(.94)}
-.style.active{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 3px var(--glow)}
-.colors{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.colorbox{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--solid);padding:7px;border-radius:14px}
-.colorbox input{width:42px;height:34px;border:0;background:transparent;padding:2px;cursor:pointer}
-.hex{font:800 11px ui-monospace,monospace}.range{display:flex;align-items:center;gap:10px}.range input{width:100%;accent-color:var(--accent)}.range span{width:40px;text-align:right;font-size:11px;font-weight:900}
-.logo-row{display:flex;align-items:center;gap:9px}.upload{
-  flex:1;min-height:72px;border:1px dashed var(--accent);border-radius:15px;background:var(--solid);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:850;cursor:pointer;
-  transition:all .35s var(--spring)
-}
-.upload:hover{transform:translateY(-3px);box-shadow:0 10px 25px var(--glow)}.upload:active{transform:scale(.97)}.upload input{display:none}
-#logoPreview{display:none;width:58px;height:58px;object-fit:contain;background:#fff;padding:5px;border-radius:12px;border:1px solid var(--line)}
-.remove{display:none;width:40px;height:40px;border:0;border-radius:12px;background:rgba(239,68,68,.1);color:var(--bad);transition:all .35s var(--spring)}.remove:hover{transform:rotate(8deg) scale(1.05)}.remove:active{transform:scale(.88)}
-
-/* Preview */
-.preview-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.preview-label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:950;color:var(--muted)}
-.status{font-size:11px;font-weight:900;color:var(--ok);margin-top:3px}.badge{padding:6px 9px;border-radius:999px;background:rgba(22,163,74,.1);color:var(--ok);font-size:9px;font-weight:950}
-.qr-stage{
-  width:100%;min-height:360px;display:grid;place-items:center;padding:18px;border-radius:20px;border:1px solid var(--line);
-  background:radial-gradient(circle at 50% 25%,var(--glow),transparent 60%),var(--solid);overflow:hidden;
-  transition:transform .4s var(--spring),box-shadow .4s var(--spring)
-}
-.qr-stage:hover{box-shadow:0 14px 35px var(--glow)}
-#qrCanvas{display:block;width:min(320px,100%);height:auto;max-width:100%;image-rendering:pixelated;border-radius:8px}
-.downloads{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.note{text-align:center;color:var(--muted);font-size:10px;line-height:1.5;margin-top:10px}
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding-bottom:70px}.feature{padding:20px}.feature h3{font-size:14px;margin:9px 0 5px}.feature p{color:var(--muted);font-size:11px;line-height:1.6;margin:0}
-
-/* Scroll reveals */
-.reveal{opacity:0;transform:translateY(30px) scale(.97);transition:opacity .7s var(--spring),transform .7s var(--spring)}
-.reveal.visible{opacity:1;transform:none}
 
 /* Toast */
-.toast{position:fixed;z-index:200;left:50%;bottom:22px;transform:translate(-50%,28px) scale(.9);opacity:0;pointer-events:none;background:var(--text);color:var(--bg);padding:11px 15px;border-radius:13px;font-size:12px;font-weight:900;transition:all .35s var(--spring)}
+.toast{position:fixed;z-index:200;left:50%;bottom:22px;transform:translate(-50%,28px) scale(.9);opacity:0;pointer-events:none;background:var(--text);color:var(--bg);padding:11px 18px;border-radius:14px;font-size:12px;font-weight:900;transition:all .35s var(--spring);box-shadow:var(--shadow)}
 .toast.show{opacity:1;transform:translate(-50%,0) scale(1)}
 #engineError{display:none;text-align:center;color:var(--bad);font-size:12px;font-weight:800;line-height:1.5;max-width:260px}
 
 /* Ripple */
 .ripple{position:relative;overflow:hidden}.ripple-wave{position:absolute;border-radius:50%;background:rgba(255,255,255,.35);transform:scale(0);animation:ripple .55s ease-out;pointer-events:none}@keyframes ripple{to{transform:scale(4);opacity:0}}
 
-@media(max-width:860px){
+/* Footer */
+.footer{padding:30px 0 40px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:12px;margin-top:40px}
+.footer a{color:var(--text);text-decoration:none;font-weight:800}
+.footer a:hover{color:var(--accent)}
+
+@media(max-width:890px){
   .app{grid-template-columns:1fr}
-  .stack{display:contents}
-  .stack > section:nth-child(1){order:1}
-  .preview-card{position:static;order:2}
-  .stack > section:nth-child(2){order:3}
-  .stack > section:nth-child(3){order:4}
-  .features{grid-template-columns:1fr}
-  .design-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-  .design-choice .theme-bundle{min-height:158px;padding:10px}
-  .design-choice .bundle-preview,.structure-preview{height:70px}
-  .design-choice .bundle-title{font-size:12px}
-  .design-choice .bundle-sub{font-size:9px}
+  .preview-card{position:static}
+  .design-row{grid-template-columns:1fr 1fr;gap:10px}
+  .theme-grid{grid-template-columns:repeat(2,1fr)}
 }
-@media(max-width:520px){
-  .wrap{width:calc(100% - 16px)}.header{width:calc(100% - 12px)}.hero{padding:55px 0 32px}.hero h1{font-size:48px}
-  .panel,.preview-card{padding:16px}.qr-stage{min-height:310px;padding:12px}
-  .theme-grid{grid-template-columns:repeat(2,1fr)}.modal-backdrop{padding:8px;align-items:end}
-  .theme-modal{max-height:88dvh;border-radius:26px 26px 0 0;transform:translateY(100%) scale(.96)}
-  .modal-backdrop.open .theme-modal{transform:translateY(0) scale(1)}
-  .modal-head{padding:15px 15px 12px}.modal-body{padding:14px}.bundle-preview{width:88px;height:48px}
-}
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;transition-duration:.001ms!important}
+@media(max-width:540px){
+  .header{padding:8px 12px}.nav-links{display:none}
+  .hero{padding:48px 0 28px}.hero h1{font-size:42px}
+  .type-grid{grid-template-columns:repeat(3,1fr)}
+  .form-row,.design-row,.download-grid{grid-template-columns:1fr}
+  .panel,.preview-card{padding:16px}
 }
 </style>
 </head>
 
 <body>
-<header class="header reveal">
-  <div class="brand">
+<header class="header">
+  <a href="https://auraqr.in/" class="brand">
     <div class="brand-mark" aria-hidden="true">
-    <img src="/logo.png" alt="AuraQR Logo" style="width:38px;height:38px;object-fit:contain;border-radius:10px;">
+      <img src="/logo.png" alt="AuraQR Logo" style="width:38px;height:38px;object-fit:contain;border-radius:10px;" onerror="this.style.display='none'">
     </div>
     <div>Aura<span>QR</span></div>
-  </div>
+  </a>
+  <nav class="nav-links">
+    <a href="#generator" class="nav-link">Generator</a>
+    <a href="#templates" class="nav-link">Templates</a>
+    <a href="#features" class="nav-link">Features</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+  </nav>
   <div class="header-actions">
-    <select id="language" class="select ripple" aria-label="Language">
-      <option value="en">🌐 English</option><option value="hi">🌐 हिन्दी</option>
-      <option value="es">🌐 Español</option><option value="fr">🌐 Français</option>
+    <select id="language" class="select ripple" aria-label="Select Language">
+      <option value="en">🌐 English</option>
+      <option value="hi">🌐 हिन्दी</option>
+      <option value="es">🌐 Español</option>
+      <option value="fr">🌐 Français</option>
     </select>
     <button id="themeToggle" class="icon-btn ripple" aria-label="Toggle theme">☾</button>
   </div>
 </header>
 
-<main class="wrap">
-<section class="hero reveal">
-  <div class="eyebrow">PRIVATE • FAST • FREE</div>
-  <h1>Make QR codes<br><span class="gradient">that actually work.</span></h1>
-  <p id="heroText">Create reliable QR codes from links, text and Wi-Fi data. Choose a premium color theme, add your logo and download instantly.</p>
+<main class="wrap" id="generator">
+<section class="hero">
+  <div class="eyebrow">✦ AURAQR 2.1 — FAST • PRIVATE • SCANNABLE</div>
+  <h1>Create QR codes<br><span class="gradient">that actually work.</span></h1>
+  <p id="heroText">Generate high-reliability QR codes from links, WhatsApp, Wi-Fi, Contacts, and UPI. Customize colors, gradients, and shapes, embed your logo, and export in SVG, PNG, JPG, or PDF.</p>
 </section>
 
+<!-- QR GENERATOR APP -->
 <section class="app">
 <div class="stack">
 
-<section class="card panel reveal">
-  <div class="section">
-    <div class="title" id="contentTitle">⌁ Enter QR Data</div>
-    <div class="tabs">
-      <button class="tab active ripple" data-type="url">URL</button>
-      <button class="tab ripple" data-type="text">Text</button>
-      <button class="tab ripple" data-type="wifi">Wi-Fi</button>
+  <!-- Type & Input Panel -->
+  <section class="card panel">
+    <div class="title"><span id="contentTitle">⌁ Select QR Type & Enter Details</span></div>
+    
+    <div class="type-grid" id="typeGrid">
+      <button class="type-btn active ripple" data-type="url"><span class="emoji">🔗</span><span>URL</span></button>
+      <button class="type-btn ripple" data-type="text"><span class="emoji">📝</span><span>Text</span></button>
+      <button class="type-btn ripple" data-type="wifi"><span class="emoji">📶</span><span>Wi-Fi</span></button>
+      <button class="type-btn ripple" data-type="whatsapp"><span class="emoji">💬</span><span>WhatsApp</span></button>
+      <button class="type-btn ripple" data-type="upi"><span class="emoji">💳</span><span>UPI Pay</span></button>
+      <button class="type-btn ripple" data-type="vcard"><span class="emoji">👤</span><span>Contact</span></button>
+      <button class="type-btn ripple" data-type="email"><span class="emoji">✉️</span><span>Email</span></button>
+      <button class="type-btn ripple" data-type="phone"><span class="emoji">📞</span><span>Phone</span></button>
+      <button class="type-btn ripple" data-type="sms"><span class="emoji">📱</span><span>SMS</span></button>
+      <button class="type-btn ripple" data-type="location"><span class="emoji">📍</span><span>Location</span></button>
+      <button class="type-btn ripple" data-type="event"><span class="emoji">📅</span><span>Event</span></button>
+      <button class="type-btn ripple" data-type="social"><span class="emoji">🌐</span><span>Socials</span></button>
     </div>
-    <textarea id="qrInput" placeholder="https://example.com" spellcheck="false"></textarea>
-    <div class="input-row"><button id="pasteBtn" class="small ripple">Paste</button><button id="clearBtn" class="small ripple">Clear</button></div>
-    <div id="inputHint" style="color:var(--muted);font-size:10px;margin-top:7px">Paste a website link. https:// will be added automatically if needed.</div>
+
+    <!-- Progressive Dynamic Form Fields -->
+    <div id="dynamicForm" class="form-group">
+      <!-- Injected via JS based on QR type -->
+    </div>
+
+    <div class="input-row">
+      <button id="pasteBtn" class="small ripple">📋 Paste</button>
+      <button id="clearBtn" class="small ripple">✕ Clear Form</button>
+    </div>
+    <div id="inputHint" style="color:var(--muted);font-size:11px;margin-top:8px">Paste a website link. https:// is added automatically if needed.</div>
     <button id="generateBtn" class="primary ripple">✦ Generate QR Code</button>
-  </div>
-</section>
+  </section>
 
-<section class="card panel reveal design-row">
-  <div class="design-choice">
-    <div class="title">🎨 QR Theme</div>
-    <div class="theme-bundle ripple" id="themeBundle" role="button" tabindex="0" aria-label="Open QR themes">
-      <div class="bundle-preview"><div id="bundleFg" class="bundle-half"></div><div id="bundleBg" class="bundle-half"></div></div>
-      <div class="bundle-info"><div id="bundleName" class="bundle-title">Classic</div><div class="bundle-sub">16 premium palettes</div></div>
-      <div class="bundle-arrow">›</div>
+  <!-- Templates -->
+  <section class="card panel" id="templates">
+    <div class="title">⚡ Quick Templates</div>
+    <div class="template-scroll">
+      <div class="template-chip ripple" data-tpl="whatsapp"><span class="icon">💬</span><span>WhatsApp</span></div>
+      <div class="template-chip ripple" data-tpl="instagram"><span class="icon">📷</span><span>Instagram</span></div>
+      <div class="template-chip ripple" data-tpl="youtube"><span class="icon">▶️</span><span>YouTube</span></div>
+      <div class="template-chip ripple" data-tpl="wifi"><span class="icon">📶</span><span>Wi-Fi Access</span></div>
+      <div class="template-chip ripple" data-tpl="upi"><span class="icon">💳</span><span>UPI Payment</span></div>
+      <div class="template-chip ripple" data-tpl="vcard"><span class="icon">💼</span><span>Biz Card</span></div>
+      <div class="template-chip ripple" data-tpl="maps"><span class="icon">📍</span><span>Google Review</span></div>
+      <div class="template-chip ripple" data-tpl="event"><span class="icon">🎟️</span><span>Event Pass</span></div>
     </div>
-  </div>
-  <div class="design-choice">
-    <div class="title">▦ QR Structure</div>
-    <div class="theme-bundle ripple" id="structureBundle" role="button" tabindex="0" aria-label="Open QR structures">
-      <div id="structurePreview" class="structure-preview"><span></span><span></span><span></span><span></span></div>
-      <div class="bundle-info"><div id="structureName" class="bundle-title">Square</div><div class="bundle-sub">Choose module shape</div></div>
-      <div class="bundle-arrow">›</div>
+  </section>
+
+  <!-- Themes & Structure -->
+  <section class="card panel design-row">
+    <div class="design-choice">
+      <div class="title">🎨 Color Palette</div>
+      <div class="theme-bundle ripple" id="themeBundle" role="button" tabindex="0" aria-label="Open QR themes">
+        <div class="bundle-preview"><div id="bundleFg" class="bundle-half"></div><div id="bundleBg" class="bundle-half"></div></div>
+        <div class="bundle-info"><div id="bundleName" class="bundle-title">Classic</div><div class="bundle-sub">16 curated themes</div></div>
+        <div class="bundle-arrow">›</div>
+      </div>
     </div>
-  </div>
-</section>
-
-<section class="card panel reveal">
-  <div class="title">✦ Customize</div>
-
-  <div class="section" style="display:none" aria-hidden="true"><button class="style active" data-style="square">Square</button></div>
-
-  <div class="section colors">
-    <div><div class="label">QR Color</div><div class="colorbox"><input id="fgColor" type="color" value="#111827"><span id="fgHex" class="hex">#111827</span></div></div>
-    <div><div class="label">Background</div><div class="colorbox"><input id="bgColor" type="color" value="#FFFFFF"><span id="bgHex" class="hex">#FFFFFF</span></div></div>
-  </div>
-
-  <div class="section">
-    <div class="label">Center Logo</div>
-    <div class="logo-row">
-      <label class="upload ripple"><span style="font-size:21px">＋</span><span>Choose image from gallery</span><input id="logoInput" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml"></label>
-      <img id="logoPreview" alt="Logo preview"><button id="removeLogo" class="remove ripple" aria-label="Remove logo">✕</button>
+    <div class="design-choice">
+      <div class="title">▦ Module Structure</div>
+      <div class="theme-bundle ripple" id="structureBundle" role="button" tabindex="0" aria-label="Open QR structures">
+        <div id="structurePreview" class="structure-preview"><span></span><span></span><span></span><span></span></div>
+        <div class="bundle-info"><div id="structureName" class="bundle-title">Square</div><div class="bundle-sub">Scan-optimized modules</div></div>
+        <div class="bundle-arrow">›</div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="section">
-    <div class="label">Error Correction</div>
-    <select id="errorCorrection" class="input">
-      <option value="L">Low — smallest</option><option value="M">Medium — balanced</option>
-      <option value="Q" selected>High — recommended</option><option value="H">Maximum — best for logos</option>
-    </select>
-  </div>
+  <!-- Advanced Customization -->
+  <section class="card panel">
+    <div class="title">✦ Design Customization</div>
 
-  <div><div class="label">Export Size</div><div class="range"><input id="qrSize" type="range" min="220" max="800" value="420"><span id="sizeValue">420</span></div></div>
-</section>
+    <div class="custom-grid section">
+      <div>
+        <div class="label">Primary Color</div>
+        <div class="colorbox"><input id="fgColor" type="color" value="#111827"><span id="fgHex" class="hex">#111827</span></div>
+      </div>
+      <div>
+        <div class="label">Background Color</div>
+        <div class="colorbox"><input id="bgColor" type="color" value="#FFFFFF"><span id="bgHex" class="hex">#FFFFFF</span></div>
+      </div>
+      <div>
+        <div class="label">Gradient Color (Optional)</div>
+        <div class="colorbox"><input id="fgColor2" type="color" value="#635BFF"><span id="fgHex2" class="hex">#635BFF</span></div>
+      </div>
+      <div>
+        <div class="label">Gradient Direction</div>
+        <select id="gradDirection" class="input" style="padding:7px 10px;">
+          <option value="none">None (Solid Color)</option>
+          <option value="diagonal" selected>Diagonal (135°)</option>
+          <option value="horizontal">Horizontal (90°)</option>
+          <option value="vertical">Vertical (180°)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="section">
+      <label class="checkbox-row">
+        <input type="checkbox" id="transparentBg">
+        <span>Transparent Background (Export PNG / SVG with transparent canvas)</span>
+      </label>
+    </div>
+
+    <div class="section">
+      <div class="label">Center Logo</div>
+      <div class="logo-row">
+        <label class="upload ripple">
+          <span style="font-size:20px">＋</span>
+          <span>Upload Image / Icon (PNG, JPG, SVG)</span>
+          <input id="logoInput" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml">
+        </label>
+        <img id="logoPreview" alt="Logo preview">
+        <button id="removeLogo" class="remove ripple" aria-label="Remove logo">✕</button>
+      </div>
+    </div>
+
+    <div class="custom-grid section">
+      <div>
+        <div class="label">Error Correction</div>
+        <select id="errorCorrection" class="input">
+          <option value="L">Low (7%) — Smallest</option>
+          <option value="M">Medium (15%) — Standard</option>
+          <option value="Q" selected>High (25%) — Recommended</option>
+          <option value="H">Maximum (30%) — Best with Logo</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">Margin / Quiet Zone</div>
+        <select id="quietZone" class="input">
+          <option value="2">Minimal Margin</option>
+          <option value="4" selected>Standard Margin</option>
+          <option value="6">Large Margin</option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <div class="label">Real-time Render Size</div>
+      <div class="range">
+        <input id="qrSize" type="range" min="256" max="1024" step="64" value="512">
+        <span id="sizeValue">512px</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- History Section -->
+  <section class="card panel">
+    <div class="history-head">
+      <div class="title" style="margin:0">🕒 Local QR History</div>
+      <button id="clearHistoryBtn" class="small ripple">Clear All</button>
+    </div>
+    <div id="historyList" class="history-list">
+      <div class="empty-history">No QR codes generated yet in this browser.</div>
+    </div>
+  </section>
+
 </div>
 
-<aside class="card preview-card reveal">
+<!-- Sticky Live Preview & Export Panel -->
+<aside class="card preview-card">
   <div class="preview-top">
-    <div><div class="preview-label">Live Preview</div><div id="status" class="status">Ready to scan ✓</div></div>
+    <div>
+      <div class="preview-label">Live Scanner Preview</div>
+      <div id="status" class="status">Ready to scan ✓</div>
+    </div>
     <div class="badge">SCANNABLE</div>
   </div>
-  <div class="qr-stage"><canvas id="qrCanvas" width="420" height="420"></canvas><div id="engineError">The QR engine could not load.<br>Connect to the internet and reload the page.</div></div>
-  <button id="downloadPng" class="primary ripple">↓ Download PNG</button>
-  <div class="downloads"><button id="downloadSvg" class="secondary ripple">Download SVG</button><button id="copyBtn" class="secondary ripple">Copy Data</button></div>
-  <div class="note">Your QR data is processed in your browser. This page does not upload it.</div>
+
+  <div class="qr-stage">
+    <canvas id="qrCanvas" width="512" height="512"></canvas>
+    <div id="engineError">The QR engine could not load.<br>Check your internet connection and reload.</div>
+  </div>
+
+  <button id="downloadPng" class="primary ripple">↓ Download PNG (High Res)</button>
+  
+  <div class="download-grid">
+    <button id="downloadSvg" class="secondary ripple">Vector SVG</button>
+    <button id="downloadJpg" class="secondary ripple">Standard JPG</button>
+    <button id="downloadPdf" class="secondary ripple">Print PDF</button>
+    <button id="copyBtn" class="secondary ripple">Copy Payload</button>
+  </div>
+
+  <div class="form-row" style="margin-top:10px">
+    <div>
+      <div class="label" style="margin-bottom:4px">Export Resolution</div>
+      <select id="exportResolution" class="input" style="padding:6px 10px;font-size:11px;">
+        <option value="512">512 × 512 px (Web)</option>
+        <option value="1024" selected>1024 × 1024 px (HD)</option>
+        <option value="2048">2048 × 2048 px (Print 300DPI)</option>
+      </select>
+    </div>
+    <div>
+      <div class="label" style="margin-bottom:4px">Architecture Tier</div>
+      <select class="input" style="padding:6px 10px;font-size:11px;" disabled>
+        <option>Standard (Static Client)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="note">🔒 100% Client-Side Privacy: Your raw QR inputs are never transmitted to any external server.</div>
 </aside>
 </section>
 
-<section class="features">
-  <div class="card feature reveal"><div style="font-size:22px">🎨</div><h3>Premium themes</h3><p>Open the compact theme studio and choose from curated combinations.</p></div>
-  <div class="card feature reveal"><div style="font-size:22px">🖼️</div><h3>Logo support</h3><p>Add a small center logo while preserving error correction.</p></div>
-  <div class="card feature reveal"><div style="font-size:22px">⚡</div><h3>Instant generation</h3><p>Paste a URL and the QR updates automatically in your browser.</p></div>
+<!-- Landing Features -->
+<section class="features-grid" id="features">
+  <div class="card feature-card">
+    <div style="font-size:24px">⚡</div>
+    <h3>Ultra-Fast Client Generation</h3>
+    <p>Zero server latencies. Codes are drawn natively via hardware-accelerated Canvas & SVG engines directly in your browser.</p>
+  </div>
+  <div class="card feature-card">
+    <div style="font-size:24px">🔒</div>
+    <h3>Private by Architecture</h3>
+    <p>Your Wi-Fi passwords, private contact numbers, and crypto addresses never touch external servers or databases.</p>
+  </div>
+  <div class="card feature-card">
+    <div style="font-size:24px">📐</div>
+    <h3>True Vector Scalability</h3>
+    <p>Export in pure vector SVG format for crystal clear billboard printing, vinyl cutting, and high-DPI packaging.</p>
+  </div>
 </section>
+
+<!-- How it works -->
+<section class="how-it-works">
+  <div class="title" style="font-size:20px;justify-content:center">How It Works</div>
+  <div class="steps-grid">
+    <div class="card step-card">
+      <div class="step-num">1</div>
+      <h3>Select Data Type</h3>
+      <p>Choose from standard links, Wi-Fi, contacts, UPI, WhatsApp or customized social profiles.</p>
+    </div>
+    <div class="card step-card">
+      <div class="step-num">2</div>
+      <h3>Enter Details</h3>
+      <p>Fill out the simple progressive fields. Formats are automatically validated for high scan fidelity.</p>
+    </div>
+    <div class="card step-card">
+      <div class="step-num">3</div>
+      <h3>Style & Brand</h3>
+      <p>Apply custom linear gradients, soft corners, custom margins, and your company logo.</p>
+    </div>
+    <div class="card step-card">
+      <div class="step-num">4</div>
+      <h3>Export & Print</h3>
+      <p>Download instant PNG, JPG, or vector SVG files at up to 2048px print resolution.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section" id="faq">
+  <div class="title" style="font-size:20px;justify-content:center">Frequently Asked Questions</div>
+  <div class="faq-grid">
+    <details class="card faq-item">
+      <summary>Are these QR codes permanent and do they expire? <span>+</span></summary>
+      <p>All QR codes created on AuraQR are standard static QR codes. They never expire, have zero scan limits, and function indefinitely without ongoing subscriptions.</p>
+    </details>
+    <details class="card faq-item">
+      <summary>Will my QR code remain scannable after adding a logo? <span>+</span></summary>
+      <p>Yes. AuraQR automatically raises error correction to Level Q or H (up to 30% recovery capability) to ensure scanner sensors can read data around the center logo reliably.</p>
+    </details>
+    <details class="card faq-item">
+      <summary>Can I use downloaded QR codes for commercial projects? <span>+</span></summary>
+      <p>Yes. All generated assets are 100% yours to use commercially across merchandise, restaurant menus, packaging, and digital advertisements.</p>
+    </details>
+  </div>
+</section>
+
+<footer class="footer">
+  <div>© 2026 AuraQR. Fast, Private & Free Online QR Code Studio.</div>
+  <div style="margin-top:6px"><a href="https://auraqr.in/">auraqr.in</a> • Privacy-First Architecture</div>
+</footer>
 </main>
 
-<!-- Theme studio -->
+<!-- THEME PALETTES MODAL -->
 <div id="themeModal" class="modal-backdrop" aria-hidden="true">
   <div class="theme-modal" role="dialog" aria-modal="true" aria-labelledby="themeModalTitle">
     <div class="modal-head">
-      <div><div class="modal-title" id="themeModalTitle">Premium QR Themes</div><div class="modal-sub">Pick a palette. Your QR structure stays intact.</div></div>
+      <div><div class="modal-title" id="themeModalTitle">Curated Color Palettes</div><div class="modal-sub">Click a palette to apply foreground and background styling.</div></div>
       <button id="closeThemes" class="close-btn ripple" aria-label="Close themes">×</button>
     </div>
     <div class="modal-body"><div id="themeGrid" class="theme-grid"></div></div>
   </div>
 </div>
 
+<!-- STRUCTURE / SHAPE MODAL -->
 <div id="structureModal" class="modal-backdrop" aria-hidden="true">
   <div class="theme-modal" role="dialog" aria-modal="true" aria-labelledby="structureModalTitle">
     <div class="modal-head">
-      <div><div class="modal-title" id="structureModalTitle">QR Structures</div><div class="modal-sub">Choose a module shape while keeping finder patterns scan-friendly.</div></div>
+      <div><div class="modal-title" id="structureModalTitle">QR Module Structures</div><div class="modal-sub">Choose body module geometry. Finder corners remain protected for scanner reading.</div></div>
       <button id="closeStructures" class="close-btn ripple" aria-label="Close structures">×</button>
     </div>
     <div class="modal-body"><div id="structureGrid" class="theme-grid"></div></div>
@@ -443,354 +696,961 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
 
 <div id="toast" class="toast"></div>
 
+<!-- LOGIC & ENGINE -->
 <script>
-let currentType="url", currentStyle="square", logoData=null, generating=false, activeThemeName="Classic";
+let currentType = "url";
+let currentStyle = "square";
+let logoData = null;
+let generating = false;
+let activeThemeName = "Classic";
+let cachedMatrix = null;
 
-const structures=[
-  ["Square","Classic block modules","square"],
-  ["Dots","Rounded dot modules","dots"],
-  ["Soft Round","Soft rounded modules","rounded"],
-  ["Compact","Tighter rounded modules","compact"],
-  ["Diamond","Angular decorative modules","diamond"],
-  ["Pixel Soft","Small softened pixels","pixel"]
+const $ = id => document.getElementById(id);
+
+const structures = [
+  ["Square", "Classic square modules", "square"],
+  ["Dots", "Rounded circular dots", "dots"],
+  ["Soft Round", "Smooth rounded blocks", "rounded"],
+  ["Compact", "Tighter micro dots", "compact"],
+  ["Diamond", "Modern diamond modules", "diamond"],
+  ["Pixel Soft", "Subtle pixel styling", "pixel"]
 ];
 
-const themes=[
-["Classic","#111827","#FFFFFF"],["Midnight","#111827","#E0E7FF"],["Royal","#4C1D95","#EDE9FE"],
-["Ocean","#075985","#E0F2FE"],["Cyber","#0F172A","#67E8F9"],["Neon","#581C87","#F0ABFC"],
-["Forest","#14532D","#DCFCE7"],["Emerald","#064E3B","#D1FAE5"],["Sunset","#7C2D12","#FFEDD5"],
-["Rose","#881337","#FFE4E6"],["Luxury Gold","#422006","#FEF3C7"],["Ice","#164E63","#CFFAFE"],
-["Coffee","#451A03","#FEF3C7"],["Lavender","#4C1D95","#F5F3FF"],["Crimson","#7F1D1D","#FEE2E2"],["Mono","#000000","#FFFFFF"]
+const themes = [
+  ["Classic","#111827","#FFFFFF"],["Midnight","#111827","#E0E7FF"],["Royal","#4C1D95","#EDE9FE"],
+  ["Ocean","#075985","#E0F2FE"],["Cyber","#0F172A","#67E8F9"],["Neon","#581C87","#F0ABFC"],
+  ["Forest","#14532D","#DCFCE7"],["Emerald","#064E3B","#D1FAE5"],["Sunset","#7C2D12","#FFEDD5"],
+  ["Rose","#881337","#FFE4E6"],["Luxury Gold","#422006","#FEF3C7"],["Ice","#164E63","#CFFAFE"],
+  ["Coffee","#451A03","#FEF3C7"],["Lavender","#4C1D95","#F5F3FF"],["Crimson","#7F1D1D","#FEE2E2"],["Mono","#000000","#FFFFFF"]
 ];
-const $=id=>document.getElementById(id);
 
-function toast(msg){const e=$("toast");e.textContent=msg;e.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>e.classList.remove("show"),1800)}
-function ripple(e){
-  const b=e.currentTarget;if(!b)return;
-  const r=document.createElement("span"),rect=b.getBoundingClientRect(),size=Math.max(rect.width,rect.height);
-  r.className="ripple-wave";r.style.width=r.style.height=size+"px";
-  r.style.left=(e.clientX-rect.left-size/2)+"px";r.style.top=(e.clientY-rect.top-size/2)+"px";
-  b.appendChild(r);setTimeout(()=>r.remove(),600);
+/* FORM BUILDER ACCORDING TO TYPE */
+const formFields = {
+  url: `
+    <div><div class="label">Target Website URL</div>
+    <input id="f_url" class="input" type="url" placeholder="https://example.com" value="https://auraqr.in"></div>
+  `,
+  text: `
+    <div><div class="label">Plain Text Content</div>
+    <textarea id="f_text" class="input" placeholder="Type anything here..."></textarea></div>
+  `,
+  wifi: `
+    <div class="form-row">
+      <div><div class="label">Network Name (SSID)</div><input id="f_wifi_ssid" class="input" type="text" placeholder="Home_WiFi"></div>
+      <div><div class="label">Security Type</div>
+        <select id="f_wifi_type" class="input">
+          <option value="WPA">WPA/WPA2/WPA3</option>
+          <option value="WEP">WEP</option>
+          <option value="nopass">None (Open)</option>
+        </select>
+      </div>
+    </div>
+    <div><div class="label">Password</div><input id="f_wifi_pass" class="input" type="text" placeholder="Network password"></div>
+    <label class="checkbox-row"><input id="f_wifi_hidden" type="checkbox"><span>Hidden Network</span></label>
+  `,
+  whatsapp: `
+    <div class="form-row">
+      <div><div class="label">Country Code</div><input id="f_wa_code" class="input" type="text" placeholder="e.g. 1 or 91" value="1"></div>
+      <div><div class="label">Phone Number</div><input id="f_wa_phone" class="input" type="tel" placeholder="10-digit number"></div>
+    </div>
+    <div><div class="label">Pre-filled Message (Optional)</div>
+    <textarea id="f_wa_msg" class="input" placeholder="Hello! I found your QR code..."></textarea></div>
+  `,
+  upi: `
+    <div class="form-row">
+      <div><div class="label">Payee UPI ID / VPA</div><input id="f_upi_id" class="input" type="text" placeholder="name@upi"></div>
+      <div><div class="label">Payee Name</div><input id="f_upi_name" class="input" type="text" placeholder="Business or Person Name"></div>
+    </div>
+    <div class="form-row">
+      <div><div class="label">Amount (INR, Optional)</div><input id="f_upi_amount" class="input" type="number" step="0.01" placeholder="e.g. 250"></div>
+      <div><div class="label">Transaction Note</div><input id="f_upi_note" class="input" type="text" placeholder="e.g. Order #101"></div>
+    </div>
+  `,
+  vcard: `
+    <div class="form-row">
+      <div><div class="label">Full Name</div><input id="f_vc_name" class="input" type="text" placeholder="Jane Doe"></div>
+      <div><div class="label">Phone Number</div><input id="f_vc_phone" class="input" type="tel" placeholder="+1 555 123 4567"></div>
+    </div>
+    <div class="form-row">
+      <div><div class="label">Email Address</div><input id="f_vc_email" class="input" type="email" placeholder="jane@example.com"></div>
+      <div><div class="label">Company / Organization</div><input id="f_vc_company" class="input" type="text" placeholder="Acme Inc"></div>
+    </div>
+    <div class="form-row">
+      <div><div class="label">Website</div><input id="f_vc_url" class="input" type="url" placeholder="https://example.com"></div>
+      <div><div class="label">Address / Location</div><input id="f_vc_adr" class="input" type="text" placeholder="City, Country"></div>
+    </div>
+  `,
+  email: `
+    <div><div class="label">Recipient Email</div><input id="f_em_to" class="input" type="email" placeholder="contact@domain.com"></div>
+    <div><div class="label">Subject</div><input id="f_em_sub" class="input" type="text" placeholder="Inquiry from QR"></div>
+    <div><div class="label">Body Message</div><textarea id="f_em_body" class="input" placeholder="Your message here..."></textarea></div>
+  `,
+  phone: `
+    <div><div class="label">Phone Number (with Country Code)</div>
+    <input id="f_ph_num" class="input" type="tel" placeholder="+1234567890"></div>
+  `,
+  sms: `
+    <div><div class="label">Recipient Phone Number</div><input id="f_sms_num" class="input" type="tel" placeholder="+1234567890"></div>
+    <div><div class="label">Default Text Message</div><textarea id="f_sms_msg" class="input" placeholder="Type SMS body..."></textarea></div>
+  `,
+  location: `
+    <div class="form-row">
+      <div><div class="label">Latitude</div><input id="f_loc_lat" class="input" type="text" placeholder="37.7749"></div>
+      <div><div class="label">Longitude</div><input id="f_loc_lng" class="input" type="text" placeholder="-122.4194"></div>
+    </div>
+    <div><div class="label">OR Direct Google Maps URL</div><input id="f_loc_url" class="input" type="url" placeholder="https://maps.google.com/?q=..."></div>
+  `,
+  event: `
+    <div><div class="label">Event Title</div><input id="f_ev_title" class="input" type="text" placeholder="Conference 2026"></div>
+    <div><div class="label">Location / Venue</div><input id="f_ev_loc" class="input" type="text" placeholder="Convention Center or Zoom"></div>
+    <div class="form-row">
+      <div><div class="label">Start Date & Time</div><input id="f_ev_start" class="input" type="datetime-local"></div>
+      <div><div class="label">End Date & Time</div><input id="f_ev_end" class="input" type="datetime-local"></div>
+    </div>
+    <div><div class="label">Description</div><textarea id="f_ev_desc" class="input" placeholder="Brief event summary..."></textarea></div>
+  `,
+  social: `
+    <div class="form-row">
+      <div><div class="label">Platform</div>
+        <select id="f_soc_platform" class="input">
+          <option value="instagram">Instagram</option>
+          <option value="youtube">YouTube</option>
+          <option value="facebook">Facebook</option>
+          <option value="x">X (Twitter)</option>
+          <option value="linkedin">LinkedIn</option>
+        </select>
+      </div>
+      <div><div class="label">Username or Page Slug</div><input id="f_soc_user" class="input" type="text" placeholder="username"></div>
+    </div>
+  `
+};
+
+function renderForm(type){
+  $("dynamicForm").innerHTML = formFields[type] || formFields.url;
+  const inputs = $("dynamicForm").querySelectorAll("input, textarea, select");
+  inputs.forEach(el => el.addEventListener("input", debounceGenerate));
+  updateHint(type);
 }
-document.querySelectorAll(".ripple").forEach(b=>b.addEventListener("pointerdown",ripple));
 
-function updateBundle(name,fg,bg){
-  activeThemeName=name;$("bundleName").textContent=name;
-  $("bundleFg").style.background=fg;$("bundleBg").style.background=bg;
+function updateHint(type){
+  const hints = {
+    url: "Paste a website link. https:// will be prepended automatically if needed.",
+    text: "Encodes raw alphanumeric text directly into the QR payload.",
+    wifi: "Standard Wi-Fi barcode format. Supported by iOS and Android Camera apps.",
+    whatsapp: "Generates a direct wa.me link with prefilled conversational message.",
+    upi: "Standard Indian UPI payment string (NPCI compatible for GPay, PhonePe, Paytm).",
+    vcard: "Standard vCard 3.0 format for seamless mobile Address Book contact additions.",
+    email: "Standard mailto protocol with optional subject and message payload.",
+    phone: "Standard tel protocol for single-tap instant phone dialing.",
+    sms: "Standard smsto protocol for preloaded SMS text conversations.",
+    location: "Encodes direct geo-coordinates or Google Maps navigation link.",
+    event: "Encodes standard iCalendar VEVENT parameters for 1-tap calendar addition.",
+    social: "Direct profile link to major social media platforms."
+  };
+  $("inputHint").textContent = hints[type] || "";
+}
+
+function getPayload(){
+  const getVal = id => $(id) ? $(id).value.trim() : "";
+  switch(currentType){
+    case "url": {
+      let u = getVal("f_url");
+      if(!u) return null;
+      if(!/^[a-z][a-z0-9+.-]*:/i.test(u)) u = "https://" + u;
+      return u;
+    }
+    case "text": {
+      return getVal("f_text") || null;
+    }
+    case "wifi": {
+      const s = getVal("f_wifi_ssid");
+      if(!s) return null;
+      const t = getVal("f_wifi_type");
+      const p = getVal("f_wifi_pass");
+      const h = $("f_wifi_hidden") && $("f_wifi_hidden").checked ? "true" : "false";
+      return `WIFI:T:${t};S:${s};P:${p};H:${h};;`;
+    }
+    case "whatsapp": {
+      const code = getVal("f_wa_code").replace(/\+/g,"");
+      const ph = getVal("f_wa_phone").replace(/[^0-9]/g,"");
+      if(!ph) return null;
+      const msg = encodeURIComponent(getVal("f_wa_msg"));
+      return `https://wa.me/${code}${ph}${msg ? '?text='+msg : ''}`;
+    }
+    case "upi": {
+      const pa = getVal("f_upi_id");
+      if(!pa) return null;
+      const pn = encodeURIComponent(getVal("f_upi_name") || "Merchant");
+      const am = getVal("f_upi_amount");
+      const tn = encodeURIComponent(getVal("f_upi_note") || "Payment");
+      return `upi://pay?pa=${pa}&pn=${pn}${am ? '&am='+am : ''}&cu=INR&tn=${tn}`;
+    }
+    case "vcard": {
+      const fn = getVal("f_vc_name");
+      if(!fn) return null;
+      const tel = getVal("f_vc_phone");
+      const email = getVal("f_vc_email");
+      const org = getVal("f_vc_company");
+      const url = getVal("f_vc_url");
+      const adr = getVal("f_vc_adr");
+      return `BEGIN:VCARD\nVERSION:3.0\nFN:${fn}\nORG:${org}\nTEL:${tel}\nEMAIL:${email}\nURL:${url}\nADR:;;${adr};;;\nEND:VCARD`;
+    }
+    case "email": {
+      const to = getVal("f_em_to");
+      if(!to) return null;
+      const sub = encodeURIComponent(getVal("f_em_sub"));
+      const body = encodeURIComponent(getVal("f_em_body"));
+      return `mailto:${to}?subject=${sub}&body=${body}`;
+    }
+    case "phone": {
+      const p = getVal("f_ph_num");
+      return p ? `tel:${p}` : null;
+    }
+    case "sms": {
+      const p = getVal("f_sms_num");
+      if(!p) return null;
+      const msg = getVal("f_sms_msg");
+      return `SMSTO:${p}:${msg}`;
+    }
+    case "location": {
+      const url = getVal("f_loc_url");
+      if(url) return url;
+      const lat = getVal("f_loc_lat");
+      const lng = getVal("f_loc_lng");
+      if(lat && lng) return `geo:${lat},${lng}?q=${lat},${lng}`;
+      return null;
+    }
+    case "event": {
+      const title = getVal("f_ev_title");
+      if(!title) return null;
+      const loc = getVal("f_ev_loc");
+      const desc = getVal("f_ev_desc");
+      const fmtDate = (d) => d ? d.replace(/[-:]/g,"") + "00Z" : "";
+      const s = fmtDate(getVal("f_ev_start"));
+      const e = fmtDate(getVal("f_ev_end"));
+      return `BEGIN:VEVENT\nSUMMARY:${title}\nLOCATION:${loc}\nDESCRIPTION:${desc}\nDTSTART:${s}\nDTEND:${e}\nEND:VEVENT`;
+    }
+    case "social": {
+      const p = getVal("f_soc_platform");
+      const u = getVal("f_soc_user");
+      if(!u) return null;
+      const baseMap = {
+        instagram: "https://instagram.com/",
+        youtube: "https://youtube.com/@",
+        facebook: "https://facebook.com/",
+        x: "https://x.com/",
+        linkedin: "https://linkedin.com/in/"
+      };
+      return (baseMap[p] || "https://") + u;
+    }
+    default: return null;
+  }
+}
+
+/* QR Engine Generator */
+function qrLevel(v){
+  if(typeof QRCode === "undefined") return 2;
+  return v==="L" ? QRCode.CorrectLevel.L : v==="M" ? QRCode.CorrectLevel.M : v==="H" ? QRCode.CorrectLevel.H : QRCode.CorrectLevel.Q;
+}
+
+function clearQR(){
+  const c = $("qrCanvas"), ctx = c.getContext("2d");
+  ctx.clearRect(0,0,c.width,c.height);
+}
+
+let debounceTimer = null;
+function debounceGenerate(){
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(generateQR, 100);
+}
+
+function generateQR(){
+  if(generating) return;
+  const payload = getPayload();
+  if(!payload){
+    clearQR();
+    $("status").textContent = "Enter required information";
+    $("status").style.color = "var(--muted)";
+    return;
+  }
+  if(typeof QRCode === "undefined"){
+    $("engineError").style.display = "block";
+    $("status").textContent = "QR engine loading…";
+    $("status").style.color = "var(--bad)";
+    return;
+  }
+
+  generating = true;
+  $("engineError").style.display = "none";
+  const holder = document.createElement("div");
+  holder.style.cssText = "position:fixed;left:-10000px;top:-10000px;width:512px;height:512px";
+  document.body.appendChild(holder);
+
+  try {
+    const qr = new QRCode(holder, {
+      text: payload,
+      width: 512,
+      height: 512,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: qrLevel($("errorCorrection").value)
+    });
+
+    setTimeout(() => {
+      const matrix = qr && qr._oQRCode && qr._oQRCode.modules;
+      if(!matrix || !matrix.length){
+        $("status").textContent = "Generation failed";
+        $("status").style.color = "var(--bad)";
+        holder.remove();
+        generating = false;
+        return;
+      }
+      cachedMatrix = matrix;
+      renderMatrixToCanvas(matrix);
+      holder.remove();
+      generating = false;
+      $("status").textContent = "Ready to scan ✓";
+      $("status").style.color = "var(--ok)";
+      saveToHistory(payload);
+    }, 40);
+  } catch(e) {
+    console.error(e);
+    holder.remove();
+    generating = false;
+    $("status").textContent = "Error generating payload";
+    $("status").style.color = "var(--bad)";
+  }
+}
+
+function renderMatrixToCanvas(matrix, targetSize){
+  const canvas = $("qrCanvas");
+  const ctx = canvas.getContext("2d");
+  const size = targetSize || parseInt($("qrSize").value, 10);
+  canvas.width = size;
+  canvas.height = size;
+  ctx.imageSmoothingEnabled = true;
+
+  const grid = matrix.length;
+  const marginCells = parseInt($("quietZone").value, 10);
+  const totalCells = grid + marginCells * 2;
+  const cellSize = size / totalCells;
+  const isTransparent = $("transparentBg").checked;
+  const bgColor = isTransparent ? "rgba(0,0,0,0)" : $("bgColor").value;
+  const fgColor1 = $("fgColor").value;
+  const fgColor2 = $("fgColor2").value;
+  const gradDir = $("gradDirection").value;
+
+  ctx.clearRect(0,0,size,size);
+  if(!isTransparent){
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0,0,size,size);
+  }
+
+  // Create gradient if enabled
+  let fillStyle = fgColor1;
+  if(gradDir !== "none"){
+    let grad;
+    if(gradDir === "diagonal") grad = ctx.createLinearGradient(0,0,size,size);
+    else if(gradDir === "horizontal") grad = ctx.createLinearGradient(0,0,size,0);
+    else if(gradDir === "vertical") grad = ctx.createLinearGradient(0,0,0,size);
+    grad.addColorStop(0, fgColor1);
+    grad.addColorStop(1, fgColor2);
+    fillStyle = grad;
+  }
+
+  const finderZones = [[0,0], [grid-7,0], [0,grid-7]];
+  const inFinder = (r,c) => finderZones.some(([fr,fc]) => r >= fr && r < fr + 7 && c >= fc && c < fc + 7);
+
+  ctx.fillStyle = fillStyle;
+  for(let r=0; r<grid; r++){
+    for(let c=0; c<grid; c++){
+      if(!matrix[r][c]) continue;
+      const x = (c + marginCells) * cellSize;
+      const y = (r + marginCells) * cellSize;
+      const w = cellSize + 0.3;
+
+      if(inFinder(r,c)){
+        ctx.fillRect(Math.floor(x), Math.floor(y), Math.ceil(w), Math.ceil(w));
+        continue;
+      }
+
+      ctx.beginPath();
+      if(currentStyle === "dots"){
+        ctx.arc(x + cellSize/2, y + cellSize/2, cellSize * 0.44, 0, Math.PI * 2);
+      } else if(currentStyle === "rounded"){
+        roundRect(ctx, x + cellSize*0.06, y + cellSize*0.06, cellSize*0.88, cellSize*0.88, cellSize*0.22);
+      } else if(currentStyle === "compact"){
+        roundRect(ctx, x + cellSize*0.12, y + cellSize*0.12, cellSize*0.76, cellSize*0.76, cellSize*0.14);
+      } else if(currentStyle === "diamond"){
+        ctx.moveTo(x + cellSize/2, y + cellSize*0.04);
+        ctx.lineTo(x + cellSize*0.96, y + cellSize/2);
+        ctx.lineTo(x + cellSize/2, y + cellSize*0.96);
+        ctx.lineTo(x + cellSize*0.04, y + cellSize/2);
+        ctx.closePath();
+      } else if(currentStyle === "pixel"){
+        roundRect(ctx, x + cellSize*0.03, y + cellSize*0.03, cellSize*0.94, cellSize*0.94, cellSize*0.08);
+      } else {
+        ctx.fillRect(Math.floor(x), Math.floor(y), Math.ceil(w), Math.ceil(w));
+        continue;
+      }
+      ctx.fill();
+    }
+  }
+
+  if(logoData){
+    const img = new Image();
+    img.onload = () => {
+      const s = Math.floor(size * 0.20);
+      const x = (size - s) / 2;
+      const y = (size - s) / 2;
+      ctx.save();
+      ctx.fillStyle = isTransparent ? "#ffffff" : $("bgColor").value;
+      roundRect(ctx, x - 6, y - 6, s + 12, s + 12, 12);
+      ctx.fill();
+      ctx.beginPath();
+      roundRect(ctx, x, y, s, s, 10);
+      ctx.clip();
+      ctx.drawImage(img, x, y, s, s);
+      ctx.restore();
+    };
+    img.src = logoData;
+  }
+}
+
+function roundRect(ctx, x, y, w, h, r){
+  if(ctx.roundRect) ctx.roundRect(x,y,w,h,r);
+  else ctx.rect(x,y,w,h);
+}
+
+/* VECTOR SVG GENERATOR */
+function generatePureVectorSVG(matrix, size){
+  if(!matrix) return "";
+  const grid = matrix.length;
+  const marginCells = parseInt($("quietZone").value, 10);
+  const totalCells = grid + marginCells * 2;
+  const cellSize = size / totalCells;
+  const isTransparent = $("transparentBg").checked;
+  const bgColor = isTransparent ? "none" : $("bgColor").value;
+  const fgColor1 = $("fgColor").value;
+  const fgColor2 = $("fgColor2").value;
+  const gradDir = $("gradDirection").value;
+
+  let defs = "";
+  let fillAttr = fgColor1;
+
+  if(gradDir !== "none"){
+    let x1="0%", y1="0%", x2="100%", y2="100%";
+    if(gradDir === "horizontal"){ x1="0%"; y1="0%"; x2="100%"; y2="0%"; }
+    if(gradDir === "vertical"){ x1="0%"; y1="0%"; x2="0%"; y2="100%"; }
+    defs = `
+      <defs>
+        <linearGradient id="auraGrad" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}">
+          <stop offset="0%" stop-color="${fgColor1}" />
+          <stop offset="100%" stop-color="${fgColor2}" />
+        </linearGradient>
+      </defs>`;
+    fillAttr = "url(#auraGrad)";
+  }
+
+  let paths = "";
+  const finderZones = [[0,0], [grid-7,0], [0,grid-7]];
+  const inFinder = (r,c) => finderZones.some(([fr,fc]) => r >= fr && r < fr + 7 && c >= fc && c < fc + 7);
+
+  for(let r=0; r<grid; r++){
+    for(let c=0; c<grid; c++){
+      if(!matrix[r][c]) continue;
+      const x = (c + marginCells) * cellSize;
+      const y = (r + marginCells) * cellSize;
+      if(inFinder(r,c) || currentStyle === "square"){
+        paths += `<rect x="${x}" y="${y}" width="${cellSize + 0.1}" height="${cellSize + 0.1}" fill="${fillAttr}" />`;
+      } else if(currentStyle === "dots"){
+        paths += `<circle cx="${x + cellSize/2}" cy="${y + cellSize/2}" r="${cellSize*0.44}" fill="${fillAttr}" />`;
+      } else if(currentStyle === "diamond"){
+        paths += `<polygon points="${x+cellSize/2},${y} ${x+cellSize},${y+cellSize/2} ${x+cellSize/2},${y+cellSize} ${x},${y+cellSize/2}" fill="${fillAttr}" />`;
+      } else {
+        paths += `<rect x="${x+cellSize*0.06}" y="${y+cellSize*0.06}" width="${cellSize*0.88}" height="${cellSize*0.88}" rx="${cellSize*0.2}" fill="${fillAttr}" />`;
+      }
+    }
+  }
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}">
+    ${defs}
+    ${bgColor !== "none" ? `<rect width="100%" height="100%" fill="${bgColor}"/>` : ""}
+    ${paths}
+  </svg>`;
+}
+
+/* TEMPLATES LOGIC */
+const templatePresets = {
+  whatsapp: { type:"whatsapp", theme:["Cyber","#0F172A","#67E8F9"], style:"rounded", msg:"Hi! How can I help you today?" },
+  instagram: { type:"social", theme:["Neon","#581C87","#F0ABFC"], style:"dots", platform:"instagram" },
+  youtube: { type:"social", theme:["Crimson","#7F1D1D","#FEE2E2"], style:"square", platform:"youtube" },
+  wifi: { type:"wifi", theme:["Ocean","#075985","#E0F2FE"], style:"compact" },
+  upi: { type:"upi", theme:["Forest","#14532D","#DCFCE7"], style:"dots" },
+  vcard: { type:"vcard", theme:["Classic","#111827","#FFFFFF"], style:"rounded" },
+  maps: { type:"location", theme:["Sunset","#7C2D12","#FFEDD5"], style:"pixel" },
+  event: { type:"event", theme:["Royal","#4C1D95","#EDE9FE"], style:"rounded" }
+};
+
+function applyTemplate(key){
+  const tpl = templatePresets[key];
+  if(!tpl) return;
+  setType(tpl.type);
+  currentStyle = tpl.style;
+  updateStructureBundle();
+  $("fgColor").value = tpl.theme[1];
+  $("bgColor").value = tpl.theme[2];
+  updateHex();
+  updateBundle(tpl.theme[0], tpl.theme[1], tpl.theme[2]);
+  generateQR();
+  toast(`Applied ${key.toUpperCase()} template!`);
+}
+document.querySelectorAll(".template-chip").forEach(chip => {
+  chip.addEventListener("click", () => applyTemplate(chip.dataset.tpl));
+});
+
+/* LOCAL STORAGE HISTORY */
+function getHistory(){
+  try { return JSON.parse(localStorage.getItem("auraqr_history") || "[]"); } catch(e){ return []; }
+}
+function saveToHistory(payload){
+  let hist = getHistory();
+  const title = getHistoryTitle();
+  hist = hist.filter(item => item.payload !== payload);
+  hist.unshift({
+    type: currentType,
+    title: title,
+    payload: payload,
+    date: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', month: 'short', day: 'numeric' })
+  });
+  if(hist.length > 15) hist.pop();
+  localStorage.setItem("auraqr_history", JSON.stringify(hist));
+  renderHistory();
+}
+function getHistoryTitle(){
+  const p = getPayload();
+  if(!p) return "QR Code";
+  if(p.length > 28) return p.substring(0,25) + "...";
+  return p;
+}
+function renderHistory(){
+  const list = $("historyList");
+  const hist = getHistory();
+  if(!hist.length){
+    list.innerHTML = `<div class="empty-history">No QR codes stored in your local session.</div>`;
+    return;
+  }
+  list.innerHTML = "";
+  hist.forEach((item, idx) => {
+    const el = document.createElement("div");
+    el.className = "history-item";
+    el.innerHTML = `
+      <div class="history-info">
+        <div class="history-title">${item.title}</div>
+        <div class="history-meta"><span style="text-transform:uppercase;font-weight:900">${item.type}</span> • ${item.date}</div>
+      </div>
+      <div class="history-actions">
+        <button class="history-btn" data-act="load" data-idx="${idx}">Load</button>
+        <button class="history-btn" data-act="del" data-idx="${idx}">✕</button>
+      </div>
+    `;
+    list.appendChild(el);
+  });
+}
+$("historyList").addEventListener("click", e => {
+  const btn = e.target.closest(".history-btn");
+  if(!btn) return;
+  const idx = btn.dataset.idx;
+  const hist = getHistory();
+  if(btn.dataset.act === "load"){
+    const item = hist[idx];
+    if(item){
+      setType(item.type);
+      setTimeout(()=>{
+        if($("f_url")) $("f_url").value = item.payload;
+        if($("f_text")) $("f_text").value = item.payload;
+        generateQR();
+        toast("Loaded item from history");
+      }, 50);
+    }
+  } else if(btn.dataset.act === "del"){
+    hist.splice(idx, 1);
+    localStorage.setItem("auraqr_history", JSON.stringify(hist));
+    renderHistory();
+    toast("Item removed");
+  }
+});
+$("clearHistoryBtn").addEventListener("click", () => {
+  localStorage.removeItem("auraqr_history");
+  renderHistory();
+  toast("History cleared");
+});
+
+/* TYPE SWITCHER */
+function setType(type){
+  currentType = type;
+  document.querySelectorAll(".type-btn").forEach(b => b.classList.toggle("active", b.dataset.type === type));
+  renderForm(type);
+  debounceGenerate();
+}
+$("typeGrid").addEventListener("click", e => {
+  const btn = e.target.closest(".type-btn");
+  if(btn) setType(btn.dataset.type);
+});
+
+/* THEMES & STRUCTURE MODALS */
+function toast(msg){
+  const e = $("toast");
+  e.textContent = msg;
+  e.classList.add("show");
+  clearTimeout(window.__toast);
+  window.__toast = setTimeout(() => e.classList.remove("show"), 2000);
+}
+function ripple(e){
+  const b = e.currentTarget; if(!b) return;
+  const r = document.createElement("span"), rect = b.getBoundingClientRect(), size = Math.max(rect.width, rect.height);
+  r.className = "ripple-wave"; r.style.width = r.style.height = size + "px";
+  r.style.left = (e.clientX - rect.left - size/2) + "px"; r.style.top = (e.clientY - rect.top - size/2) + "px";
+  b.appendChild(r); setTimeout(() => r.remove(), 600);
+}
+document.querySelectorAll(".ripple").forEach(b => b.addEventListener("pointerdown", ripple));
+
+function updateBundle(name, fg, bg){
+  activeThemeName = name;
+  $("bundleName").textContent = name;
+  $("bundleFg").style.background = fg;
+  $("bundleBg").style.background = bg;
+}
+function updateHex(){
+  $("fgHex").textContent = $("fgColor").value.toUpperCase();
+  $("bgHex").textContent = $("bgColor").value.toUpperCase();
+  $("fgHex2").textContent = $("fgColor2").value.toUpperCase();
 }
 function renderThemes(){
-  const grid=$("themeGrid"),fg=$("fgColor").value.toUpperCase(),bg=$("bgColor").value.toUpperCase();
-  grid.innerHTML="";
-  themes.forEach(([name,f,b],i)=>{
-    const x=document.createElement("button");x.className="theme"+(fg===f&&bg===b?" active":"");
-    x.style.animationDelay=(i*22)+"ms";
-    x.innerHTML=`<div class="swatch" style="background:linear-gradient(135deg,${f} 50%,${b} 50%)"></div><div class="theme-name">${name}</div><div class="theme-code">${f} / ${b}</div>`;
-    x.addEventListener("click",()=>{ $("fgColor").value=f;$("bgColor").value=b;updateHex();updateBundle(name,f,b);renderThemes();generateQR();toast(name+" theme applied");setTimeout(closeThemes,180)});
+  const grid = $("themeGrid"), fg = $("fgColor").value.toUpperCase(), bg = $("bgColor").value.toUpperCase();
+  grid.innerHTML = "";
+  themes.forEach(([name, f, b], i) => {
+    const x = document.createElement("button");
+    x.className = "theme" + (fg === f && bg === b ? " active" : "");
+    x.innerHTML = `<div class="swatch" style="background:linear-gradient(135deg,${f} 50%,${b} 50%)"></div><div class="theme-name">${name}</div><div class="theme-code">${f} / ${b}</div>`;
+    x.addEventListener("click", () => {
+      $("fgColor").value = f;
+      $("bgColor").value = b;
+      updateHex();
+      updateBundle(name, f, b);
+      renderThemes();
+      debounceGenerate();
+      toast(name + " theme applied");
+      setTimeout(closeThemes, 180);
+    });
     grid.appendChild(x);
   });
 }
-function updateHex(){$("fgHex").textContent=$("fgColor").value.toUpperCase();$("bgHex").textContent=$("bgColor").value.toUpperCase()}
 function openThemes(){
-  renderThemes();$("themeModal").classList.add("open");$("themeModal").setAttribute("aria-hidden","false");document.body.classList.add("modal-open");
-  setTimeout(()=>$("closeThemes").focus(),100);
+  renderThemes();
+  $("themeModal").classList.add("open");
+  $("themeModal").setAttribute("aria-hidden","false");
+  document.body.classList.add("modal-open");
 }
 function closeThemes(){
-  $("themeModal").classList.remove("open");$("themeModal").setAttribute("aria-hidden","true");document.body.classList.remove("modal-open");
+  $("themeModal").classList.remove("open");
+  $("themeModal").setAttribute("aria-hidden","true");
+  document.body.classList.remove("modal-open");
 }
-$("themeBundle").addEventListener("click",openThemes);
-$("themeBundle").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openThemes()}});
-$("closeThemes").addEventListener("click",closeThemes);
-$("themeModal").addEventListener("click",e=>{if(e.target===$("themeModal"))closeThemes()});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeThemes();closeStructures()}});
+$("themeBundle").addEventListener("click", openThemes);
+$("closeThemes").addEventListener("click", closeThemes);
+$("themeModal").addEventListener("click", e => { if(e.target === $("themeModal")) closeThemes(); });
 
-
+function structureCellType(key){
+  if(key === "dots") return "round";
+  if(key === "rounded") return "soft";
+  if(key === "compact") return "compact";
+  if(key === "diamond") return "diamond";
+  if(key === "pixel") return "pixel";
+  return "";
+}
 function updateStructureBundle(){
-  const found=structures.find(x=>x[2]===currentStyle);
-  $("structureName").textContent=found?found[0]:"Square";
-  const p=$("structurePreview");p.innerHTML="";
-  const type=structureCellType(currentStyle);
-  const size=9;
-  const finder=(r,c,fr,fc)=>r>=fr&&r<fr+3&&c>=fc&&c<fc+3;
-  for(let r=0;r<size;r++){
-    for(let c=0;c<size;c++){
-      const s=document.createElement("span");s.className=type;
-      const inF=finder(r,c,0,0)||finder(r,c,6,0)||finder(r,c,0,6);
-      if(inF){
-        s.style.background="#111827";
-        s.style.borderRadius="0";
-        s.style.transform="none";
-      }else{
-        const on=((r*13+c*19+r*c*5)%4)<2;
-        s.style.opacity=on?"1":"0";
+  const found = structures.find(x => x[2] === currentStyle);
+  $("structureName").textContent = found ? found[0] : "Square";
+  const p = $("structurePreview");
+  p.innerHTML = "";
+  const type = structureCellType(currentStyle);
+  const size = 9;
+  const finder = (r,c,fr,fc) => r>=fr && r<fr+3 && c>=fc && c<fc+3;
+  for(let r=0; r<size; r++){
+    for(let c=0; c<size; c++){
+      const s = document.createElement("span");
+      s.className = type;
+      if(finder(r,c,0,0) || finder(r,c,6,0) || finder(r,c,0,6)){
+        s.style.background = "#111827";
+        s.style.borderRadius = "0";
+      } else {
+        const on = ((r*13 + c*19 + r*c*5)%4) < 2;
+        s.style.opacity = on ? "1" : "0";
       }
       p.appendChild(s);
     }
   }
 }
-function structureCellType(key){
-  if(key==="dots")return "round";
-  if(key==="rounded")return "soft";
-  if(key==="compact")return "compact";
-  if(key==="diamond")return "diamond";
-  if(key==="pixel")return "pixel";
-  return "";
-}
 function makeMiniQR(key){
-  const art=document.createElement("div");art.className="structure-art";
-  const type=structureCellType(key);
-  const size=11;
-  const finder=(r,c,fr,fc)=>{
-    return r>=fr&&r<fr+5&&c>=fc&&c<fc+5;
-  };
-  for(let r=0;r<size;r++){
-    for(let c=0;c<size;c++){
-      const s=document.createElement("span");s.className="m "+type;
-      const inFinder=finder(r,c,0,0)||finder(r,c,6,0)||finder(r,c,0,6);
-      const finderBorder=inFinder && (
-        ((r===0||r===4)&&(c>=0&&c<=4)) ||
-        ((c===0||c===4)&&(r>=0&&r<=4)) ||
-        ((r===6||r===10)&&(c>=0&&c<=4)) ||
-        ((c===0||c===4)&&(r>=6&&r<=10)) ||
-        ((r===0||r===4)&&(c>=6&&c<=10)) ||
-        ((c===6||c===10)&&(r>=0&&r<=4))
+  const art = document.createElement("div");
+  art.className = "structure-art";
+  const type = structureCellType(key);
+  const size = 11;
+  const finder = (r,c,fr,fc) => r>=fr && r<fr+5 && c>=fc && c<fc+5;
+  for(let r=0; r<size; r++){
+    for(let c=0; c<size; c++){
+      const s = document.createElement("span");
+      s.className = "m " + type;
+      const inFinder = finder(r,c,0,0) || finder(r,c,6,0) || finder(r,c,0,6);
+      const finderBorder = inFinder && (
+        ((r===0||r===4)&&(c>=0&&c<=4)) || ((c===0||c===4)&&(r>=0&&r<=4)) ||
+        ((r===6||r===10)&&(c>=0&&c<=4)) || ((c===0||c===4)&&(r>=6&&r<=10)) ||
+        ((r===0||r===4)&&(c>=6&&c<=10)) || ((c===6||c===10)&&(r>=0&&r<=4))
       );
       if(inFinder){
         s.classList.add("finder");
-        // Finder center is handled by pseudo-elements.
-      }else{
-        const on=((r*17+c*31+r*c*7)%5)<2 || (r===5&&c%2===0) || (c===5&&r%3===0);
-        s.style.opacity=on?"1":"0";
+      } else {
+        const on = ((r*17+c*31+r*c*7)%5)<2 || (r===5&&c%2===0) || (c===5&&r%3===0);
+        s.style.opacity = on ? "1" : "0";
       }
-      if(finderBorder) s.style.opacity="1";
+      if(finderBorder) s.style.opacity = "1";
       art.appendChild(s);
     }
   }
   return art;
 }
 function renderStructures(){
-  const grid=$("structureGrid");grid.innerHTML="";
-  structures.forEach(([name,desc,key],i)=>{
-    const x=document.createElement("button");
-    x.className="theme"+(currentStyle===key?" active":"");
-    x.style.animationDelay=(i*35)+"ms";
-    const sw=document.createElement("div");sw.className="swatch";
-    sw.appendChild(makeMiniQR(key));x.appendChild(sw);
-    const nm=document.createElement("div");nm.className="theme-name";nm.textContent=name;x.appendChild(nm);
-    const ds=document.createElement("div");ds.className="theme-code";ds.textContent=desc;x.appendChild(ds);
-    x.addEventListener("click",()=>{
-      currentStyle=key;updateStructureBundle();renderStructures();generateQR();
-      toast(name+" structure applied");setTimeout(closeStructures,180)
+  const grid = $("structureGrid");
+  grid.innerHTML = "";
+  structures.forEach(([name, desc, key]) => {
+    const x = document.createElement("button");
+    x.className = "theme" + (currentStyle === key ? " active" : "");
+    const sw = document.createElement("div");
+    sw.className = "swatch";
+    sw.appendChild(makeMiniQR(key));
+    x.appendChild(sw);
+    const nm = document.createElement("div");
+    nm.className = "theme-name";
+    nm.textContent = name;
+    x.appendChild(nm);
+    const ds = document.createElement("div");
+    ds.className = "theme-code";
+    ds.textContent = desc;
+    x.appendChild(ds);
+    x.addEventListener("click", () => {
+      currentStyle = key;
+      updateStructureBundle();
+      renderStructures();
+      debounceGenerate();
+      toast(name + " structure applied");
+      setTimeout(closeStructures, 180);
     });
     grid.appendChild(x);
   });
 }
 function openStructures(){
-  closeThemes();renderStructures();$("structureModal").classList.add("open");
-  $("structureModal").setAttribute("aria-hidden","false");document.body.classList.add("modal-open");
-  setTimeout(()=>$("closeStructures").focus(),100);
+  closeThemes();
+  renderStructures();
+  $("structureModal").classList.add("open");
+  $("structureModal").setAttribute("aria-hidden","false");
+  document.body.classList.add("modal-open");
 }
 function closeStructures(){
-  $("structureModal").classList.remove("open");$("structureModal").setAttribute("aria-hidden","true");document.body.classList.remove("modal-open");
+  $("structureModal").classList.remove("open");
+  $("structureModal").setAttribute("aria-hidden","true");
+  document.body.classList.remove("modal-open");
 }
-$("structureBundle").addEventListener("click",openStructures);
-$("structureBundle").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openStructures()}});
-$("closeStructures").addEventListener("click",closeStructures);
-$("structureModal").addEventListener("click",e=>{if(e.target===$("structureModal"))closeStructures()});
+$("structureBundle").addEventListener("click", openStructures);
+$("closeStructures").addEventListener("click", closeStructures);
+$("structureModal").addEventListener("click", e => { if(e.target === $("structureModal")) closeStructures(); });
+document.addEventListener("keydown", e => { if(e.key === "Escape"){ closeThemes(); closeStructures(); } });
 
-function getData(){
-  let v=$("qrInput").value.trim();if(!v)return null;
-  if(currentType==="url"&&!/^[a-z][a-z0-9+.-]*:/i.test(v))v="https://"+v;
-  return v;
+/* EXPORTS & DOWNLOADS */
+function getFilename(ext){
+  const expRes = $("exportResolution").value;
+  return `auraqr-${currentType}-${expRes}px.${ext}`;
 }
-function qrLevel(v){if(typeof QRCode==="undefined")return 2;return v==="L"?QRCode.CorrectLevel.L:v==="M"?QRCode.CorrectLevel.M:v==="H"?QRCode.CorrectLevel.H:QRCode.CorrectLevel.Q}
-function clearQR(){const c=$("qrCanvas"),ctx=c.getContext("2d");ctx.clearRect(0,0,c.width,c.height)}
 
-function focusGeneratedResult(){
-  const card=$("qrCanvas").closest(".preview-card");
-  card.classList.remove("result-pop");void card.offsetWidth;card.classList.add("result-pop");
-  setTimeout(()=>card.scrollIntoView({behavior:"smooth",block:window.innerWidth<=860?"center":"nearest"}),90);
-}
-function generateQR(){
-  if(generating)return;
-  const data=getData();
-  if(!data){clearQR();$("status").textContent="Enter something to generate";$("status").style.color="var(--muted)";return}
-  if(typeof QRCode==="undefined"){$("engineError").style.display="block";$("status").textContent="QR engine loading…";$("status").style.color="var(--bad)";return}
-
-  generating=true;$("engineError").style.display="none";
-  const holder=document.createElement("div");
-  holder.style.cssText="position:fixed;left:-10000px;top:-10000px;width:420px;height:420px";
-  document.body.appendChild(holder);
-
-  try{
-    // Let qrcodejs build the real QR matrix. We then draw that exact matrix ourselves.
-    // This avoids trying to reverse-engineer the QR from pixels, which was the source
-    // of the broken/non-scannable codes in the previous version.
-    const qr=new QRCode(holder,{
-      text:data,
-      width:420,
-      height:420,
-      colorDark:"#000000",
-      colorLight:"#ffffff",
-      correctLevel:qrLevel($("errorCorrection").value)
-    });
-
-    setTimeout(()=>{
-      const out=$("qrCanvas"),ctx=out.getContext("2d"),size=+$("qrSize").value;
-      out.width=size;out.height=size;ctx.imageSmoothingEnabled=false;
-      const matrix=qr && qr._oQRCode && qr._oQRCode.modules;
-
-      if(!matrix || !matrix.length){
-        $("status").textContent="QR generation failed";$("status").style.color="var(--bad)";
-        holder.remove();generating=false;return;
-      }
-
-      ctx.fillStyle=$("bgColor").value;ctx.fillRect(0,0,size,size);
-      drawStyledMatrix(matrix,ctx,size,$("fgColor").value,$("bgColor").value,currentStyle);
-
-      // Logo is drawn synchronously when possible, so it is included in downloads.
-      if(logoData){
-        const img=new Image();
-        img.onload=()=>{
-          drawLogoImage(ctx,img,size,$("bgColor").value);
-          finishQR();
-        };
-        img.onerror=finishQR;
-        img.src=logoData;
-      }else finishQR();
-
-      function finishQR(){
-        $("status").textContent="Ready to scan ✓";$("status").style.color="var(--ok)";
-        holder.remove();generating=false;focusGeneratedResult();
-      }
-    },40);
-  }catch(err){
-    console.error(err);holder.remove();$("status").textContent="Could not generate this QR";$("status").style.color="var(--bad)";generating=false;
+$("downloadPng").addEventListener("click", () => {
+  const exportSize = parseInt($("exportResolution").value, 10);
+  if(cachedMatrix){
+    const tempCanvas = document.createElement("canvas");
+    tempCanvas.width = exportSize;
+    tempCanvas.height = exportSize;
+    renderMatrixToCanvas(cachedMatrix, exportSize);
   }
-}
+  const a = document.createElement("a");
+  a.download = getFilename("png");
+  a.href = $("qrCanvas").toDataURL("image/png");
+  a.click();
+  toast("PNG Downloaded!");
+});
 
-function drawStyledMatrix(matrix,ctx,size,fg,bg,style){
-  const grid=matrix.length;
-  const margin=Math.max(4,Math.round(grid*0.12));
-  const total=grid+margin*2;
-  const cell=size/total;
-  const finderZones=[[0,0],[grid-7,0],[0,grid-7]];
-  const inFinder=(r,c)=>finderZones.some(([fr,fc])=>r>=fr&&r<fr+7&&c>=fc&&c<fc+7);
+$("downloadJpg").addEventListener("click", () => {
+  const canvas = $("qrCanvas");
+  const a = document.createElement("a");
+  a.download = getFilename("jpg");
+  a.href = canvas.toDataURL("image/jpeg", 0.95);
+  a.click();
+  toast("JPG Downloaded!");
+});
 
-  ctx.fillStyle=bg;ctx.fillRect(0,0,size,size);
-  ctx.fillStyle=fg;
+$("downloadSvg").addEventListener("click", () => {
+  if(!cachedMatrix){ toast("Generate a QR first"); return; }
+  const exportSize = parseInt($("exportResolution").value, 10);
+  const svgString = generatePureVectorSVG(cachedMatrix, exportSize);
+  const blob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+  const u = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = u;
+  a.download = getFilename("svg");
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(u), 500);
+  toast("Vector SVG Downloaded!");
+});
 
-  for(let r=0;r<grid;r++){
-    for(let c=0;c<grid;c++){
-      if(!matrix[r][c])continue;
-      const x=(c+margin)*cell;
-      const y=(r+margin)*cell;
-      const w=cell+0.35;
+$("downloadPdf").addEventListener("click", () => {
+  const canvas = $("qrCanvas");
+  const dataUrl = canvas.toDataURL("image/png");
+  const printWin = window.open("", "_blank");
+  printWin.document.write(`
+    <html>
+      <head><title>Print QR Code - AuraQR</title></head>
+      <body style="margin:0;display:grid;place-items:center;min-height:100vh;">
+        <div style="text-align:center;">
+          <img src="${dataUrl}" style="width:380px;height:380px;"/>
+          <p style="font-family:sans-serif;font-weight:bold;margin-top:12px;">Scanned via AuraQR</p>
+        </div>
+      </body>
+    </html>
+  `);
+  printWin.document.close();
+  printWin.focus();
+  setTimeout(() => { printWin.print(); printWin.close(); }, 350);
+});
 
-      // Finder patterns stay square. They are essential to reliable detection.
-      if(inFinder(r,c)){
-        ctx.fillRect(Math.floor(x),Math.floor(y),Math.ceil(w),Math.ceil(w));
-        continue;
-      }
+$("copyBtn").addEventListener("click", async () => {
+  const payload = getPayload();
+  if(!payload){ toast("Nothing to copy"); return; }
+  try {
+    await navigator.clipboard.writeText(payload);
+    toast("Payload copied to clipboard!");
+  } catch(e) {
+    toast("Failed to copy clipboard");
+  }
+});
 
-      ctx.beginPath();
-      if(style==="dots"){
-        // Large enough to remain scan-friendly.
-        ctx.arc(x+cell/2,y+cell/2,cell*0.43,0,Math.PI*2);
-      }else if(style==="rounded"){
-        round(ctx,x+cell*.055,y+cell*.055,cell*.89,cell*.89,cell*.20);
-      }else if(style==="compact"){
-        round(ctx,x+cell*.11,y+cell*.11,cell*.78,cell*.78,cell*.12);
-      }else if(style==="diamond"){
-        ctx.moveTo(x+cell/2,y+cell*.04);
-        ctx.lineTo(x+cell*.96,y+cell/2);
-        ctx.lineTo(x+cell/2,y+cell*.96);
-        ctx.lineTo(x+cell*.04,y+cell/2);
-        ctx.closePath();
-      }else if(style==="pixel"){
-        round(ctx,x+cell*.025,y+cell*.025,cell*.95,cell*.95,cell*.06);
-      }else{
-        ctx.fillRect(Math.floor(x),Math.floor(y),Math.ceil(w),Math.ceil(w));
-        continue;
-      }
-      ctx.fill();
+/* INPUT LISTENERS */
+$("fgColor").addEventListener("input", () => { updateHex(); debounceGenerate(); });
+$("bgColor").addEventListener("input", () => { updateHex(); debounceGenerate(); });
+$("fgColor2").addEventListener("input", () => { updateHex(); debounceGenerate(); });
+$("gradDirection").addEventListener("change", debounceGenerate);
+$("transparentBg").addEventListener("change", debounceGenerate);
+$("errorCorrection").addEventListener("change", debounceGenerate);
+$("quietZone").addEventListener("change", debounceGenerate);
+$("qrSize").addEventListener("input", () => {
+  $("sizeValue").textContent = $("qrSize").value + "px";
+  debounceGenerate();
+});
+
+$("generateBtn").addEventListener("click", generateQR);
+$("clearBtn").addEventListener("click", () => {
+  renderForm(currentType);
+  clearQR();
+  $("status").textContent = "Enter required information";
+  $("status").style.color = "var(--muted)";
+});
+$("pasteBtn").addEventListener("click", async () => {
+  try {
+    const text = await navigator.clipboard.readText();
+    const target = $("dynamicForm").querySelector("input[type='text'], input[type='url'], textarea");
+    if(target){ target.value = text; debounceGenerate(); toast("Pasted!"); }
+  } catch(e) { toast("Clipboard access blocked"); }
+});
+
+/* LOGO HANDLING */
+$("logoInput").addEventListener("change", e => {
+  const file = e.target.files?.[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    logoData = reader.result;
+    $("logoPreview").src = logoData;
+    $("logoPreview").style.display = "block";
+    $("removeLogo").style.display = "grid";
+    if($("errorCorrection").value === "L" || $("errorCorrection").value === "M"){
+      $("errorCorrection").value = "Q";
     }
+    debounceGenerate();
+    toast("Logo added!");
+  };
+  reader.readAsDataURL(file);
+});
+$("removeLogo").addEventListener("click", () => {
+  logoData = null;
+  $("logoInput").value = "";
+  $("logoPreview").style.display = "none";
+  $("removeLogo").style.display = "none";
+  debounceGenerate();
+  toast("Logo removed");
+});
+
+/* DARK/LIGHT THEME */
+function applyMode(mode){
+  document.documentElement.classList.toggle("dark", mode === "dark");
+  document.documentElement.classList.toggle("light", mode !== "dark");
+  $("themeToggle").textContent = mode === "dark" ? "☀" : "☾";
+  localStorage.setItem("auraqr-mode", mode);
+}
+$("themeToggle").addEventListener("click", () => {
+  applyMode(document.documentElement.classList.contains("dark") ? "light" : "dark");
+});
+
+/* MULTILINGUAL SUPPORT */
+const languageStrings = {
+  en: {
+    title: "⌁ Select QR Type & Enter Details",
+    hero: "Generate high-reliability QR codes from links, WhatsApp, Wi-Fi, Contacts, and UPI. Customize colors, gradients, and shapes, embed your logo, and export in SVG, PNG, JPG, or PDF."
+  },
+  hi: {
+    title: "⌁ QR प्रकार चुनें और जानकारी दर्ज करें",
+    hero: "वेबसाइट लिंक, WhatsApp, Wi-Fi, vCard और UPI के लिए सुरक्षित और प्रीमियम QR कोड बनाएं। रंग, ग्रेडिएंट और लोगो कस्टमाइज़ करें और तुरंत डाउनलोड करें।"
+  },
+  es: {
+    title: "⌁ Seleccione tipo QR e ingrese detalles",
+    hero: "Genere códigos QR confiables para enlaces, WhatsApp, Wi-Fi, contactos y UPI. Personalice colores, gradientes y logotipo con descargas SVG y PNG."
+  },
+  fr: {
+    title: "⌁ Sélectionnez le type de QR et entrez les détails",
+    hero: "Générez des codes QR fiables pour liens, WhatsApp, Wi-Fi, vCard et paiements. Personnalisez les couleurs, dégradés et logos avec téléchargement instantané."
   }
-}
-
-function drawLogoImage(ctx,img,size,bg){
-  const s=Math.floor(size*.16),x=(size-s)/2,y=(size-s)/2;
-  ctx.save();ctx.fillStyle=bg;round(ctx,x-8,y-8,s+16,s+16,12);ctx.fill();
-  ctx.beginPath();round(ctx,x,y,s,s,9);ctx.clip();ctx.drawImage(img,x,y,s,s);ctx.restore();
-}
-
-function drawLogo(ctx,src,size,bg){
-  const img=new Image();img.onload=()=>drawLogoImage(ctx,img,size,bg);img.src=src;
-}
-function round(ctx,x,y,w,h,r){if(ctx.roundRect)ctx.roundRect(x,y,w,h,r);else ctx.rect(x,y,w,h)}
-
-function setType(t){
-  currentType=t;document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.type===t));
-  const i=$("qrInput");
-  if(t==="url"){i.placeholder="https://example.com";$("inputHint").textContent="Paste a website link. https:// will be added automatically if needed."}
-  else if(t==="text"){i.placeholder="Write anything you want...";$("inputHint").textContent="Any text can be encoded into the QR."}
-  else{i.placeholder="WIFI:T:WPA;S:MyWiFi;P:MyPassword;;";$("inputHint").textContent="Use the standard Wi-Fi QR format."}
-  generateQR();
-}
-document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>setType(b.dataset.type)));
-document.querySelectorAll(".style").forEach(b=>b.addEventListener("click",()=>{currentStyle=b.dataset.style;document.querySelectorAll(".style").forEach(x=>x.classList.toggle("active",x===b));generateQR()}));
-
-$("qrInput").addEventListener("input",()=>{clearTimeout(window.__inputTimer);window.__inputTimer=setTimeout(generateQR,120)});
-$("generateBtn").addEventListener("click",generateQR);
-$("fgColor").addEventListener("input",()=>{updateHex();renderThemes();updateBundle("Custom",$("fgColor").value,$("bgColor").value);generateQR()});
-$("bgColor").addEventListener("input",()=>{updateHex();renderThemes();updateBundle("Custom",$("fgColor").value,$("bgColor").value);generateQR()});
-$("errorCorrection").addEventListener("change",generateQR);
-$("qrSize").addEventListener("input",()=>{$("sizeValue").textContent=$("qrSize").value;clearTimeout(window.__sizeTimer);window.__sizeTimer=setTimeout(generateQR,80)});
-
-$("clearBtn").addEventListener("click",()=>{$("qrInput").value="";clearQR();$("status").textContent="Enter something to generate";$("status").style.color="var(--muted)";$("qrInput").focus()});
-$("pasteBtn").addEventListener("click",async()=>{try{$("qrInput").value=await navigator.clipboard.readText();generateQR();toast("Pasted")}catch{toast("Paste permission blocked")}});
-
-$("logoInput").addEventListener("change",e=>{
-  const f=e.target.files?.[0];if(!f)return;const r=new FileReader();
-  r.onload=()=>{logoData=r.result;$("logoPreview").src=logoData;$("logoPreview").style.display="block";$("removeLogo").style.display="grid";generateQR();toast("Logo added")};r.readAsDataURL(f)
-});
-$("removeLogo").addEventListener("click",()=>{logoData=null;$("logoInput").value="";$("logoPreview").style.display="none";$("removeLogo").style.display="none";generateQR();toast("Logo removed")});
-
-$("downloadPng").addEventListener("click",()=>{const a=document.createElement("a");a.download=".png";a.href=$("qrCanvas").toDataURL("image/png");a.click();toast("PNG downloaded")});
-$("downloadSvg").addEventListener("click",()=>{
-  const c=$("qrCanvas"),s=c.width,p=c.toDataURL("image/png");
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><image href="${p}" width="${s}" height="${s}"/></svg>`;
-  const u=URL.createObjectURL(new Blob([svg],{type:"image/svg+xml"})),a=document.createElement("a");a.href=u;a.download=".svg";a.click();setTimeout(()=>URL.revokeObjectURL(u),500);toast("SVG downloaded")
-});
-$("copyBtn").addEventListener("click",async()=>{const d=getData();if(!d){toast("Nothing to copy");return}try{await navigator.clipboard.writeText(d);toast("Copied")}catch{toast("Copy failed")}});
-
-/* Theme */
-function applyMode(m){
-  document.documentElement.classList.toggle("dark",m==="dark");document.documentElement.classList.toggle("light",m!=="dark");
-  $("themeToggle").textContent=m==="dark"?"☀":"☾";localStorage.setItem("auraqr-mode",m)
-}
-$("themeToggle").addEventListener("click",()=>applyMode(document.documentElement.classList.contains("dark")?"light":"dark"));
-
-/* Language */
-const texts={
-en:["Enter QR Data","Create reliable QR codes from links, text and Wi-Fi data. Choose a premium color theme, add your logo and download instantly."],
-hi:["QR डेटा दर्ज करें","लिंक, टेक्स्ट और Wi-Fi डेटा से भरोसेमंद QR कोड बनाएं। प्रीमियम थीम चुनें, लोगो जोड़ें और तुरंत डाउनलोड करें।"],
-es:["Introducir datos QR","Crea códigos QR fiables para enlaces, texto y Wi-Fi. Elige un tema premium, añade tu logo y descarga al instante."],
-fr:["Entrer les données QR","Créez des QR fiables pour les liens, le texte et le Wi-Fi. Choisissez un thème premium, ajoutez votre logo et téléchargez instantanément."]
 };
-$("language").addEventListener("change",()=>{const t=texts[$("language").value]||texts.en;$("contentTitle").textContent="⌁ "+t[0];$("heroText").textContent=t[1]});
+$("language").addEventListener("change", () => {
+  const lang = $("language").value;
+  const t = languageStrings[lang] || languageStrings.en;
+  $("contentTitle").textContent = t.title;
+  $("heroText").textContent = t.hero;
+});
 
-/* Scroll reveal */
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")}),{threshold:.08});
-document.querySelectorAll(".reveal").forEach(e=>observer.observe(e));
-
-/* Startup */
+/* STARTUP INITIALIZATION */
 (function init(){
-  applyMode(localStorage.getItem("auraqr-mode")==="dark"?"dark":"light");
-  updateHex();updateBundle("Classic",$("fgColor").value,$("bgColor").value);updateStructureBundle();renderThemes();
-  setTimeout(()=>{
-    if(typeof QRCode==="undefined"){$("engineError").style.display="block";$("status").textContent="QR engine unavailable";$("status").style.color="var(--bad)"}
-    else generateQR();
-  },350);
+  applyMode(localStorage.getItem("auraqr-mode") === "dark" ? "dark" : "light");
+  renderForm("url");
+  updateHex();
+  updateBundle("Classic", $("fgColor").value, $("bgColor").value);
+  updateStructureBundle();
+  renderThemes();
+  renderHistory();
+  setTimeout(() => {
+    if(typeof QRCode === "undefined"){
+      $("engineError").style.display = "block";
+      $("status").textContent = "QR engine unavailable";
+      $("status").style.color = "var(--bad)";
+    } else {
+      generateQR();
+    }
+  }, 300);
 })();
 </script>
 </body>
