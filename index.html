@@ -7,7 +7,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-L0DHR4QXSV');
 </script>
 <meta charset="UTF-8">
@@ -15,14 +14,14 @@
 <meta name="theme-color" content="#080A12">
 <title>AuraQR — Free Custom QR Code Generator with Logo, Colors & Vector SVG</title>
 <link rel="icon" type="image/png" href="/logo.png">
-<meta name="description" content="AuraQR is a free, privacy-first QR code generator. Create custom scannable QR codes for URLs, WiFi, WhatsApp, UPI, vCard contacts, Social Media, and Events in high-resolution PNG, SVG, JPG, and PDF.">
+<meta name="description" content="AuraQR is a free, privacy-first custom QR code generator. Create scannable QR codes for URLs, WiFi, WhatsApp, UPI, Contacts, Social Media, and Events in high-resolution PNG, SVG, JPG, and PDF.">
 <meta name="keywords" content="QR code generator, free QR code generator, custom QR code generator, WiFi QR code, WhatsApp QR code, UPI QR code, QR code with logo, QR code generator online, SVG QR generator">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://auraqr.in/">
 
 <!-- Open Graph / Social Media -->
 <meta property="og:site_name" content="AuraQR">
-<meta property="og:title" content="AuraQR — Premium & Free QR Code Generator">
+<meta property="og:title" content="AuraQR — Premium & Free Custom QR Code Generator">
 <meta property="og:description" content="Generate customizable, high-resolution QR codes for links, WhatsApp, Wi-Fi, UPI, vCard, and more. 100% private and client-side.">
 <meta property="og:url" content="https://auraqr.in/">
 <meta property="og:type" content="website">
@@ -30,25 +29,76 @@
 
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AuraQR — Premium QR Code Generator">
+<meta name="twitter:title" content="AuraQR — Free Custom QR Code Generator">
 <meta name="twitter:description" content="Generate customizable, high-resolution QR codes for links, WhatsApp, Wi-Fi, UPI, vCard, and more.">
 <meta name="twitter:image" content="https://auraqr.in/logo.png">
 
-<!-- JSON-LD Structured Data -->
+<!-- JSON-LD Structured Data: WebApplication & FAQPage -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "AuraQR",
-  "url": "https://auraqr.in/",
-  "description": "Free, privacy-first custom QR code generator with vector SVG, PNG, PDF download, colors, logos, and multiple QR payload structures.",
-  "applicationCategory": "UtilityApplication",
-  "operatingSystem": "All",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  }
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://auraqr.in/#webapp",
+      "name": "AuraQR",
+      "url": "https://auraqr.in/",
+      "description": "Free, privacy-first custom QR code generator with vector SVG, PNG, PDF download, custom colors, logos, and multiple payload structures.",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://auraqr.in/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a QR Code?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A QR (Quick Response) code is a two-dimensional barcode that stores data such as website links, text, Wi-Fi passwords, contact cards, or payment links."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is AuraQR free to use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, AuraQR is 100% free with no scan limits, hidden fees, or account creation required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will my QR code expire?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. AuraQR generates static QR codes that encode your data directly into the pattern. They work permanently and never expire."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I add a custom logo to my QR code?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you can upload any image logo (PNG, JPG, SVG) and place it in the center. Error correction is automatically adjusted to maintain scannability."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my data private?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. AuraQR operates completely client-side in your browser. Your inputs, Wi-Fi credentials, and contact details are never transmitted to any server."
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
 
@@ -57,7 +107,7 @@
 
 <style>
 /* =========================================================
-   AURAQR VERSION 2.1 — PRODUCTION SYSTEM
+   AURAQR VERSION 2.2 — UPGRADED & SCALABLE DESIGN SYSTEM
 ========================================================= */
 :root{
   --bg:#f4f6ff;--bg2:#eef2ff;--card:rgba(255,255,255,.88);--solid:#fff;
@@ -90,9 +140,10 @@ button{cursor:pointer;-webkit-tap-highlight-color:transparent}
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
   outline:3px solid var(--glow);outline-offset:2px
 }
+section{scroll-margin-top:90px}
 .wrap{width:min(1140px,calc(100% - 24px));margin:auto}
 
-/* Header */
+/* Header & Mobile Navigation */
 .header{
   position:sticky;top:10px;z-index:30;width:min(1140px,calc(100% - 16px));
   margin:10px auto 0;padding:10px 14px;
@@ -109,7 +160,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .brand span{color:var(--accent)}
 .nav-links{display:flex;align-items:center;gap:18px}
 .nav-link{color:var(--muted);text-decoration:none;font-size:13px;font-weight:700;transition:color .2s}
-.nav-link:hover{color:var(--accent)}
+.nav-link:hover,.nav-link.active{color:var(--accent)}
 .header-actions{display:flex;align-items:center;gap:8px}
 .select,.icon-btn{
   min-height:42px;border:1px solid var(--line);border-radius:13px;background:var(--solid);color:var(--text);
@@ -118,6 +169,16 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .select{padding:0 12px}.icon-btn{width:42px;display:grid;place-items:center;font-size:18px}
 .select:hover,.icon-btn:hover{transform:translateY(-2px);box-shadow:0 9px 25px var(--glow)}
 .select:active,.icon-btn:active{transform:scale(.93)}
+
+.mobile-toggle{display:none;width:42px;height:42px;border-radius:13px;border:1px solid var(--line);background:var(--solid);color:var(--text);font-size:20px;align-items:center;justify-content:center}
+.mobile-nav{
+  display:none;position:fixed;top:70px;left:12px;right:12px;z-index:29;
+  background:var(--card);border:1px solid var(--line);border-radius:20px;
+  padding:16px;box-shadow:var(--shadow);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  flex-direction:column;gap:12px;
+}
+.mobile-nav.open{display:flex}
+.mobile-nav .nav-link{font-size:15px;padding:8px 12px;border-radius:10px;background:var(--solid)}
 
 /* Hero */
 .hero{text-align:center;padding:64px 0 38px}
@@ -169,7 +230,8 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
 .small,.secondary{
   border:1px solid var(--line);background:var(--solid);color:var(--text);
   border-radius:13px;padding:10px 14px;font-size:12px;font-weight:900;
-  transition:all .35s var(--spring);display:inline-flex;align-items:center;justify-content:center;gap:6px
+  transition:all .35s var(--spring);display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  text-decoration:none
 }
 .small:hover,.secondary:hover{transform:translateY(-2px);box-shadow:0 10px 24px var(--glow);border-color:var(--accent)}
 .small:active,.secondary:active{transform:translateY(1px) scale(.95)}
@@ -178,7 +240,7 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
   background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;
   box-shadow:0 13px 32px var(--glow);margin-top:12px;
   transition:all .35s var(--spring);position:relative;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;gap:8px
+  display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none
 }
 .primary:hover{transform:translateY(-3px) scale(1.01);box-shadow:0 18px 38px var(--glow)}
 .primary:active{transform:translateY(1px) scale(.96)}
@@ -221,7 +283,7 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
 .structure-preview span.diamond{transform:rotate(45deg) scale(.72);border-radius:1px}
 .structure-preview span.pixel{transform:scale(.88);border-radius:2px}
 
-/* Advanced Customization Controls */
+/* Customization Controls */
 .custom-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
 .colorbox{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--solid);padding:7px 10px;border-radius:14px}
 .colorbox input[type="color"]{width:36px;height:32px;border:0;background:transparent;padding:0;cursor:pointer;border-radius:6px}
@@ -274,15 +336,16 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
 /* Landing & Marketing Sections */
 .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:60px}
 .feature-card{padding:22px}
-.feature-card h3{font-size:15px;margin:10px 0 6px}
+.feature-card h2, .feature-card h3{font-size:15px;margin:10px 0 6px;font-weight:950}
 .feature-card p{color:var(--muted);font-size:12px;line-height:1.6;margin:0}
 
 .how-it-works{margin-bottom:60px}
-.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px}
-.step-card{padding:20px;position:relative}
-.step-num{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;display:grid;place-items:center;font-weight:950;font-size:13px;margin-bottom:12px}
-.step-card h3{font-size:14px;margin:0 0 4px}
-.step-card p{font-size:12px;color:var(--muted);line-height:1.5;margin:0}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:20px}
+.step-card{padding:22px;position:relative;display:flex;flex-direction:column;justify-content:space-between}
+.step-num{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;display:grid;place-items:center;font-weight:950;font-size:14px;margin-bottom:12px}
+.step-card h3{font-size:15px;margin:0 0 6px;font-weight:900}
+.step-card p{font-size:12px;color:var(--muted);line-height:1.5;margin:0 0 12px}
+.step-tip{padding:8px 10px;border-radius:10px;background:var(--glow);color:var(--accent);font-size:10px;font-weight:800}
 
 .faq-section{margin-bottom:70px}
 .faq-grid{display:grid;gap:10px;margin-top:18px}
@@ -290,6 +353,10 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
 .faq-item summary{font-weight:900;font-size:14px;list-style:none;display:flex;justify-content:space-between;align-items:center}
 .faq-item summary::-webkit-details-marker{display:none}
 .faq-item p{margin:12px 0 0;color:var(--muted);font-size:12px;line-height:1.6}
+
+/* Contact Form Section */
+.contact-section{margin-bottom:70px}
+.contact-card{padding:28px;max-width:720px;margin:auto}
 
 /* Modals */
 .modal-backdrop{
@@ -344,6 +411,7 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
 
 /* Footer */
 .footer{padding:30px 0 40px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:12px;margin-top:40px}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin-bottom:12px}
 .footer a{color:var(--text);text-decoration:none;font-weight:800}
 .footer a:hover{color:var(--accent)}
 
@@ -353,31 +421,40 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
   .design-row{grid-template-columns:1fr 1fr;gap:10px}
   .theme-grid{grid-template-columns:repeat(2,1fr)}
 }
+@media(max-width:768px){
+  .nav-links{display:none}
+  .mobile-toggle{display:flex}
+}
 @media(max-width:540px){
-  .header{padding:8px 12px}.nav-links{display:none}
-  .hero{padding:48px 0 28px}.hero h1{font-size:42px}
+  .header{padding:8px 12px}
+  .hero{padding:48px 0 28px}.hero h1{font-size:38px}
   .type-grid{grid-template-columns:repeat(3,1fr)}
-  .form-row,.design-row,.download-grid{grid-template-columns:1fr}
-  .panel,.preview-card{padding:16px}
+  .form-row,.design-row,.download-grid,.theme-grid{grid-template-columns:1fr}
+  .panel,.preview-card,.contact-card{padding:16px}
 }
 </style>
 </head>
 
 <body>
+
+<!-- Header Navigation -->
 <header class="header">
-  <a href="https://auraqr.in/" class="brand">
+  <a href="https://auraqr.in/" class="brand" aria-label="AuraQR Homepage">
     <div class="brand-mark" aria-hidden="true">
-      <img src="/logo.png" alt="AuraQR Logo" style="width:38px;height:38px;object-fit:contain;border-radius:10px;" onerror="this.style.display='none'">
+      <img src="/logo.png" alt="AuraQR Brand Logo" style="width:38px;height:38px;object-fit:contain;border-radius:10px;" onerror="this.style.display='none'">
     </div>
     <div>Aura<span>QR</span></div>
   </a>
-  <nav class="nav-links">
-    <a href="#generator" class="nav-link">Generator</a>
+
+  <nav class="nav-links" aria-label="Main Navigation">
+    <a href="#generator" class="nav-link active">Generator</a>
     <a href="#templates" class="nav-link">Templates</a>
-    <a href="how-to-use.html" class="nav-link">How to Use</a>
     <a href="#features" class="nav-link">Features</a>
+    <a href="#how-to-use" class="nav-link">How to Use</a>
     <a href="#faq" class="nav-link">FAQ</a>
+    <a href="#contact" class="nav-link">Contact</a>
   </nav>
+
   <div class="header-actions">
     <select id="language" class="select ripple" aria-label="Select Language">
       <option value="en">🌐 English</option>
@@ -385,56 +462,69 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
       <option value="es">🌐 Español</option>
       <option value="fr">🌐 Français</option>
     </select>
-    <button id="themeToggle" class="icon-btn ripple" aria-label="Toggle theme">☾</button>
+    <button id="themeToggle" class="icon-btn ripple" aria-label="Toggle dark/light mode">☾</button>
+    <button id="mobileNavToggle" class="mobile-toggle ripple" aria-label="Toggle mobile menu">☰</button>
   </div>
 </header>
 
-<main class="wrap" id="generator">
+<!-- Mobile Navigation Drawer -->
+<nav id="mobileNav" class="mobile-nav" aria-label="Mobile Navigation">
+  <a href="#generator" class="nav-link">Generator</a>
+  <a href="#templates" class="nav-link">Templates</a>
+  <a href="#features" class="nav-link">Features</a>
+  <a href="#how-to-use" class="nav-link">How to Use</a>
+  <a href="#faq" class="nav-link">FAQ</a>
+  <a href="#contact" class="nav-link">Contact</a>
+</nav>
+
+<main class="wrap">
+
+<!-- Hero Header Section -->
 <section class="hero">
-  <div class="eyebrow">✦ AURAQR 2.1 — FAST • PRIVATE • SCANNABLE</div>
-  <h1>Create QR codes<br><span class="gradient">that actually work.</span></h1>
-  <p id="heroText">Generate high-reliability QR codes from links, WhatsApp, Wi-Fi, Contacts, and UPI. Customize colors, gradients, and shapes, embed your logo, and export in SVG, PNG, JPG, or PDF.</p>
+  <div class="eyebrow">✦ AURAQR 2.2 — FAST • PRIVATE • SCANNABLE</div>
+  <h1>Free Custom QR Code Generator<br><span class="gradient">with Logo & Vector SVG</span></h1>
+  <p id="heroText">Generate high-reliability QR codes for websites, WhatsApp, Wi-Fi networks, Contacts, and UPI. Customize colors, linear gradients, and shapes, embed your logo, and export in SVG, PNG, JPG, or PDF.</p>
 </section>
 
-<!-- QR GENERATOR APP -->
-<section class="app">
+<!-- 1. EXISTING QR GENERATOR -->
+<section class="app" id="generator">
 <div class="stack">
 
-  <!-- Type & Input Panel -->
+  <!-- Type Selection & Dynamic Form Panel -->
   <section class="card panel">
     <div class="title"><span id="contentTitle">⌁ Select QR Type & Enter Details</span></div>
     
     <div class="type-grid" id="typeGrid">
-      <button class="type-btn active ripple" data-type="url"><span class="emoji">🔗</span><span>URL</span></button>
-      <button class="type-btn ripple" data-type="text"><span class="emoji">📝</span><span>Text</span></button>
-      <button class="type-btn ripple" data-type="wifi"><span class="emoji">📶</span><span>Wi-Fi</span></button>
-      <button class="type-btn ripple" data-type="whatsapp"><span class="emoji">💬</span><span>WhatsApp</span></button>
-      <button class="type-btn ripple" data-type="upi"><span class="emoji">💳</span><span>UPI Pay</span></button>
-      <button class="type-btn ripple" data-type="vcard"><span class="emoji">👤</span><span>Contact</span></button>
-      <button class="type-btn ripple" data-type="email"><span class="emoji">✉️</span><span>Email</span></button>
-      <button class="type-btn ripple" data-type="phone"><span class="emoji">📞</span><span>Phone</span></button>
-      <button class="type-btn ripple" data-type="sms"><span class="emoji">📱</span><span>SMS</span></button>
-      <button class="type-btn ripple" data-type="location"><span class="emoji">📍</span><span>Location</span></button>
-      <button class="type-btn ripple" data-type="event"><span class="emoji">📅</span><span>Event</span></button>
-      <button class="type-btn ripple" data-type="social"><span class="emoji">🌐</span><span>Socials</span></button>
+      <button class="type-btn active ripple" data-type="url" aria-label="URL QR Type"><span class="emoji">🔗</span><span>URL</span></button>
+      <button class="type-btn ripple" data-type="text" aria-label="Text QR Type"><span class="emoji">📝</span><span>Text</span></button>
+      <button class="type-btn ripple" data-type="wifi" aria-label="Wi-Fi QR Type"><span class="emoji">📶</span><span>Wi-Fi</span></button>
+      <button class="type-btn ripple" data-type="whatsapp" aria-label="WhatsApp QR Type"><span class="emoji">💬</span><span>WhatsApp</span></button>
+      <button class="type-btn ripple" data-type="upi" aria-label="UPI Pay QR Type"><span class="emoji">💳</span><span>UPI Pay</span></button>
+      <button class="type-btn ripple" data-type="vcard" aria-label="Contact vCard QR Type"><span class="emoji">👤</span><span>Contact</span></button>
+      <button class="type-btn ripple" data-type="email" aria-label="Email QR Type"><span class="emoji">✉️</span><span>Email</span></button>
+      <button class="type-btn ripple" data-type="phone" aria-label="Phone QR Type"><span class="emoji">📞</span><span>Phone</span></button>
+      <button class="type-btn ripple" data-type="sms" aria-label="SMS QR Type"><span class="emoji">📱</span><span>SMS</span></button>
+      <button class="type-btn ripple" data-type="location" aria-label="Location QR Type"><span class="emoji">📍</span><span>Location</span></button>
+      <button class="type-btn ripple" data-type="event" aria-label="Event QR Type"><span class="emoji">📅</span><span>Event</span></button>
+      <button class="type-btn ripple" data-type="social" aria-label="Socials QR Type"><span class="emoji">🌐</span><span>Socials</span></button>
     </div>
 
     <!-- Progressive Dynamic Form Fields -->
     <div id="dynamicForm" class="form-group">
-      <!-- Injected via JS based on QR type -->
+      <!-- Injected dynamically via JS based on selected QR type -->
     </div>
 
     <div class="input-row">
-      <button id="pasteBtn" class="small ripple">📋 Paste</button>
-      <button id="clearBtn" class="small ripple">✕ Clear Form</button>
+      <button id="pasteBtn" class="small ripple" type="button">📋 Paste Clipboard</button>
+      <button id="clearBtn" class="small ripple" type="button">✕ Clear Form</button>
     </div>
     <div id="inputHint" style="color:var(--muted);font-size:11px;margin-top:8px">Paste a website link. https:// is added automatically if needed.</div>
-    <button id="generateBtn" class="primary ripple">✦ Generate QR Code</button>
+    <button id="generateBtn" class="primary ripple" type="button">✦ Generate QR Code</button>
   </section>
 
-  <!-- Templates -->
+  <!-- 2. TEMPLATES SECTION -->
   <section class="card panel" id="templates">
-    <div class="title">⚡ Quick Templates</div>
+    <div class="title">⚡ Quick QR Templates</div>
     <div class="template-scroll">
       <div class="template-chip ripple" data-tpl="whatsapp"><span class="icon">💬</span><span>WhatsApp</span></div>
       <div class="template-chip ripple" data-tpl="instagram"><span class="icon">📷</span><span>Instagram</span></div>
@@ -447,11 +537,11 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
     </div>
   </section>
 
-  <!-- Themes & Structure -->
+  <!-- Themes & Structure Selector Panels -->
   <section class="card panel design-row">
     <div class="design-choice">
       <div class="title">🎨 Color Palette</div>
-      <div class="theme-bundle ripple" id="themeBundle" role="button" tabindex="0" aria-label="Open QR themes">
+      <div class="theme-bundle ripple" id="themeBundle" role="button" tabindex="0" aria-label="Open QR color theme presets">
         <div class="bundle-preview"><div id="bundleFg" class="bundle-half"></div><div id="bundleBg" class="bundle-half"></div></div>
         <div class="bundle-info"><div id="bundleName" class="bundle-title">Classic</div><div class="bundle-sub">16 curated themes</div></div>
         <div class="bundle-arrow">›</div>
@@ -459,7 +549,7 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
     </div>
     <div class="design-choice">
       <div class="title">▦ Module Structure</div>
-      <div class="theme-bundle ripple" id="structureBundle" role="button" tabindex="0" aria-label="Open QR structures">
+      <div class="theme-bundle ripple" id="structureBundle" role="button" tabindex="0" aria-label="Open QR module shape presets">
         <div id="structurePreview" class="structure-preview"><span></span><span></span><span></span><span></span></div>
         <div class="bundle-info"><div id="structureName" class="bundle-title">Square</div><div class="bundle-sub">Scan-optimized modules</div></div>
         <div class="bundle-arrow">›</div>
@@ -467,25 +557,25 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
     </div>
   </section>
 
-  <!-- Advanced Customization -->
+  <!-- 3. ADVANCED CUSTOMIZATION SECTION -->
   <section class="card panel">
-    <div class="title">✦ Design Customization</div>
+    <div class="title">✦ Custom Design Controls</div>
 
     <div class="custom-grid section">
       <div>
-        <div class="label">Primary Color</div>
+        <label for="fgColor" class="label">Primary Color</label>
         <div class="colorbox"><input id="fgColor" type="color" value="#111827"><span id="fgHex" class="hex">#111827</span></div>
       </div>
       <div>
-        <div class="label">Background Color</div>
+        <label for="bgColor" class="label">Background Color</label>
         <div class="colorbox"><input id="bgColor" type="color" value="#FFFFFF"><span id="bgHex" class="hex">#FFFFFF</span></div>
       </div>
       <div>
-        <div class="label">Gradient Color (Optional)</div>
+        <label for="fgColor2" class="label">Gradient Color (Optional)</label>
         <div class="colorbox"><input id="fgColor2" type="color" value="#635BFF"><span id="fgHex2" class="hex">#635BFF</span></div>
       </div>
       <div>
-        <div class="label">Gradient Direction</div>
+        <label for="gradDirection" class="label">Gradient Direction</label>
         <select id="gradDirection" class="input" style="padding:7px 10px;">
           <option value="none">None (Solid Color)</option>
           <option value="diagonal" selected>Diagonal (135°)</option>
@@ -503,21 +593,21 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
     </div>
 
     <div class="section">
-      <div class="label">Center Logo</div>
+      <div class="label">Center Logo Support</div>
       <div class="logo-row">
-        <label class="upload ripple">
+        <label class="upload ripple" for="logoInput">
           <span style="font-size:20px">＋</span>
           <span>Upload Image / Icon (PNG, JPG, SVG)</span>
           <input id="logoInput" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml">
         </label>
-        <img id="logoPreview" alt="Logo preview">
-        <button id="removeLogo" class="remove ripple" aria-label="Remove logo">✕</button>
+        <img id="logoPreview" alt="Logo image preview">
+        <button id="removeLogo" class="remove ripple" aria-label="Remove uploaded logo">✕</button>
       </div>
     </div>
 
     <div class="custom-grid section">
       <div>
-        <div class="label">Error Correction</div>
+        <label for="errorCorrection" class="label">Error Correction Level</label>
         <select id="errorCorrection" class="input">
           <option value="L">Low (7%) — Smallest</option>
           <option value="M">Medium (15%) — Standard</option>
@@ -526,7 +616,7 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
         </select>
       </div>
       <div>
-        <div class="label">Margin / Quiet Zone</div>
+        <label for="quietZone" class="label">Margin / Quiet Zone</label>
         <select id="quietZone" class="input">
           <option value="2">Minimal Margin</option>
           <option value="4" selected>Standard Margin</option>
@@ -536,7 +626,7 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
     </div>
 
     <div>
-      <div class="label">Real-time Render Size</div>
+      <label for="qrSize" class="label">Real-time Render Size</label>
       <div class="range">
         <input id="qrSize" type="range" min="256" max="1024" step="64" value="512">
         <span id="sizeValue">512px</span>
@@ -544,11 +634,11 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
     </div>
   </section>
 
-  <!-- History Section -->
+  <!-- Local QR History Section -->
   <section class="card panel">
     <div class="history-head">
       <div class="title" style="margin:0">🕒 Local QR History</div>
-      <button id="clearHistoryBtn" class="small ripple">Clear All</button>
+      <button id="clearHistoryBtn" class="small ripple" type="button">Clear All</button>
     </div>
     <div id="historyList" class="history-list">
       <div class="empty-history">No QR codes generated yet in this browser.</div>
@@ -557,7 +647,7 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
 
 </div>
 
-<!-- Sticky Live Preview & Export Panel -->
+<!-- Sticky Live Preview & Export Card -->
 <aside class="card preview-card">
   <div class="preview-top">
     <div>
@@ -568,22 +658,22 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
   </div>
 
   <div class="qr-stage">
-    <canvas id="qrCanvas" width="512" height="512"></canvas>
+    <canvas id="qrCanvas" width="512" height="512" aria-label="Generated QR Code Preview Canvas"></canvas>
     <div id="engineError">The QR engine could not load.<br>Check your internet connection and reload.</div>
   </div>
 
-  <button id="downloadPng" class="primary ripple">↓ Download PNG (High Res)</button>
+  <button id="downloadPng" class="primary ripple" type="button">↓ Download PNG (High Res)</button>
   
   <div class="download-grid">
-    <button id="downloadSvg" class="secondary ripple">Vector SVG</button>
-    <button id="downloadJpg" class="secondary ripple">Standard JPG</button>
-    <button id="downloadPdf" class="secondary ripple">Print PDF</button>
-    <button id="copyBtn" class="secondary ripple">Copy Payload</button>
+    <button id="downloadSvg" class="secondary ripple" type="button">Vector SVG</button>
+    <button id="downloadJpg" class="secondary ripple" type="button">Standard JPG</button>
+    <button id="downloadPdf" class="secondary ripple" type="button">Print PDF</button>
+    <button id="copyBtn" class="secondary ripple" type="button">Copy Payload</button>
   </div>
 
   <div class="form-row" style="margin-top:10px">
     <div>
-      <div class="label" style="margin-bottom:4px">Export Resolution</div>
+      <label for="exportResolution" class="label" style="margin-bottom:4px">Export Resolution</label>
       <select id="exportResolution" class="input" style="padding:6px 10px;font-size:11px;">
         <option value="512">512 × 512 px (Web)</option>
         <option value="1024" selected>1024 × 1024 px (HD)</option>
@@ -592,7 +682,7 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
     </div>
     <div>
       <div class="label" style="margin-bottom:4px">Architecture Tier</div>
-      <select class="input" style="padding:6px 10px;font-size:11px;" disabled>
+      <select class="input" style="padding:6px 10px;font-size:11px;" disabled aria-label="Architecture Tier">
         <option>Standard (Static Client)</option>
       </select>
     </div>
@@ -602,83 +692,190 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
 </aside>
 </section>
 
-<!-- Landing Features -->
+<!-- 4. FEATURES SECTION -->
 <section class="features-grid" id="features">
   <div class="card feature-card">
-    <div style="font-size:24px">⚡</div>
-    <h3>Ultra-Fast Client Generation</h3>
-    <p>Zero server latencies. Codes are drawn natively via hardware-accelerated Canvas & SVG engines directly in your browser.</p>
+    <div style="font-size:24px" aria-hidden="true">⚡</div>
+    <h2>Free QR Code Generator</h2>
+    <p>AuraQR is 100% free with unlimited QR generation and zero scan limits or hidden trial expirations.</p>
   </div>
   <div class="card feature-card">
-    <div style="font-size:24px">🔒</div>
-    <h3>Private by Architecture</h3>
-    <p>Your Wi-Fi passwords, private contact numbers, and crypto addresses never touch external servers or databases.</p>
+    <div style="font-size:24px" aria-hidden="true">📱</div>
+    <h2>Multiple QR Types Supported</h2>
+    <p>Create QR codes for website URLs, plain text, Wi-Fi login, WhatsApp, UPI payment, vCard contact, Email, SMS, Location, and Social Media profiles.</p>
   </div>
   <div class="card feature-card">
-    <div style="font-size:24px">📐</div>
-    <h3>True Vector Scalability</h3>
-    <p>Export in pure vector SVG format for crystal clear billboard printing, vinyl cutting, and high-DPI packaging.</p>
+    <div style="font-size:24px" aria-hidden="true">🎨</div>
+    <h2>Custom Designs & Gradients</h2>
+    <p>Personalize your QR codes with vibrant custom foreground colors, background shades, linear gradients, and soft module corner shapes.</p>
+  </div>
+  <div class="card feature-card">
+    <div style="font-size:24px" aria-hidden="true">🖼️</div>
+    <h2>Logo Support</h2>
+    <p>Upload your brand logo or custom image icon directly into the center of the QR code with automatic error correction scaling.</p>
+  </div>
+  <div class="card feature-card">
+    <div style="font-size:24px" aria-hidden="true">📐</div>
+    <h2>High Resolution Exports</h2>
+    <p>Download crisp, high-resolution QR codes in PNG, JPG, print-ready PDF, or scalable vector SVG format for billboards and packaging.</p>
+  </div>
+  <div class="card feature-card">
+    <div style="font-size:24px" aria-hidden="true">🔒</div>
+    <h2>Privacy Focused Architecture</h2>
+    <p>100% client-side privacy. Your Wi-Fi passwords, contact numbers, and payload inputs are never transmitted to external servers.</p>
   </div>
 </section>
 
-<!-- How it works -->
-<section class="how-it-works">
-  <div class="title" style="font-size:20px;justify-content:center">How It Works</div>
+<!-- 5. HOW TO USE SECTION -->
+<section class="how-it-works" id="how-to-use">
+  <div class="title" style="font-size:20px;justify-content:center">How to Use AuraQR (Step-by-Step Guide)</div>
   <div class="steps-grid">
     <div class="card step-card">
-      <div class="step-num">1</div>
-      <h3>Select Data Type</h3>
-      <p>Choose from standard links, Wi-Fi, contacts, UPI, WhatsApp or customized social profiles.</p>
+      <div>
+        <div class="step-num">1</div>
+        <h3>Choose Your QR Type</h3>
+        <p>Select the appropriate QR code type for your use case (URL, Wi-Fi, WhatsApp, UPI, Contact, etc.).</p>
+      </div>
+      <div class="step-tip">💡 Tip: You can switch QR types anytime without losing custom styling.</div>
     </div>
     <div class="card step-card">
-      <div class="step-num">2</div>
-      <h3>Enter Details</h3>
-      <p>Fill out the simple progressive fields. Formats are automatically validated for high scan fidelity.</p>
+      <div>
+        <div class="step-num">2</div>
+        <h3>Enter Your Information</h3>
+        <p>Fill in the required details into the input fields. AuraQR validates formats dynamically to prevent broken codes.</p>
+      </div>
+      <div class="step-tip">💡 Tip: Double check phone numbers and payment addresses for accuracy.</div>
     </div>
     <div class="card step-card">
-      <div class="step-num">3</div>
-      <h3>Style & Brand</h3>
-      <p>Apply custom linear gradients, soft corners, custom margins, and your company logo.</p>
+      <div>
+        <div class="step-num">3</div>
+        <h3>Customize QR Design</h3>
+        <p>Select a color palette, set linear gradient directions, and select module shapes like rounded dots or diamonds.</p>
+      </div>
+      <div class="step-tip">💡 Tip: High contrast between primary and background colors ensures fast scans.</div>
     </div>
     <div class="card step-card">
-      <div class="step-num">4</div>
-      <h3>Export & Print</h3>
-      <p>Download instant PNG, JPG, or vector SVG files at up to 2048px print resolution.</p>
+      <div>
+        <div class="step-num">4</div>
+        <h3>Add Logo & Advanced Settings</h3>
+        <p>Upload your logo image (PNG/SVG) and adjust error correction levels (High / Maximum) for maximum reliability.</p>
+      </div>
+      <div class="step-tip">💡 Tip: High (25%) or Maximum (30%) error correction is best when adding center logos.</div>
+    </div>
+    <div class="card step-card">
+      <div>
+        <div class="step-num">5</div>
+        <h3>Generate the QR Code</h3>
+        <p>Click "Generate QR Code" or watch the live scanner preview render instantly in real time on screen.</p>
+      </div>
+      <div class="step-tip">💡 Tip: Always scan test the preview with your smartphone camera before downloading.</div>
+    </div>
+    <div class="card step-card">
+      <div>
+        <div class="step-num">6</div>
+        <h3>Download and Share</h3>
+        <p>Export your finished QR code in PNG, JPG, print PDF, or scalable SVG format at up to 2048px resolution.</p>
+      </div>
+      <div class="step-tip">💡 Tip: Choose Vector SVG format for professional print, merchandise, and signages.</div>
     </div>
   </div>
 </section>
 
-<!-- FAQ Section -->
+<!-- 6. FAQ SECTION -->
 <section class="faq-section" id="faq">
-  <div class="title" style="font-size:20px;justify-content:center">Frequently Asked Questions</div>
+  <div class="title" style="font-size:20px;justify-content:center">Frequently Asked Questions (FAQ)</div>
   <div class="faq-grid">
     <details class="card faq-item">
-      <summary>Are these QR codes permanent and do they expire? <span>+</span></summary>
-      <p>All QR codes created on AuraQR are standard static QR codes. They never expire, have zero scan limits, and function indefinitely without ongoing subscriptions.</p>
+      <summary>What is a QR Code? <span>+</span></summary>
+      <p>A QR (Quick Response) code is a machine-readable optical barcode containing data that can be quickly scanned by smart devices and camera apps to direct users to links, contacts, or payments.</p>
     </details>
     <details class="card faq-item">
-      <summary>Will my QR code remain scannable after adding a logo? <span>+</span></summary>
-      <p>Yes. AuraQR automatically raises error correction to Level Q or H (up to 30% recovery capability) to ensure scanner sensors can read data around the center logo reliably.</p>
+      <summary>How do I create a QR Code? <span>+</span></summary>
+      <p>Simply choose your data type (e.g. Website URL), enter your text or URL, customize the colors and module shapes, and click download to get your high-resolution image.</p>
     </details>
     <details class="card faq-item">
-      <summary>Can I use downloaded QR codes for commercial projects? <span>+</span></summary>
-      <p>Yes. All generated assets are 100% yours to use commercially across merchandise, restaurant menus, packaging, and digital advertisements.</p>
+      <summary>Is AuraQR free? <span>+</span></summary>
+      <p>Yes, AuraQR is 100% free forever. There are no scan caps, trial periods, or hidden subscriptions.</p>
+    </details>
+    <details class="card faq-item">
+      <summary>Do I need to create an account? <span>+</span></summary>
+      <p>No account or registration is required. You can generate unlimited custom QR codes instantly upon opening the page.</p>
+    </details>
+    <details class="card faq-item">
+      <summary>What QR Code types are supported? <span>+</span></summary>
+      <p>AuraQR supports 12 dynamic types: Website URLs, Plain Text, Wi-Fi credentials, WhatsApp direct chat, UPI payment links, vCard contacts, Email, Phone dialing, SMS, Map Locations, Calendar Events, and Social Media profiles.</p>
+    </details>
+    <details class="card faq-item">
+      <summary>Can I add a logo to my QR code? <span>+</span></summary>
+      <p>Yes! You can upload any image icon (PNG, JPG, SVG) to center inside your QR code. AuraQR automatically increases error correction to preserve scan fidelity.</p>
+    </details>
+    <details class="card faq-item">
+      <summary>Will my QR Code expire? <span>+</span></summary>
+      <p>No. All QR codes created on AuraQR are standard static codes. They store raw data directly inside the matrix, meaning they work permanently without expiring.</p>
+    </details>
+    <details class="card faq-item">
+      <summary>Which download formats are supported? <span>+</span></summary>
+      <p>You can export QR codes in high-definition PNG, standard JPG, print PDF, and pure scalable Vector SVG format.</p>
+    </details>
+    <details class="card faq-item">
+      <summary>Why is my QR Code not scanning? <span>+</span></summary>
+      <p>Ensure there is sufficient color contrast between the primary modules and the background. If using a logo, increase the Error Correction level to Q (25%) or H (30%).</p>
+    </details>
+    <details class="card faq-item">
+      <summary>Is my data stored on any server? <span>+</span></summary>
+      <p>No. All barcode generation logic is performed 100% locally in your browser. Your sensitive payload data is never transmitted to an external server.</p>
     </details>
   </div>
 </section>
 
+<!-- 7. CONTACT SECTION -->
+<section class="contact-section" id="contact">
+  <div class="card contact-card">
+    <div class="title" style="font-size:20px;justify-content:center;margin-bottom:6px">Contact Us</div>
+    <p style="text-align:center;color:var(--muted);font-size:13px;margin:0 0 20px">Have feedback or questions about AuraQR? Send us a message below.</p>
+    
+    <form id="contactForm" class="form-group" onsubmit="handleContactSubmit(event)">
+      <div class="form-row">
+        <div>
+          <label for="c_name" class="label">Your Name</label>
+          <input id="c_name" class="input" type="text" placeholder="John Doe" required>
+        </div>
+        <div>
+          <label for="c_email" class="label">Email Address</label>
+          <input id="c_email" class="input" type="email" placeholder="john@example.com" required>
+        </div>
+      </div>
+      <div>
+        <label for="c_message" class="label">Message</label>
+        <textarea id="c_message" class="input" placeholder="How can we help you?" required></textarea>
+      </div>
+      <button type="submit" class="primary ripple">Send Message</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- 8. FOOTER SECTION -->
 <footer class="footer">
-  <div>© 2026 AuraQR. Fast, Private & Free Online QR Code Studio.</div>
+  <div class="footer-links">
+    <a href="#generator">Generator</a> •
+    <a href="#templates">Templates</a> •
+    <a href="#features">Features</a> •
+    <a href="#how-to-use">How to Use</a> •
+    <a href="#faq">FAQ</a> •
+    <a href="#contact">Contact</a>
+  </div>
+  <div>© 2026 AuraQR. Fast, Private & Free Online Custom QR Code Generator.</div>
   <div style="margin-top:6px"><a href="https://auraqr.in/">auraqr.in</a> • Privacy-First Architecture</div>
 </footer>
-</main>
 
 <!-- THEME PALETTES MODAL -->
 <div id="themeModal" class="modal-backdrop" aria-hidden="true">
   <div class="theme-modal" role="dialog" aria-modal="true" aria-labelledby="themeModalTitle">
     <div class="modal-head">
       <div><div class="modal-title" id="themeModalTitle">Curated Color Palettes</div><div class="modal-sub">Click a palette to apply foreground and background styling.</div></div>
-      <button id="closeThemes" class="close-btn ripple" aria-label="Close themes">×</button>
+      <button id="closeThemes" class="close-btn ripple" aria-label="Close themes modal">×</button>
     </div>
     <div class="modal-body"><div id="themeGrid" class="theme-grid"></div></div>
   </div>
@@ -689,15 +886,15 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
   <div class="theme-modal" role="dialog" aria-modal="true" aria-labelledby="structureModalTitle">
     <div class="modal-head">
       <div><div class="modal-title" id="structureModalTitle">QR Module Structures</div><div class="modal-sub">Choose body module geometry. Finder corners remain protected for scanner reading.</div></div>
-      <button id="closeStructures" class="close-btn ripple" aria-label="Close structures">×</button>
+      <button id="closeStructures" class="close-btn ripple" aria-label="Close structures modal">×</button>
     </div>
     <div class="modal-body"><div id="structureGrid" class="theme-grid"></div></div>
   </div>
 </div>
 
-<div id="toast" class="toast"></div>
+<div id="toast" class="toast" role="alert" aria-live="polite"></div>
 
-<!-- LOGIC & ENGINE -->
+<!-- LOGIC ENGINE -->
 <script>
 let currentType = "url";
 let currentStyle = "square";
@@ -725,20 +922,20 @@ const themes = [
   ["Coffee","#451A03","#FEF3C7"],["Lavender","#4C1D95","#F5F3FF"],["Crimson","#7F1D1D","#FEE2E2"],["Mono","#000000","#FFFFFF"]
 ];
 
-/* FORM BUILDER ACCORDING TO TYPE */
+/* FORM BUILDER FOR DIFFERENT TYPES */
 const formFields = {
   url: `
-    <div><div class="label">Target Website URL</div>
+    <div><label for="f_url" class="label">Target Website URL</label>
     <input id="f_url" class="input" type="url" placeholder="https://example.com" value="https://auraqr.in"></div>
   `,
   text: `
-    <div><div class="label">Plain Text Content</div>
+    <div><label for="f_text" class="label">Plain Text Content</label>
     <textarea id="f_text" class="input" placeholder="Type anything here..."></textarea></div>
   `,
   wifi: `
     <div class="form-row">
-      <div><div class="label">Network Name (SSID)</div><input id="f_wifi_ssid" class="input" type="text" placeholder="Home_WiFi"></div>
-      <div><div class="label">Security Type</div>
+      <div><label for="f_wifi_ssid" class="label">Network Name (SSID)</label><input id="f_wifi_ssid" class="input" type="text" placeholder="Home_WiFi"></div>
+      <div><label for="f_wifi_type" class="label">Security Type</label>
         <select id="f_wifi_type" class="input">
           <option value="WPA">WPA/WPA2/WPA3</option>
           <option value="WEP">WEP</option>
@@ -746,73 +943,73 @@ const formFields = {
         </select>
       </div>
     </div>
-    <div><div class="label">Password</div><input id="f_wifi_pass" class="input" type="text" placeholder="Network password"></div>
+    <div><label for="f_wifi_pass" class="label">Password</label><input id="f_wifi_pass" class="input" type="text" placeholder="Network password"></div>
     <label class="checkbox-row"><input id="f_wifi_hidden" type="checkbox"><span>Hidden Network</span></label>
   `,
   whatsapp: `
     <div class="form-row">
-      <div><div class="label">Country Code</div><input id="f_wa_code" class="input" type="text" placeholder="e.g. 1 or 91" value="1"></div>
-      <div><div class="label">Phone Number</div><input id="f_wa_phone" class="input" type="tel" placeholder="10-digit number"></div>
+      <div><label for="f_wa_code" class="label">Country Code</label><input id="f_wa_code" class="input" type="text" placeholder="e.g. 1 or 91" value="1"></div>
+      <div><label for="f_wa_phone" class="label">Phone Number</label><input id="f_wa_phone" class="input" type="tel" placeholder="10-digit number"></div>
     </div>
-    <div><div class="label">Pre-filled Message (Optional)</div>
+    <div><label for="f_wa_msg" class="label">Pre-filled Message (Optional)</label>
     <textarea id="f_wa_msg" class="input" placeholder="Hello! I found your QR code..."></textarea></div>
   `,
   upi: `
     <div class="form-row">
-      <div><div class="label">Payee UPI ID / VPA</div><input id="f_upi_id" class="input" type="text" placeholder="name@upi"></div>
-      <div><div class="label">Payee Name</div><input id="f_upi_name" class="input" type="text" placeholder="Business or Person Name"></div>
+      <div><label for="f_upi_id" class="label">Payee UPI ID / VPA</label><input id="f_upi_id" class="input" type="text" placeholder="name@upi"></div>
+      <div><label for="f_upi_name" class="label">Payee Name</label><input id="f_upi_name" class="input" type="text" placeholder="Business or Person Name"></div>
     </div>
     <div class="form-row">
-      <div><div class="label">Amount (INR, Optional)</div><input id="f_upi_amount" class="input" type="number" step="0.01" placeholder="e.g. 250"></div>
-      <div><div class="label">Transaction Note</div><input id="f_upi_note" class="input" type="text" placeholder="e.g. Order #101"></div>
+      <div><label for="f_upi_amount" class="label">Amount (INR, Optional)</label><input id="f_upi_amount" class="input" type="number" step="0.01" placeholder="e.g. 250"></div>
+      <div><label for="f_upi_note" class="label">Transaction Note</label><input id="f_upi_note" class="input" type="text" placeholder="e.g. Order #101"></div>
     </div>
   `,
   vcard: `
     <div class="form-row">
-      <div><div class="label">Full Name</div><input id="f_vc_name" class="input" type="text" placeholder="Jane Doe"></div>
-      <div><div class="label">Phone Number</div><input id="f_vc_phone" class="input" type="tel" placeholder="+1 555 123 4567"></div>
+      <div><label for="f_vc_name" class="label">Full Name</label><input id="f_vc_name" class="input" type="text" placeholder="Jane Doe"></div>
+      <div><label for="f_vc_phone" class="label">Phone Number</label><input id="f_vc_phone" class="input" type="tel" placeholder="+1 555 123 4567"></div>
     </div>
     <div class="form-row">
-      <div><div class="label">Email Address</div><input id="f_vc_email" class="input" type="email" placeholder="jane@example.com"></div>
-      <div><div class="label">Company / Organization</div><input id="f_vc_company" class="input" type="text" placeholder="Acme Inc"></div>
+      <div><label for="f_vc_email" class="label">Email Address</label><input id="f_vc_email" class="input" type="email" placeholder="jane@example.com"></div>
+      <div><label for="f_vc_company" class="label">Company / Organization</label><input id="f_vc_company" class="input" type="text" placeholder="Acme Inc"></div>
     </div>
     <div class="form-row">
-      <div><div class="label">Website</div><input id="f_vc_url" class="input" type="url" placeholder="https://example.com"></div>
-      <div><div class="label">Address / Location</div><input id="f_vc_adr" class="input" type="text" placeholder="City, Country"></div>
+      <div><label for="f_vc_url" class="label">Website</label><input id="f_vc_url" class="input" type="url" placeholder="https://example.com"></div>
+      <div><label for="f_vc_adr" class="label">Address / Location</label><input id="f_vc_adr" class="input" type="text" placeholder="City, Country"></div>
     </div>
   `,
   email: `
-    <div><div class="label">Recipient Email</div><input id="f_em_to" class="input" type="email" placeholder="contact@domain.com"></div>
-    <div><div class="label">Subject</div><input id="f_em_sub" class="input" type="text" placeholder="Inquiry from QR"></div>
-    <div><div class="label">Body Message</div><textarea id="f_em_body" class="input" placeholder="Your message here..."></textarea></div>
+    <div><label for="f_em_to" class="label">Recipient Email</label><input id="f_em_to" class="input" type="email" placeholder="contact@domain.com"></div>
+    <div><label for="f_em_sub" class="label">Subject</label><input id="f_em_sub" class="input" type="text" placeholder="Inquiry from QR"></div>
+    <div><label for="f_em_body" class="label">Body Message</label><textarea id="f_em_body" class="input" placeholder="Your message here..."></textarea></div>
   `,
   phone: `
-    <div><div class="label">Phone Number (with Country Code)</div>
+    <div><label for="f_ph_num" class="label">Phone Number (with Country Code)</label>
     <input id="f_ph_num" class="input" type="tel" placeholder="+1234567890"></div>
   `,
   sms: `
-    <div><div class="label">Recipient Phone Number</div><input id="f_sms_num" class="input" type="tel" placeholder="+1234567890"></div>
-    <div><div class="label">Default Text Message</div><textarea id="f_sms_msg" class="input" placeholder="Type SMS body..."></textarea></div>
+    <div><label for="f_sms_num" class="label">Recipient Phone Number</label><input id="f_sms_num" class="input" type="tel" placeholder="+1234567890"></div>
+    <div><label for="f_sms_msg" class="label">Default Text Message</label><textarea id="f_sms_msg" class="input" placeholder="Type SMS body..."></textarea></div>
   `,
   location: `
     <div class="form-row">
-      <div><div class="label">Latitude</div><input id="f_loc_lat" class="input" type="text" placeholder="37.7749"></div>
-      <div><div class="label">Longitude</div><input id="f_loc_lng" class="input" type="text" placeholder="-122.4194"></div>
+      <div><label for="f_loc_lat" class="label">Latitude</label><input id="f_loc_lat" class="input" type="text" placeholder="37.7749"></div>
+      <div><label for="f_loc_lng" class="label">Longitude</label><input id="f_loc_lng" class="input" type="text" placeholder="-122.4194"></div>
     </div>
-    <div><div class="label">OR Direct Google Maps URL</div><input id="f_loc_url" class="input" type="url" placeholder="https://maps.google.com/?q=..."></div>
+    <div><label for="f_loc_url" class="label">OR Direct Google Maps URL</label><input id="f_loc_url" class="input" type="url" placeholder="https://maps.google.com/?q=..."></div>
   `,
   event: `
-    <div><div class="label">Event Title</div><input id="f_ev_title" class="input" type="text" placeholder="Conference 2026"></div>
-    <div><div class="label">Location / Venue</div><input id="f_ev_loc" class="input" type="text" placeholder="Convention Center or Zoom"></div>
+    <div><label for="f_ev_title" class="label">Event Title</label><input id="f_ev_title" class="input" type="text" placeholder="Conference 2026"></div>
+    <div><label for="f_ev_loc" class="label">Location / Venue</label><input id="f_ev_loc" class="input" type="text" placeholder="Convention Center or Zoom"></div>
     <div class="form-row">
-      <div><div class="label">Start Date & Time</div><input id="f_ev_start" class="input" type="datetime-local"></div>
-      <div><div class="label">End Date & Time</div><input id="f_ev_end" class="input" type="datetime-local"></div>
+      <div><label for="f_ev_start" class="label">Start Date & Time</label><input id="f_ev_start" class="input" type="datetime-local"></div>
+      <div><label for="f_ev_end" class="label">End Date & Time</label><input id="f_ev_end" class="input" type="datetime-local"></div>
     </div>
-    <div><div class="label">Description</div><textarea id="f_ev_desc" class="input" placeholder="Brief event summary..."></textarea></div>
+    <div><label for="f_ev_desc" class="label">Description</label><textarea id="f_ev_desc" class="input" placeholder="Brief event summary..."></textarea></div>
   `,
   social: `
     <div class="form-row">
-      <div><div class="label">Platform</div>
+      <div><label for="f_soc_platform" class="label">Platform</label>
         <select id="f_soc_platform" class="input">
           <option value="instagram">Instagram</option>
           <option value="youtube">YouTube</option>
@@ -821,7 +1018,7 @@ const formFields = {
           <option value="linkedin">LinkedIn</option>
         </select>
       </div>
-      <div><div class="label">Username or Page Slug</div><input id="f_soc_user" class="input" type="text" placeholder="username"></div>
+      <div><label for="f_soc_user" class="label">Username or Page Slug</label><input id="f_soc_user" class="input" type="text" placeholder="username"></div>
     </div>
   `
 };
@@ -1047,7 +1244,7 @@ function renderMatrixToCanvas(matrix, targetSize){
     ctx.fillRect(0,0,size,size);
   }
 
-  // Create gradient if enabled
+  // Create linear gradient if configured
   let fillStyle = fgColor1;
   if(gradDir !== "none"){
     let grad;
@@ -1181,7 +1378,7 @@ function generatePureVectorSVG(matrix, size){
   </svg>`;
 }
 
-/* TEMPLATES LOGIC */
+/* TEMPLATE PRESETS */
 const templatePresets = {
   whatsapp: { type:"whatsapp", theme:["Cyber","#0F172A","#67E8F9"], style:"rounded", msg:"Hi! How can I help you today?" },
   instagram: { type:"social", theme:["Neon","#581C87","#F0ABFC"], style:"dots", platform:"instagram" },
@@ -1251,8 +1448,8 @@ function renderHistory(){
         <div class="history-meta"><span style="text-transform:uppercase;font-weight:900">${item.type}</span> • ${item.date}</div>
       </div>
       <div class="history-actions">
-        <button class="history-btn" data-act="load" data-idx="${idx}">Load</button>
-        <button class="history-btn" data-act="del" data-idx="${idx}">✕</button>
+        <button class="history-btn" data-act="load" data-idx="${idx}" type="button">Load</button>
+        <button class="history-btn" data-act="del" data-idx="${idx}" type="button">✕</button>
       </div>
     `;
     list.appendChild(el);
@@ -1330,8 +1527,9 @@ function updateHex(){
 function renderThemes(){
   const grid = $("themeGrid"), fg = $("fgColor").value.toUpperCase(), bg = $("bgColor").value.toUpperCase();
   grid.innerHTML = "";
-  themes.forEach(([name, f, b], i) => {
+  themes.forEach(([name, f, b]) => {
     const x = document.createElement("button");
+    x.type = "button";
     x.className = "theme" + (fg === f && bg === b ? " active" : "");
     x.innerHTML = `<div class="swatch" style="background:linear-gradient(135deg,${f} 50%,${b} 50%)"></div><div class="theme-name">${name}</div><div class="theme-code">${f} / ${b}</div>`;
     x.addEventListener("click", () => {
@@ -1426,6 +1624,7 @@ function renderStructures(){
   grid.innerHTML = "";
   structures.forEach(([name, desc, key]) => {
     const x = document.createElement("button");
+    x.type = "button";
     x.className = "theme" + (currentStyle === key ? " active" : "");
     const sw = document.createElement("div");
     sw.className = "swatch";
@@ -1538,7 +1737,7 @@ $("copyBtn").addEventListener("click", async () => {
     await navigator.clipboard.writeText(payload);
     toast("Payload copied to clipboard!");
   } catch(e) {
-    toast("Failed to copy clipboard");
+    toast("Failed to copy to clipboard");
   }
 });
 
@@ -1608,7 +1807,30 @@ $("themeToggle").addEventListener("click", () => {
   applyMode(document.documentElement.classList.contains("dark") ? "light" : "dark");
 });
 
-/* MULTILINGUAL SUPPORT */
+/* MOBILE MENU TOGGLE */
+$("mobileNavToggle").addEventListener("click", () => {
+  const nav = $("mobileNav");
+  nav.classList.toggle("open");
+});
+document.querySelectorAll("#mobileNav .nav-link").forEach(link => {
+  link.addEventListener("click", () => $("mobileNav").classList.remove("open"));
+});
+
+/* CONTACT FORM HANDLER */
+function handleContactSubmit(e){
+  e.preventDefault();
+  const name = $("c_name").value.trim();
+  const email = $("c_email").value.trim();
+  const message = $("c_message").value.trim();
+  if(!name || !email || !message){
+    toast("Please fill out all contact fields.");
+    return;
+  }
+  toast("Form structured! Ready to connect to backend endpoint.");
+  $("contactForm").reset();
+}
+
+/* MULTILINGUAL STRINGS */
 const languageStrings = {
   en: {
     title: "⌁ Select QR Type & Enter Details",
