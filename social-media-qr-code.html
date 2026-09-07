@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Social Media QR Code Generator Online – Free | AuraQR</title>
+
+  <meta name="description" content="Create a free Social Media QR Code online with AuraQR. Add your Instagram, YouTube, Facebook, X, LinkedIn or Telegram profile and generate a QR code instantly.">
+
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://auraqr.in/social-media-qr-code.html">
+
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #f7f7ff, #ffffff);
+      color: #171725;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 32px));
+      margin: auto;
+    }
+
+    /* HEADER */
+    header {
+      padding: 18px 0;
+    }
+
+    .navbar {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid #e7e7ef;
+      border-radius: 16px;
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      box-shadow: 0 8px 30px rgba(30,30,70,0.06);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .logo img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    nav a:hover {
+      color: #714cff;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 62px 15px 35px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #eee8ff;
+      color: #704cff;
+      padding: 7px 13px;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 17px;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.05;
+      font-weight: 900;
+      letter-spacing: -2px;
+      margin-bottom: 16px;
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, #6f4cff, #ad45ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: auto;
+      color: #73738a;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* GENERATOR */
+    .generator {
+      background: white;
+      border: 1px solid #e8e8f1;
+      border-radius: 18px;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 1.45fr 0.8fr;
+      gap: 18px;
+      box-shadow: 0 15px 45px rgba(40,30,100,0.08);
+      margin: 10px auto 45px;
+      max-width: 1000px;
+    }
+
+    .form-box {
+      padding: 10px 5px;
+    }
+
+    .form-box h2 {
+      font-size: 17px;
+      margin-bottom: 18px;
+    }
+
+    .field {
+      margin-bottom: 13px;
+    }
+
+    label {
+      display: block;
+      font-size: 10px;
+      font-weight: 800;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    select,
+    input {
+      width: 100%;
+      border: 1px solid #dedee9;
+      border-radius: 9px;
+      padding: 12px;
+      font-size: 13px;
+      outline: none;
+      background: #fff;
+      color: #20202d;
+    }
+
+    select:focus,
+    input:focus {
+      border-color: #815bff;
+      box-shadow: 0 0 0 3px rgba(129,91,255,0.08);
+    }
+
+    .hint {
+      color: #88889a;
+      font-size: 9px;
+      margin-top: 5px;
+      line-height: 1.5;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 9px;
+      padding: 13px;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 12px;
+      transition: 0.2s ease;
+    }
+
+    .generate-btn {
+      color: white;
+      background: linear-gradient(90deg, #704cff, #ad45ff);
+      margin-top: 5px;
+    }
+
+    .generate-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(112,76,255,0.22);
+    }
+
+    .download-btn {
+      background: #171725;
+      color: white;
+      margin-top: 9px;
+    }
+
+    .download-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* PREVIEW */
+    .preview {
+      min-height: 420px;
+      border: 1px solid #ececf4;
+      background: #fbfaff;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .preview h3 {
+      font-size: 11px;
+      margin-bottom: 22px;
+      text-transform: uppercase;
+    }
+
+    #qrcode {
+      min-height: 260px;
+      min-width: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    #qrcode img,
+    #qrcode canvas {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .preview-text {
+      color: #9898aa;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    /* PLATFORM INFO */
+    .platform-info {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      background: #f7f5ff;
+      color: #707085;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    /* CONTENT */
+    .content {
+      max-width: 1000px;
+      margin: 0 auto 45px;
+      background: white;
+      border: 1px solid #e7e7ef;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 10px 35px rgba(30,30,70,0.05);
+    }
+
+    .content h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .content h3 {
+      font-size: 17px;
+      margin: 24px 0 9px;
+    }
+
+    .content p,
+    .content li {
+      color: #66667a;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .content ul {
+      padding-left: 20px;
+    }
+
+    /* FAQ */
+    .faq {
+      max-width: 1000px;
+      margin: 0 auto 55px;
+    }
+
+    .faq-title {
+      text-align: center;
+      font-size: 27px;
+      margin-bottom: 20px;
+    }
+
+    .faq-item {
+      background: white;
+      border: 1px solid #e7e7ef;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 17px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 17px 17px;
+      color: #707085;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid #e6e6ee;
+      padding: 25px 0;
+      text-align: center;
+      color: #77778b;
+      font-size: 11px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 13px;
+      font-weight: 700;
+    }
+
+    .footer-links a:hover {
+      color: #714cff;
+    }
+
+    /* MOBILE */
+    @media (max-width: 760px) {
+
+      .container {
+        width: min(100% - 22px, 1100px);
+      }
+
+      .navbar {
+        padding: 0 13px;
+      }
+
+      nav {
+        gap: 10px;
+        font-size: 10px;
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      .hero h1 {
+        font-size: 37px;
+        letter-spacing: -1px;
+      }
+
+      .generator {
+        grid-template-columns: 1fr;
+        padding: 13px;
+      }
+
+      .preview {
+        min-height: 330px;
+      }
+
+      #qrcode {
+        min-width: 230px;
+        min-height: 230px;
+      }
+
+      .content {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      nav a:nth-child(n+3) {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 31px;
+      }
+
+      .hero p {
+        font-size: 12px;
+      }
+
+      #qrcode {
+        min-width: 210px;
+        min-height: 210px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+
+      <div class="navbar">
+
+        <a href="/" class="logo">
+          <img src="/logo.png" alt="AuraQR Logo">
+          <span>AuraQR</span>
+        </a>
+
+        <nav>
+          <a href="/">Generator</a>
+          <a href="/url-qr-code.html">URL QR</a>
+          <a href="/templates.html">Templates</a>
+          <a href="/how-to-use.html">How to Use</a>
+        </nav>
+
+      </div>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+
+      <span class="badge">
+        AURAQR • FREE SOCIAL MEDIA QR GENERATOR
+      </span>
+
+      <h1>
+        Social Media QR Code
+        <span class="gradient">Generator Online</span>
+      </h1>
+
+      <p>
+        Create a free Social Media QR Code with AuraQR.
+        Add your social media profile URL and generate a
+        QR code that people can scan to visit your profile instantly.
+      </p>
+
+    </section>
+
+
+    <!-- GENERATOR -->
+    <section class="generator">
+
+      <div class="form-box">
+
+        <h2>Enter Social Media Details</h2>
+
+        <!-- PLATFORM -->
+        <div class="field">
+
+          <label for="platform">
+            Social Media Platform
+          </label>
+
+          <select id="platform">
+
+            <option value="Instagram">
+              Instagram
+            </option>
+
+            <option value="YouTube">
+              YouTube
+            </option>
+
+            <option value="Facebook">
+              Facebook
+            </option>
+
+            <option value="X">
+              X / Twitter
+            </option>
+
+            <option value="LinkedIn">
+              LinkedIn
+            </option>
+
+            <option value="Telegram">
+              Telegram
+            </option>
+
+            <option value="Other">
+              Other
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- PROFILE NAME -->
+        <div class="field">
+
+          <label for="profileName">
+            Profile / Channel Name
+          </label>
+
+          <input
+            type="text"
+            id="profileName"
+            placeholder="Example: AuraQR"
+          >
+
+        </div>
+
+
+        <!-- PROFILE URL -->
+        <div class="field">
+
+          <label for="profileUrl">
+            Profile URL
+          </label>
+
+          <input
+            type="url"
+            id="profileUrl"
+            placeholder="https://instagram.com/yourprofile"
+          >
+
+          <div class="hint">
+            Enter the complete profile, channel or page URL.
+          </div>
+
+        </div>
+
+
+        <!-- GENERATE -->
+        <button
+          class="generate-btn"
+          onclick="generateSocialQR()"
+        >
+          Generate Social Media QR Code
+        </button>
+
+
+        <!-- DOWNLOAD -->
+        <button
+          class="download-btn"
+          onclick="downloadQR()"
+        >
+          Download QR Code
+        </button>
+
+
+        <div class="platform-info">
+          Tip: Use the direct URL of your social media profile,
+          channel or page for the best scanning experience.
+        </div>
+
+      </div>
+
+
+      <!-- PREVIEW -->
+      <div class="preview">
+
+        <h3>
+          Social Media QR Code Preview
+        </h3>
+
+        <div id="qrcode">
+
+          <span class="preview-text">
+            Your Social Media QR Code will appear here
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SEO CONTENT -->
+    <section class="content">
+
+      <h2>
+        Free Social Media QR Code Generator
+      </h2>
+
+      <p>
+        AuraQR makes it easy to create a Social Media QR Code
+        online. Add your Instagram, YouTube, Facebook, X,
+        LinkedIn or Telegram profile URL and turn it into a
+        scannable QR code.
+      </p>
+
+
+      <h3>
+        What is a Social Media QR Code?
+      </h3>
+
+      <p>
+        A Social Media QR Code is a QR code that contains a
+        social media profile, channel or page URL. When someone
+        scans the QR code, their device can open the linked
+        social media page.
+      </p>
+
+
+      <h3>
+        Supported Social Media Platforms
+      </h3>
+
+      <ul>
+
+        <li>
+          Instagram QR Code
+        </li>
+
+        <li>
+          YouTube QR Code
+        </li>
+
+        <li>
+          Facebook QR Code
+        </li>
+
+        <li>
+          X / Twitter QR Code
+        </li>
+
+        <li>
+          LinkedIn QR Code
+        </li>
+
+        <li>
+          Telegram QR Code
+        </li>
+
+        <li>
+          Other social media profile URLs
+        </li>
+
+      </ul>
+
+
+      <h3>
+        How to Create a Social Media QR Code
+      </h3>
+
+      <ul>
+
+        <li>
+          Select your social media platform.
+        </li>
+
+        <li>
+          Enter your profile or channel name.
+        </li>
+
+        <li>
+          Paste your social media profile URL.
+        </li>
+
+        <li>
+          Click Generate Social Media QR Code.
+        </li>
+
+        <li>
+          Test the QR code with a smartphone.
+        </li>
+
+        <li>
+          Download the QR code as a PNG image.
+        </li>
+
+      </ul>
+
+
+      <h3>
+        Where Can You Use Social Media QR Codes?
+      </h3>
+
+      <p>
+        Social media QR codes can be used on business cards,
+        posters, flyers, product packaging, restaurant menus,
+        storefronts, events, advertisements, presentations,
+        YouTube videos and other marketing materials.
+      </p>
+
+
+      <h3>
+        Social Media QR Codes for Business
+      </h3>
+
+      <p>
+        Businesses can use QR codes to make their social media
+        profiles easier to discover. Customers can scan a printed
+        QR code and open the linked profile without manually
+        typing a username or web address.
+      </p>
+
+    </section>
+
+
+    <!-- FAQ -->
+    <section class="faq">
+
+      <h2 class="faq-title">
+        Social Media QR Code FAQ
+      </h2>
+
+
+      <div class="faq-item">
+
+        <div
+          class="faq-question"
+          onclick="toggleFAQ(this)"
+        >
+          What is a Social Media QR Code?
+          <span>+</span>
+        </div>
+
+        <div class="faq-answer">
+          A Social Media QR Code contains a social media
+          profile, channel or page URL that people can open
+          by scanning the QR code.
+        </div>
+
+      </div>
+
+
+      <div class="faq-item">
+
+        <div
+          class="faq-question"
+          onclick="toggleFAQ(this)"
+        >
+          Can I create a Social Media QR Code for free?
+          <span>+</span>
+        </div>
+
+        <div class="faq-answer">
+          Yes. AuraQR lets you create a Social Media QR Code
+          online for free.
+        </div>
+
+      </div>
+
+
+      <div class="faq-item">
+
+        <div
+          class="faq-question"
+          onclick="toggleFAQ(this)"
+        >
+          Which social media platforms are supported?
+          <span>+</span>
+        </div>
+
+        <div class="faq-answer">
+          You can create QR codes for Instagram, YouTube,
+          Facebook, X, LinkedIn, Telegram and other profile URLs.
+        </div>
+
+      </div>
+
+
+      <div class="faq-item">
+
+        <div
+          class="faq-question"
+          onclick="toggleFAQ(this)"
+        >
+          Can I use the QR code on a business card?
+          <span>+</span>
+        </div>
+
+        <div class="faq-answer">
+          Yes. A Social Media QR Code can be placed on
+          business cards, posters, flyers, packaging and
+          other marketing materials.
+        </div>
+
+      </div>
+
+
+      <div class="faq-item">
+
+        <div
+          class="faq-question"
+          onclick="toggleFAQ(this)"
+        >
+          Can I download the QR code?
+          <span>+</span>
+        </div>
+
+        <div class="faq-answer">
+          Yes. Generate the QR code first and then click
+          Download QR Code to save it as a PNG image.
+        </div>
+
+      </div>
+
+
+      <div class="faq-item">
+
+        <div
+          class="faq-question"
+          onclick="toggleFAQ(this)"
+        >
+          Does this QR code expire?
+          <span>+</span>
+        </div>
+
+        <div class="faq-answer">
+          This page generates a static QR code containing
+          the URL you provide. The QR code itself does not
+          have an automatic expiration date.
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-links">
+
+        <a href="/">Generator</a>
+
+        <a href="/url-qr-code.html">
+          URL QR
+        </a>
+
+        <a href="/text-qr-code.html">
+          Text QR
+        </a>
+
+        <a href="/wifi-qr-code.html">
+          WiFi QR
+        </a>
+
+        <a href="/whatsapp-qr-code.html">
+          WhatsApp QR
+        </a>
+
+        <a href="/upi-qr-code.html">
+          UPI QR
+        </a>
+
+        <a href="/vcard-qr-code.html">
+          vCard QR
+        </a>
+
+        <a href="/email-qr-code.html">
+          Email QR
+        </a>
+
+        <a href="/sms-qr-code.html">
+          SMS QR
+        </a>
+
+        <a href="/phone-qr-code.html">
+          Phone QR
+        </a>
+
+        <a href="/location-qr-code.html">
+          Location QR
+        </a>
+
+        <a href="/event-qr-code.html">
+          Event QR
+        </a>
+
+        <a href="/templates.html">
+          Templates
+        </a>
+
+        <a href="/how-to-use.html">
+          How to Use
+        </a>
+
+      </div>
+
+      <div>
+        © 2026 AuraQR. Free Online QR Code Generator.
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- QR LIBRARY -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+
+  <script>
+
+    let currentQR = null;
+
+
+    function generateSocialQR() {
+
+      const platform =
+        document.getElementById("platform").value;
+
+      const profileName =
+        document.getElementById("profileName").value.trim();
+
+      let profileUrl =
+        document.getElementById("profileUrl").value.trim();
+
+
+      if (!profileName) {
+
+        alert("Please enter your profile or channel name.");
+
+        return;
+      }
+
+
+      if (!profileUrl) {
+
+        alert("Please enter your social media profile URL.");
+
+        return;
+      }
+
+
+      if (
+        !profileUrl.startsWith("http://") &&
+        !profileUrl.startsWith("https://")
+      ) {
+
+        profileUrl =
+          "https://" + profileUrl;
+
+      }
+
+
+      try {
+
+        new URL(profileUrl);
+
+      } catch (error) {
+
+        alert("Please enter a valid profile URL.");
+
+        return;
+      }
+
+
+      const qrContainer =
+        document.getElementById("qrcode");
+
+
+      qrContainer.innerHTML = "";
+
+
+      currentQR =
+        new QRCode(qrContainer, {
+
+          text: profileUrl,
+
+          width: 250,
+
+          height: 250,
+
+          colorDark: "#171725",
+
+          colorLight: "#ffffff",
+
+          correctLevel:
+            QRCode.CorrectLevel.H
+
+        });
+
+    }
+
+
+    function downloadQR() {
+
+      const qrContainer =
+        document.getElementById("qrcode");
+
+
+      const canvas =
+        qrContainer.querySelector("canvas");
+
+
+      const image =
+        qrContainer.querySelector("img");
+
+
+      if (canvas) {
+
+        const link =
+          document.createElement("a");
+
+
+        link.download =
+          "auraqr-social-media-qr-code.png";
+
+
+        link.href =
+          canvas.toDataURL("image/png");
+
+
+        link.click();
+
+
+        return;
+      }
+
+
+      if (image) {
+
+        const link =
+          document.createElement("a");
+
+
+        link.download =
+          "auraqr-social-media-qr-code.png";
+
+
+        link.href =
+          image.src;
+
+
+        link.click();
+
+
+        return;
+      }
+
+
+      alert(
+        "Please generate the QR code first."
+      );
+
+    }
+
+
+    function toggleFAQ(element) {
+
+      const item =
+        element.parentElement;
+
+
+      item.classList.toggle("active");
+
+
+      const icon =
+        element.querySelector("span");
+
+
+      if (
+        item.classList.contains("active")
+      ) {
+
+        icon.textContent = "−";
+
+      } else {
+
+        icon.textContent = "+";
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
