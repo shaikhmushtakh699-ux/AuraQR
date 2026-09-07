@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>High Resolution QR Code Generator – HD QR Codes | AuraQR</title>
+
+<meta name="description" content="Create high resolution QR codes online with AuraQR. Generate HD QR codes, customize size and colors, and download high-quality PNG QR codes for printing, business and marketing.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://auraqr.in/qr-high-resolution.html">
+
+<link rel="icon" type="image/png" href="/favicon.png">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f8f7ff;
+    color:#171923;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.container{
+    width:min(1100px,92%);
+    margin:auto;
+}
+
+/* HEADER */
+
+header{
+    background:#fff;
+    border-bottom:1px solid #eee;
+}
+
+.navbar{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    font-size:20px;
+    font-weight:800;
+    color:#171923;
+}
+
+.logo img{
+    width:28px;
+    height:28px;
+    object-fit:contain;
+}
+
+.logo span{
+    color:#743cff;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.nav-links a:hover{
+    color:#743cff;
+}
+
+.create-btn{
+    background:linear-gradient(135deg,#7138ff,#9b42ff);
+    color:#fff!important;
+    padding:12px 19px;
+    border-radius:9px;
+    box-shadow:0 7px 18px rgba(115,58,255,.22);
+}
+
+/* HERO */
+
+.hero{
+    text-align:center;
+    padding:65px 20px 45px;
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 13px;
+    border-radius:20px;
+    background:#eee8ff;
+    color:#743cff;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.5px;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:42px;
+    line-height:1.15;
+    margin-bottom:14px;
+}
+
+.hero h1 span{
+    color:#743cff;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    color:#77738a;
+    font-size:14px;
+    line-height:1.7;
+}
+
+/* GENERATOR */
+
+.generator{
+    background:#fff;
+    border:1px solid #e9e5f5;
+    border-radius:18px;
+    padding:26px;
+    box-shadow:0 15px 45px rgba(49,32,100,.08);
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:28px;
+    margin-bottom:55px;
+}
+
+.panel-title{
+    font-size:16px;
+    font-weight:800;
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+textarea{
+    width:100%;
+    min-height:110px;
+    resize:vertical;
+    border:1px solid #ddd8eb;
+    border-radius:9px;
+    padding:13px;
+    font-size:13px;
+    outline:none;
+}
+
+textarea:focus{
+    border-color:#743cff;
+    box-shadow:0 0 0 3px rgba(116,60,255,.08);
+}
+
+.control{
+    margin-top:18px;
+}
+
+.range-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+input[type="range"]{
+    flex:1;
+    accent-color:#743cff;
+}
+
+.size-value{
+    min-width:55px;
+    color:#743cff;
+    font-size:12px;
+    font-weight:800;
+}
+
+.color-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.color-box{
+    border:1px solid #e1dcec;
+    border-radius:9px;
+    padding:12px;
+}
+
+.color-input{
+    width:100%;
+    height:38px;
+    border:0;
+    background:transparent;
+    cursor:pointer;
+}
+
+.select{
+    width:100%;
+    border:1px solid #ddd8eb;
+    border-radius:9px;
+    padding:11px;
+    background:#fff;
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+    margin-top:22px;
+}
+
+button{
+    border:0;
+    border-radius:9px;
+    padding:12px 18px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.generate{
+    background:linear-gradient(135deg,#7138ff,#9b42ff);
+    color:#fff;
+    box-shadow:0 7px 18px rgba(115,58,255,.2);
+}
+
+.reset{
+    background:#eee9ff;
+    color:#6234d8;
+}
+
+/* PREVIEW */
+
+.preview{
+    border:1px solid #ebe7f3;
+    border-radius:14px;
+    min-height:390px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+}
+
+.preview-title{
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+#qrcode{
+    background:#fff;
+    padding:12px;
+    border-radius:10px;
+    min-height:30px;
+}
+
+#qrcode img,
+#qrcode canvas{
+    max-width:100%;
+    height:auto;
+}
+
+.preview-note{
+    color:#77738a;
+    font-size:10px;
+    text-align:center;
+    margin:15px 0;
+    line-height:1.5;
+}
+
+.download{
+    background:linear-gradient(135deg,#7138ff,#9b42ff);
+    color:#fff;
+    padding:12px 20px;
+}
+
+/* CONTENT */
+
+.info-section{
+    margin-bottom:55px;
+}
+
+.info-section h2{
+    text-align:center;
+    font-size:28px;
+    margin-bottom:15px;
+}
+
+.info-section h2 span{
+    color:#743cff;
+}
+
+.info-section>p{
+    max-width:750px;
+    margin:0 auto 25px;
+    text-align:center;
+    color:#77738a;
+    line-height:1.7;
+    font-size:13px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.card{
+    background:#fff;
+    border:1px solid #e9e5f5;
+    border-radius:14px;
+    padding:22px;
+}
+
+.card h3{
+    font-size:15px;
+    margin-bottom:9px;
+}
+
+.card p{
+    color:#77738a;
+    font-size:12px;
+    line-height:1.7;
+}
+
+/* FAQ */
+
+.faq{
+    margin-bottom:60px;
+}
+
+.faq h2{
+    text-align:center;
+    margin-bottom:22px;
+}
+
+details{
+    background:#fff;
+    border:1px solid #e8e3f3;
+    border-radius:10px;
+    padding:15px 18px;
+    margin-bottom:10px;
+}
+
+summary{
+    cursor:pointer;
+    font-weight:800;
+    font-size:13px;
+}
+
+details p{
+    color:#77738a;
+    font-size:12px;
+    line-height:1.7;
+    padding-top:12px;
+}
+
+/* FOOTER */
+
+footer{
+    background:#fff;
+    border-top:1px solid #eee;
+    padding:35px 0;
+}
+
+.footer-inner{
+    display:flex;
+    justify-content:space-between;
+    gap:25px;
+}
+
+.footer-text{
+    color:#77738a;
+    font-size:11px;
+    line-height:1.7;
+    max-width:400px;
+}
+
+.footer-links{
+    display:flex;
+    gap:18px;
+    font-size:11px;
+    font-weight:700;
+}
+
+.footer-links a:hover{
+    color:#743cff;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .nav-links{
+        gap:10px;
+        font-size:10px;
+    }
+
+    .create-btn{
+        padding:9px 11px;
+    }
+
+    .hero{
+        padding-top:45px;
+    }
+
+    .hero h1{
+        font-size:31px;
+    }
+
+    .generator{
+        grid-template-columns:1fr;
+        padding:18px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+    }
+
+    .footer-links{
+        flex-wrap:wrap;
+    }
+}
+
+@media(max-width:520px){
+
+    .navbar{
+        height:auto;
+        min-height:65px;
+    }
+
+    .nav-links a:not(.create-btn){
+        display:none;
+    }
+
+    .logo{
+        font-size:17px;
+    }
+
+    .hero h1{
+        font-size:27px;
+    }
+
+    .hero p{
+        font-size:12px;
+    }
+
+    .color-row{
+        grid-template-columns:1fr;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+
+    .preview{
+        min-height:330px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="container navbar">
+
+        <a href="index.html" class="logo">
+            <img src="/logo.png" alt="AuraQR Logo">
+            <span>AuraQR</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="index.html">Generator</a>
+            <a href="templates.html">Templates</a>
+            <a href="how-to-use.html">How to Use</a>
+            <a href="index.html#faq">FAQ</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="index.html" class="create-btn">Create QR</a>
+        </nav>
+
+    </div>
+</header>
+
+<main>
+
+<section class="hero">
+    <div class="badge">AURAQR • HIGH RESOLUTION QR</div>
+
+    <h1>
+        High Resolution <span>QR Code</span> Generator
+    </h1>
+
+    <p>
+        Create high-resolution QR codes online with AuraQR.
+        Generate sharp, print-ready QR codes with customizable
+        size, colors and error correction. Download your QR code
+        in high quality for business, marketing and printing.
+    </p>
+</section>
+
+<section class="container">
+
+<div class="generator">
+
+<div>
+
+    <div class="panel-title">Create Your HD QR Code</div>
+
+    <label for="qrText">URL OR TEXT</label>
+
+    <textarea
+        id="qrText"
+        placeholder="Enter a website URL, text, contact information or any content..."
+    >https://auraqr.in</textarea>
+
+    <div class="control">
+
+        <label for="size">QR CODE RESOLUTION</label>
+
+        <div class="range-row">
+
+            <input
+                id="size"
+                type="range"
+                min="300"
+                max="2000"
+                value="800"
+                step="50"
+                oninput="updateSize()"
+            >
+
+            <span class="size-value" id="sizeValue">800px</span>
+
+        </div>
+
+    </div>
+
+    <div class="control color-row">
+
+        <div class="color-box">
+            <label for="darkColor">QR CODE COLOR</label>
+
+            <input
+                class="color-input"
+                id="darkColor"
+                type="color"
+                value="#171923"
+            >
+        </div>
+
+        <div class="color-box">
+            <label for="lightColor">BACKGROUND COLOR</label>
+
+            <input
+                class="color-input"
+                id="lightColor"
+                type="color"
+                value="#ffffff"
+            >
+        </div>
+
+    </div>
+
+    <div class="control">
+
+        <label for="correction">
+            ERROR CORRECTION
+        </label>
+
+        <select id="correction" class="select">
+
+            <option value="L">Low — 7%</option>
+            <option value="M">Medium — 15%</option>
+            <option value="Q">Quartile — 25%</option>
+            <option value="H" selected>High — 30%</option>
+
+        </select>
+
+    </div>
+
+    <div class="buttons">
+
+        <button class="generate" onclick="generateQR()">
+            Generate HD QR Code
+        </button>
+
+        <button class="reset" onclick="resetQR()">
+            Reset
+        </button>
+
+    </div>
+
+</div>
+
+<div class="preview">
+
+    <div class="preview-title">
+        QR CODE PREVIEW
+    </div>
+
+    <div id="qrcode"></div>
+
+    <div class="preview-note">
+        High-resolution QR codes are suitable for printing,
+        posters, packaging, business cards and marketing materials.
+    </div>
+
+    <button class="download" onclick="downloadQR()">
+        Download High Resolution PNG
+    </button>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="container info-section">
+
+    <h2>
+        Why Use <span>High Resolution QR Codes?</span>
+    </h2>
+
+    <p>
+        High-resolution QR codes contain sharp, detailed modules
+        that remain suitable for larger print sizes and professional
+        marketing materials.
+    </p>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>🖨️ Print Ready</h3>
+            <p>
+                Generate larger QR codes that are better suited
+                for posters, flyers, banners, packaging and signs.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>📱 Easy Scanning</h3>
+            <p>
+                Keep your QR code clear and readable when used
+                on professional printed materials.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>💼 Business Use</h3>
+            <p>
+                Create high-quality QR codes for business cards,
+                menus, products, advertisements and promotions.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="container info-section">
+
+    <h2>
+        QR Code <span>Resolution Guide</span>
+    </h2>
+
+    <p>
+        Choose a resolution based on how and where you plan
+        to use your QR code.
+    </p>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>300–500px</h3>
+            <p>
+                Good for websites, social media posts,
+                small digital graphics and messaging.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>600–1000px</h3>
+            <p>
+                Suitable for business cards, menus,
+                brochures and general marketing.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>1200–2000px</h3>
+            <p>
+                Useful for larger graphics, posters,
+                signs and professional print projects.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="container faq">
+
+    <h2>
+        High Resolution QR Code <span>FAQ</span>
+    </h2>
+
+    <details>
+        <summary>What is a high resolution QR code?</summary>
+        <p>
+            A high-resolution QR code is generated at a larger
+            pixel size so it can remain sharp when used in
+            larger digital or printed designs.
+        </p>
+    </details>
+
+    <details>
+        <summary>What resolution should I use for printing?</summary>
+        <p>
+            The appropriate resolution depends on the physical
+            print size and scanning distance. For larger printed
+            materials, a higher-resolution QR code can provide
+            more flexibility.
+        </p>
+    </details>
+
+    <details>
+        <summary>Can I download the QR code in high quality?</summary>
+        <p>
+            Yes. AuraQR generates the QR code locally in your
+            browser and allows you to download the generated
+            PNG at the selected resolution.
+        </p>
+    </details>
+
+    <details>
+        <summary>Will a high-resolution QR code scan better?</summary>
+        <p>
+            Resolution alone does not guarantee better scanning.
+            Contrast, quiet zone, physical size and correct QR
+            code generation are also important.
+        </p>
+    </details>
+
+    <details>
+        <summary>Is this QR code static?</summary>
+        <p>
+            Yes. The QR code generated by this page is a static
+            QR code containing the information you provide.
+        </p>
+    </details>
+
+</section>
+
+</main>
+
+<footer>
+
+<div class="container footer-inner">
+
+    <div>
+
+        <div class="logo">
+            <img src="/logo.png" alt="AuraQR Logo">
+            <span>AuraQR</span>
+        </div>
+
+        <p class="footer-text">
+            Create high-quality QR codes online for websites,
+            businesses, marketing, events and everyday use.
+        </p>
+
+    </div>
+
+    <div class="footer-links">
+        <a href="index.html">Generator</a>
+        <a href="templates.html">Templates</a>
+        <a href="how-to-use.html">How to Use</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="index.html#contact">Contact</a>
+    </div>
+
+</div>
+
+</footer>
+
+<script>
+
+let currentCanvas = null;
+
+function updateSize(){
+
+    const size = document.getElementById("size").value;
+
+    document.getElementById("sizeValue").textContent =
+        size + "px";
+}
+
+function generateQR(){
+
+    const text =
+        document.getElementById("qrText").value.trim();
+
+    if(!text){
+
+        alert("Please enter a URL or text.");
+        return;
+    }
+
+    const size =
+        Number(document.getElementById("size").value);
+
+    const dark =
+        document.getElementById("darkColor").value;
+
+    const light =
+        document.getElementById("lightColor").value;
+
+    const correction =
+        document.getElementById("correction").value;
+
+    const container =
+        document.getElementById("qrcode");
+
+    container.innerHTML = "";
+
+    new QRCode(container, {
+
+        text: text,
+
+        width: size,
+        height: size,
+
+        colorDark: dark,
+        colorLight: light,
+
+        correctLevel:
+            QRCode.CorrectLevel[correction]
+
+    });
+
+    setTimeout(() => {
+
+        currentCanvas =
+            container.querySelector("canvas");
+
+    }, 100);
+}
+
+function downloadQR(){
+
+    const canvas =
+        document.querySelector("#qrcode canvas");
+
+    if(!canvas){
+
+        alert("Please generate your QR code first.");
+        return;
+    }
+
+    const link =
+        document.createElement("a");
+
+    link.download =
+        "auraqr-high-resolution-qr.png";
+
+    link.href =
+        canvas.toDataURL("image/png");
+
+    link.click();
+}
+
+function resetQR(){
+
+    document.getElementById("qrText").value =
+        "https://auraqr.in";
+
+    document.getElementById("size").value =
+        800;
+
+    document.getElementById("sizeValue").textContent =
+        "800px";
+
+    document.getElementById("darkColor").value =
+        "#171923";
+
+    document.getElementById("lightColor").value =
+        "#ffffff";
+
+    document.getElementById("correction").value =
+        "H";
+
+    document.getElementById("qrcode").innerHTML = "";
+
+    currentCanvas = null;
+
+    generateQR();
+}
+
+window.addEventListener("load", function(){
+
+    generateQR();
+
+});
+
+</script>
+
+</body>
+</html>
