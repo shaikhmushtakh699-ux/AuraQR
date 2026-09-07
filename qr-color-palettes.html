@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>50 QR Code Color Palettes – Free QR Color Generator | AuraQR</title>
+
+  <meta name="description"
+    content="Explore 50 beautiful QR code color palettes with AuraQR. Choose professional, modern, colorful and branded QR code color combinations and create your custom QR code online for free.">
+
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical"
+    href="https://auraqr.in/qr-color-palettes.html">
+
+  <link rel="icon"
+    type="image/png"
+    href="/favicon.png">
+
+  <meta property="og:title"
+    content="50 QR Code Color Palettes | AuraQR">
+
+  <meta property="og:description"
+    content="Choose from 50 professional QR code color palettes and create customized QR codes with AuraQR.">
+
+  <meta property="og:type"
+    content="website">
+
+  <meta property="og:url"
+    content="https://auraqr.in/qr-color-palettes.html">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f8f7ff;
+      color: #17152d;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* HEADER */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #ece9f7;
+    }
+
+    .nav {
+      width: min(1180px, 92%);
+      margin: auto;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 800;
+      color: #17152d;
+    }
+
+    .logo img {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+    }
+
+    .logo span {
+      background: linear-gradient(90deg, #6d42ff, #b43cff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #7044ff;
+    }
+
+    .nav-btn {
+      background: linear-gradient(90deg, #7044ff, #b13cff);
+      color: white !important;
+      padding: 11px 18px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(112,68,255,0.18);
+    }
+
+    /* HERO */
+
+    .hero {
+      text-align: center;
+      padding: 65px 20px 35px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #eee8ff;
+      color: #7044ff;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .4px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.08;
+      font-weight: 900;
+      letter-spacing: -1.8px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, #7044ff, #b13cff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 18px auto 0;
+      color: #706b84;
+      font-size: 15px;
+    }
+
+    /* PALETTE SECTION */
+
+    .section {
+      width: min(1180px, 92%);
+      margin: 30px auto 70px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-title h2 {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: #777188;
+      font-size: 14px;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .palette-card {
+      background: white;
+      border: 1px solid #ebe8f4;
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 12px 35px rgba(35,25,75,0.06);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .palette-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 40px rgba(35,25,75,0.11);
+    }
+
+    .palette-number {
+      font-size: 12px;
+      font-weight: 800;
+      color: #7044ff;
+      margin-bottom: 12px;
+    }
+
+    .colors {
+      display: flex;
+      height: 70px;
+      border-radius: 13px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .color {
+      flex: 1;
+      cursor: pointer;
+      position: relative;
+      transition: flex .25s ease;
+    }
+
+    .color:hover {
+      flex: 1.35;
+    }
+
+    .palette-name {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .hex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .hex span {
+      background: #f6f4fb;
+      border: 1px solid #ebe8f4;
+      border-radius: 7px;
+      padding: 4px 7px;
+      font-size: 10px;
+      color: #5e596e;
+      font-family: monospace;
+    }
+
+    /* CTA */
+
+    .cta {
+      width: min(900px, 92%);
+      margin: 0 auto 70px;
+      background: linear-gradient(135deg, #7044ff, #b13cff);
+      color: white;
+      border-radius: 24px;
+      padding: 45px 30px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(112,68,255,0.2);
+    }
+
+    .cta h2 {
+      font-size: 30px;
+      margin-bottom: 10px;
+      font-weight: 900;
+    }
+
+    .cta p {
+      max-width: 650px;
+      margin: 0 auto 22px;
+      opacity: .92;
+      font-size: 14px;
+    }
+
+    .cta a {
+      display: inline-block;
+      background: white;
+      color: #7044ff;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    /* FAQ */
+
+    .faq-section {
+      width: min(900px, 92%);
+      margin: 0 auto 70px;
+    }
+
+    .faq-section h2 {
+      text-align: center;
+      font-size: 30px;
+      margin-bottom: 25px;
+    }
+
+    .faq {
+      background: white;
+      border: 1px solid #ebe8f4;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 12px;
+      box-shadow: 0 8px 25px rgba(35,25,75,0.04);
+    }
+
+    .faq h3 {
+      font-size: 15px;
+      margin-bottom: 7px;
+    }
+
+    .faq p {
+      font-size: 13px;
+      color: #716c80;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #17152d;
+      color: #ddd9eb;
+      padding: 45px 20px 25px;
+    }
+
+    .footer-inner {
+      width: min(1180px, 92%);
+      margin: auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    .footer-brand h3 {
+      color: white;
+      font-size: 21px;
+      margin-bottom: 10px;
+    }
+
+    .footer-brand p {
+      color: #aaa5bb;
+      font-size: 13px;
+      max-width: 400px;
+    }
+
+    .footer-col h4 {
+      color: white;
+      font-size: 14px;
+      margin-bottom: 13px;
+    }
+
+    .footer-col a {
+      display: block;
+      color: #aaa5bb;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .footer-col a:hover {
+      color: white;
+    }
+
+    .copyright {
+      width: min(1180px, 92%);
+      margin: 35px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #898397;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .palette-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .nav {
+        min-height: 64px;
+      }
+
+      .nav-links {
+        gap: 10px;
+        font-size: 10px;
+      }
+
+      .nav-btn {
+        padding: 8px 10px;
+      }
+
+      .hero {
+        padding-top: 45px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 13px;
+      }
+
+      .palette-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        width: 90%;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .cta {
+        padding: 35px 20px;
+      }
+
+      .cta h2 {
+        font-size: 25px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .nav-links a:nth-child(4),
+      .nav-links a:nth-child(5) {
+        display: none;
+      }
+
+      .logo {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+
+    <a href="https://auraqr.in/" class="logo">
+      <img src="/logo.png" alt="AuraQR logo">
+      <span>AuraQR</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="https://auraqr.in/">Generator</a>
+      <a href="/templates.html">Templates</a>
+      <a href="/how-to-use.html">How to Use</a>
+      <a href="/index.html#faq">FAQ</a>
+      <a href="/index.html#contact">Contact</a>
+      <a href="https://auraqr.in/" class="nav-btn">Create QR</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main>
+
+  <section class="hero">
+
+    <div class="badge">
+      AURAQR • QR CODE COLOR PALETTES
+    </div>
+
+    <h1>
+      50 QR Code
+      <span>Color Palettes</span>
+    </h1>
+
+    <p>
+      Choose from 50 carefully selected color combinations for your
+      custom QR codes. Find professional, modern, colorful and
+      branded QR code colors for your next design.
+    </p>
+
+  </section>
+
+
+  <section class="section">
+
+    <div class="section-title">
+      <h2>Explore 50 Color Palettes</h2>
+      <p>
+        Click or hover over the colors to explore each combination.
+      </p>
+    </div>
+
+    <div class="palette-grid">
+
+      <!-- 01 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 01</div>
+        <div class="colors">
+          <div class="color" style="background:#111827"></div>
+          <div class="color" style="background:#374151"></div>
+          <div class="color" style="background:#6B7280"></div>
+          <div class="color" style="background:#F9FAFB"></div>
+        </div>
+        <div class="palette-name">Modern Black</div>
+        <div class="hex">
+          <span>#111827</span><span>#374151</span>
+          <span>#6B7280</span><span>#F9FAFB</span>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 02</div>
+        <div class="colors">
+          <div class="color" style="background:#4F46E5"></div>
+          <div class="color" style="background:#7C3AED"></div>
+          <div class="color" style="background:#A855F7"></div>
+          <div class="color" style="background:#F5F3FF"></div>
+        </div>
+        <div class="palette-name">Royal Purple</div>
+        <div class="hex">
+          <span>#4F46E5</span><span>#7C3AED</span>
+          <span>#A855F7</span><span>#F5F3FF</span>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 03</div>
+        <div class="colors">
+          <div class="color" style="background:#2563EB"></div>
+          <div class="color" style="background:#0EA5E9"></div>
+          <div class="color" style="background:#38BDF8"></div>
+          <div class="color" style="background:#EFF6FF"></div>
+        </div>
+        <div class="palette-name">Ocean Blue</div>
+        <div class="hex">
+          <span>#2563EB</span><span>#0EA5E9</span>
+          <span>#38BDF8</span><span>#EFF6FF</span>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 04</div>
+        <div class="colors">
+          <div class="color" style="background:#047857"></div>
+          <div class="color" style="background:#059669"></div>
+          <div class="color" style="background:#34D399"></div>
+          <div class="color" style="background:#ECFDF5"></div>
+        </div>
+        <div class="palette-name">Emerald Green</div>
+        <div class="hex">
+          <span>#047857</span><span>#059669</span>
+          <span>#34D399</span><span>#ECFDF5</span>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 05</div>
+        <div class="colors">
+          <div class="color" style="background:#DC2626"></div>
+          <div class="color" style="background:#EF4444"></div>
+          <div class="color" style="background:#F87171"></div>
+          <div class="color" style="background:#FEF2F2"></div>
+        </div>
+        <div class="palette-name">Ruby Red</div>
+        <div class="hex">
+          <span>#DC2626</span><span>#EF4444</span>
+          <span>#F87171</span><span>#FEF2F2</span>
+        </div>
+      </div>
+
+      <!-- 06 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 06</div>
+        <div class="colors">
+          <div class="color" style="background:#EA580C"></div>
+          <div class="color" style="background:#F97316"></div>
+          <div class="color" style="background:#FB923C"></div>
+          <div class="color" style="background:#FFF7ED"></div>
+        </div>
+        <div class="palette-name">Sunset Orange</div>
+        <div class="hex">
+          <span>#EA580C</span><span>#F97316</span>
+          <span>#FB923C</span><span>#FFF7ED</span>
+        </div>
+      </div>
+
+      <!-- 07 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 07</div>
+        <div class="colors">
+          <div class="color" style="background:#CA8A04"></div>
+          <div class="color" style="background:#EAB308"></div>
+          <div class="color" style="background:#FACC15"></div>
+          <div class="color" style="background:#FEFCE8"></div>
+        </div>
+        <div class="palette-name">Golden Yellow</div>
+        <div class="hex">
+          <span>#CA8A04</span><span>#EAB308</span>
+          <span>#FACC15</span><span>#FEFCE8</span>
+        </div>
+      </div>
+
+      <!-- 08 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 08</div>
+        <div class="colors">
+          <div class="color" style="background:#BE185D"></div>
+          <div class="color" style="background:#DB2777"></div>
+          <div class="color" style="background:#F472B6"></div>
+          <div class="color" style="background:#FDF2F8"></div>
+        </div>
+        <div class="palette-name">Pink Blossom</div>
+        <div class="hex">
+          <span>#BE185D</span><span>#DB2777</span>
+          <span>#F472B6</span><span>#FDF2F8</span>
+        </div>
+      </div>
+
+      <!-- 09 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 09</div>
+        <div class="colors">
+          <div class="color" style="background:#7E22CE"></div>
+          <div class="color" style="background:#9333EA"></div>
+          <div class="color" style="background:#C084FC"></div>
+          <div class="color" style="background:#FAF5FF"></div>
+        </div>
+        <div class="palette-name">Violet Dream</div>
+        <div class="hex">
+          <span>#7E22CE</span><span>#9333EA</span>
+          <span>#C084FC</span><span>#FAF5FF</span>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 10</div>
+        <div class="colors">
+          <div class="color" style="background:#0F766E"></div>
+          <div class="color" style="background:#14B8A6"></div>
+          <div class="color" style="background:#5EEAD4"></div>
+          <div class="color" style="background:#F0FDFA"></div>
+        </div>
+        <div class="palette-name">Teal Fresh</div>
+        <div class="hex">
+          <span>#0F766E</span><span>#14B8A6</span>
+          <span>#5EEAD4</span><span>#F0FDFA</span>
+        </div>
+      </div>
+
+      <!-- 11 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 11</div>
+        <div class="colors">
+          <div class="color" style="background:#0F172A"></div>
+          <div class="color" style="background:#1E293B"></div>
+          <div class="color" style="background:#475569"></div>
+          <div class="color" style="background:#F8FAFC"></div>
+        </div>
+        <div class="palette-name">Midnight</div>
+        <div class="hex">
+          <span>#0F172A</span><span>#1E293B</span>
+          <span>#475569</span><span>#F8FAFC</span>
+        </div>
+      </div>
+
+      <!-- 12 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 12</div>
+        <div class="colors">
+          <div class="color" style="background:#172554"></div>
+          <div class="color" style="background:#1D4ED8"></div>
+          <div class="color" style="background:#60A5FA"></div>
+          <div class="color" style="background:#EFF6FF"></div>
+        </div>
+        <div class="palette-name">Deep Ocean</div>
+        <div class="hex">
+          <span>#172554</span><span>#1D4ED8</span>
+          <span>#60A5FA</span><span>#EFF6FF</span>
+        </div>
+      </div>
+
+      <!-- 13 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 13</div>
+        <div class="colors">
+          <div class="color" style="background:#064E3B"></div>
+          <div class="color" style="background:#047857"></div>
+          <div class="color" style="background:#6EE7B7"></div>
+          <div class="color" style="background:#ECFDF5"></div>
+        </div>
+        <div class="palette-name">Forest</div>
+        <div class="hex">
+          <span>#064E3B</span><span>#047857</span>
+          <span>#6EE7B7</span><span>#ECFDF5</span>
+        </div>
+      </div>
+
+      <!-- 14 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 14</div>
+        <div class="colors">
+          <div class="color" style="background:#581C87"></div>
+          <div class="color" style="background:#7E22CE"></div>
+          <div class="color" style="background:#D8B4FE"></div>
+          <div class="color" style="background:#FAF5FF"></div>
+        </div>
+        <div class="palette-name">Deep Violet</div>
+        <div class="hex">
+          <span>#581C87</span><span>#7E22CE</span>
+          <span>#D8B4FE</span><span>#FAF5FF</span>
+        </div>
+      </div>
+
+      <!-- 15 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 15</div>
+        <div class="colors">
+          <div class="color" style="background:#831843"></div>
+          <div class="color" style="background:#BE185D"></div>
+          <div class="color" style="background:#F9A8D4"></div>
+          <div class="color" style="background:#FDF2F8"></div>
+        </div>
+        <div class="palette-name">Berry</div>
+        <div class="hex">
+          <span>#831843</span><span>#BE185D</span>
+          <span>#F9A8D4</span><span>#FDF2F8</span>
+        </div>
+      </div>
+
+      <!-- 16 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 16</div>
+        <div class="colors">
+          <div class="color" style="background:#7C2D12"></div>
+          <div class="color" style="background:#C2410C"></div>
+          <div class="color" style="background:#FDBA74"></div>
+          <div class="color" style="background:#FFF7ED"></div>
+        </div>
+        <div class="palette-name">Burnt Orange</div>
+        <div class="hex">
+          <span>#7C2D12</span><span>#C2410C</span>
+          <span>#FDBA74</span><span>#FFF7ED</span>
+        </div>
+      </div>
+
+      <!-- 17 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 17</div>
+        <div class="colors">
+          <div class="color" style="background:#365314"></div>
+          <div class="color" style="background:#65A30D"></div>
+          <div class="color" style="background:#BEF264"></div>
+          <div class="color" style="background:#F7FEE7"></div>
+        </div>
+        <div class="palette-name">Lime Fresh</div>
+        <div class="hex">
+          <span>#365314</span><span>#65A30D</span>
+          <span>#BEF264</span><span>#F7FEE7</span>
+        </div>
+      </div>
+
+      <!-- 18 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 18</div>
+        <div class="colors">
+          <div class="color" style="background:#134E4A"></div>
+          <div class="color" style="background:#0F766E"></div>
+          <div class="color" style="background:#99F6E4"></div>
+          <div class="color" style="background:#F0FDFA"></div>
+        </div>
+        <div class="palette-name">Aqua</div>
+        <div class="hex">
+          <span>#134E4A</span><span>#0F766E</span>
+          <span>#99F6E4</span><span>#F0FDFA</span>
+        </div>
+      </div>
+
+      <!-- 19 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 19</div>
+        <div class="colors">
+          <div class="color" style="background:#312E81"></div>
+          <div class="color" style="background:#4338CA"></div>
+          <div class="color" style="background:#A5B4FC"></div>
+          <div class="color" style="background:#EEF2FF"></div>
+        </div>
+        <div class="palette-name">Indigo</div>
+        <div class="hex">
+          <span>#312E81</span><span>#4338CA</span>
+          <span>#A5B4FC</span><span>#EEF2FF</span>
+        </div>
+      </div>
+
+      <!-- 20 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 20</div>
+        <div class="colors">
+          <div class="color" style="background:#164E63"></div>
+          <div class="color" style="background:#0891B2"></div>
+          <div class="color" style="background:#67E8F9"></div>
+          <div class="color" style="background:#ECFEFF"></div>
+        </div>
+        <div class="palette-name">Cyan</div>
+        <div class="hex">
+          <span>#164E63</span><span>#0891B2</span>
+          <span>#67E8F9</span><span>#ECFEFF</span>
+        </div>
+      </div>
+
+      <!-- 21 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 21</div>
+        <div class="colors">
+          <div class="color" style="background:#450A0A"></div>
+          <div class="color" style="background:#B91C1C"></div>
+          <div class="color" style="background:#FCA5A5"></div>
+          <div class="color" style="background:#FEF2F2"></div>
+        </div>
+        <div class="palette-name">Crimson</div>
+        <div class="hex">
+          <span>#450A0A</span><span>#B91C1C</span>
+          <span>#FCA5A5</span><span>#FEF2F2</span>
+        </div>
+      </div>
+
+      <!-- 22 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 22</div>
+        <div class="colors">
+          <div class="color" style="background:#422006"></div>
+          <div class="color" style="background:#A16207"></div>
+          <div class="color" style="background:#FDE68A"></div>
+          <div class="color" style="background:#FEFCE8"></div>
+        </div>
+        <div class="palette-name">Amber</div>
+        <div class="hex">
+          <span>#422006</span><span>#A16207</span>
+          <span>#FDE68A</span><span>#FEFCE8</span>
+        </div>
+      </div>
+
+      <!-- 23 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 23</div>
+        <div class="colors">
+          <div class="color" style="background:#1C1917"></div>
+          <div class="color" style="background:#57534E"></div>
+          <div class="color" style="background:#A8A29E"></div>
+          <div class="color" style="background:#FAFAF9"></div>
+        </div>
+        <div class="palette-name">Stone</div>
+        <div class="hex">
+          <span>#1C1917</span><span>#57534E</span>
+          <span>#A8A29E</span><span>#FAFAF9</span>
+        </div>
+      </div>
+
+      <!-- 24 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 24</div>
+        <div class="colors">
+          <div class="color" style="background:#3F3F46"></div>
+          <div class="color" style="background:#71717A"></div>
+          <div class="color" style="background:#D4D4D8"></div>
+          <div class="color" style="background:#FAFAFA"></div>
+        </div>
+        <div class="palette-name">Slate Gray</div>
+        <div class="hex">
+          <span>#3F3F46</span><span>#71717A</span>
+          <span>#D4D4D8</span><span>#FAFAFA</span>
+        </div>
+      </div>
+
+      <!-- 25 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 25</div>
+        <div class="colors">
+          <div class="color" style="background:#701A75"></div>
+          <div class="color" style="background:#A21CAF"></div>
+          <div class="color" style="background:#E879F9"></div>
+          <div class="color" style="background:#FDF4FF"></div>
+        </div>
+        <div class="palette-name">Magenta</div>
+        <div class="hex">
+          <span>#701A75</span><span>#A21CAF</span>
+          <span>#E879F9</span><span>#FDF4FF</span>
+        </div>
+      </div>
+
+      <!-- 26 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 26</div>
+        <div class="colors">
+          <div class="color" style="background:#4A044E"></div>
+          <div class="color" style="background:#86198F"></div>
+          <div class="color" style="background:#E879F9"></div>
+          <div class="color" style="background:#FDF4FF"></div>
+        </div>
+        <div class="palette-name">Plum</div>
+        <div class="hex">
+          <span>#4A044E</span><span>#86198F</span>
+          <span>#E879F9</span><span>#FDF4FF</span>
+        </div>
+      </div>
+
+      <!-- 27 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 27</div>
+        <div class="colors">
+          <div class="color" style="background:#14532D"></div>
+          <div class="color" style="background:#16A34A"></div>
+          <div class="color" style="background:#86EFAC"></div>
+          <div class="color" style="background:#F0FDF4"></div>
+        </div>
+        <div class="palette-name">Leaf Green</div>
+        <div class="hex">
+          <span>#14532D</span><span>#16A34A</span>
+          <span>#86EFAC</span><span>#F0FDF4</span>
+        </div>
+      </div>
+
+      <!-- 28 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 28</div>
+        <div class="colors">
+          <div class="color" style="background:#713F12"></div>
+          <div class="color" style="background:#D97706"></div>
+          <div class="color" style="background:#FCD34D"></div>
+          <div class="color" style="background:#FFFBEB"></div>
+        </div>
+        <div class="palette-name">Honey</div>
+        <div class="hex">
+          <span>#713F12</span><span>#D97706</span>
+          <span>#FCD34D</span><span>#FFFBEB</span>
+        </div>
+      </div>
+
+      <!-- 29 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 29</div>
+        <div class="colors">
+          <div class="color" style="background:#172554"></div>
+          <div class="color" style="background:#0369A1"></div>
+          <div class="color" style="background:#7DD3FC"></div>
+          <div class="color" style="background:#F0F9FF"></div>
+        </div>
+        <div class="palette-name">Sky Night</div>
+        <div class="hex">
+          <span>#172554</span><span>#0369A1</span>
+          <span>#7DD3FC</span><span>#F0F9FF</span>
+        </div>
+      </div>
+
+      <!-- 30 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 30</div>
+        <div class="colors">
+          <div class="color" style="background:#500724"></div>
+          <div class="color" style="background:#9D174D"></div>
+          <div class="color" style="background:#F9A8D4"></div>
+          <div class="color" style="background:#FDF2F8"></div>
+        </div>
+        <div class="palette-name">Rose</div>
+        <div class="hex">
+          <span>#500724</span><span>#9D174D</span>
+          <span>#F9A8D4</span><span>#FDF2F8</span>
+        </div>
+      </div>
+
+      <!-- 31 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 31</div>
+        <div class="colors">
+          <div class="color" style="background:#064E3B"></div>
+          <div class="color" style="background:#059669"></div>
+          <div class="color" style="background:#A7F3D0"></div>
+          <div class="color" style="background:#ECFDF5"></div>
+        </div>
+        <div class="palette-name">Mint Forest</div>
+        <div class="hex">
+          <span>#064E3B</span><span>#059669</span>
+          <span>#A7F3D0</span><span>#ECFDF5</span>
+        </div>
+      </div>
+
+      <!-- 32 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 32</div>
+        <div class="colors">
+          <div class="color" style="background:#1E1B4B"></div>
+          <div class="color" style="background:#6366F1"></div>
+          <div class="color" style="background:#C7D2FE"></div>
+          <div class="color" style="background:#EEF2FF"></div>
+        </div>
+        <div class="palette-name">Soft Indigo</div>
+        <div class="hex">
+          <span>#1E1B4B</span><span>#6366F1</span>
+          <span>#C7D2FE</span><span>#EEF2FF</span>
+        </div>
+      </div>
+
+      <!-- 33 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 33</div>
+        <div class="colors">
+          <div class="color" style="background:#083344"></div>
+          <div class="color" style="background:#06B6D4"></div>
+          <div class="color" style="background:#A5F3FC"></div>
+          <div class="color" style="background:#ECFEFF"></div>
+        </div>
+        <div class="palette-name">Crystal Cyan</div>
+        <div class="hex">
+          <span>#083344</span><span>#06B6D4</span>
+          <span>#A5F3FC</span><span>#ECFEFF</span>
+        </div>
+      </div>
+
+      <!-- 34 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 34</div>
+        <div class="colors">
+          <div class="color" style="background:#3B0764"></div>
+          <div class="color" style="background:#9333EA"></div>
+          <div class="color" style="background:#D8B4FE"></div>
+          <div class="color" style="background:#FAF5FF"></div>
+        </div>
+        <div class="palette-name">Purple Glow</div>
+        <div class="hex">
+          <span>#3B0764</span><span>#9333EA</span>
+          <span>#D8B4FE</span><span>#FAF5FF</span>
+        </div>
+      </div>
+
+      <!-- 35 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 35</div>
+        <div class="colors">
+          <div class="color" style="background:#7F1D1D"></div>
+          <div class="color" style="background:#DC2626"></div>
+          <div class="color" style="background:#FCA5A5"></div>
+          <div class="color" style="background:#FEF2F2"></div>
+        </div>
+        <div class="palette-name">Red Velvet</div>
+        <div class="hex">
+          <span>#7F1D1D</span><span>#DC2626</span>
+          <span>#FCA5A5</span><span>#FEF2F2</span>
+        </div>
+      </div>
+
+      <!-- 36 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 36</div>
+        <div class="colors">
+          <div class="color" style="background:#451A03"></div>
+          <div class="color" style="background:#EA580C"></div>
+          <div class="color" style="background:#FDBA74"></div>
+          <div class="color" style="background:#FFF7ED"></div>
+        </div>
+        <div class="palette-name">Fire Orange</div>
+        <div class="hex">
+          <span>#451A03</span><span>#EA580C</span>
+          <span>#FDBA74</span><span>#FFF7ED</span>
+        </div>
+      </div>
+
+      <!-- 37 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 37</div>
+        <div class="colors">
+          <div class="color" style="background:#713F12"></div>
+          <div class="color" style="background:#CA8A04"></div>
+          <div class="color" style="background:#FDE68A"></div>
+          <div class="color" style="background:#FEFCE8"></div>
+        </div>
+        <div class="palette-name">Warm Gold</div>
+        <div class="hex">
+          <span>#713F12</span><span>#CA8A04</span>
+          <span>#FDE68A</span><span>#FEFCE8</span>
+        </div>
+      </div>
+
+      <!-- 38 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 38</div>
+        <div class="colors">
+          <div class="color" style="background:#134E4A"></div>
+          <div class="color" style="background:#14B8A6"></div>
+          <div class="color" style="background:#99F6E4"></div>
+          <div class="color" style="background:#F0FDFA"></div>
+        </div>
+        <div class="palette-name">Tropical Teal</div>
+        <div class="hex">
+          <span>#134E4A</span><span>#14B8A6</span>
+          <span>#99F6E4</span><span>#F0FDFA</span>
+        </div>
+      </div>
+
+      <!-- 39 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 39</div>
+        <div class="colors">
+          <div class="color" style="background:#082F49"></div>
+          <div class="color" style="background:#0284C7"></div>
+          <div class="color" style="background:#7DD3FC"></div>
+          <div class="color" style="background:#F0F9FF"></div>
+        </div>
+        <div class="palette-name">Deep Sky</div>
+        <div class="hex">
+          <span>#082F49</span><span>#0284C7</span>
+          <span>#7DD3FC</span><span>#F0F9FF</span>
+        </div>
+      </div>
+
+      <!-- 40 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 40</div>
+        <div class="colors">
+          <div class="color" style="background:#3F0A1D"></div>
+          <div class="color" style="background:#BE185D"></div>
+          <div class="color" style="background:#F9A8D4"></div>
+          <div class="color" style="background:#FDF2F8"></div>
+        </div>
+        <div class="palette-name">Luxury Pink</div>
+        <div class="hex">
+          <span>#3F0A1D</span><span>#BE185D</span>
+          <span>#F9A8D4</span><span>#FDF2F8</span>
+        </div>
+      </div>
+
+      <!-- 41 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 41</div>
+        <div class="colors">
+          <div class="color" style="background:#022C22"></div>
+          <div class="color" style="background:#059669"></div>
+          <div class="color" style="background:#6EE7B7"></div>
+          <div class="color" style="background:#ECFDF5"></div>
+        </div>
+        <div class="palette-name">Premium Green</div>
+        <div class="hex">
+          <span>#022C22</span><span>#059669</span>
+          <span>#6EE7B7</span><span>#ECFDF5</span>
+        </div>
+      </div>
+
+      <!-- 42 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 42</div>
+        <div class="colors">
+          <div class="color" style="background:#1E1B4B"></div>
+          <div class="color" style="background:#7C3AED"></div>
+          <div class="color" style="background:#C4B5FD"></div>
+          <div class="color" style="background:#F5F3FF"></div>
+        </div>
+        <div class="palette-name">Aura Purple</div>
+        <div class="hex">
+          <span>#1E1B4B</span><span>#7C3AED</span>
+          <span>#C4B5FD</span><span>#F5F3FF</span>
+        </div>
+      </div>
+
+      <!-- 43 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 43</div>
+        <div class="colors">
+          <div class="color" style="background:#1F2937"></div>
+          <div class="color" style="background:#4B5563"></div>
+          <div class="color" style="background:#9CA3AF"></div>
+          <div class="color" style="background:#F3F4F6"></div>
+        </div>
+        <div class="palette-name">Corporate Gray</div>
+        <div class="hex">
+          <span>#1F2937</span><span>#4B5563</span>
+          <span>#9CA3AF</span><span>#F3F4F6</span>
+        </div>
+      </div>
+
+      <!-- 44 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 44</div>
+        <div class="colors">
+          <div class="color" style="background:#052E16"></div>
+          <div class="color" style="background:#15803D"></div>
+          <div class="color" style="background:#86EFAC"></div>
+          <div class="color" style="background:#F0FDF4"></div>
+        </div>
+        <div class="palette-name">Eco Green</div>
+        <div class="hex">
+          <span>#052E16</span><span>#15803D</span>
+          <span>#86EFAC</span><span>#F0FDF4</span>
+        </div>
+      </div>
+
+      <!-- 45 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 45</div>
+        <div class="colors">
+          <div class="color" style="background:#172554"></div>
+          <div class="color" style="background:#4338CA"></div>
+          <div class="color" style="background:#A5B4FC"></div>
+          <div class="color" style="background:#EEF2FF"></div>
+        </div>
+        <div class="palette-name">Blue Violet</div>
+        <div class="hex">
+          <span>#172554</span><span>#4338CA</span>
+          <span>#A5B4FC</span><span>#EEF2FF</span>
+        </div>
+      </div>
+
+      <!-- 46 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 46</div>
+        <div class="colors">
+          <div class="color" style="background:#431407"></div>
+          <div class="color" style="background:#C2410C"></div>
+          <div class="color" style="background:#FDBA74"></div>
+          <div class="color" style="background:#FFF7ED"></div>
+        </div>
+        <div class="palette-name">Copper</div>
+        <div class="hex">
+          <span>#431407</span><span>#C2410C</span>
+          <span>#FDBA74</span><span>#FFF7ED</span>
+        </div>
+      </div>
+
+      <!-- 47 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 47</div>
+        <div class="colors">
+          <div class="color" style="background:#172554"></div>
+          <div class="color" style="background:#0284C7"></div>
+          <div class="color" style="background:#38BDF8"></div>
+          <div class="color" style="background:#F0F9FF"></div>
+        </div>
+        <div class="palette-name">Electric Blue</div>
+        <div class="hex">
+          <span>#172554</span><span>#0284C7</span>
+          <span>#38BDF8</span><span>#F0F9FF</span>
+        </div>
+      </div>
+
+      <!-- 48 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 48</div>
+        <div class="colors">
+          <div class="color" style="background:#4A044E"></div>
+          <div class="color" style="background:#C026D3"></div>
+          <div class="color" style="background:#F0ABFC"></div>
+          <div class="color" style="background:#FDF4FF"></div>
+        </div>
+        <div class="palette-name">Neon Magenta</div>
+        <div class="hex">
+          <span>#4A044E</span><span>#C026D3</span>
+          <span>#F0ABFC</span><span>#FDF4FF</span>
+        </div>
+      </div>
+
+      <!-- 49 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 49</div>
+        <div class="colors">
+          <div class="color" style="background:#171717"></div>
+          <div class="color" style="background:#525252"></div>
+          <div class="color" style="background:#D4D4D4"></div>
+          <div class="color" style="background:#FAFAFA"></div>
+        </div>
+        <div class="palette-name">Minimal White</div>
+        <div class="hex">
+          <span>#171717</span><span>#525252</span>
+          <span>#D4D4D4</span><span>#FAFAFA</span>
+        </div>
+      </div>
+
+      <!-- 50 -->
+      <div class="palette-card">
+        <div class="palette-number">PALETTE 50</div>
+        <div class="colors">
+          <div class="color" style="background:#111827"></div>
+          <div class="color" style="background:#7C3AED"></div>
+          <div class="color" style="background:#EC4899"></div>
+          <div class="color" style="background:#FDF4FF"></div>
+        </div>
+        <div class="palette-name">Aura Gradient</div>
+        <div class="hex">
+          <span>#111827</span><span>#7C3AED</span>
+          <span>#EC4899</span><span>#FDF4FF</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="cta">
+
+    <h2>Create Your Custom QR Code</h2>
+
+    <p>
+      Found a color combination you like?
+      Create your own customized QR code with AuraQR and
+      choose your preferred QR colors, logo and design.
+    </p>
+
+    <a href="https://auraqr.in/">
+      Create QR Code →
+    </a>
+
+  </section>
+
+
+  <section class="faq-section">
+
+    <h2>QR Code Color FAQ</h2>
+
+    <div class="faq">
+      <h3>Can I use colors in a QR code?</h3>
+      <p>
+        Yes. QR codes can use colors, but the foreground and
+        background should have strong enough contrast for reliable
+        scanning.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>What is the best color for a QR code?</h3>
+      <p>
+        Dark foreground colors combined with a light background
+        generally provide good readability and scanning reliability.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Can I create a branded QR code?</h3>
+      <p>
+        Yes. AuraQR supports customized QR code designs, including
+        colors and QR codes with logos.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Can I use these palettes for business QR codes?</h3>
+      <p>
+        Yes. Professional palettes can be useful for business cards,
+        menus, packaging, posters, marketing materials and branded
+        QR codes.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Should a QR code have high contrast?</h3>
+      <p>
+        Yes. High contrast between the QR modules and background is
+        important for reliable scanning.
+      </p>
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <div class="footer-inner">
+
+    <div class="footer-brand">
+      <h3>AuraQR</h3>
+      <p>
+        Free online QR code generator for creating customized,
+        professional and high-quality QR codes.
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h4>QR Tools</h4>
+      <a href="https://auraqr.in/">QR Generator</a>
+      <a href="/qr-code-with-logo.html">QR with Logo</a>
+      <a href="/colored-qr-code.html">Colored QR</a>
+      <a href="/qr-color-palettes.html">Color Palettes</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="/templates.html">QR Templates</a>
+      <a href="/how-to-use.html">How to Use</a>
+      <a href="/index.html#faq">FAQ</a>
+      <a href="/index.html#contact">Contact</a>
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    © 2026 AuraQR. All rights reserved.
+  </div>
+
+</footer>
+
+</body>
+</html>
