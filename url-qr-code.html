@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>URL QR Code Generator – Create QR Code from URL | AuraQR</title>
+
+  <meta name="description"
+        content="Create a free URL QR code with AuraQR. Enter any website URL, generate a QR code instantly, and download it for sharing, printing, marketing and business use.">
+
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://auraqr.in/url-qr-code.html">
+
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="apple-touch-icon" href="/logo.png">
+
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --card: #ffffff;
+      --text: #17191c;
+      --muted: #6f747c;
+      --line: #e5e7eb;
+      --accent: #111827;
+      --accent-text: #ffffff;
+      --success: #16803c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .header {
+      width: min(1180px, calc(100% - 32px));
+      margin: 18px auto 0;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.05);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .brand img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .brand span {
+      color: #6d5dfc;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav a:hover {
+      opacity: .65;
+    }
+
+    .hero {
+      width: min(900px, calc(100% - 32px));
+      margin: 70px auto 35px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      font-size: clamp(34px, 6vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -2px;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .generator {
+      width: min(1000px, calc(100% - 32px));
+      margin: 0 auto 55px;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.05);
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 15px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      outline: none;
+      font-size: 15px;
+      background: #fff;
+      color: var(--text);
+    }
+
+    input:focus {
+      border-color: #888;
+    }
+
+    .help {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .primary {
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px 18px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--accent);
+      color: var(--accent-text);
+      font-size: 15px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .primary:hover {
+      opacity: .9;
+    }
+
+    .secondary {
+      width: 100%;
+      margin-top: 10px;
+      padding: 13px 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .preview {
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    #qrcode {
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #qrcode canvas,
+    #qrcode img {
+      max-width: 260px;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .placeholder {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .status {
+      margin-top: 15px;
+      color: var(--success);
+      font-size: 13px;
+      font-weight: 800;
+      display: none;
+    }
+
+    .content {
+      width: min(1000px, calc(100% - 32px));
+      margin: 0 auto 60px;
+    }
+
+    .content h2 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    .content h3 {
+      margin-top: 28px;
+      font-size: 20px;
+    }
+
+    .content p,
+    .content li {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    .faq {
+      margin-top: 35px;
+    }
+
+    details {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      margin-bottom: 10px;
+      padding: 16px 18px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    footer {
+      width: min(1000px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 30px 0 45px;
+      border-top: 1px solid var(--line);
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-links {
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      font-weight: 800;
+    }
+
+    @media (max-width: 800px) {
+      .nav {
+        display: none;
+      }
+
+      .generator {
+        grid-template-columns: 1fr;
+      }
+
+      .preview {
+        min-height: 330px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .header {
+        margin-top: 10px;
+      }
+
+      .hero {
+        margin-top: 48px;
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+    }
+  </style>
+
+  <!-- QR Code Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+
+<body>
+
+<header class="header">
+
+  <a href="https://auraqr.in/" class="brand" aria-label="AuraQR Homepage">
+    <img src="/logo.png" alt="AuraQR logo">
+    <div>Aura<span>QR</span></div>
+  </a>
+
+  <nav class="nav" aria-label="Main Navigation">
+    <a href="https://auraqr.in/">Generator</a>
+    <a href="https://auraqr.in/templates.html">Templates</a>
+    <a href="https://auraqr.in/how-to-use.html">How to Use</a>
+    <a href="https://auraqr.in/#faq">FAQ</a>
+    <a href="https://auraqr.in/#contact">Contact</a>
+  </nav>
+
+</header>
+
+
+<section class="hero">
+
+  <h1>URL QR Code Generator</h1>
+
+  <p>
+    Create a free QR code from any website URL with AuraQR.
+    Enter your link, generate your QR code instantly, and download
+    it for websites, business cards, posters, marketing and sharing.
+  </p>
+
+</section>
+
+
+<section class="generator">
+
+  <div class="card">
+
+    <div class="title">Create Your URL QR Code</div>
+
+    <label for="urlInput">Website URL</label>
+
+    <input
+      id="urlInput"
+      type="url"
+      placeholder="https://example.com"
+      autocomplete="url"
+    >
+
+    <div class="help">
+      Enter the complete website address, including https://
+    </div>
+
+    <button class="primary" onclick="generateQR()">
+      Generate QR Code
+    </button>
+
+    <button class="secondary" onclick="downloadQR()">
+      Download QR Code
+    </button>
+
+  </div>
+
+
+  <div class="card preview">
+
+    <div class="title">QR Preview</div>
+
+    <div id="qrcode">
+      <div class="placeholder">
+        Your QR code will appear here
+      </div>
+    </div>
+
+    <div id="status" class="status">
+      QR Code generated successfully
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="content">
+
+  <div class="card">
+
+    <h2>Free URL QR Code Generator</h2>
+
+    <p>
+      AuraQR makes it easy to convert any website URL into a
+      scannable QR code. QR codes can be used on business cards,
+      posters, flyers, packaging, menus, advertisements and digital
+      marketing materials.
+    </p>
+
+    <h3>How to Create a URL QR Code</h3>
+
+    <ol>
+      <li>Enter your website URL in the URL field.</li>
+      <li>Click the Generate QR Code button.</li>
+      <li>Scan the generated QR code to test the link.</li>
+      <li>Download the QR code and use it wherever you need.</li>
+    </ol>
+
+    <h3>Where Can You Use a URL QR Code?</h3>
+
+    <p>
+      URL QR codes are useful for websites, online stores,
+      landing pages, social media profiles, portfolios,
+      business information, campaigns, product pages and
+      promotional materials.
+    </p>
+
+  </div>
+
+
+  <div class="faq">
+
+    <h2>Frequently Asked Questions</h2>
+
+    <details>
+      <summary>What is a URL QR code?</summary>
+      <p>
+        A URL QR code stores a website address that can be opened
+        by scanning the QR code with a compatible smartphone camera
+        or QR scanner.
+      </p>
+    </details>
+
+    <details>
+      <summary>Is the URL QR code free?</summary>
+      <p>
+        Yes. AuraQR provides free QR code generation without
+        requiring an account.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can I use the QR code for business?</summary>
+      <p>
+        Yes. You can use a URL QR code for business cards,
+        marketing materials, packaging, posters, menus and
+        other promotional uses.
+      </p>
+    </details>
+
+    <details>
+      <summary>Should I test my QR code before printing?</summary>
+      <p>
+        Yes. Always scan and test the QR code before printing
+        or distributing it.
+      </p>
+    </details>
+
+  </div>
+
+</section>
+
+
+<footer>
+
+  <div class="footer-links">
+    <a href="https://auraqr.in/">Generator</a>
+    <a href="https://auraqr.in/templates.html">Templates</a>
+    <a href="https://auraqr.in/how-to-use.html">How to Use</a>
+    <a href="https://auraqr.in/#faq">FAQ</a>
+    <a href="https://auraqr.in/#contact">Contact</a>
+  </div>
+
+  <div>
+    © 2026 AuraQR. Free Online QR Code Generator.
+  </div>
+
+</footer>
+
+
+<script>
+
+  let currentQR = null;
+
+  function getURL() {
+
+    const input = document.getElementById("urlInput");
+
+    let url = input.value.trim();
+
+    if (!url) {
+      alert("Please enter a website URL.");
+      input.focus();
+      return null;
+    }
+
+    if (!/^https?:\/\//i.test(url)) {
+      url = "https://" + url;
+    }
+
+    try {
+      new URL(url);
+    } catch (error) {
+      alert("Please enter a valid website URL.");
+      input.focus();
+      return null;
+    }
+
+    return url;
+  }
+
+
+  function generateQR() {
+
+    const url = getURL();
+
+    if (!url) return;
+
+    const container = document.getElementById("qrcode");
+
+    container.innerHTML = "";
+
+    currentQR = new QRCode(container, {
+      text: url,
+      width: 260,
+      height: 260,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    document.getElementById("status").style.display = "block";
+  }
+
+
+  function downloadQR() {
+
+    const container = document.getElementById("qrcode");
+
+    const canvas = container.querySelector("canvas");
+
+    const image = container.querySelector("img");
+
+    if (canvas) {
+
+      const link = document.createElement("a");
+
+      link.download = "auraqr-url-qr-code.png";
+
+      link.href = canvas.toDataURL("image/png");
+
+      link.click();
+
+      return;
+    }
+
+    if (image) {
+
+      const link = document.createElement("a");
+
+      link.download = "auraqr-url-qr-code.png";
+
+      link.href = image.src;
+
+      link.click();
+
+      return;
+    }
+
+    alert("Please generate the QR code first.");
+  }
+
+
+  document
+    .getElementById("urlInput")
+    .addEventListener("keydown", function(event) {
+
+      if (event.key === "Enter") {
+        generateQR();
+      }
+
+    });
+
+</script>
+
+</body>
+</html>
