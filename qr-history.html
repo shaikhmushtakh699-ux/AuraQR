@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>QR Code History – View & Manage Your QR Codes | AuraQR</title>
+
+  <meta name="description" content="View and manage your recently generated QR codes with AuraQR. Your QR history is stored locally in your browser for privacy.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://auraqr.in/qr-history.html">
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <meta property="og:title" content="QR Code History | AuraQR">
+  <meta property="og:description" content="View and manage your recently generated QR codes with AuraQR.">
+  <meta property="og:url" content="https://auraqr.in/qr-history.html">
+  <meta property="og:type" content="website">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f8f7ff;
+      color: #171329;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    /* HEADER */
+
+    header {
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid #eeeaf8;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav {
+      max-width: 1180px;
+      margin: auto;
+      min-height: 70px;
+      padding: 0 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 21px;
+      font-weight: 800;
+      color: #171329;
+    }
+
+    .brand img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+
+    .brand span {
+      color: #743cff;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #743cff;
+    }
+
+    .create-btn {
+      background: linear-gradient(135deg, #743cff, #923cff);
+      color: white !important;
+      padding: 12px 18px;
+      border-radius: 9px;
+      box-shadow: 0 8px 20px rgba(116,60,255,0.20);
+    }
+
+    .mobile-menu {
+      display: none;
+      border: none;
+      background: #f0ebff;
+      color: #743cff;
+      font-size: 22px;
+      width: 42px;
+      height: 42px;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    /* HERO */
+
+    .hero {
+      text-align: center;
+      padding: 70px 20px 35px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 13px;
+      border-radius: 20px;
+      background: #eee8ff;
+      color: #743cff;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.7px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.1;
+      margin-bottom: 15px;
+      font-weight: 800;
+    }
+
+    .hero h1 span {
+      color: #743cff;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: #77718c;
+      font-size: 14px;
+    }
+
+    /* MAIN */
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 25px auto 80px;
+    }
+
+    .history-card {
+      background: white;
+      border: 1px solid #ebe7f5;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 15px 45px rgba(42, 26, 91, 0.08);
+    }
+
+    .history-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .history-top h2 {
+      font-size: 21px;
+    }
+
+    .history-count {
+      color: #7c758e;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .clear-btn {
+      border: none;
+      background: #fff0f0;
+      color: #d93636;
+      padding: 11px 16px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 12px;
+      transition: 0.2s;
+    }
+
+    .clear-btn:hover {
+      background: #ffe1e1;
+    }
+
+    /* EMPTY */
+
+    .empty-state {
+      text-align: center;
+      padding: 65px 20px;
+      border: 1px dashed #dcd5ed;
+      border-radius: 15px;
+      background: #fbfaff;
+    }
+
+    .empty-icon {
+      width: 65px;
+      height: 65px;
+      margin: 0 auto 18px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #eee8ff;
+      color: #743cff;
+      font-size: 30px;
+    }
+
+    .empty-state h3 {
+      font-size: 19px;
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      color: #817b91;
+      font-size: 13px;
+      max-width: 480px;
+      margin: auto auto 20px;
+    }
+
+    .primary-btn {
+      display: inline-block;
+      border: none;
+      background: linear-gradient(135deg, #743cff, #923cff);
+      color: white;
+      padding: 13px 21px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(116,60,255,0.20);
+    }
+
+    /* HISTORY GRID */
+
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .history-item {
+      border: 1px solid #ebe7f5;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .history-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(42,26,91,0.10);
+    }
+
+    .qr-preview {
+      min-height: 235px;
+      padding: 22px;
+      background: #faf9ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qr-preview img {
+      width: 180px;
+      height: 180px;
+      max-width: 100%;
+      object-fit: contain;
+      background: white;
+      padding: 8px;
+      border-radius: 8px;
+    }
+
+    .item-content {
+      padding: 17px;
+    }
+
+    .item-type {
+      display: inline-block;
+      color: #743cff;
+      background: #eee8ff;
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 9px;
+    }
+
+    .item-text {
+      font-size: 13px;
+      font-weight: 600;
+      word-break: break-word;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 60px;
+    }
+
+    .item-date {
+      color: #8b8499;
+      font-size: 10px;
+      margin-top: 9px;
+      margin-bottom: 14px;
+    }
+
+    .item-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .item-actions button {
+      flex: 1;
+      border: none;
+      padding: 10px 7px;
+      border-radius: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .download-btn {
+      background: #743cff;
+      color: white;
+    }
+
+    .copy-btn {
+      background: #eee8ff;
+      color: #6332d8;
+    }
+
+    .delete-btn {
+      background: #fff0f0;
+      color: #d93636;
+    }
+
+    /* INFO */
+
+    .privacy-section {
+      margin-top: 25px;
+      padding: 22px;
+      background: #f0ebff;
+      border-radius: 14px;
+      border: 1px solid #e3d9ff;
+    }
+
+    .privacy-section h3 {
+      font-size: 16px;
+      margin-bottom: 7px;
+    }
+
+    .privacy-section p {
+      color: #716a80;
+      font-size: 12px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #151221;
+      color: #fff;
+      padding: 45px 20px;
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 35px;
+    }
+
+    .footer-brand {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .footer-brand span {
+      color: #9b6cff;
+    }
+
+    .footer-text {
+      color: #aaa4b7;
+      font-size: 12px;
+      max-width: 360px;
+    }
+
+    .footer-col h4 {
+      font-size: 13px;
+      margin-bottom: 13px;
+    }
+
+    .footer-col a {
+      display: block;
+      color: #aaa4b7;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .footer-col a:hover {
+      color: white;
+    }
+
+    .copyright {
+      max-width: 1120px;
+      margin: 30px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid #302b3b;
+      color: #817b8c;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    /* TOAST */
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background: #171329;
+      color: white;
+      padding: 13px 18px;
+      border-radius: 9px;
+      font-size: 12px;
+      opacity: 0;
+      transform: translateY(15px);
+      pointer-events: none;
+      transition: 0.25s;
+      z-index: 5000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 850px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 18px 22px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 5px;
+        border-bottom: 1px solid #eeeaf8;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 12px;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .history-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero {
+        padding-top: 50px;
+      }
+
+      .history-card {
+        padding: 17px;
+      }
+
+      .history-top {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .history-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .qr-preview {
+        min-height: 250px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <nav class="nav">
+
+    <a href="index.html" class="brand">
+      <img src="/logo.png" alt="AuraQR Logo">
+      Aura<span>QR</span>
+    </a>
+
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Generator</a>
+      <a href="templates.html">Templates</a>
+      <a href="how-to-use.html">How to Use</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="index.html" class="create-btn">Create QR</a>
+    </div>
+
+    <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">
+      ☰
+    </button>
+
+  </nav>
+</header>
+
+
+<main>
+
+  <section class="hero">
+
+    <div class="badge">
+      AURAQR • QR CODE HISTORY
+    </div>
+
+    <h1>
+      Your QR Code <span>History</span>
+    </h1>
+
+    <p>
+      View, download, copy and manage your recently generated QR codes.
+      Your history is stored locally in your browser.
+    </p>
+
+  </section>
+
+
+  <div class="container">
+
+    <section class="history-card">
+
+      <div class="history-top">
+
+        <div>
+          <h2>Recently Generated QR Codes</h2>
+          <div class="history-count" id="historyCount">
+            0 QR codes saved
+          </div>
+        </div>
+
+        <button class="clear-btn" id="clearBtn" onclick="clearHistory()">
+          Clear History
+        </button>
+
+      </div>
+
+
+      <div id="historyContainer"></div>
+
+
+      <div class="privacy-section">
+
+        <h3>🔒 Your Privacy</h3>
+
+        <p>
+          AuraQR stores your QR history locally in your browser using
+          localStorage. Your saved QR history is not uploaded to our server.
+          Clearing your browser's site data may remove your saved history.
+        </p>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<footer>
+
+  <div class="footer-inner">
+
+    <div>
+      <div class="footer-brand">
+        Aura<span>QR</span>
+      </div>
+
+      <p class="footer-text">
+        Create free custom QR codes online for websites, businesses,
+        marketing, events and everyday use.
+      </p>
+    </div>
+
+
+    <div class="footer-col">
+
+      <h4>QR Tools</h4>
+
+      <a href="index.html">QR Generator</a>
+      <a href="url-qr-code.html">URL QR Code</a>
+      <a href="qr-code-with-logo.html">QR with Logo</a>
+      <a href="qr-color-palettes.html">Color Palettes</a>
+      <a href="qr-code-design.html">QR Design</a>
+      <a href="qr-history.html">QR History</a>
+
+    </div>
+
+
+    <div class="footer-col">
+
+      <h4>Resources</h4>
+
+      <a href="templates.html">QR Templates</a>
+      <a href="how-to-use.html">How to Use</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#contact">Contact</a>
+
+    </div>
+
+  </div>
+
+
+  <div class="copyright">
+    © 2026 AuraQR. All rights reserved.
+  </div>
+
+</footer>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+  const STORAGE_KEY = "auraqr_history";
+
+  let historyData = [];
+
+
+  /* =========================
+     LOAD HISTORY
+  ========================= */
+
+  function loadHistory() {
+
+    try {
+
+      const saved = localStorage.getItem(STORAGE_KEY);
+
+      if (!saved) {
+        historyData = [];
+        return;
+      }
+
+      const parsed = JSON.parse(saved);
+
+      if (Array.isArray(parsed)) {
+        historyData = parsed;
+      } else {
+        historyData = [];
+      }
+
+    } catch (error) {
+
+      console.error("Unable to read QR history:", error);
+
+      historyData = [];
+
+    }
+
+  }
+
+
+  /* =========================
+     SAVE HISTORY
+  ========================= */
+
+  function saveHistory() {
+
+    try {
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(historyData)
+      );
+
+    } catch (error) {
+
+      console.error("Unable to save QR history:", error);
+
+    }
+
+  }
+
+
+  /* =========================
+     RENDER HISTORY
+  ========================= */
+
+  function renderHistory() {
+
+    const container =
+      document.getElementById("historyContainer");
+
+    const count =
+      document.getElementById("historyCount");
+
+    const clearButton =
+      document.getElementById("clearBtn");
+
+
+    count.textContent =
+      `${historyData.length} QR code${historyData.length === 1 ? "" : "s"} saved`;
+
+
+    if (historyData.length === 0) {
+
+      clearButton.style.display = "none";
+
+      container.innerHTML = `
+
+        <div class="empty-state">
+
+          <div class="empty-icon">
+            ◫
+          </div>
+
+          <h3>No QR Codes Yet</h3>
+
+          <p>
+            Your generated QR codes will appear here automatically
+            when they are saved to your AuraQR history.
+          </p>
+
+          <a href="index.html" class="primary-btn">
+            Create Your First QR
+          </a>
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    clearButton.style.display = "block";
+
+
+    container.innerHTML = `
+
+      <div class="history-grid">
+
+        ${historyData.map((item, index) => {
+
+          return createHistoryItem(item, index);
+
+        }).join("")}
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* =========================
+     CREATE HISTORY CARD
+  ========================= */
+
+  function createHistoryItem(item, index) {
+
+    const content =
+      getItemValue(item);
+
+    const image =
+      getItemImage(item);
+
+    const type =
+      getItemType(item);
+
+    const date =
+      getItemDate(item);
+
+
+    return `
+
+      <article class="history-item">
+
+        <div class="qr-preview">
+
+          ${
+            image
+
+            ? `<img
+                src="${escapeAttribute(image)}"
+                alt="Generated QR Code"
+                loading="lazy"
+              >`
+
+            : `<div style="
+                color:#8b8499;
+                font-size:12px;
+                text-align:center;
+              ">
+                QR preview unavailable
+              </div>`
+          }
+
+        </div>
+
+
+        <div class="item-content">
+
+          <span class="item-type">
+            ${escapeHTML(type)}
+          </span>
+
+          <div class="item-text">
+            ${escapeHTML(content || "QR Code")}
+          </div>
+
+          <div class="item-date">
+            ${escapeHTML(date)}
+          </div>
+
+
+          <div class="item-actions">
+
+            <button
+              class="download-btn"
+              onclick="downloadQR(${index})">
+              Download
+            </button>
+
+            <button
+              class="copy-btn"
+              onclick="copyQRText(${index})">
+              Copy
+            </button>
+
+            <button
+              class="delete-btn"
+              onclick="deleteQR(${index})">
+              Delete
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    `;
+
+  }
+
+
+  /* =========================
+     GET CONTENT
+  ========================= */
+
+  function getItemValue(item) {
+
+    if (!item) return "";
+
+    return (
+      item.text ||
+      item.content ||
+      item.data ||
+      item.value ||
+      item.url ||
+      item.qrText ||
+      item.message ||
+      ""
+    );
+
+  }
+
+
+  /* =========================
+     GET IMAGE
+  ========================= */
+
+  function getItemImage(item) {
+
+    if (!item) return "";
+
+    return (
+      item.image ||
+      item.imageData ||
+      item.dataUrl ||
+      item.qrImage ||
+      item.src ||
+      item.png ||
+      ""
+    );
+
+  }
+
+
+  /* =========================
+     GET TYPE
+  ========================= */
+
+  function getItemType(item) {
+
+    if (!item) return "QR Code";
+
+    return (
+      item.type ||
+      item.category ||
+      "QR Code"
+    );
+
+  }
+
+
+  /* =========================
+     GET DATE
+  ========================= */
+
+  function getItemDate(item) {
+
+    if (!item) return "Recently generated";
+
+    const rawDate =
+      item.date ||
+      item.createdAt ||
+      item.timestamp ||
+      item.time;
+
+
+    if (!rawDate) {
+      return "Recently generated";
+    }
+
+
+    try {
+
+      const date =
+        new Date(
+          typeof rawDate === "number"
+            ? rawDate
+            : rawDate
+        );
+
+
+      if (isNaN(date.getTime())) {
+        return String(rawDate);
+      }
+
+
+      return date.toLocaleString(
+        undefined,
+        {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+          hour: "numeric",
+          minute: "2-digit"
+        }
+      );
+
+    } catch {
+
+      return String(rawDate);
+
+    }
+
+  }
+
+
+  /* =========================
+     DOWNLOAD QR
+  ========================= */
+
+  function downloadQR(index) {
+
+    const item = historyData[index];
+
+    if (!item) return;
+
+
+    const image =
+      getItemImage(item);
+
+
+    if (!image) {
+
+      showToast(
+        "QR image is not available for this item."
+      );
+
+      return;
+
+    }
+
+
+    const link =
+      document.createElement("a");
+
+
+    link.href = image;
+
+    link.download =
+      `auraqr-history-${index + 1}.png`;
+
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+
+    showToast("QR code downloaded.");
+
+  }
+
+
+  /* =========================
+     COPY TEXT
+  ========================= */
+
+  async function copyQRText(index) {
+
+    const item =
+      historyData[index];
+
+
+    if (!item) return;
+
+
+    const text =
+      getItemValue(item);
+
+
+    if (!text) {
+
+      showToast(
+        "No text available to copy."
+      );
+
+      return;
+
+    }
+
+
+    try {
+
+      await navigator.clipboard.writeText(text);
+
+      showToast("Content copied.");
+
+    } catch {
+
+      showToast(
+        "Unable to copy automatically."
+      );
+
+    }
+
+  }
+
+
+  /* =========================
+     DELETE QR
+  ========================= */
+
+  function deleteQR(index) {
+
+    if (!historyData[index]) {
+      return;
+    }
+
+
+    historyData.splice(index, 1);
+
+    saveHistory();
+
+    renderHistory();
+
+    showToast("QR code removed.");
+
+  }
+
+
+  /* =========================
+     CLEAR HISTORY
+  ========================= */
+
+  function clearHistory() {
+
+    if (historyData.length === 0) {
+      return;
+    }
+
+
+    const confirmed =
+      confirm(
+        "Are you sure you want to clear your entire QR history?"
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    historyData = [];
+
+    saveHistory();
+
+    renderHistory();
+
+    showToast("QR history cleared.");
+
+  }
+
+
+  /* =========================
+     HTML SECURITY
+  ========================= */
+
+  function escapeHTML(value) {
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  function escapeAttribute(value) {
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/"/g, "&quot;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+
+  }
+
+
+  /* =========================
+     TOAST
+  ========================= */
+
+  let toastTimer;
+
+
+  function showToast(message) {
+
+    const toast =
+      document.getElementById("toast");
+
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+
+    clearTimeout(toastTimer);
+
+
+    toastTimer =
+      setTimeout(() => {
+
+        toast.classList.remove("show");
+
+      }, 2500);
+
+  }
+
+
+  /* =========================
+     MOBILE MENU
+  ========================= */
+
+  document
+    .getElementById("mobileMenu")
+    .addEventListener("click", function() {
+
+      document
+        .getElementById("navLinks")
+        .classList.toggle("active");
+
+    });
+
+
+  /* =========================
+     INITIALIZE
+  ========================= */
+
+  loadHistory();
+
+  renderHistory();
+
+</script>
+
+</body>
+</html>
