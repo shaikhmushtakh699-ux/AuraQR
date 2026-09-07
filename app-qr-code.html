@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>App QR Code Generator – Create QR Code for Apps | AuraQR</title>
+
+  <meta name="description" content="Create a free App QR code with AuraQR. Generate QR codes for Google Play, Apple App Store and custom app download links. Download your QR code as a PNG.">
+
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://auraqr.in/app-qr-code.html">
+
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <meta property="og:title" content="App QR Code Generator | AuraQR">
+  <meta property="og:description" content="Create a free QR code for your mobile app download link with AuraQR.">
+  <meta property="og:url" content="https://auraqr.in/app-qr-code.html">
+  <meta property="og:type" content="website">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(124, 77, 255, 0.08), transparent 30%),
+        radial-gradient(circle at 80% 20%, rgba(168, 76, 255, 0.08), transparent 30%),
+        #f8f8ff;
+      color: #17172a;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: auto;
+    }
+
+    /* HEADER */
+
+    header {
+      padding: 22px 0 0;
+    }
+
+    .navbar {
+      min-height: 58px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid #e8e5f4;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      box-shadow: 0 8px 25px rgba(55, 45, 100, 0.06);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .brand img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    .brand span {
+      background: linear-gradient(90deg, #674cff, #a63fff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    nav a {
+      transition: 0.2s ease;
+    }
+
+    nav a:hover {
+      color: #714cff;
+    }
+
+    /* HERO */
+
+    .hero {
+      text-align: center;
+      padding: 65px 20px 35px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 13px;
+      border-radius: 20px;
+      background: #eee8ff;
+      color: #734dff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 62px);
+      line-height: 1.05;
+      font-weight: 850;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 span {
+      display: inline-block;
+      background: linear-gradient(90deg, #704cff, #ae42ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 20px auto 0;
+      color: #73738a;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* GENERATOR */
+
+    .generator-card {
+      width: min(900px, 100%);
+      margin: 20px auto 45px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid #e8e4f5;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 15px 45px rgba(70, 55, 130, 0.08);
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 25px;
+    }
+
+    .form-section h2 {
+      font-size: 18px;
+      margin-bottom: 22px;
+    }
+
+    .field {
+      margin-bottom: 17px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #25243a;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      height: 48px;
+      border: 1px solid #dedbea;
+      border-radius: 9px;
+      padding: 0 14px;
+      outline: none;
+      font-size: 14px;
+      background: #fff;
+      transition: 0.2s ease;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: #8653ff;
+      box-shadow: 0 0 0 3px rgba(128, 78, 255, 0.1);
+    }
+
+    .hint {
+      font-size: 10px;
+      color: #88869b;
+      margin-top: 6px;
+    }
+
+    button {
+      width: 100%;
+      height: 48px;
+      border: 0;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 800;
+      transition: 0.2s ease;
+    }
+
+    .generate-btn {
+      color: white;
+      background: linear-gradient(90deg, #704cff, #a743ff);
+      margin-top: 5px;
+      box-shadow: 0 8px 20px rgba(112, 76, 255, 0.2);
+    }
+
+    .generate-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(112, 76, 255, 0.28);
+    }
+
+    .download-btn {
+      background: #151525;
+      color: white;
+      margin-top: 10px;
+    }
+
+    .download-btn:hover {
+      background: #25243a;
+    }
+
+    .download-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    /* PREVIEW */
+
+    .preview-section {
+      border: 1px solid #e8e4f5;
+      border-radius: 14px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      background: #fbfaff;
+    }
+
+    .preview-title {
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    #qrcode {
+      width: 220px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    #qrcode img,
+    #qrcode canvas {
+      max-width: 100%;
+      height: auto !important;
+    }
+
+    .empty-message {
+      color: #9693a8;
+      font-size: 11px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* CONTENT */
+
+    .content-card {
+      width: min(900px, 100%);
+      margin: 0 auto 30px;
+      background: white;
+      border: 1px solid #e8e4f5;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 35px rgba(70, 55, 130, 0.05);
+    }
+
+    .content-card h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .content-card h3 {
+      font-size: 17px;
+      margin: 25px 0 9px;
+    }
+
+    .content-card p {
+      color: #69677c;
+      line-height: 1.75;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .content-card ul {
+      margin: 10px 0 15px 20px;
+      color: #69677c;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    /* FAQ */
+
+    .faq {
+      width: min(900px, 100%);
+      margin: 30px auto 60px;
+    }
+
+    .faq h2 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 22px;
+    }
+
+    details {
+      background: white;
+      border: 1px solid #e6e2f1;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      padding: 17px 20px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    details p {
+      margin-top: 12px;
+      color: #707087;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid #e5e2ef;
+      padding: 25px 0;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .footer-links a:hover {
+      color: #704cff;
+    }
+
+    .copyright {
+      color: #858398;
+      font-size: 11px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(100% - 22px, 1180px);
+      }
+
+      .navbar {
+        padding: 0 14px;
+      }
+
+      nav {
+        gap: 11px;
+        font-size: 10px;
+      }
+
+      .hero {
+        padding: 45px 10px 25px;
+      }
+
+      .hero h1 {
+        font-size: 38px;
+        letter-spacing: -1.5px;
+      }
+
+      .hero p {
+        font-size: 13px;
+      }
+
+      .generator-card {
+        grid-template-columns: 1fr;
+        padding: 18px;
+      }
+
+      .preview-section {
+        min-height: 280px;
+      }
+
+      #qrcode {
+        width: 210px;
+        height: 210px;
+      }
+
+      .content-card {
+        padding: 22px;
+      }
+
+      .content-card h2 {
+        font-size: 21px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .brand {
+        font-size: 17px;
+      }
+
+      .brand img {
+        width: 24px;
+        height: 24px;
+      }
+
+      nav {
+        gap: 8px;
+      }
+
+      nav a:nth-child(3) {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container">
+      <div class="navbar">
+
+        <a href="/" class="brand">
+          <img src="/logo.png" alt="AuraQR Logo">
+          Aura<span>QR</span>
+        </a>
+
+        <nav>
+          <a href="/">Generator</a>
+          <a href="/url-qr-code.html">URL QR</a>
+          <a href="/templates.html">Templates</a>
+          <a href="/how-to-use.html">How to Use</a>
+        </nav>
+
+      </div>
+    </div>
+  </header>
+
+
+  <main>
+
+    <section class="hero">
+
+      <div class="badge">
+        AURAQR • FREE APP QR GENERATOR
+      </div>
+
+      <h1>
+        App QR Code
+        <span>Generator Online</span>
+      </h1>
+
+      <p>
+        Create a free QR code for your mobile app download link.
+        Add a Google Play, Apple App Store or custom app URL,
+        then generate and download your QR code instantly.
+      </p>
+
+    </section>
+
+
+    <section class="generator-card">
+
+      <div class="form-section">
+
+        <h2>Create Your App QR Code</h2>
+
+        <div class="field">
+
+          <label for="appType">
+            APP PLATFORM
+          </label>
+
+          <select id="appType">
+
+            <option value="android">
+              Android / Google Play
+            </option>
+
+            <option value="ios">
+              iPhone / Apple App Store
+            </option>
+
+            <option value="custom">
+              Custom App Link
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="appUrl">
+            APP DOWNLOAD URL
+          </label>
+
+          <input
+            type="url"
+            id="appUrl"
+            placeholder="https://play.google.com/store/apps/..."
+            autocomplete="url"
+          >
+
+          <div class="hint">
+            Enter the public URL where users can download your app.
+          </div>
+
+        </div>
+
+
+        <button
+          class="generate-btn"
+          type="button"
+          onclick="generateAppQR()"
+        >
+          Generate App QR Code
+        </button>
+
+
+        <button
+          class="download-btn"
+          id="downloadBtn"
+          type="button"
+          onclick="downloadQR()"
+          disabled
+        >
+          Download QR Code
+        </button>
+
+      </div>
+
+
+      <div class="preview-section">
+
+        <div class="preview-title">
+          APP QR CODE PREVIEW
+        </div>
+
+        <div id="qrcode">
+
+          <div class="empty-message">
+            Your App QR code<br>
+            will appear here
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="content-card">
+
+      <h2>Free App QR Code Generator</h2>
+
+      <p>
+        AuraQR makes it easy to share your mobile application
+        using a simple QR code. Instead of typing a long app
+        download address, users can scan the QR code with their
+        smartphone.
+      </p>
+
+
+      <h3>How to Create an App QR Code</h3>
+
+      <p>
+        Choose your app platform, paste your application download
+        URL and click the Generate App QR Code button.
+      </p>
+
+      <ul>
+
+        <li>
+          Select Android, iPhone or Custom App Link.
+        </li>
+
+        <li>
+          Paste your app download URL.
+        </li>
+
+        <li>
+          Click Generate App QR Code.
+        </li>
+
+        <li>
+          Scan the QR code to test the link.
+        </li>
+
+        <li>
+          Download the QR code as a PNG image.
+        </li>
+
+      </ul>
+
+
+      <h3>Where Can You Use an App QR Code?</h3>
+
+      <p>
+        App QR codes are useful for websites, business cards,
+        posters, flyers, product packaging, advertisements,
+        app promotion campaigns, social media profiles and
+        printed marketing materials.
+      </p>
+
+
+      <h3>Android and iPhone App QR Codes</h3>
+
+      <p>
+        You can create QR codes for Google Play Store links,
+        Apple App Store links or any other public application
+        download page.
+      </p>
+
+
+      <h3>Important</h3>
+
+      <p>
+        AuraQR does not host your mobile application. The QR code
+        stores the app URL you provide. Make sure your app link is
+        publicly accessible before sharing or printing the QR code.
+      </p>
+
+    </section>
+
+
+    <section class="faq">
+
+      <h2>App QR Code FAQ</h2>
+
+
+      <details>
+
+        <summary>
+          What is an App QR code?
+        </summary>
+
+        <p>
+          An App QR code is a QR code containing a link to a mobile
+          application download page. Users can scan it to open the
+          app link on their device.
+        </p>
+
+      </details>
+
+
+      <details>
+
+        <summary>
+          Can I create an Android App QR code?
+        </summary>
+
+        <p>
+          Yes. You can enter your Google Play Store application URL
+          and generate a QR code for it.
+        </p>
+
+      </details>
+
+
+      <details>
+
+        <summary>
+          Can I create an iPhone App QR code?
+        </summary>
+
+        <p>
+          Yes. Enter your Apple App Store application URL and
+          generate the QR code.
+        </p>
+
+      </details>
+
+
+      <details>
+
+        <summary>
+          Is the App QR code free?
+        </summary>
+
+        <p>
+          Yes. AuraQR provides this App QR code generator free of
+          charge.
+        </p>
+
+      </details>
+
+
+      <details>
+
+        <summary>
+          Can I download the App QR code?
+        </summary>
+
+        <p>
+          Yes. After generating the QR code, click Download QR Code
+          to save it as a PNG image.
+        </p>
+
+      </details>
+
+
+      <details>
+
+        <summary>
+          Will the App QR code expire?
+        </summary>
+
+        <p>
+          The QR code itself does not expire. However, the QR code
+          will only work while the app URL you provided remains
+          accessible.
+        </p>
+
+      </details>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-links">
+
+        <a href="/">Generator</a>
+
+        <a href="/url-qr-code.html">
+          URL QR
+        </a>
+
+        <a href="/text-qr-code.html">
+          Text QR
+        </a>
+
+        <a href="/wifi-qr-code.html">
+          WiFi QR
+        </a>
+
+        <a href="/whatsapp-qr-code.html">
+          WhatsApp QR
+        </a>
+
+        <a href="/upi-qr-code.html">
+          UPI QR
+        </a>
+
+        <a href="/vcard-qr-code.html">
+          vCard QR
+        </a>
+
+        <a href="/email-qr-code.html">
+          Email QR
+        </a>
+
+        <a href="/sms-qr-code.html">
+          SMS QR
+        </a>
+
+        <a href="/phone-qr-code.html">
+          Phone QR
+        </a>
+
+        <a href="/location-qr-code.html">
+          Location QR
+        </a>
+
+        <a href="/event-qr-code.html">
+          Event QR
+        </a>
+
+        <a href="/social-media-qr-code.html">
+          Social QR
+        </a>
+
+        <a href="/pdf-qr-code.html">
+          PDF QR
+        </a>
+
+        <a href="/templates.html">
+          Templates
+        </a>
+
+        <a href="/how-to-use.html">
+          How to Use
+        </a>
+
+      </div>
+
+
+      <div class="copyright">
+        © 2026 AuraQR. Free, Private &amp; Fast QR Code Generator.
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <script>
+
+    let qrGenerated = false;
+
+
+    function generateAppQR() {
+
+      const input = document.getElementById("appUrl");
+
+      let url = input.value.trim();
+
+
+      if (!url) {
+
+        alert("Please enter your app download URL.");
+
+        input.focus();
+
+        return;
+
+      }
+
+
+      if (!/^https?:\/\//i.test(url)) {
+
+        url = "https://" + url;
+
+      }
+
+
+      try {
+
+        new URL(url);
+
+      } catch (error) {
+
+        alert("Please enter a valid app URL.");
+
+        input.focus();
+
+        return;
+
+      }
+
+
+      const qrContainer =
+        document.getElementById("qrcode");
+
+
+      qrContainer.innerHTML = "";
+
+
+      new QRCode(qrContainer, {
+
+        text: url,
+
+        width: 200,
+
+        height: 200,
+
+        colorDark: "#17172a",
+
+        colorLight: "#ffffff",
+
+        correctLevel: QRCode.CorrectLevel.H
+
+      });
+
+
+      qrGenerated = true;
+
+
+      document.getElementById("downloadBtn")
+        .disabled = false;
+
+    }
+
+
+    function downloadQR() {
+
+      if (!qrGenerated) {
+
+        alert("Please generate a QR code first.");
+
+        return;
+
+      }
+
+
+      const qrContainer =
+        document.getElementById("qrcode");
+
+
+      const canvas =
+        qrContainer.querySelector("canvas");
+
+
+      const image =
+        qrContainer.querySelector("img");
+
+
+      let dataUrl = null;
+
+
+      if (canvas) {
+
+        dataUrl =
+          canvas.toDataURL("image/png");
+
+      } else if (image) {
+
+        dataUrl = image.src;
+
+      }
+
+
+      if (!dataUrl) {
+
+        alert(
+          "QR code is not ready yet. Please try again."
+        );
+
+        return;
+
+      }
+
+
+      const link =
+        document.createElement("a");
+
+
+      link.href = dataUrl;
+
+      link.download =
+        "auraqr-app-qr-code.png";
+
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      document.body.removeChild(link);
+
+    }
+
+
+    document
+      .getElementById("appUrl")
+      .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+
+          generateAppQR();
+
+        }
+
+      });
+
+  </script>
+
+</body>
+</html>
