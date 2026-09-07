@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Multi URL QR Code Generator – Create QR Codes Online | AuraQR</title>
+
+<meta name="description" content="Create a multi URL QR code with AuraQR. Add multiple website URLs and generate a QR code containing all your links. Free online QR code generator.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://auraqr.in/multi-url-qr-code.html">
+
+<link rel="icon" href="/favicon.png">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f8f9fc;
+    color:#171923;
+}
+
+.container{
+    width:min(1100px,92%);
+    margin:auto;
+}
+
+header{
+    margin-top:18px;
+    background:#fff;
+    border:1px solid #e8e8ef;
+    border-radius:16px;
+    padding:16px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    color:#171923;
+    font-size:20px;
+    font-weight:800;
+}
+
+.logo img{
+    width:30px;
+    height:30px;
+    object-fit:contain;
+}
+
+nav{
+    display:flex;
+    gap:20px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#171923;
+    font-size:14px;
+    font-weight:600;
+}
+
+.hero{
+    text-align:center;
+    padding:65px 10px 35px;
+}
+
+.badge{
+    display:inline-block;
+    background:#eee7ff;
+    color:#7647ff;
+    padding:7px 13px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+h1{
+    font-size:48px;
+    line-height:1.1;
+    margin-bottom:16px;
+}
+
+.gradient{
+    color:#7b4cff;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    color:#697080;
+    line-height:1.7;
+    font-size:15px;
+}
+
+.generator{
+    background:#fff;
+    border:1px solid #e8e8ef;
+    border-radius:18px;
+    padding:28px;
+    display:grid;
+    grid-template-columns:1fr 260px;
+    gap:25px;
+    box-shadow:0 15px 40px rgba(80,50,150,.08);
+}
+
+h2{
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+.url-row{
+    display:flex;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+input{
+    flex:1;
+    width:100%;
+    padding:14px;
+    border:1px solid #dddfea;
+    border-radius:9px;
+    outline:none;
+    font-size:14px;
+}
+
+input:focus{
+    border-color:#8555ff;
+}
+
+button{
+    border:none;
+    border-radius:9px;
+    padding:14px 20px;
+    font-weight:700;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.add-btn{
+    background:#eee8ff;
+    color:#7145ee;
+}
+
+.generate{
+    width:100%;
+    margin-top:10px;
+    background:linear-gradient(90deg,#7148ff,#ad45ef);
+    color:#fff;
+}
+
+.download{
+    width:100%;
+    margin-top:10px;
+    background:#15182a;
+    color:#fff;
+}
+
+.remove{
+    background:#ffecec;
+    color:#d83c3c;
+    padding:9px 12px;
+}
+
+.preview{
+    min-height:260px;
+    background:#faf9ff;
+    border:1px solid #e9e5f6;
+    border-radius:14px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.preview h3{
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+#qrcode{
+    background:#fff;
+    padding:12px;
+    min-height:20px;
+}
+
+.info{
+    background:#fff;
+    border:1px solid #e8e8ef;
+    border-radius:18px;
+    padding:30px;
+    margin:30px 0;
+    line-height:1.8;
+}
+
+.info h2{
+    margin-bottom:12px;
+}
+
+.info p{
+    color:#697080;
+    font-size:14px;
+    margin-bottom:15px;
+}
+
+.faq{
+    margin:30px 0 50px;
+}
+
+.faq-item{
+    background:#fff;
+    border:1px solid #e8e8ef;
+    border-radius:12px;
+    padding:18px 20px;
+    margin-bottom:12px;
+}
+
+.faq-item h3{
+    font-size:15px;
+    margin-bottom:8px;
+}
+
+.faq-item p{
+    color:#697080;
+    font-size:14px;
+    line-height:1.7;
+}
+
+footer{
+    text-align:center;
+    padding:30px 10px;
+    color:#777;
+    font-size:13px;
+}
+
+@media(max-width:750px){
+
+    header{
+        padding:14px 16px;
+    }
+
+    nav{
+        gap:10px;
+        flex-wrap:wrap;
+        justify-content:flex-end;
+    }
+
+    nav a{
+        font-size:12px;
+    }
+
+    .hero{
+        padding-top:45px;
+    }
+
+    h1{
+        font-size:36px;
+    }
+
+    .generator{
+        grid-template-columns:1fr;
+    }
+
+    .url-row{
+        flex-direction:column;
+    }
+
+    .add-btn{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+
+<a href="https://auraqr.in/" class="logo">
+<img src="/logo.png" alt="AuraQR Logo">
+AuraQR
+</a>
+
+<nav>
+<a href="/">Generator</a>
+<a href="/url-qr-code.html">URL QR</a>
+<a href="/templates.html">Templates</a>
+<a href="/how-to-use.html">How to Use</a>
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div class="badge">AURAQR • FREE MULTI URL QR GENERATOR</div>
+
+<h1>
+Multi URL QR Code
+<span class="gradient">Generator Online</span>
+</h1>
+
+<p>
+Add multiple website URLs and generate one QR code containing all your links.
+Create and download your multi URL QR code online with AuraQR.
+</p>
+
+</section>
+
+<section class="generator">
+
+<div>
+
+<h2>Create Your Multi URL QR Code</h2>
+
+<div id="urlList">
+
+<div class="url-row">
+<input type="url" placeholder="https://example.com">
+<button class="remove" onclick="removeURL(this)">Remove</button>
+</div>
+
+</div>
+
+<button class="add-btn" onclick="addURL()">
++ Add Another URL
+</button>
+
+<button class="generate" onclick="generateQR()">
+Generate Multi URL QR Code
+</button>
+
+<button class="download" onclick="downloadQR()">
+Download QR Code
+</button>
+
+</div>
+
+<div class="preview">
+
+<h3>QR CODE PREVIEW</h3>
+
+<div id="qrcode">
+<p style="color:#888;font-size:13px;">
+Your QR code will appear here
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="info">
+
+<h2>Free Multi URL QR Code Generator</h2>
+
+<p>
+AuraQR lets you combine multiple website links into a single QR code.
+Users can scan the QR code and access the information stored inside it.
+</p>
+
+<p>
+Multi URL QR codes can be useful for websites, portfolios, business pages,
+social media profiles, product information, marketing campaigns and more.
+</p>
+
+<h2>How to Create a Multi URL QR Code</h2>
+
+<p>
+1. Enter your first website URL.
+<br>
+2. Click <strong>Add Another URL</strong>.
+<br>
+3. Add additional URLs.
+<br>
+4. Click <strong>Generate Multi URL QR Code</strong>.
+<br>
+5. Download the generated QR code.
+</p>
+
+</section>
+
+<section class="faq">
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq-item">
+<h3>What is a Multi URL QR Code?</h3>
+<p>
+A Multi URL QR Code stores multiple website addresses inside one QR code.
+</p>
+</div>
+
+<div class="faq-item">
+<h3>Is the Multi URL QR Code free?</h3>
+<p>
+Yes. AuraQR provides this generator free of charge.
+</p>
+</div>
+
+<div class="faq-item">
+<h3>Can I add multiple websites?</h3>
+<p>
+Yes. You can add multiple URLs before generating the QR code.
+</p>
+</div>
+
+<div class="faq-item">
+<h3>Can I download the QR code?</h3>
+<p>
+Yes. After generating the QR code, you can download it as a PNG image.
+</p>
+</div>
+
+</section>
+
+<footer>
+© 2026 AuraQR. All rights reserved.
+</footer>
+
+</div>
+
+<script>
+
+function addURL(){
+
+    const list = document.getElementById("urlList");
+
+    const row = document.createElement("div");
+
+    row.className = "url-row";
+
+    row.innerHTML = `
+        <input type="url" placeholder="https://example.com">
+        <button class="remove" onclick="removeURL(this)">
+            Remove
+        </button>
+    `;
+
+    list.appendChild(row);
+}
+
+function removeURL(button){
+
+    const list = document.getElementById("urlList");
+
+    if(list.children.length <= 1){
+        alert("At least one URL is required.");
+        return;
+    }
+
+    button.parentElement.remove();
+}
+
+function generateQR(){
+
+    const inputs = document.querySelectorAll("#urlList input");
+
+    let urls = [];
+
+    inputs.forEach(input => {
+
+        let value = input.value.trim();
+
+        if(value){
+
+            if(!/^https?:\/\//i.test(value)){
+                value = "https://" + value;
+            }
+
+            urls.push(value);
+        }
+
+    });
+
+    if(urls.length === 0){
+        alert("Please enter at least one URL.");
+        return;
+    }
+
+    const data = urls.join("\n");
+
+    const qr = document.getElementById("qrcode");
+
+    qr.innerHTML = "";
+
+    new QRCode(qr,{
+        text:data,
+        width:210,
+        height:210,
+        correctLevel:QRCode.CorrectLevel.H
+    });
+}
+
+function downloadQR(){
+
+    const canvas = document.querySelector("#qrcode canvas");
+
+    if(!canvas){
+        alert("Please generate the QR code first.");
+        return;
+    }
+
+    const link = document.createElement("a");
+
+    link.download = "auraqr-multi-url-qr.png";
+
+    link.href = canvas.toDataURL("image/png");
+
+    link.click();
+}
+
+</script>
+
+</body>
+</html>
