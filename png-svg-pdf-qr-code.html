@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QR Code PNG, SVG & PDF Generator | AuraQR</title>
+
+<meta name="description" content="Generate and download high-quality QR codes in PNG, SVG and PDF formats with AuraQR. Customize QR size, colors and error correction for free.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://auraqr.in/png-svg-pdf-qr-code.html">
+
+<link rel="icon" type="image/png" href="/favicon.png">
+
+<meta property="og:title" content="QR Code PNG, SVG & PDF Generator | AuraQR">
+<meta property="og:description" content="Create custom QR codes and download them as PNG, SVG or PDF with AuraQR.">
+<meta property="og:url" content="https://auraqr.in/png-svg-pdf-qr-code.html">
+<meta property="og:type" content="website">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f8f7ff;
+    color:#171923;
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.container{
+    width:min(1120px,92%);
+    margin:auto;
+}
+
+/* HEADER */
+
+header{
+    background:#ffffff;
+    border-bottom:1px solid #eeeaf8;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.nav{
+    min-height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:20px;
+    font-weight:800;
+    color:#171923;
+}
+
+.logo img{
+    width:28px;
+    height:28px;
+    object-fit:contain;
+}
+
+.logo span{
+    color:#7c3cff;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.nav-links a:hover{
+    color:#7c3cff;
+}
+
+.create-btn{
+    background:linear-gradient(135deg,#7c3cff,#9747ff);
+    color:white!important;
+    padding:12px 18px;
+    border-radius:10px;
+    box-shadow:0 8px 20px rgba(124,60,255,.18);
+}
+
+.menu-btn{
+    display:none;
+    border:0;
+    background:transparent;
+    font-size:25px;
+    cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+    text-align:center;
+    padding:72px 20px 45px;
+}
+
+.badge{
+    display:inline-block;
+    background:#eee8ff;
+    color:#7138e8;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.6px;
+    padding:7px 13px;
+    border-radius:20px;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:42px;
+    line-height:1.15;
+    margin-bottom:16px;
+    font-weight:800;
+}
+
+.hero h1 span{
+    color:#7c3cff;
+}
+
+.hero p{
+    max-width:720px;
+    margin:auto;
+    color:#74738a;
+    font-size:15px;
+}
+
+/* GENERATOR */
+
+.generator-card{
+    background:#fff;
+    border:1px solid #ebe7f5;
+    border-radius:18px;
+    box-shadow:0 18px 45px rgba(35,25,75,.08);
+    padding:28px;
+    display:grid;
+    grid-template-columns:1.08fr .92fr;
+    gap:30px;
+    margin-bottom:55px;
+}
+
+.section-title{
+    font-size:17px;
+    font-weight:800;
+    margin-bottom:22px;
+}
+
+.field{
+    margin-bottom:18px;
+}
+
+.field label{
+    display:block;
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:8px;
+    color:#27243b;
+    text-transform:uppercase;
+}
+
+textarea,
+select,
+input[type="text"]{
+    width:100%;
+    border:1px solid #ddd8ed;
+    border-radius:9px;
+    background:#fff;
+    padding:13px 14px;
+    font-size:13px;
+    color:#252237;
+    outline:none;
+    transition:.2s;
+}
+
+textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+textarea:focus,
+select:focus,
+input[type="text"]:focus{
+    border-color:#7c3cff;
+    box-shadow:0 0 0 3px rgba(124,60,255,.08);
+}
+
+/* COLORS */
+
+.color-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.color-box{
+    border:1px solid #e3dff0;
+    border-radius:10px;
+    padding:10px;
+}
+
+.color-box label{
+    margin-bottom:8px;
+}
+
+.color-control{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+input[type="color"]{
+    width:44px;
+    height:36px;
+    padding:2px;
+    border:1px solid #ddd8ed;
+    border-radius:7px;
+    background:white;
+    cursor:pointer;
+}
+
+.color-value{
+    font-size:11px;
+    color:#77728a;
+    font-family:monospace;
+}
+
+/* RANGE */
+
+.range-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+input[type="range"]{
+    width:100%;
+    accent-color:#7c3cff;
+    cursor:pointer;
+}
+
+.range-value{
+    min-width:60px;
+    text-align:right;
+    font-size:12px;
+    font-weight:800;
+    color:#7c3cff;
+}
+
+/* BUTTONS */
+
+.button-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:24px;
+}
+
+.btn{
+    border:0;
+    border-radius:9px;
+    padding:12px 18px;
+    font-size:12px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,#7436ff,#9747ff);
+    color:#fff;
+    box-shadow:0 8px 18px rgba(124,60,255,.18);
+}
+
+.btn-secondary{
+    background:#eee9ff;
+    color:#6733d5;
+}
+
+.btn-dark{
+    background:#171923;
+    color:white;
+}
+
+/* PREVIEW */
+
+.preview{
+    border:1px solid #ebe7f5;
+    border-radius:14px;
+    min-height:470px;
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:#fcfbff;
+}
+
+.preview-title{
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:20px;
+}
+
+.qr-wrapper{
+    background:#fff;
+    padding:18px;
+    border-radius:12px;
+    box-shadow:0 10px 28px rgba(30,20,70,.08);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+#qrPreview{
+    line-height:0;
+}
+
+#qrPreview svg{
+    display:block;
+    max-width:100%;
+    height:auto;
+}
+
+.preview-note{
+    margin-top:18px;
+    font-size:11px;
+    color:#77728a;
+    max-width:360px;
+}
+
+.download-row{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+    margin-top:20px;
+}
+
+/* INFO */
+
+.info-section{
+    margin:65px auto;
+}
+
+.info-section h2{
+    text-align:center;
+    font-size:28px;
+    margin-bottom:15px;
+}
+
+.info-intro{
+    max-width:760px;
+    margin:0 auto 35px;
+    text-align:center;
+    color:#77728a;
+    font-size:14px;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.info-card{
+    background:#fff;
+    border:1px solid #ebe7f5;
+    border-radius:14px;
+    padding:23px;
+}
+
+.info-card h3{
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+.info-card p{
+    font-size:13px;
+    color:#77728a;
+}
+
+/* FAQ */
+
+.faq{
+    margin:70px auto;
+    max-width:850px;
+}
+
+.faq h2{
+    text-align:center;
+    font-size:28px;
+    margin-bottom:28px;
+}
+
+details{
+    background:white;
+    border:1px solid #ebe7f5;
+    border-radius:11px;
+    padding:17px 19px;
+    margin-bottom:10px;
+}
+
+summary{
+    cursor:pointer;
+    font-size:14px;
+    font-weight:800;
+}
+
+details p{
+    color:#77728a;
+    font-size:13px;
+    margin-top:12px;
+}
+
+/* CTA */
+
+.cta{
+    background:linear-gradient(135deg,#f0eaff,#faf8ff);
+    border:1px solid #e5ddff;
+    border-radius:18px;
+    padding:40px 25px;
+    text-align:center;
+    margin:60px auto;
+}
+
+.cta h2{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.cta p{
+    color:#77728a;
+    margin-bottom:20px;
+}
+
+/* FOOTER */
+
+footer{
+    background:#171923;
+    color:#fff;
+    margin-top:70px;
+    padding:45px 0 25px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer-brand p{
+    color:#aaa8b7;
+    font-size:13px;
+    max-width:370px;
+    margin-top:13px;
+}
+
+.footer-col h3{
+    font-size:14px;
+    margin-bottom:14px;
+}
+
+.footer-col a{
+    display:block;
+    color:#aaa8b7;
+    font-size:13px;
+    margin-bottom:9px;
+}
+
+.footer-col a:hover{
+    color:#fff;
+}
+
+.footer-bottom{
+    border-top:1px solid #2d2d39;
+    margin-top:35px;
+    padding-top:20px;
+    color:#aaa8b7;
+    font-size:12px;
+    text-align:center;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%) translateY(100px);
+    background:#171923;
+    color:#fff;
+    padding:12px 20px;
+    border-radius:10px;
+    font-size:13px;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:3000;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:72px;
+        left:0;
+        right:0;
+        background:#fff;
+        padding:20px;
+        flex-direction:column;
+        border-bottom:1px solid #eeeaf8;
+        box-shadow:0 15px 30px rgba(20,15,50,.08);
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .generator-card{
+        grid-template-columns:1fr;
+    }
+
+    .preview{
+        min-height:400px;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:560px){
+
+    .hero{
+        padding:50px 15px 35px;
+    }
+
+    .hero h1{
+        font-size:31px;
+    }
+
+    .hero p{
+        font-size:13px;
+    }
+
+    .generator-card{
+        padding:18px;
+    }
+
+    .color-grid{
+        grid-template-columns:1fr;
+    }
+
+    .button-row{
+        flex-direction:column;
+    }
+
+    .button-row .btn{
+        width:100%;
+    }
+
+    .download-row{
+        flex-direction:column;
+        width:100%;
+    }
+
+    .download-row .btn{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="container nav">
+
+        <a href="index.html" class="logo">
+            <img src="/logo.png" alt="AuraQR Logo">
+            Aura<span>QR</span>
+        </a>
+
+        <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">
+            ☰
+        </button>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html">Generator</a>
+            <a href="templates.html">Templates</a>
+            <a href="how-to-use.html">How to Use</a>
+            <a href="index.html#faq">FAQ</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="index.html" class="create-btn">Create QR</a>
+        </nav>
+
+    </div>
+</header>
+
+
+<main>
+
+<section class="hero">
+
+    <div class="badge">AURAQR • PNG • SVG • PDF</div>
+
+    <h1>
+        QR Code <span>PNG, SVG & PDF</span> Generator
+    </h1>
+
+    <p>
+        Create high-quality QR codes online and download them in
+        PNG, SVG or PDF format. Customize size, colors and error
+        correction for business, marketing, printing and everyday use.
+    </p>
+
+</section>
+
+
+<section class="container">
+
+<div class="generator-card">
+
+    <!-- LEFT -->
+
+    <div>
+
+        <h2 class="section-title">
+            Create Your QR Code
+        </h2>
+
+        <div class="field">
+
+            <label for="qrText">
+                URL or Text
+            </label>
+
+            <textarea
+                id="qrText"
+                placeholder="Enter a website URL, text, contact information or any content..."
+            >https://auraqr.in</textarea>
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="size">
+                QR Code Size
+            </label>
+
+            <div class="range-row">
+
+                <input
+                    type="range"
+                    id="size"
+                    min="200"
+                    max="1200"
+                    value="500"
+                    step="10"
+                    oninput="updateSize()"
+                >
+
+                <span class="range-value" id="sizeValue">
+                    500px
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="color-grid">
+
+            <div class="color-box">
+
+                <label>
+                    QR Code Color
+                </label>
+
+                <div class="color-control">
+
+                    <input
+                        type="color"
+                        id="darkColor"
+                        value="#111827"
+                        onchange="generateQR()"
+                    >
+
+                    <span class="color-value" id="darkValue">
+                        #111827
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="color-box">
+
+                <label>
+                    Background Color
+                </label>
+
+                <div class="color-control">
+
+                    <input
+                        type="color"
+                        id="lightColor"
+                        value="#ffffff"
+                        onchange="generateQR()"
+                    >
+
+                    <span class="color-value" id="lightValue">
+                        #FFFFFF
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="field" style="margin-top:18px;">
+
+            <label for="errorCorrection">
+                Error Correction
+            </label>
+
+            <select
+                id="errorCorrection"
+                onchange="generateQR()"
+            >
+                <option value="L">Low — 7%</option>
+                <option value="M">Medium — 15%</option>
+                <option value="Q">Quartile — 25%</option>
+                <option value="H" selected>High — 30%</option>
+            </select>
+
+        </div>
+
+
+        <div class="button-row">
+
+            <button
+                class="btn btn-primary"
+                onclick="generateQR()"
+            >
+                Generate QR Code
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                onclick="resetQR()"
+            >
+                Reset
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT -->
+
+    <div class="preview">
+
+        <div class="preview-title">
+            QR CODE PREVIEW
+        </div>
+
+        <div class="qr-wrapper">
+
+            <div id="qrPreview"></div>
+
+        </div>
+
+        <p class="preview-note">
+            Download your QR code in PNG, SVG or PDF format.
+            Test your QR code before printing or sharing.
+        </p>
+
+
+        <div class="download-row">
+
+            <button
+                class="btn btn-primary"
+                onclick="downloadPNG()"
+            >
+                Download PNG
+            </button>
+
+            <button
+                class="btn btn-dark"
+                onclick="downloadSVG()"
+            >
+                Download SVG
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                onclick="downloadPDF()"
+            >
+                Download PDF
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- INFO -->
+
+<section class="container info-section">
+
+    <h2>Why Download QR Codes in Multiple Formats?</h2>
+
+    <p class="info-intro">
+        Different projects require different file formats.
+        AuraQR lets you create one QR code and download it in
+        the format that best fits your project.
+    </p>
+
+
+    <div class="info-grid">
+
+        <article class="info-card">
+
+            <h3>PNG QR Code</h3>
+
+            <p>
+                PNG is ideal for websites, social media,
+                presentations, digital documents and everyday
+                online use.
+            </p>
+
+        </article>
+
+
+        <article class="info-card">
+
+            <h3>SVG QR Code</h3>
+
+            <p>
+                SVG is a scalable vector format that works well
+                for professional designs, logos, posters,
+                packaging and printing.
+            </p>
+
+        </article>
+
+
+        <article class="info-card">
+
+            <h3>PDF QR Code</h3>
+
+            <p>
+                PDF is useful for documents, print materials,
+                flyers, business cards and professional
+                marketing projects.
+            </p>
+
+        </article>
+
+
+        <article class="info-card">
+
+            <h3>High Resolution</h3>
+
+            <p>
+                Choose a larger QR size when you need a sharper
+                QR code for printing or large-format designs.
+            </p>
+
+        </article>
+
+
+        <article class="info-card">
+
+            <h3>Custom Colors</h3>
+
+            <p>
+                Customize the QR foreground and background
+                colors while keeping enough contrast for
+                reliable scanning.
+            </p>
+
+        </article>
+
+
+        <article class="info-card">
+
+            <h3>Error Correction</h3>
+
+            <p>
+                Higher error correction can help a QR code remain
+                readable when part of the code is damaged or
+                covered.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- FAQ -->
+
+<section class="container faq">
+
+    <h2>Frequently Asked Questions</h2>
+
+
+    <details open>
+
+        <summary>
+            Can I download a QR code as PNG?
+        </summary>
+
+        <p>
+            Yes. AuraQR lets you download your generated QR code
+            as a PNG image.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            What is an SVG QR code?
+        </summary>
+
+        <p>
+            SVG is a vector format that can be scaled to different
+            sizes without losing sharpness. It is especially useful
+            for professional design and printing.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Can I create a PDF QR code?
+        </summary>
+
+        <p>
+            Yes. AuraQR can place your generated QR code into a
+            downloadable PDF file.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Which format is best for printing?
+        </summary>
+
+        <p>
+            SVG is generally a strong choice when you need a
+            scalable QR graphic for professional design and
+            printing. PDF is also useful for print documents.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Are my QR codes stored online?
+        </summary>
+
+        <p>
+            QR generation on this page happens in your browser.
+            Your entered content is used locally to create the
+            QR code.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Is AuraQR free?
+        </summary>
+
+        <p>
+            Yes. AuraQR provides free QR code generation and
+            downloading tools.
+        </p>
+
+    </details>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="container">
+
+    <div class="cta">
+
+        <h2>
+            Create Your QR Code
+        </h2>
+
+        <p>
+            Generate a customized QR code with AuraQR.
+        </p>
+
+        <a
+            href="index.html"
+            class="btn btn-primary"
+        >
+            Open QR Generator
+        </a>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+
+                <a href="index.html" class="logo">
+                    <img src="/logo.png" alt="AuraQR Logo">
+                    Aura<span>QR</span>
+                </a>
+
+                <p>
+                    Create free custom QR codes for websites,
+                    businesses, marketing, events and everyday use.
+                </p>
+
+            </div>
+
+
+            <div class="footer-col">
+
+                <h3>QR Tools</h3>
+
+                <a href="index.html">
+                    QR Generator
+                </a>
+
+                <a href="url-qr-code.html">
+                    URL QR Code
+                </a>
+
+                <a href="qr-code-with-logo.html">
+                    QR Code with Logo
+                </a>
+
+                <a href="qr-color-palettes.html">
+                    Color Palettes
+                </a>
+
+                <a href="qr-frames.html">
+                    QR Frames
+                </a>
+
+                <a href="qr-error-correction.html">
+                    Error Correction
+                </a>
+
+                <a href="qr-high-resolution.html">
+                    High Resolution QR
+                </a>
+
+            </div>
+
+
+            <div class="footer-col">
+
+                <h3>Resources</h3>
+
+                <a href="templates.html">
+                    QR Templates
+                </a>
+
+                <a href="how-to-use.html">
+                    How to Use
+                </a>
+
+                <a href="qr-code-design.html">
+                    QR Code Design
+                </a>
+
+                <a href="index.html#faq">
+                    FAQ
+                </a>
+
+                <a href="index.html#contact">
+                    Contact
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+            © 2026 AuraQR. All rights reserved.
+        </div>
+
+    </div>
+
+</footer>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* MENU */
+
+function toggleMenu(){
+
+    document
+        .getElementById("navLinks")
+        .classList
+        .toggle("active");
+
+}
+
+
+/* TOAST */
+
+function showToast(message){
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },2500);
+
+}
+
+
+/* SIZE */
+
+function updateSize(){
+
+    const size = document.getElementById("size").value;
+
+    document.getElementById("sizeValue").textContent =
+        size + "px";
+
+    generateQR();
+
+}
+
+
+/* COLOR LABELS */
+
+function updateColorLabels(){
+
+    const dark =
+        document.getElementById("darkColor").value;
+
+    const light =
+        document.getElementById("lightColor").value;
+
+    document.getElementById("darkValue").textContent =
+        dark.toUpperCase();
+
+    document.getElementById("lightValue").textContent =
+        light.toUpperCase();
+
+}
+
+
+/* GENERATE */
+
+function generateQR(){
+
+    updateColorLabels();
+
+    const text =
+        document.getElementById("qrText").value.trim();
+
+    if(!text){
+
+        document.getElementById("qrPreview").innerHTML =
+            "";
+
+        return;
+
+    }
+
+
+    const size =
+        parseInt(document.getElementById("size").value);
+
+    const dark =
+        document.getElementById("darkColor").value;
+
+    const light =
+        document.getElementById("lightColor").value;
+
+    const correction =
+        document.getElementById("errorCorrection").value;
+
+
+    let qrType = 0;
+
+    if(text.length > 100){
+
+        qrType = 4;
+
+    }
+
+
+    try{
+
+        const qr =
+            qrcode(qrType, correction);
+
+        qr.addData(text);
+
+        qr.make();
+
+
+        const svg =
+            qr.createSvgTag({
+                scalable:true,
+                margin:4
+            });
+
+
+        const preview =
+            document.getElementById("qrPreview");
+
+        preview.innerHTML = svg;
+
+
+        const svgElement =
+            preview.querySelector("svg");
+
+
+        if(svgElement){
+
+            svgElement.setAttribute(
+                "width",
+                size
+            );
+
+            svgElement.setAttribute(
+                "height",
+                size
+            );
+
+            svgElement.style.background =
+                light;
+
+            svgElement.style.maxWidth =
+                "100%";
+
+            svgElement.style.height =
+                "auto";
+
+
+            const rects =
+                svgElement.querySelectorAll("rect");
+
+
+            rects.forEach(function(rect){
+
+                const fill =
+                    rect.getAttribute("fill");
+
+                if(
+                    fill &&
+                    fill.toLowerCase() === "#000000"
+                ){
+
+                    rect.setAttribute(
+                        "fill",
+                        dark
+                    );
+
+                }
+
+            });
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Content is too long or could not be encoded."
+        );
+
+    }
+
+}
+
+
+/* CREATE SVG FOR DOWNLOAD */
+
+function createDownloadSVG(){
+
+    const text =
+        document.getElementById("qrText").value.trim();
+
+    if(!text){
+
+        showToast("Please enter URL or text first.");
+
+        return null;
+
+    }
+
+
+    const correction =
+        document.getElementById("errorCorrection").value;
+
+    const dark =
+        document.getElementById("darkColor").value;
+
+    const light =
+        document.getElementById("lightColor").value;
+
+
+    try{
+
+        const qr =
+            qrcode(0, correction);
+
+        qr.addData(text);
+
+        qr.make();
+
+
+        let svg =
+            qr.createSvgTag({
+                scalable:true,
+                margin:4
+            });
+
+
+        svg =
+            svg.replace(
+                /fill="#000000"/gi,
+                'fill="' + dark + '"'
+            );
+
+
+        svg =
+            svg.replace(
+                /fill="#ffffff"/gi,
+                'fill="' + light + '"'
+            );
+
+
+        return svg;
+
+    }catch(error){
+
+        showToast(
+            "Unable to create QR code."
+        );
+
+        return null;
+
+    }
+
+}
+
+
+/* DOWNLOAD SVG */
+
+function downloadSVG(){
+
+    const svg =
+        createDownloadSVG();
+
+    if(!svg){
+
+        return;
+
+    }
+
+
+    const blob =
+        new Blob(
+            [svg],
+            {
+                type:"image/svg+xml;charset=utf-8"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        "auraqr-code.svg";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+    URL.revokeObjectURL(url);
+
+    showToast(
+        "SVG QR code downloaded."
+    );
+
+}
+
+
+/* SVG TO CANVAS */
+
+function svgToCanvas(callback){
+
+    const svg =
+        createDownloadSVG();
+
+    if(!svg){
+
+        return;
+
+    }
+
+
+    const size =
+        parseInt(
+            document.getElementById("size").value
+        );
+
+
+    const blob =
+        new Blob(
+            [svg],
+            {
+                type:"image/svg+xml;charset=utf-8"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const image =
+        new Image();
+
+
+    image.onload = function(){
+
+        const canvas =
+            document.createElement("canvas");
+
+        canvas.width =
+            size;
+
+        canvas.height =
+            size;
+
+
+        const ctx =
+            canvas.getContext("2d");
+
+
+        const background =
+            document.getElementById("lightColor").value;
+
+
+        ctx.fillStyle =
+            background;
+
+        ctx.fillRect(
+            0,
+            0,
+            size,
+            size
+        );
+
+
+        ctx.drawImage(
+            image,
+            0,
+            0,
+            size,
+            size
+        );
+
+
+        URL.revokeObjectURL(url);
+
+        callback(canvas);
+
+    };
+
+
+    image.onerror = function(){
+
+        URL.revokeObjectURL(url);
+
+        showToast(
+            "Could not prepare QR image."
+        );
+
+    };
+
+
+    image.src = url;
+
+}
+
+
+/* PNG */
+
+function downloadPNG(){
+
+    svgToCanvas(function(canvas){
+
+        const link =
+            document.createElement("a");
+
+        link.download =
+            "auraqr-code.png";
+
+        link.href =
+            canvas.toDataURL("image/png");
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        link.remove();
+
+        showToast(
+            "PNG QR code downloaded."
+        );
+
+    });
+
+}
+
+
+/* PDF */
+
+function downloadPDF(){
+
+    svgToCanvas(function(canvas){
+
+        try{
+
+            const {
+                jsPDF
+            } = window.jspdf;
+
+
+            const size =
+                parseInt(
+                    document.getElementById("size").value
+                );
+
+
+            const pdf =
+                new jsPDF({
+                    orientation:"portrait",
+                    unit:"pt",
+                    format:"a4"
+                });
+
+
+            const pageWidth =
+                pdf.internal.pageSize.getWidth();
+
+            const pageHeight =
+                pdf.internal.pageSize.getHeight();
+
+
+            const maxSize = 420;
+
+            const qrSize =
+                Math.min(size, maxSize);
+
+
+            const x =
+                (pageWidth - qrSize) / 2;
+
+            const y =
+                (pageHeight - qrSize) / 2;
+
+
+            pdf.setFontSize(18);
+
+            pdf.text(
+                "AuraQR - QR Code",
+                pageWidth / 2,
+                70,
+                {
+                    align:"center"
+                }
+            );
+
+
+            pdf.addImage(
+                canvas.toDataURL("image/png"),
+                "PNG",
+                x,
+                y,
+                qrSize,
+                qrSize
+            );
+
+
+            pdf.setFontSize(9);
+
+            pdf.text(
+                "Generated with AuraQR",
+                pageWidth / 2,
+                pageHeight - 40,
+                {
+                    align:"center"
+                }
+            );
+
+
+            pdf.save(
+                "auraqr-code.pdf"
+            );
+
+
+            showToast(
+                "PDF QR code downloaded."
+            );
+
+        }catch(error){
+
+            console.error(error);
+
+            showToast(
+                "PDF generation failed."
+            );
+
+        }
+
+    });
+
+}
+
+
+/* RESET */
+
+function resetQR(){
+
+    document.getElementById("qrText").value =
+        "https://auraqr.in";
+
+    document.getElementById("size").value =
+        500;
+
+    document.getElementById("darkColor").value =
+        "#111827";
+
+    document.getElementById("lightColor").value =
+        "#ffffff";
+
+    document.getElementById("errorCorrection").value =
+        "H";
+
+    document.getElementById("sizeValue").textContent =
+        "500px";
+
+    updateColorLabels();
+
+    generateQR();
+
+    showToast(
+        "QR settings reset."
+    );
+
+}
+
+
+/* LIVE TEXT */
+
+document
+    .getElementById("qrText")
+    .addEventListener(
+        "input",
+        function(){
+
+            generateQR();
+
+        }
+    );
+
+
+/* INITIAL */
+
+updateColorLabels();
+
+generateQR();
+
+</script>
+
+</body>
+</html>
