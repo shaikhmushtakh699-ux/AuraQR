@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SMS QR Code Generator – Create SMS QR Code Online | AuraQR</title>
+
+<meta name="description" content="Create a free SMS QR code online with AuraQR. Enter a phone number and message, generate an SMS QR code and download it instantly.">
+
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://auraqr.in/sms-qr-code.html">
+<link rel="icon" type="image/png" href="/favicon.png">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#f8f7ff,#ffffff);
+  color:#17152b;
+  min-height:100vh;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+header{
+  width:min(1100px,92%);
+  margin:22px auto;
+  background:#fff;
+  border:1px solid #e8e3f5;
+  border-radius:16px;
+  padding:15px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 8px 30px rgba(70,50,130,.08);
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:20px;
+  font-weight:800;
+}
+
+.logo img{
+  width:28px;
+  height:28px;
+  object-fit:contain;
+}
+
+nav{
+  display:flex;
+  gap:20px;
+  font-size:14px;
+  font-weight:700;
+}
+
+nav a:hover{
+  color:#7548ff;
+}
+
+.hero{
+  text-align:center;
+  width:min(900px,92%);
+  margin:65px auto 30px;
+}
+
+.badge{
+  display:inline-block;
+  background:#eee8ff;
+  color:#7548ff;
+  padding:7px 13px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.4px;
+  margin-bottom:15px;
+}
+
+h1{
+  font-size:42px;
+  line-height:1.12;
+  margin-bottom:15px;
+}
+
+.gradient{
+  background:linear-gradient(90deg,#6848ff,#b04cff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  max-width:700px;
+  margin:auto;
+  color:#77738a;
+  line-height:1.7;
+  font-size:14px;
+}
+
+.generator{
+  width:min(900px,92%);
+  margin:30px auto;
+  background:#fff;
+  border:1px solid #e6e1f1;
+  border-radius:18px;
+  padding:25px;
+  display:grid;
+  grid-template-columns:1.6fr .9fr;
+  gap:22px;
+  box-shadow:0 12px 35px rgba(75,55,140,.09);
+}
+
+.form h2{
+  font-size:18px;
+  margin-bottom:20px;
+}
+
+label{
+  display:block;
+  font-size:11px;
+  font-weight:800;
+  margin:14px 0 7px;
+  text-transform:uppercase;
+}
+
+input,
+textarea{
+  width:100%;
+  border:1px solid #ddd7ef;
+  border-radius:9px;
+  padding:13px;
+  font-size:14px;
+  outline:none;
+  background:#fff;
+}
+
+input:focus,
+textarea:focus{
+  border-color:#8453ff;
+  box-shadow:0 0 0 3px rgba(132,83,255,.1);
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.help{
+  font-size:10px;
+  color:#88829a;
+  margin-top:5px;
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:9px;
+  padding:13px;
+  margin-top:16px;
+  font-weight:800;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.generate{
+  background:linear-gradient(90deg,#7049ff,#b04cff);
+  color:#fff;
+}
+
+.download{
+  background:#17152b;
+  color:#fff;
+}
+
+.preview{
+  border:1px solid #e6e1f1;
+  border-radius:15px;
+  min-height:320px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:#fbfaff;
+}
+
+.preview h3{
+  font-size:12px;
+  margin-bottom:18px;
+}
+
+#qrcode{
+  background:#fff;
+  padding:10px;
+  min-height:40px;
+}
+
+.info{
+  width:min(900px,92%);
+  margin:35px auto;
+  background:#fff;
+  border:1px solid #e6e1f1;
+  border-radius:18px;
+  padding:25px;
+}
+
+.info h2{
+  font-size:20px;
+  margin-bottom:15px;
+}
+
+.info h3{
+  font-size:16px;
+  margin:20px 0 8px;
+}
+
+.info p,
+.info li{
+  color:#77738a;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.info ol{
+  padding-left:20px;
+}
+
+.faq{
+  width:min(900px,92%);
+  margin:35px auto;
+}
+
+.faq h2{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+details{
+  background:#fff;
+  border:1px solid #e6e1f1;
+  border-radius:10px;
+  margin-bottom:10px;
+  padding:15px 18px;
+}
+
+summary{
+  cursor:pointer;
+  font-weight:700;
+  font-size:14px;
+}
+
+details p{
+  color:#77738a;
+  line-height:1.6;
+  font-size:13px;
+  margin-top:10px;
+}
+
+footer{
+  margin-top:60px;
+  border-top:1px solid #e7e2f2;
+  padding:25px;
+  text-align:center;
+  color:#77738a;
+  font-size:12px;
+}
+
+.footer-links{
+  margin-bottom:12px;
+}
+
+.footer-links a{
+  margin:0 7px;
+  font-weight:700;
+  color:#29263d;
+}
+
+@media(max-width:700px){
+  header{
+    padding:13px 15px;
+  }
+
+  nav{
+    gap:10px;
+    font-size:11px;
+  }
+
+  h1{
+    font-size:32px;
+  }
+
+  .generator{
+    grid-template-columns:1fr;
+    padding:18px;
+  }
+
+  .preview{
+    min-height:280px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html" class="logo">
+    <img src="/logo.png" alt="AuraQR logo">
+    AuraQR
+  </a>
+
+  <nav>
+    <a href="index.html">Generator</a>
+    <a href="url-qr-code.html">URL QR</a>
+    <a href="templates.html">Templates</a>
+    <a href="how-to-use.html">How to Use</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+
+  <div class="badge">AURAQR • FREE SMS QR GENERATOR</div>
+
+  <h1>
+    SMS QR Code<br>
+    <span class="gradient">Generator Online</span>
+  </h1>
+
+  <p>
+    Create a free SMS QR code with AuraQR. Enter a phone number and
+    optional message, then generate a QR code that can open the SMS app.
+  </p>
+
+</section>
+
+<section class="generator">
+
+  <div class="form">
+
+    <h2>Enter SMS Details</h2>
+
+    <label for="phone">Phone Number</label>
+    <input
+      id="phone"
+      type="tel"
+      placeholder="+91 9876543210"
+    >
+
+    <div class="help">
+      Include the country code for better compatibility.
+    </div>
+
+    <label for="message">SMS Message</label>
+    <textarea
+      id="message"
+      placeholder="Enter your SMS message..."
+    ></textarea>
+
+    <button class="generate" onclick="generateSMSQR()">
+      Generate SMS QR Code
+    </button>
+
+    <button class="download" onclick="downloadQR()">
+      Download QR Code
+    </button>
+
+  </div>
+
+  <div class="preview">
+
+    <h3>SMS QR CODE PREVIEW</h3>
+
+    <div id="qrcode">
+      <span style="font-size:12px;color:#999;">
+        Your QR code will appear here
+      </span>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="info">
+
+  <h2>Free SMS QR Code Generator</h2>
+
+  <p>
+    AuraQR lets you create an SMS QR code that stores a phone number
+    and optional message. When scanned, compatible devices can open
+    the SMS application with the information prepared.
+  </p>
+
+  <h3>How to Create an SMS QR Code</h3>
+
+  <ol>
+    <li>Enter the phone number.</li>
+    <li>Add an optional SMS message.</li>
+    <li>Click Generate SMS QR Code.</li>
+    <li>Scan the QR code with your phone.</li>
+    <li>Check that the SMS application opens correctly.</li>
+    <li>Download the QR code as a PNG image.</li>
+  </ol>
+
+  <h3>Where Can You Use an SMS QR Code?</h3>
+
+  <p>
+    SMS QR codes can be useful on posters, advertisements, business cards,
+    product packaging, event materials, customer support materials and flyers.
+  </p>
+
+</section>
+
+<section class="faq">
+
+  <h2>SMS QR Code FAQ</h2>
+
+  <details>
+    <summary>What is an SMS QR code?</summary>
+    <p>
+      An SMS QR code contains an SMS link that can open a compatible
+      messaging application with a phone number and optional message.
+    </p>
+  </details>
+
+  <details>
+    <summary>Is the SMS QR code free?</summary>
+    <p>
+      Yes. AuraQR provides free QR code generation directly in your browser.
+    </p>
+  </details>
+
+  <details>
+    <summary>Can I add a pre-filled message?</summary>
+    <p>
+      Yes. You can enter a message that will be included in the SMS link.
+    </p>
+  </details>
+
+  <details>
+    <summary>Does AuraQR send the SMS?</summary>
+    <p>
+      No. AuraQR only creates the QR code. Your phone's messaging
+      application handles the actual SMS.
+    </p>
+  </details>
+
+</section>
+
+<footer>
+
+  <div class="footer-links">
+    <a href="index.html">Generator</a> ·
+    <a href="url-qr-code.html">URL QR</a> ·
+    <a href="text-qr-code.html">Text QR</a> ·
+    <a href="wifi-qr-code.html">WiFi QR</a> ·
+    <a href="whatsapp-qr-code.html">WhatsApp QR</a> ·
+    <a href="upi-qr-code.html">UPI QR</a> ·
+    <a href="vcard-qr-code.html">vCard QR</a> ·
+    <a href="email-qr-code.html">Email QR</a>
+  </div>
+
+  © 2026 AuraQR. Free Online QR Code Generator.
+
+</footer>
+
+<script>
+
+let generatedQR = null;
+
+function generateSMSQR(){
+
+  const phone = document.getElementById("phone").value.trim();
+  const message = document.getElementById("message").value.trim();
+
+  if(!phone){
+    alert("Please enter a phone number.");
+    return;
+  }
+
+  const cleanPhone = phone.replace(/[^\d+]/g,"");
+
+  if(cleanPhone.length < 7){
+    alert("Please enter a valid phone number.");
+    return;
+  }
+
+  let data = "SMSTO:" + cleanPhone;
+
+  if(message){
+    data += ":" + message;
+  }
+
+  const container = document.getElementById("qrcode");
+
+  container.innerHTML = "";
+
+  generatedQR = new QRCode(container,{
+    text:data,
+    width:220,
+    height:220,
+    colorDark:"#17152b",
+    colorLight:"#ffffff",
+    correctLevel:QRCode.CorrectLevel.H
+  });
+
+}
+
+function downloadQR(){
+
+  if(!generatedQR){
+    alert("Please generate the QR code first.");
+    return;
+  }
+
+  const container = document.getElementById("qrcode");
+  const canvas = container.querySelector("canvas");
+
+  if(canvas){
+
+    const link = document.createElement("a");
+
+    link.download = "auraqr-sms-qr.png";
+    link.href = canvas.toDataURL("image/png");
+
+    link.click();
+
+  }else{
+
+    const image = container.querySelector("img");
+
+    if(image){
+
+      const link = document.createElement("a");
+
+      link.download = "auraqr-sms-qr.png";
+      link.href = image.src;
+
+      link.click();
+
+    }
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
