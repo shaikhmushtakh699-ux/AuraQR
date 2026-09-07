@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QR Code Error Correction – L, M, Q & H Levels | AuraQR</title>
+
+<meta name="description" content="Create QR codes with adjustable error correction levels. Choose L, M, Q or H and generate reliable QR codes online with AuraQR.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://auraqr.in/qr-error-correction.html">
+
+<link rel="icon" type="image/png" href="/favicon.png">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f8f7ff;
+    color:#171923;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+header{
+    background:#fff;
+    border-bottom:1px solid #eee;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.nav{
+    max-width:1100px;
+    margin:auto;
+    min-height:68px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    font-size:20px;
+    font-weight:800;
+}
+
+.logo img{
+    width:28px;
+    height:28px;
+    object-fit:contain;
+}
+
+.logo strong{
+    color:#7c3cff;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.nav-links a:hover{
+    color:#7c3cff;
+}
+
+.create-btn{
+    background:linear-gradient(135deg,#7c3cff,#9b45ff);
+    color:#fff !important;
+    padding:12px 18px;
+    border-radius:10px;
+    box-shadow:0 8px 20px rgba(124,60,255,.2);
+}
+
+.hero{
+    text-align:center;
+    padding:70px 20px 35px;
+}
+
+.badge{
+    display:inline-block;
+    background:#eee8ff;
+    color:#7137ef;
+    padding:7px 13px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.4px;
+}
+
+.hero h1{
+    font-size:40px;
+    line-height:1.15;
+    margin:17px 0 13px;
+}
+
+.hero h1 span{
+    color:#7c3cff;
+}
+
+.hero p{
+    max-width:720px;
+    margin:auto;
+    color:#77748a;
+    font-size:15px;
+    line-height:1.7;
+}
+
+.generator{
+    max-width:1050px;
+    margin:25px auto 70px;
+    padding:22px;
+}
+
+.generator-card{
+    background:#fff;
+    border:1px solid #e9e4f5;
+    border-radius:18px;
+    box-shadow:0 15px 45px rgba(48,30,100,.08);
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:25px;
+    padding:25px;
+}
+
+.controls h2{
+    font-size:18px;
+    margin-bottom:22px;
+}
+
+.control{
+    margin-bottom:22px;
+}
+
+label{
+    display:block;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+textarea{
+    width:100%;
+    min-height:105px;
+    resize:vertical;
+    border:1px solid #ddd8eb;
+    border-radius:10px;
+    padding:14px;
+    font-size:14px;
+    outline:none;
+}
+
+textarea:focus{
+    border-color:#7c3cff;
+    box-shadow:0 0 0 3px rgba(124,60,255,.08);
+}
+
+.level-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
+
+.level{
+    border:1px solid #ddd8eb;
+    border-radius:12px;
+    padding:15px 8px;
+    text-align:center;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.level:hover{
+    border-color:#7c3cff;
+}
+
+.level.active{
+    border-color:#7c3cff;
+    background:#f4efff;
+    box-shadow:0 0 0 2px rgba(124,60,255,.08);
+}
+
+.level strong{
+    display:block;
+    color:#7137ef;
+    font-size:19px;
+    margin-bottom:5px;
+}
+
+.level span{
+    display:block;
+    font-size:11px;
+    font-weight:700;
+}
+
+.level small{
+    display:block;
+    color:#77748a;
+    font-size:10px;
+    margin-top:5px;
+}
+
+.description{
+    background:#f8f5ff;
+    border:1px solid #ebe4ff;
+    border-radius:11px;
+    padding:13px;
+    color:#686578;
+    font-size:12px;
+    line-height:1.6;
+}
+
+.size-row{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+input[type="range"]{
+    flex:1;
+    accent-color:#7c3cff;
+}
+
+#sizeValue{
+    min-width:50px;
+    font-size:12px;
+    font-weight:700;
+    color:#7137ef;
+}
+
+.color-row{
+    display:flex;
+    gap:15px;
+}
+
+.color-box{
+    flex:1;
+}
+
+.color-box input{
+    width:100%;
+    height:42px;
+    border:1px solid #ddd8eb;
+    border-radius:9px;
+    background:#fff;
+    cursor:pointer;
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+    margin-top:22px;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.generate{
+    background:linear-gradient(135deg,#7c3cff,#9b45ff);
+    color:#fff;
+    padding:13px 18px;
+    border-radius:10px;
+    box-shadow:0 8px 20px rgba(124,60,255,.2);
+}
+
+.reset{
+    background:#eee9ff;
+    color:#6330d7;
+    padding:13px 18px;
+    border-radius:10px;
+}
+
+.preview{
+    min-height:500px;
+    border:1px solid #eee9f5;
+    border-radius:15px;
+    background:#fcfbff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+}
+
+.preview-title{
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+.qr-box{
+    background:#fff;
+    padding:18px;
+    border-radius:14px;
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+}
+
+#qrcode{
+    line-height:0;
+}
+
+.level-display{
+    margin-top:15px;
+    font-size:12px;
+    font-weight:700;
+    color:#7137ef;
+}
+
+.download{
+    margin-top:20px;
+    background:#7c3cff;
+    color:#fff;
+    padding:12px 20px;
+    border-radius:10px;
+}
+
+.info{
+    max-width:950px;
+    margin:0 auto 70px;
+    padding:0 25px;
+}
+
+.info-card{
+    background:#fff;
+    border:1px solid #e9e4f5;
+    border-radius:16px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(48,30,100,.05);
+}
+
+.info h2{
+    font-size:25px;
+    margin-bottom:15px;
+}
+
+.info p{
+    color:#666477;
+    line-height:1.8;
+    font-size:14px;
+    margin-bottom:15px;
+}
+
+.level-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+    font-size:13px;
+}
+
+.level-table th,
+.level-table td{
+    border:1px solid #e5e0ee;
+    padding:12px;
+    text-align:left;
+}
+
+.level-table th{
+    background:#f5f1ff;
+}
+
+.level-table td:first-child{
+    font-weight:800;
+    color:#7137ef;
+}
+
+.faq{
+    max-width:900px;
+    margin:0 auto 70px;
+    padding:0 25px;
+}
+
+.faq h2{
+    text-align:center;
+    font-size:28px;
+    margin-bottom:25px;
+}
+
+details{
+    background:#fff;
+    border:1px solid #e8e3f2;
+    border-radius:12px;
+    padding:17px 20px;
+    margin-bottom:12px;
+}
+
+summary{
+    cursor:pointer;
+    font-weight:700;
+    font-size:14px;
+}
+
+details p{
+    color:#686578;
+    font-size:13px;
+    line-height:1.7;
+    margin-top:12px;
+}
+
+footer{
+    background:#fff;
+    border-top:1px solid #eee;
+    padding:40px 20px;
+}
+
+.footer{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer h3{
+    margin-bottom:15px;
+    font-size:14px;
+}
+
+.footer p,
+.footer a{
+    color:#77748a;
+    font-size:13px;
+    line-height:2;
+}
+
+.footer a:hover{
+    color:#7c3cff;
+}
+
+@media(max-width:800px){
+
+    .nav-links{
+        gap:12px;
+        font-size:11px;
+    }
+
+    .generator-card{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .footer{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .nav{
+        padding:0 12px;
+    }
+
+    .nav-links a:not(.create-btn){
+        display:none;
+    }
+
+    .hero{
+        padding-top:45px;
+    }
+
+    .hero h1{
+        font-size:28px;
+    }
+
+    .generator{
+        padding:10px;
+    }
+
+    .generator-card{
+        padding:18px;
+    }
+
+    .level-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .preview{
+        min-height:400px;
+    }
+
+    .level-table{
+        font-size:11px;
+    }
+
+    .level-table th,
+    .level-table td{
+        padding:8px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<nav class="nav">
+
+<a href="index.html" class="logo">
+<img src="/logo.png" alt="AuraQR Logo">
+<span>Aura<strong>QR</strong></span>
+</a>
+
+<div class="nav-links">
+
+<a href="index.html">Generator</a>
+
+<a href="templates.html">Templates</a>
+
+<a href="how-to-use.html">How to Use</a>
+
+<a href="index.html#faq">FAQ</a>
+
+<a href="index.html#contact">Contact</a>
+
+<a href="index.html" class="create-btn">
+Create QR
+</a>
+
+</div>
+
+</nav>
+
+</header>
+
+
+<section class="hero">
+
+<div class="badge">
+AURAQR • ERROR CORRECTION
+</div>
+
+<h1>
+QR Code <span>Error Correction</span>
+</h1>
+
+<p>
+Choose the right QR code error correction level for your use case.
+Higher correction levels help QR codes remain readable when parts
+of the code are damaged, dirty or covered.
+</p>
+
+</section>
+
+
+<section class="generator">
+
+<div class="generator-card">
+
+
+<div class="controls">
+
+<h2>Customize Your QR Code</h2>
+
+
+<div class="control">
+
+<label for="text">
+URL OR TEXT
+</label>
+
+<textarea id="text" placeholder="Enter a website URL, text or any content...">https://auraqr.in</textarea>
+
+</div>
+
+
+<div class="control">
+
+<label>
+ERROR CORRECTION LEVEL
+</label>
+
+<div class="level-grid">
+
+<div class="level active" data-level="L">
+
+<strong>L</strong>
+
+<span>Low</span>
+
+<small>About 7%</small>
+
+</div>
+
+
+<div class="level" data-level="M">
+
+<strong>M</strong>
+
+<span>Medium</span>
+
+<small>About 15%</small>
+
+</div>
+
+
+<div class="level" data-level="Q">
+
+<strong>Q</strong>
+
+<span>Quartile</span>
+
+<small>About 25%</small>
+
+</div>
+
+
+<div class="level" data-level="H">
+
+<strong>H</strong>
+
+<span>High</span>
+
+<small>About 30%</small>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="description" id="levelDescription">
+
+<strong>Low (L)</strong> — Suitable for clean environments
+where the QR code is unlikely to be damaged or obscured.
+
+</div>
+
+
+<div class="control">
+
+<label>
+QR CODE SIZE
+</label>
+
+<div class="size-row">
+
+<input
+type="range"
+id="size"
+min="180"
+max="450"
+value="280"
+>
+
+<span id="sizeValue">
+280px
+</span>
+
+</div>
+
+</div>
+
+
+<div class="control">
+
+<label>
+QR COLORS
+</label>
+
+<div class="color-row">
+
+<div class="color-box">
+
+<input
+type="color"
+id="darkColor"
+value="#000000"
+>
+
+</div>
+
+<div class="color-box">
+
+<input
+type="color"
+id="lightColor"
+value="#ffffff"
+>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="buttons">
+
+<button class="generate" onclick="generateQR()">
+Generate QR Code
+</button>
+
+<button class="reset" onclick="resetAll()">
+Reset
+</button>
+
+</div>
+
+</div>
+
+
+<div class="preview">
+
+<div class="preview-title">
+QR CODE PREVIEW
+</div>
+
+<div class="qr-box">
+
+<div id="qrcode"></div>
+
+</div>
+
+<div class="level-display" id="levelDisplay">
+Error Correction: L — Low
+</div>
+
+<button class="download" onclick="downloadQR()">
+Download PNG
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<section class="info">
+
+<div class="info-card">
+
+<h2>
+What Is QR Code Error Correction?
+</h2>
+
+<p>
+QR codes use error correction to recover encoded information when
+a portion of the QR code becomes damaged, dirty or obscured.
+There are four standard levels: L, M, Q and H.
+</p>
+
+<p>
+A higher level provides greater recovery capability but normally
+requires more QR code data capacity, which can make the QR pattern
+denser.
+</p>
+
+
+<table class="level-table">
+
+<thead>
+
+<tr>
+<th>Level</th>
+<th>Approx. Recovery</th>
+<th>Recommended Use</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+<td>L</td>
+<td>7%</td>
+<td>Clean digital displays and low-risk environments</td>
+</tr>
+
+<tr>
+<td>M</td>
+<td>15%</td>
+<td>General everyday QR codes</td>
+</tr>
+
+<tr>
+<td>Q</td>
+<td>25%</td>
+<td>Print materials and moderate damage risk</td>
+</tr>
+
+<tr>
+<td>H</td>
+<td>30%</td>
+<td>Logos, labels and environments with higher damage risk</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<section class="faq">
+
+<h2>
+Error Correction FAQ
+</h2>
+
+
+<details>
+
+<summary>
+Which QR error correction level should I use?
+</summary>
+
+<p>
+For most normal QR codes, M is a practical choice. If the QR code
+may be damaged, printed on packaging or used with a logo, Q or H
+can provide additional recovery capability.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+What does QR error correction level H mean?
+</summary>
+
+<p>
+H is the highest standard QR error correction level available in
+this generator. It is designed to provide the greatest recovery
+capability among the four standard levels.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+Does higher error correction make a QR code better?
+</summary>
+
+<p>
+Not always. Higher correction can improve robustness, but it can
+also make the QR pattern denser. Choose the level based on the
+environment where the QR code will be used.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+Can I use error correction with a QR code logo?
+</summary>
+
+<p>
+Yes. Higher error correction levels are commonly useful when a
+logo or other design element covers part of the QR code. The QR
+code should still be tested with multiple devices before publishing.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+Are AuraQR QR codes static?
+</summary>
+
+<p>
+Yes. QR codes generated directly in the browser encode the supplied
+information into the QR pattern. They do not require an AuraQR
+server to scan.
+</p>
+
+</details>
+
+</section>
+
+
+<footer>
+
+<div class="footer">
+
+<div>
+
+<h3>AuraQR</h3>
+
+<p>
+Create custom QR codes online for websites, businesses,
+marketing, events and everyday use.
+</p>
+
+</div>
+
+
+<div>
+
+<h3>QR Tools</h3>
+
+<p>
+
+<a href="index.html">
+QR Generator
+</a>
+<br>
+
+<a href="url-qr-code.html">
+URL QR Code
+</a>
+<br>
+
+<a href="qr-code-with-logo.html">
+QR Code with Logo
+</a>
+<br>
+
+<a href="qr-code-design.html">
+QR Code Design
+</a>
+<br>
+
+<a href="qr-frames.html">
+QR Code Frames
+</a>
+<br>
+
+<a href="qr-color-palettes.html">
+Color Palettes
+</a>
+
+</p>
+
+</div>
+
+
+<div>
+
+<h3>Resources</h3>
+
+<p>
+
+<a href="templates.html">
+QR Templates
+</a>
+<br>
+
+<a href="how-to-use.html">
+How to Use
+</a>
+<br>
+
+<a href="index.html#faq">
+FAQ
+</a>
+<br>
+
+<a href="index.html#contact">
+Contact
+</a>
+
+</p>
+
+</div>
+
+</div>
+
+</footer>
+
+
+<script>
+
+let selectedLevel = "L";
+
+
+const levelDescriptions = {
+
+L:
+"<strong>Low (L)</strong> — Suitable for clean environments where the QR code is unlikely to be damaged or obscured.",
+
+M:
+"<strong>Medium (M)</strong> — A balanced choice for most everyday QR codes and general-purpose use.",
+
+Q:
+"<strong>Quartile (Q)</strong> — Provides greater recovery capability and can be useful for printed materials.",
+
+H:
+"<strong>High (H)</strong> — Provides the highest recovery capability and is useful when QR codes may be damaged or partly covered."
+
+};
+
+
+const levelNames = {
+
+L:"Low",
+
+M:"Medium",
+
+Q:"Quartile",
+
+H:"High"
+
+};
+
+
+document.querySelectorAll(".level").forEach(function(item){
+
+item.addEventListener("click",function(){
+
+document.querySelectorAll(".level").forEach(function(level){
+
+level.classList.remove("active");
+
+});
+
+this.classList.add("active");
+
+selectedLevel = this.dataset.level;
+
+document.getElementById("levelDescription").innerHTML =
+levelDescriptions[selectedLevel];
+
+document.getElementById("levelDisplay").textContent =
+"Error Correction: " +
+selectedLevel +
+" — " +
+levelNames[selectedLevel];
+
+generateQR();
+
+});
+
+});
+
+
+document.getElementById("size").addEventListener("input",function(){
+
+document.getElementById("sizeValue").textContent =
+this.value + "px";
+
+generateQR();
+
+});
+
+
+document.getElementById("darkColor").addEventListener(
+"input",
+generateQR
+);
+
+
+document.getElementById("lightColor").addEventListener(
+"input",
+generateQR
+);
+
+
+function getCorrectionLevel(){
+
+if(selectedLevel === "L"){
+return QRCode.CorrectLevel.L;
+}
+
+if(selectedLevel === "M"){
+return QRCode.CorrectLevel.M;
+}
+
+if(selectedLevel === "Q"){
+return QRCode.CorrectLevel.Q;
+}
+
+return QRCode.CorrectLevel.H;
+
+}
+
+
+function generateQR(){
+
+const text =
+document.getElementById("text").value.trim();
+
+if(!text){
+
+return;
+
+}
+
+
+const container =
+document.getElementById("qrcode");
+
+container.innerHTML = "";
+
+
+const size =
+parseInt(document.getElementById("size").value);
+
+
+const dark =
+document.getElementById("darkColor").value;
+
+
+const light =
+document.getElementById("lightColor").value;
+
+
+new QRCode(container,{
+
+text:text,
+
+width:size,
+
+height:size,
+
+colorDark:dark,
+
+colorLight:light,
+
+correctLevel:getCorrectionLevel()
+
+});
+
+
+document.getElementById("levelDisplay").textContent =
+"Error Correction: " +
+selectedLevel +
+" — " +
+levelNames[selectedLevel];
+
+}
+
+
+function downloadQR(){
+
+const canvas =
+document.querySelector("#qrcode canvas");
+
+
+if(!canvas){
+
+alert("Please generate the QR code first.");
+
+return;
+
+}
+
+
+const link =
+document.createElement("a");
+
+
+link.download =
+"auraqr-error-correction-" +
+selectedLevel.toLowerCase() +
+".png";
+
+
+link.href =
+canvas.toDataURL("image/png");
+
+
+link.click();
+
+}
+
+
+function resetAll(){
+
+document.getElementById("text").value =
+"https://auraqr.in";
+
+
+document.getElementById("size").value =
+280;
+
+
+document.getElementById("sizeValue").textContent =
+"280px";
+
+
+document.getElementById("darkColor").value =
+"#000000";
+
+
+document.getElementById("lightColor").value =
+"#ffffff";
+
+
+selectedLevel = "L";
+
+
+document.querySelectorAll(".level").forEach(function(level){
+
+level.classList.remove("active");
+
+});
+
+
+document.querySelector('.level[data-level="L"]')
+.classList.add("active");
+
+
+document.getElementById("levelDescription").innerHTML =
+levelDescriptions.L;
+
+
+generateQR();
+
+}
+
+
+generateQR();
+
+</script>
+
+</body>
+</html>
