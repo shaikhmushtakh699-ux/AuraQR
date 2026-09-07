@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QR Code Frames – Create Framed QR Codes | AuraQR</title>
+
+<meta name="description" content="Create stylish QR codes with frames using AuraQR. Choose from multiple QR code frame designs, customize your QR code and download it instantly.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://auraqr.in/qr-frames.html">
+
+<link rel="icon" type="image/png" href="/favicon.png">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f8f7ff;
+    color:#171923;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+header{
+    background:#fff;
+    border-bottom:1px solid #eee;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.nav{
+    max-width:1100px;
+    margin:auto;
+    min-height:68px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    font-size:20px;
+    font-weight:800;
+}
+
+.logo img{
+    width:28px;
+    height:28px;
+    object-fit:contain;
+}
+
+.logo span{
+    color:#171923;
+}
+
+.logo strong{
+    color:#7c3cff;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:25px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.nav-links a:hover{
+    color:#7c3cff;
+}
+
+.create-btn{
+    background:linear-gradient(135deg,#7c3cff,#9b45ff);
+    color:#fff !important;
+    padding:12px 18px;
+    border-radius:10px;
+    box-shadow:0 8px 20px rgba(124,60,255,.2);
+}
+
+.hero{
+    text-align:center;
+    padding:70px 20px 35px;
+}
+
+.badge{
+    display:inline-block;
+    background:#eee8ff;
+    color:#7137ef;
+    padding:7px 13px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.4px;
+}
+
+.hero h1{
+    font-size:40px;
+    line-height:1.15;
+    margin:17px 0 13px;
+}
+
+.hero h1 span{
+    color:#7c3cff;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    color:#77748a;
+    font-size:15px;
+    line-height:1.7;
+}
+
+.generator{
+    max-width:1050px;
+    margin:25px auto 70px;
+    padding:22px;
+}
+
+.generator-card{
+    background:#fff;
+    border:1px solid #e9e4f5;
+    border-radius:18px;
+    box-shadow:0 15px 45px rgba(48,30,100,.08);
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:25px;
+    padding:25px;
+}
+
+.controls h2{
+    font-size:18px;
+    margin-bottom:22px;
+}
+
+label{
+    display:block;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+textarea{
+    width:100%;
+    min-height:100px;
+    resize:vertical;
+    border:1px solid #ddd8eb;
+    border-radius:10px;
+    padding:14px;
+    font-size:14px;
+    outline:none;
+}
+
+textarea:focus{
+    border-color:#7c3cff;
+    box-shadow:0 0 0 3px rgba(124,60,255,.08);
+}
+
+.control{
+    margin-bottom:20px;
+}
+
+.frame-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.frame-option{
+    border:1px solid #ddd8eb;
+    border-radius:10px;
+    padding:12px 8px;
+    text-align:center;
+    cursor:pointer;
+    font-size:11px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.frame-option:hover,
+.frame-option.active{
+    border-color:#7c3cff;
+    background:#f4efff;
+    color:#6d32ef;
+}
+
+.frame-option span{
+    display:block;
+    margin-bottom:7px;
+    font-size:20px;
+}
+
+input[type="color"]{
+    width:48px;
+    height:38px;
+    border:1px solid #ddd8eb;
+    border-radius:8px;
+    background:#fff;
+    cursor:pointer;
+}
+
+.color-row{
+    display:flex;
+    gap:15px;
+}
+
+.color-box{
+    flex:1;
+}
+
+.size-row{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+input[type="range"]{
+    flex:1;
+    accent-color:#7c3cff;
+}
+
+#sizeValue{
+    min-width:45px;
+    font-size:12px;
+    font-weight:700;
+    color:#7137ef;
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+    margin-top:22px;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.generate{
+    background:linear-gradient(135deg,#7c3cff,#9b45ff);
+    color:#fff;
+    padding:13px 18px;
+    border-radius:10px;
+    box-shadow:0 8px 20px rgba(124,60,255,.2);
+}
+
+.reset{
+    background:#eee9ff;
+    color:#6330d7;
+    padding:13px 18px;
+    border-radius:10px;
+}
+
+.preview{
+    min-height:460px;
+    border:1px solid #eee9f5;
+    border-radius:15px;
+    background:#fcfbff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+}
+
+.preview-title{
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+.frame-preview{
+    position:relative;
+    display:inline-flex;
+    flex-direction:column;
+    align-items:center;
+    padding:20px;
+    background:#171923;
+    color:#fff;
+    border-radius:15px;
+}
+
+#qrcode{
+    background:#fff;
+    padding:10px;
+    line-height:0;
+}
+
+.frame-text{
+    margin-top:12px;
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:.5px;
+}
+
+.download{
+    margin-top:22px;
+    background:#7c3cff;
+    color:#fff;
+    padding:12px 20px;
+    border-radius:10px;
+}
+
+.info{
+    max-width:900px;
+    margin:0 auto 70px;
+    padding:0 25px;
+}
+
+.info-card{
+    background:#fff;
+    border:1px solid #e9e4f5;
+    border-radius:16px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(48,30,100,.05);
+}
+
+.info h2{
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.info p{
+    color:#666477;
+    line-height:1.8;
+    font-size:14px;
+}
+
+.faq{
+    max-width:900px;
+    margin:0 auto 70px;
+    padding:0 25px;
+}
+
+.faq h2{
+    text-align:center;
+    font-size:28px;
+    margin-bottom:25px;
+}
+
+details{
+    background:#fff;
+    border:1px solid #e8e3f2;
+    border-radius:12px;
+    padding:17px 20px;
+    margin-bottom:12px;
+}
+
+summary{
+    cursor:pointer;
+    font-weight:700;
+    font-size:14px;
+}
+
+details p{
+    color:#686578;
+    font-size:13px;
+    line-height:1.7;
+    margin-top:12px;
+}
+
+footer{
+    background:#fff;
+    border-top:1px solid #eee;
+    padding:40px 20px;
+}
+
+.footer{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer h3{
+    margin-bottom:15px;
+    font-size:14px;
+}
+
+.footer p,
+.footer a{
+    color:#77748a;
+    font-size:13px;
+    line-height:2;
+}
+
+.footer a:hover{
+    color:#7c3cff;
+}
+
+@media(max-width:800px){
+    .nav-links{
+        gap:12px;
+        font-size:11px;
+    }
+
+    .generator-card{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .footer{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+    .nav{
+        padding:0 12px;
+    }
+
+    .nav-links a:not(.create-btn){
+        display:none;
+    }
+
+    .hero{
+        padding-top:45px;
+    }
+
+    .hero h1{
+        font-size:28px;
+    }
+
+    .generator{
+        padding:10px;
+    }
+
+    .generator-card{
+        padding:18px;
+    }
+
+    .frame-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .preview{
+        min-height:400px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <nav class="nav">
+
+        <a href="index.html" class="logo">
+            <img src="/logo.png" alt="AuraQR Logo">
+            <span>Aura<strong>QR</strong></span>
+        </a>
+
+        <div class="nav-links">
+            <a href="index.html">Generator</a>
+            <a href="templates.html">Templates</a>
+            <a href="how-to-use.html">How to Use</a>
+            <a href="index.html#faq">FAQ</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="index.html" class="create-btn">Create QR</a>
+        </div>
+
+    </nav>
+</header>
+
+<section class="hero">
+
+    <div class="badge">
+        AURAQR • QR CODE FRAMES
+    </div>
+
+    <h1>
+        QR Code <span>Frames</span>
+    </h1>
+
+    <p>
+        Create professional framed QR codes with custom colors,
+        frame styles and call-to-action text. Generate and download
+        your QR code instantly.
+    </p>
+
+</section>
+
+<section class="generator">
+
+<div class="generator-card">
+
+<div class="controls">
+
+<h2>Customize Your QR Code</h2>
+
+<div class="control">
+
+<label for="text">
+URL OR TEXT
+</label>
+
+<textarea id="text" placeholder="Enter a website URL, text, contact information or any content...">https://auraqr.in</textarea>
+
+</div>
+
+<div class="control">
+
+<label>
+CHOOSE FRAME
+</label>
+
+<div class="frame-grid">
+
+<div class="frame-option active" data-frame="classic">
+<span>▣</span>
+Classic
+</div>
+
+<div class="frame-option" data-frame="rounded">
+<span>▢</span>
+Rounded
+</div>
+
+<div class="frame-option" data-frame="bold">
+<span>⬛</span>
+Bold
+</div>
+
+<div class="frame-option" data-frame="minimal">
+<span>□</span>
+Minimal
+</div>
+
+<div class="frame-option" data-frame="badge">
+<span>▣</span>
+Badge
+</div>
+
+<div class="frame-option" data-frame="scan">
+<span>⌁</span>
+Scan Me
+</div>
+
+</div>
+
+</div>
+
+<div class="control">
+
+<label>
+FRAME COLORS
+</label>
+
+<div class="color-row">
+
+<div class="color-box">
+<input type="color" id="frameColor" value="#171923">
+</div>
+
+<div class="color-box">
+<input type="color" id="textColor" value="#ffffff">
+</div>
+
+</div>
+
+</div>
+
+<div class="control">
+
+<label>
+QR CODE SIZE
+</label>
+
+<div class="size-row">
+
+<input type="range" id="size" min="180" max="450" value="280">
+
+<span id="sizeValue">280px</span>
+
+</div>
+
+</div>
+
+<div class="buttons">
+
+<button class="generate" onclick="generateQR()">
+Generate QR Code
+</button>
+
+<button class="reset" onclick="resetAll()">
+Reset
+</button>
+
+</div>
+
+</div>
+
+<div class="preview">
+
+<div class="preview-title">
+QR CODE PREVIEW
+</div>
+
+<div id="framePreview" class="frame-preview">
+
+<div id="qrcode"></div>
+
+<div id="frameText" class="frame-text">
+SCAN ME
+</div>
+
+</div>
+
+<button class="download" onclick="downloadQR()">
+Download PNG
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="info">
+
+<div class="info-card">
+
+<h2>Why Use QR Code Frames?</h2>
+
+<p>
+QR code frames help make QR codes more noticeable and easier to
+understand. Add a simple call-to-action such as "SCAN ME",
+"VIEW MENU", "VISIT US" or "GET STARTED". AuraQR creates the
+QR code directly in your browser and lets you download the result.
+</p>
+
+</div>
+
+</section>
+
+<section class="faq">
+
+<h2>QR Code Frames FAQ</h2>
+
+<details>
+<summary>What are QR code frames?</summary>
+<p>
+QR code frames are decorative designs placed around a QR code,
+often with a call-to-action message that encourages people to scan.
+</p>
+</details>
+
+<details>
+<summary>Can I customize the frame color?</summary>
+<p>
+Yes. You can choose a custom frame color and text color using
+the color controls on this page.
+</p>
+</details>
+
+<details>
+<summary>Can I download the framed QR code?</summary>
+<p>
+Yes. Generate your QR code and use the Download PNG button to
+save the QR code as a PNG image.
+</p>
+</details>
+
+<details>
+<summary>Does the QR code expire?</summary>
+<p>
+The QR code generated here is a standard static QR code. It does
+not expire as long as the information encoded in it remains valid.
+</p>
+</details>
+
+</section>
+
+<footer>
+
+<div class="footer">
+
+<div>
+<h3>AuraQR</h3>
+<p>
+Create custom QR codes online for websites, businesses,
+marketing, events and everyday use.
+</p>
+</div>
+
+<div>
+<h3>QR Tools</h3>
+<p>
+<a href="index.html">QR Generator</a><br>
+<a href="url-qr-code.html">URL QR Code</a><br>
+<a href="qr-code-with-logo.html">QR Code with Logo</a><br>
+<a href="qr-code-design.html">QR Code Design</a><br>
+<a href="qr-color-palettes.html">Color Palettes</a>
+</p>
+</div>
+
+<div>
+<h3>Resources</h3>
+<p>
+<a href="templates.html">QR Templates</a><br>
+<a href="how-to-use.html">How to Use</a><br>
+<a href="index.html#faq">FAQ</a><br>
+<a href="index.html#contact">Contact</a>
+</p>
+</div>
+
+</div>
+
+</footer>
+
+<script>
+
+let selectedFrame = "classic";
+
+const frameOptions = document.querySelectorAll(".frame-option");
+
+frameOptions.forEach(option => {
+
+    option.addEventListener("click", function(){
+
+        frameOptions.forEach(item =>
+            item.classList.remove("active")
+        );
+
+        this.classList.add("active");
+
+        selectedFrame = this.dataset.frame;
+
+        updateFrame();
+
+    });
+
+});
+
+document.getElementById("size").addEventListener("input", function(){
+
+    document.getElementById("sizeValue").textContent =
+        this.value + "px";
+
+    updateFrame();
+
+});
+
+document.getElementById("frameColor").addEventListener("input", updateFrame);
+
+document.getElementById("textColor").addEventListener("input", updateFrame);
+
+
+function generateQR(){
+
+    const text = document.getElementById("text").value.trim();
+
+    if(!text){
+
+        alert("Please enter URL or text.");
+
+        return;
+
+    }
+
+    const qr = document.getElementById("qrcode");
+
+    qr.innerHTML = "";
+
+    const size = parseInt(
+        document.getElementById("size").value
+    );
+
+    new QRCode(qr, {
+
+        text:text,
+
+        width:size,
+
+        height:size,
+
+        colorDark:"#000000",
+
+        colorLight:"#ffffff",
+
+        correctLevel:QRCode.CorrectLevel.H
+
+    });
+
+    updateFrame();
+
+}
+
+
+function updateFrame(){
+
+    const preview =
+        document.getElementById("framePreview");
+
+    const frameColor =
+        document.getElementById("frameColor").value;
+
+    const textColor =
+        document.getElementById("textColor").value;
+
+    const frameText =
+        document.getElementById("frameText");
+
+    preview.style.background = frameColor;
+
+    frameText.style.color = textColor;
+
+    preview.style.borderRadius = "15px";
+
+    if(selectedFrame === "classic"){
+
+        frameText.textContent = "SCAN ME";
+
+        preview.style.padding = "20px";
+
+    }
+
+    if(selectedFrame === "rounded"){
+
+        frameText.textContent = "SCAN ME";
+
+        preview.style.borderRadius = "28px";
+
+        preview.style.padding = "22px";
+
+    }
+
+    if(selectedFrame === "bold"){
+
+        frameText.textContent = "SCAN NOW";
+
+        preview.style.borderRadius = "4px";
+
+        preview.style.padding = "24px";
+
+    }
+
+    if(selectedFrame === "minimal"){
+
+        frameText.textContent = "SCAN";
+
+        preview.style.borderRadius = "0";
+
+        preview.style.padding = "15px";
+
+    }
+
+    if(selectedFrame === "badge"){
+
+        frameText.textContent = "SCAN TO OPEN";
+
+        preview.style.borderRadius = "12px";
+
+        preview.style.padding = "20px";
+
+    }
+
+    if(selectedFrame === "scan"){
+
+        frameText.textContent = "SCAN ME →";
+
+        preview.style.borderRadius = "20px";
+
+        preview.style.padding = "20px";
+
+    }
+
+}
+
+
+function downloadQR(){
+
+    const qrCanvas =
+        document.querySelector("#qrcode canvas");
+
+    if(!qrCanvas){
+
+        alert("Please generate the QR code first.");
+
+        return;
+
+    }
+
+    const preview =
+        document.getElementById("framePreview");
+
+    const rect =
+        preview.getBoundingClientRect();
+
+    const scale = 2;
+
+    const canvas =
+        document.createElement("canvas");
+
+    canvas.width = rect.width * scale;
+
+    canvas.height = rect.height * scale;
+
+    const ctx = canvas.getContext("2d");
+
+    ctx.scale(scale, scale);
+
+    const frameColor =
+        document.getElementById("frameColor").value;
+
+    const textColor =
+        document.getElementById("textColor").value;
+
+    ctx.fillStyle = frameColor;
+
+    ctx.fillRect(
+        0,
+        0,
+        rect.width,
+        rect.height
+    );
+
+    const qrSize =
+        qrCanvas.width;
+
+    const qrX =
+        (rect.width - qrSize) / 2;
+
+    ctx.drawImage(
+        qrCanvas,
+        qrX,
+        20,
+        qrSize,
+        qrSize
+    );
+
+    ctx.fillStyle = textColor;
+
+    ctx.font = "bold 14px Arial";
+
+    ctx.textAlign = "center";
+
+    ctx.fillText(
+        document.getElementById("frameText").textContent,
+        rect.width / 2,
+        qrSize + 45
+    );
+
+    const link =
+        document.createElement("a");
+
+    link.download =
+        "auraqr-framed-qr.png";
+
+    link.href =
+        canvas.toDataURL("image/png");
+
+    link.click();
+
+}
+
+
+function resetAll(){
+
+    document.getElementById("text").value =
+        "https://auraqr.in";
+
+    document.getElementById("frameColor").value =
+        "#171923";
+
+    document.getElementById("textColor").value =
+        "#ffffff";
+
+    document.getElementById("size").value =
+        280;
+
+    document.getElementById("sizeValue").textContent =
+        "280px";
+
+    frameOptions.forEach(item =>
+        item.classList.remove("active")
+    );
+
+    frameOptions[0].classList.add("active");
+
+    selectedFrame = "classic";
+
+    document.getElementById("qrcode").innerHTML = "";
+
+    updateFrame();
+
+    generateQR();
+
+}
+
+
+generateQR();
+
+</script>
+
+</body>
+</html>
