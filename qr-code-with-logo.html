@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QR Code with Logo – Create Custom QR Code | AuraQR</title>
+
+<meta name="description" content="Create a QR code with your own logo using AuraQR. Upload a logo, customize your QR code and download a high-quality QR code online for free.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://auraqr.in/qr-code-with-logo.html">
+
+<link rel="icon" href="/favicon.png">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f8f9fc;
+    color:#171923;
+}
+
+.container{
+    width:min(1100px,92%);
+    margin:auto;
+}
+
+header{
+    margin-top:18px;
+    background:#fff;
+    border:1px solid #e8e8ef;
+    border-radius:16px;
+    padding:16px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    color:#171923;
+    font-size:20px;
+    font-weight:800;
+}
+
+.logo img{
+    width:30px;
+    height:30px;
+    object-fit:contain;
+}
+
+nav{
+    display:flex;
+    gap:20px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#171923;
+    font-size:14px;
+    font-weight:600;
+}
+
+.hero{
+    text-align:center;
+    padding:65px 10px 35px;
+}
+
+.badge{
+    display:inline-block;
+    background:#eee7ff;
+    color:#7647ff;
+    padding:7px 13px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+h1{
+    font-size:48px;
+    line-height:1.1;
+    margin-bottom:16px;
+}
+
+.gradient{
+    color:#7b4cff;
+}
+
+.hero p{
+    max-width:720px;
+    margin:auto;
+    color:#697080;
+    line-height:1.7;
+    font-size:15px;
+}
+
+.generator{
+    background:#fff;
+    border:1px solid #e8e8ef;
+    border-radius:18px;
+    padding:28px;
+    display:grid;
+    grid-template-columns:1fr 270px;
+    gap:25px;
+    box-shadow:0 15px 40px rgba(80,50,150,.08);
+}
+
+h2{
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    font-size:12px;
+    font-weight:700;
+    margin:15px 0 7px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:1px solid #dddfea;
+    border-radius:9px;
+    outline:none;
+    font-size:14px;
+}
+
+input:focus{
+    border-color:#8555ff;
+}
+
+.logo-input{
+    padding:11px;
+    background:#fafaff;
+}
+
+button{
+    border:none;
+    border-radius:9px;
+    padding:14px 20px;
+    font-weight:700;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.generate{
+    width:100%;
+    margin-top:20px;
+    background:linear-gradient(90deg,#7148ff,#ad45ef);
+    color:#fff;
+}
+
+.download{
+    width:100%;
+    margin-top:10px;
+    background:#15182a;
+    color:#fff;
+}
+
+.preview{
+    min-height:300px;
+    background:#faf9ff;
+    border:1px solid #e9e5f6;
+    border-radius:14px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.preview h3{
+    font-size:14px;
+    margin-bottom:18px;
+}
+
+#qrcode{
+    background:#fff;
+    padding:12px;
+    min-height:20px;
+}
+
+.logo-preview{
+    margin-top:15px;
+    max-width:70px;
+    max-height:70px;
+    display:none;
+}
+
+.info{
+    background:#fff;
+    border:1px solid #e8e8ef;
+    border-radius:18px;
+    padding:30px;
+    margin:30px 0;
+    line-height:1.8;
+}
+
+.info h2{
+    margin-bottom:12px;
+}
+
+.info p{
+    color:#697080;
+    font-size:14px;
+    margin-bottom:15px;
+}
+
+.faq{
+    margin:30px 0 50px;
+}
+
+.faq-item{
+    background:#fff;
+    border:1px solid #e8e8ef;
+    border-radius:12px;
+    padding:18px 20px;
+    margin-bottom:12px;
+}
+
+.faq-item h3{
+    font-size:15px;
+    margin-bottom:8px;
+}
+
+.faq-item p{
+    color:#697080;
+    font-size:14px;
+    line-height:1.7;
+}
+
+footer{
+    text-align:center;
+    padding:30px 10px;
+    color:#777;
+    font-size:13px;
+}
+
+@media(max-width:750px){
+
+    header{
+        padding:14px 16px;
+    }
+
+    nav{
+        gap:10px;
+        flex-wrap:wrap;
+        justify-content:flex-end;
+    }
+
+    nav a{
+        font-size:12px;
+    }
+
+    .hero{
+        padding-top:45px;
+    }
+
+    h1{
+        font-size:36px;
+    }
+
+    .generator{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+
+<a href="https://auraqr.in/" class="logo">
+<img src="/logo.png" alt="AuraQR Logo">
+AuraQR
+</a>
+
+<nav>
+<a href="/">Generator</a>
+<a href="/url-qr-code.html">URL QR</a>
+<a href="/templates.html">Templates</a>
+<a href="/how-to-use.html">How to Use</a>
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div class="badge">AURAQR • FREE QR CODE WITH LOGO</div>
+
+<h1>
+QR Code with Logo
+<span class="gradient">Generator</span>
+</h1>
+
+<p>
+Create a branded QR code with your own logo. Enter a URL, upload your logo,
+generate your QR code and download it as a PNG image.
+</p>
+
+</section>
+
+<section class="generator">
+
+<div>
+
+<h2>Create QR Code with Logo</h2>
+
+<label for="url">WEBSITE URL</label>
+
+<input
+id="url"
+type="url"
+placeholder="https://example.com"
+>
+
+<label for="logo">UPLOAD YOUR LOGO</label>
+
+<input
+id="logo"
+class="logo-input"
+type="file"
+accept="image/png,image/jpeg,image/webp"
+>
+
+<button class="generate" onclick="generateQR()">
+Generate QR Code
+</button>
+
+<button class="download" onclick="downloadQR()">
+Download QR Code
+</button>
+
+</div>
+
+<div class="preview">
+
+<h3>QR CODE PREVIEW</h3>
+
+<div id="qrcode">
+<p style="color:#888;font-size:13px;">
+Your QR code will appear here
+</p>
+</div>
+
+<img id="logoPreview" class="logo-preview" alt="Uploaded logo preview">
+
+</div>
+
+</section>
+
+<section class="info">
+
+<h2>Free QR Code with Logo Generator</h2>
+
+<p>
+AuraQR lets you create customized QR codes with your own brand logo.
+Logo QR codes are useful for businesses, marketing campaigns, websites,
+menus, posters, packaging and business cards.
+</p>
+
+<p>
+For reliable scanning, use a clear logo and keep enough contrast between
+the QR code and its background.
+</p>
+
+<h2>How to Create a QR Code with Logo</h2>
+
+<p>
+1. Enter the website URL you want to encode.
+<br>
+2. Upload your logo image.
+<br>
+3. Click <strong>Generate QR Code</strong>.
+<br>
+4. Test the QR code with a phone camera.
+<br>
+5. Download the QR code as a PNG image.
+</p>
+
+</section>
+
+<section class="faq">
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq-item">
+<h3>Can I add my own logo to a QR code?</h3>
+<p>
+Yes. Upload a PNG, JPG or WebP logo and AuraQR will use it for the QR code.
+</p>
+</div>
+
+<div class="faq-item">
+<h3>Is the QR Code with Logo generator free?</h3>
+<p>
+Yes. You can create QR codes with logos using AuraQR for free.
+</p>
+</div>
+
+<div class="faq-item">
+<h3>What logo formats are supported?</h3>
+<p>
+PNG, JPEG and WebP image files are supported.
+</p>
+</div>
+
+<div class="faq-item">
+<h3>Can I download the QR code?</h3>
+<p>
+Yes. You can download the generated QR code as a PNG image.
+</p>
+</div>
+
+</section>
+
+<footer>
+© 2026 AuraQR. All rights reserved.
+</footer>
+
+</div>
+
+<script>
+
+let uploadedLogo = null;
+
+document.getElementById("logo").addEventListener("change", function(){
+
+    const file = this.files[0];
+
+    if(!file){
+        uploadedLogo = null;
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        uploadedLogo = e.target.result;
+
+        const preview = document.getElementById("logoPreview");
+
+        preview.src = uploadedLogo;
+        preview.style.display = "block";
+    };
+
+    reader.readAsDataURL(file);
+});
+
+
+function generateQR(){
+
+    let url = document.getElementById("url").value.trim();
+
+    if(!url){
+        alert("Please enter a URL.");
+        return;
+    }
+
+    if(!/^https?:\/\//i.test(url)){
+        url = "https://" + url;
+    }
+
+    const qrContainer = document.getElementById("qrcode");
+
+    qrContainer.innerHTML = "";
+
+    new QRCode(qrContainer,{
+        text:url,
+        width:220,
+        height:220,
+        correctLevel:QRCode.CorrectLevel.H
+    });
+}
+
+
+function downloadQR(){
+
+    const canvas = document.querySelector("#qrcode canvas");
+
+    if(!canvas){
+        alert("Please generate the QR code first.");
+        return;
+    }
+
+    if(!uploadedLogo){
+
+        const link = document.createElement("a");
+
+        link.download = "auraqr-logo-qr-code.png";
+
+        link.href = canvas.toDataURL("image/png");
+
+        link.click();
+
+        return;
+    }
+
+    const finalCanvas = document.createElement("canvas");
+
+    const size = canvas.width;
+
+    finalCanvas.width = size;
+    finalCanvas.height = size;
+
+    const ctx = finalCanvas.getContext("2d");
+
+    ctx.drawImage(canvas,0,0);
+
+    const logo = new Image();
+
+    logo.onload = function(){
+
+        const logoSize = Math.floor(size * 0.22);
+
+        const x = (size - logoSize) / 2;
+        const y = (size - logoSize) / 2;
+
+        ctx.fillStyle = "#ffffff";
+
+        ctx.fillRect(
+            x - 8,
+            y - 8,
+            logoSize + 16,
+            logoSize + 16
+        );
+
+        ctx.drawImage(
+            logo,
+            x,
+            y,
+            logoSize,
+            logoSize
+        );
+
+        const link = document.createElement("a");
+
+        link.download = "auraqr-qr-code-with-logo.png";
+
+        link.href = finalCanvas.toDataURL("image/png");
+
+        link.click();
+    };
+
+    logo.src = uploadedLogo;
+}
+
+</script>
+
+</body>
+</html>
