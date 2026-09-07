@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>UPI QR Code Generator – Create UPI QR Code Online | AuraQR</title>
+
+  <meta name="description" content="Create a free UPI QR code online with AuraQR. Enter your UPI ID, name and optional amount to generate a scannable UPI payment QR code.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://auraqr.in/upi-qr-code.html">
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #f8f7ff, #ffffff);
+      color: #17152b;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: auto;
+    }
+
+    /* HEADER */
+    header {
+      padding: 24px 0;
+    }
+
+    .nav {
+      background: #ffffff;
+      border: 1px solid #e8e5f5;
+      box-shadow: 0 10px 30px rgba(80, 60, 160, 0.08);
+      border-radius: 16px;
+      min-height: 58px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .brand img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      color: #7347ff;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 45px 15px 30px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 13px;
+      border-radius: 30px;
+      background: #eee9ff;
+      color: #7045ff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .4px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.05;
+      font-weight: 900;
+      margin-bottom: 15px;
+    }
+
+    h1 span {
+      color: #7848ff;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: auto;
+      color: #68647b;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* GENERATOR */
+    .generator {
+      width: min(900px, 100%);
+      margin: 30px auto 45px;
+      background: #ffffff;
+      border: 1px solid #e7e3f4;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 18px 50px rgba(80, 60, 160, 0.10);
+      display: grid;
+      grid-template-columns: 1fr 230px;
+      gap: 25px;
+    }
+
+    .form-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    input {
+      width: 100%;
+      height: 46px;
+      padding: 0 13px;
+      border: 1px solid #ddd9ed;
+      border-radius: 9px;
+      outline: none;
+      font-size: 14px;
+      color: #17152b;
+      background: #fff;
+    }
+
+    input:focus {
+      border-color: #8050ff;
+      box-shadow: 0 0 0 3px rgba(128, 80, 255, 0.10);
+    }
+
+    .hint {
+      margin-top: 6px;
+      color: #8a849e;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .btn {
+      width: 100%;
+      height: 46px;
+      border: 0;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 13px;
+      margin-top: 4px;
+      transition: .2s ease;
+    }
+
+    .generate-btn {
+      background: linear-gradient(90deg, #7047ff, #ad43f5);
+      color: white;
+    }
+
+    .generate-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(112, 71, 255, .22);
+    }
+
+    .download-btn {
+      background: #17152b;
+      color: #fff;
+      display: none;
+      margin-top: 10px;
+    }
+
+    .download-btn:hover {
+      opacity: .92;
+    }
+
+    /* PREVIEW */
+    .preview {
+      border: 1px solid #e9e5f3;
+      border-radius: 15px;
+      background: #faf9ff;
+      min-height: 310px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preview-title {
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    #qrcode {
+      background: #ffffff;
+      padding: 10px;
+      border-radius: 8px;
+      min-width: 170px;
+      min-height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preview-placeholder {
+      color: #928ca7;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    /* CONTENT */
+    .content-card {
+      background: #ffffff;
+      border: 1px solid #e7e3f4;
+      border-radius: 18px;
+      padding: 30px;
+      margin-bottom: 25px;
+      box-shadow: 0 12px 35px rgba(80, 60, 160, 0.06);
+    }
+
+    .content-card h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .content-card h3 {
+      font-size: 17px;
+      margin: 22px 0 8px;
+    }
+
+    .content-card p {
+      color: #68647b;
+      font-size: 14px;
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+
+    .content-card ol {
+      padding-left: 20px;
+      color: #68647b;
+      line-height: 1.9;
+      font-size: 14px;
+    }
+
+    /* FAQ */
+    .faq {
+      margin: 25px 0 50px;
+    }
+
+    .faq h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    details {
+      background: #ffffff;
+      border: 1px solid #e7e3f4;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 10px;
+      box-shadow: 0 8px 20px rgba(80, 60, 160, 0.04);
+    }
+
+    summary {
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    details p {
+      margin-top: 12px;
+      color: #68647b;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: 45px;
+      padding: 30px 0;
+      border-top: 1px solid #e5e1ef;
+      text-align: center;
+      color: #777188;
+      font-size: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 12px;
+      font-weight: 700;
+      color: #29243d;
+    }
+
+    .footer-links a:hover {
+      color: #7047ff;
+    }
+
+    /* MOBILE */
+    @media (max-width: 750px) {
+      .nav {
+        padding: 12px 15px;
+      }
+
+      .nav-links {
+        gap: 10px;
+        font-size: 11px;
+      }
+
+      .hero {
+        padding-top: 30px;
+      }
+
+      .generator {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+
+      .preview {
+        min-height: 270px;
+      }
+
+      .content-card {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .nav-links a:nth-child(3) {
+        display: none;
+      }
+
+      .hero p {
+        font-size: 13px;
+      }
+
+      .generator {
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="/" class="brand">
+          <img src="/logo.png" alt="AuraQR Logo">
+          <span>AuraQR</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="/">Generator</a>
+          <a href="/url-qr-code.html">URL QR</a>
+          <a href="/templates.html">Templates</a>
+          <a href="/how-to-use.html">How to Use</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="badge">AURAQR • FREE UPI QR GENERATOR</div>
+
+      <h1>
+        UPI QR Code
+        <span>Generator Online</span>
+      </h1>
+
+      <p>
+        Create a free UPI QR code online with AuraQR.
+        Enter your UPI ID, name and optional payment amount,
+        then generate a QR code that can be scanned to make a UPI payment.
+      </p>
+    </section>
+
+    <section class="generator">
+
+      <div>
+        <div class="form-title">Enter UPI Details</div>
+
+        <div class="field">
+          <label for="upiId">UPI ID</label>
+          <input
+            type="text"
+            id="upiId"
+            placeholder="example@upi"
+            autocomplete="off"
+          >
+          <div class="hint">
+            Example: yourname@bank
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="payeeName">Payee Name</label>
+          <input
+            type="text"
+            id="payeeName"
+            placeholder="Your Name or Business Name"
+            autocomplete="name"
+          >
+        </div>
+
+        <div class="field">
+          <label for="amount">Amount (Optional)</label>
+          <input
+            type="number"
+            id="amount"
+            placeholder="100"
+            min="1"
+            step="0.01"
+            inputmode="decimal"
+          >
+          <div class="hint">
+            Leave empty if the payer should enter the amount.
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="note">Payment Note (Optional)</label>
+          <input
+            type="text"
+            id="note"
+            placeholder="Payment for order"
+            maxlength="80"
+          >
+        </div>
+
+        <button class="btn generate-btn" onclick="generateUPI()">
+          Generate UPI QR Code
+        </button>
+
+        <button class="btn download-btn" id="downloadBtn" onclick="downloadQR()">
+          Download QR Code
+        </button>
+      </div>
+
+      <div class="preview">
+        <div class="preview-title">UPI QR CODE PREVIEW</div>
+
+        <div id="qrcode">
+          <div class="preview-placeholder">
+            Your UPI QR code will appear here
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="container">
+
+      <div class="content-card">
+        <h2>Free UPI QR Code Generator</h2>
+
+        <p>
+          AuraQR lets you create a UPI payment QR code directly in your browser.
+          Enter your UPI ID and payee name to generate a QR code that can be
+          scanned using a compatible UPI payment application.
+        </p>
+
+        <h3>How to Create a UPI QR Code</h3>
+
+        <ol>
+          <li>Enter your UPI ID.</li>
+          <li>Enter your name or business name.</li>
+          <li>Optionally enter a fixed payment amount.</li>
+          <li>Add a payment note if required.</li>
+          <li>Click Generate UPI QR Code.</li>
+          <li>Download the generated QR code.</li>
+        </ol>
+
+        <h3>Where Can You Use a UPI QR Code?</h3>
+
+        <p>
+          UPI QR codes can be useful for shops, freelancers, small businesses,
+          restaurants, events, invoices, posters, counters, business cards
+          and other payment situations.
+        </p>
+      </div>
+
+      <div class="faq">
+        <h2>UPI QR Code FAQ</h2>
+
+        <details>
+          <summary>What is a UPI QR code?</summary>
+          <p>
+            A UPI QR code contains UPI payment information that compatible
+            payment applications can read to start a payment.
+          </p>
+        </details>
+
+        <details>
+          <summary>Can I create a UPI QR code for free?</summary>
+          <p>
+            Yes. AuraQR provides this UPI QR code generator directly in your browser.
+          </p>
+        </details>
+
+        <details>
+          <summary>Can I add a fixed amount?</summary>
+          <p>
+            Yes. You can optionally enter an amount. If you leave the amount
+            field empty, the payer can enter the amount in their payment app,
+            depending on the app's supported behavior.
+          </p>
+        </details>
+
+        <details>
+          <summary>Does AuraQR process my payment?</summary>
+          <p>
+            No. AuraQR only generates the QR code. The actual payment is handled
+            by your UPI-compatible payment application and payment provider.
+          </p>
+        </details>
+
+        <details>
+          <summary>Is my UPI ID uploaded to a server?</summary>
+          <p>
+            This page generates the QR code in your browser. AuraQR does not need
+            to upload your UPI ID to a server to generate the QR code.
+          </p>
+        </details>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+
+      <div class="footer-links">
+        <a href="/">Generator</a>
+        <a href="/url-qr-code.html">URL QR</a>
+        <a href="/text-qr-code.html">Text QR</a>
+        <a href="/wifi-qr-code.html">WiFi QR</a>
+        <a href="/whatsapp-qr-code.html">WhatsApp QR</a>
+        <a href="/templates.html">Templates</a>
+        <a href="/how-to-use.html">How to Use</a>
+      </div>
+
+      <div>
+        © 2026 AuraQR. Free Online QR Code Generator.
+      </div>
+
+      <div style="margin-top:6px;">
+        <a href="https://auraqr.in/">auraqr.in</a>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    let generated = false;
+
+    function generateUPI() {
+      const upiId = document.getElementById("upiId").value.trim();
+      const payeeName = document.getElementById("payeeName").value.trim();
+      const amount = document.getElementById("amount").value.trim();
+      const note = document.getElementById("note").value.trim();
+
+      if (!upiId) {
+        alert("Please enter your UPI ID.");
+        return;
+      }
+
+      if (!upiId.includes("@")) {
+        alert("Please enter a valid UPI ID, for example: yourname@upi");
+        return;
+      }
+
+      if (!payeeName) {
+        alert("Please enter the payee name.");
+        return;
+      }
+
+      if (amount && Number(amount) <= 0) {
+        alert("Please enter a valid amount.");
+        return;
+      }
+
+      const params = new URLSearchParams();
+
+      params.set("pa", upiId);
+      params.set("pn", payeeName);
+
+      if (amount) {
+        params.set("am", Number(amount).toFixed(2));
+      }
+
+      if (note) {
+        params.set("tn", note);
+      }
+
+      params.set("cu", "INR");
+
+      const upiUrl = "upi://pay?" + params.toString();
+
+      const qrContainer = document.getElementById("qrcode");
+
+      qrContainer.innerHTML = "";
+
+      new QRCode(qrContainer, {
+        text: upiUrl,
+        width: 190,
+        height: 190,
+        colorDark: "#17152b",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      document.getElementById("downloadBtn").style.display = "block";
+
+      generated = true;
+    }
+
+    function downloadQR() {
+      if (!generated) {
+        alert("Please generate the QR code first.");
+        return;
+      }
+
+      const qrContainer = document.getElementById("qrcode");
+
+      const canvas = qrContainer.querySelector("canvas");
+      const image = qrContainer.querySelector("img");
+
+      let url = "";
+
+      if (canvas) {
+        url = canvas.toDataURL("image/png");
+      } else if (image) {
+        url = image.src;
+      }
+
+      if (!url) {
+        alert("QR code is not ready yet.");
+        return;
+      }
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "auraqr-upi-qr-code.png";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+
+</body>
+</html>
