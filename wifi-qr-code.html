@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WiFi QR Code Generator – Create WiFi QR Code Online | AuraQR</title>
+
+<meta name="description" content="Create a free WiFi QR code online with AuraQR. Enter your WiFi name, password and security type to generate a QR code that guests can scan to connect quickly.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://auraqr.in/wifi-qr-code.html">
+
+<link rel="icon" type="image/png" href="/favicon.png">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#f8f6ff,#ffffff,#f3efff);
+  color:#17152b;
+  min-height:100vh;
+}
+
+header{
+  width:min(1100px,92%);
+  margin:28px auto 0;
+  background:#fff;
+  border:1px solid #e8e3f7;
+  border-radius:16px;
+  padding:16px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 8px 30px rgba(90,60,180,.08);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  color:#17152b;
+  font-size:20px;
+  font-weight:800;
+}
+
+.brand img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+  border-radius:8px;
+}
+
+nav{
+  display:flex;
+  gap:22px;
+  align-items:center;
+}
+
+nav a{
+  color:#332d52;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:600;
+}
+
+nav a:hover{
+  color:#744cff;
+}
+
+.hero{
+  text-align:center;
+  width:min(900px,92%);
+  margin:65px auto 35px;
+}
+
+.badge{
+  display:inline-block;
+  background:#eee8ff;
+  color:#7651e9;
+  padding:7px 14px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.4px;
+  margin-bottom:18px;
+}
+
+h1{
+  font-size:52px;
+  line-height:1.05;
+  margin-bottom:18px;
+  font-weight:850;
+}
+
+.gradient-text{
+  background:linear-gradient(90deg,#684cff,#b34cff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  max-width:700px;
+  margin:auto;
+  color:#6d6783;
+  font-size:16px;
+  line-height:1.7;
+}
+
+.generator{
+  width:min(950px,92%);
+  margin:35px auto 55px;
+  background:#fff;
+  border:1px solid #e7e1f6;
+  border-radius:22px;
+  padding:30px;
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:28px;
+  box-shadow:0 18px 50px rgba(79,51,160,.10);
+}
+
+.form-title{
+  font-size:15px;
+  font-weight:800;
+  margin-bottom:20px;
+}
+
+.field{
+  margin-bottom:18px;
+}
+
+label{
+  display:block;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:8px;
+  color:#504a67;
+}
+
+input,select{
+  width:100%;
+  height:50px;
+  border:1px solid #ddd7ed;
+  border-radius:11px;
+  padding:0 14px;
+  font-size:14px;
+  outline:none;
+  background:#fff;
+  color:#222;
+}
+
+input:focus,select:focus{
+  border-color:#825cff;
+  box-shadow:0 0 0 3px rgba(130,92,255,.12);
+}
+
+.checkbox-row{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin:8px 0 18px;
+  color:#625c78;
+  font-size:13px;
+}
+
+.checkbox-row input{
+  width:16px;
+  height:16px;
+}
+
+button{
+  width:100%;
+  height:52px;
+  border:0;
+  border-radius:11px;
+  background:linear-gradient(90deg,#704cff,#ad4cff);
+  color:#fff;
+  font-weight:800;
+  cursor:pointer;
+  font-size:14px;
+  transition:.2s ease;
+}
+
+button:hover{
+  transform:translateY(-1px);
+  box-shadow:0 8px 20px rgba(116,76,255,.22);
+}
+
+.download-btn{
+  margin-top:12px;
+  background:#17152b;
+}
+
+.preview{
+  min-height:360px;
+  border:1px solid #ebe6f6;
+  border-radius:18px;
+  background:#faf9ff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+}
+
+.preview-title{
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:20px;
+}
+
+#qrcode{
+  min-height:250px;
+  min-width:250px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#fff;
+  padding:12px;
+  border-radius:10px;
+}
+
+#qrcode img,
+#qrcode canvas{
+  max-width:100%;
+  height:auto;
+}
+
+.placeholder{
+  color:#9a94ad;
+  font-size:13px;
+  text-align:center;
+}
+
+.info{
+  width:min(950px,92%);
+  margin:0 auto 60px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.info-card{
+  background:#fff;
+  border:1px solid #e7e1f6;
+  border-radius:16px;
+  padding:24px;
+}
+
+.info-card h2{
+  font-size:17px;
+  margin-bottom:10px;
+}
+
+.info-card p{
+  color:#6d6783;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.faq{
+  width:min(950px,92%);
+  margin:0 auto 70px;
+}
+
+.faq h2{
+  text-align:center;
+  font-size:30px;
+  margin-bottom:25px;
+}
+
+details{
+  background:#fff;
+  border:1px solid #e7e1f6;
+  border-radius:12px;
+  margin-bottom:10px;
+  padding:17px 20px;
+}
+
+summary{
+  cursor:pointer;
+  font-weight:700;
+  font-size:14px;
+}
+
+details p{
+  margin-top:12px;
+  color:#6d6783;
+  font-size:14px;
+  line-height:1.7;
+}
+
+footer{
+  border-top:1px solid #e5e0ef;
+  padding:30px 20px;
+  text-align:center;
+  color:#77718b;
+  font-size:13px;
+}
+
+.footer-links{
+  margin-bottom:12px;
+}
+
+.footer-links a{
+  color:#443b63;
+  text-decoration:none;
+  margin:0 8px;
+  font-weight:600;
+}
+
+.message{
+  margin-top:12px;
+  color:#d64242;
+  font-size:13px;
+  min-height:18px;
+}
+
+@media(max-width:760px){
+
+  header{
+    padding:14px 17px;
+  }
+
+  nav{
+    gap:10px;
+  }
+
+  nav a:nth-child(n+3){
+    display:none;
+  }
+
+  h1{
+    font-size:38px;
+  }
+
+  .hero{
+    margin-top:45px;
+  }
+
+  .generator{
+    grid-template-columns:1fr;
+    padding:20px;
+  }
+
+  .preview{
+    min-height:320px;
+  }
+
+  .info{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:480px){
+
+  header{
+    width:94%;
+  }
+
+  .brand{
+    font-size:17px;
+  }
+
+  .brand img{
+    width:30px;
+    height:30px;
+  }
+
+  nav a{
+    font-size:11px;
+  }
+
+  h1{
+    font-size:32px;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  .generator{
+    width:94%;
+  }
+
+  #qrcode{
+    min-width:220px;
+    min-height:220px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="https://auraqr.in/" class="brand">
+    <img src="/logo.png" alt="AuraQR Logo">
+    <span>AuraQR</span>
+  </a>
+
+  <nav aria-label="Main Navigation">
+    <a href="https://auraqr.in/">Generator</a>
+    <a href="/url-qr-code.html">URL QR</a>
+    <a href="/templates.html">Templates</a>
+    <a href="/how-to-use.html">How to Use</a>
+  </nav>
+</header>
+
+<section class="hero">
+
+  <div class="badge">AURAQR • FREE WIFI QR GENERATOR</div>
+
+  <h1>
+    WiFi QR Code
+    <br>
+    <span class="gradient-text">Generator Online</span>
+  </h1>
+
+  <p>
+    Create a free WiFi QR code with AuraQR.
+    Enter your WiFi network name, password and security type,
+    then generate a QR code that guests can scan to connect quickly.
+  </p>
+
+</section>
+
+<section class="generator">
+
+  <div>
+
+    <div class="form-title">
+      Enter WiFi Details
+    </div>
+
+    <div class="field">
+      <label for="ssid">WIFI NETWORK NAME (SSID)</label>
+      <input
+        id="ssid"
+        type="text"
+        placeholder="Example: MyHomeWiFi"
+        autocomplete="off">
+    </div>
+
+    <div class="field">
+      <label for="password">WIFI PASSWORD</label>
+      <input
+        id="password"
+        type="password"
+        placeholder="Enter WiFi password"
+        autocomplete="off">
+    </div>
+
+    <div class="field">
+      <label for="security">SECURITY TYPE</label>
+
+      <select id="security">
+        <option value="WPA">WPA/WPA2</option>
+        <option value="WEP">WEP</option>
+        <option value="nopass">No Password</option>
+      </select>
+    </div>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="hidden">
+      <label for="hidden">Hidden WiFi network</label>
+    </div>
+
+    <button onclick="generateWiFiQR()">
+      Generate WiFi QR Code
+    </button>
+
+    <button class="download-btn" onclick="downloadQR()">
+      Download QR Code
+    </button>
+
+    <div id="message" class="message"></div>
+
+  </div>
+
+  <div class="preview">
+
+    <div class="preview-title">
+      WIFI QR CODE PREVIEW
+    </div>
+
+    <div id="qrcode">
+      <div class="placeholder">
+        Your WiFi QR code will appear here
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="info">
+
+  <div class="info-card">
+    <h2>Fast WiFi Sharing</h2>
+    <p>
+      Create a QR code that makes it easier for guests,
+      customers and visitors to connect to your WiFi network.
+    </p>
+  </div>
+
+  <div class="info-card">
+    <h2>Multiple Security Types</h2>
+    <p>
+      Choose WPA/WPA2, WEP or No Password depending on
+      how your wireless network is configured.
+    </p>
+  </div>
+
+  <div class="info-card">
+    <h2>Private Generation</h2>
+    <p>
+      Your WiFi details are used directly in your browser
+      to create the QR code. AuraQR does not need a server
+      to generate the code.
+    </p>
+  </div>
+
+</section>
+
+<section class="faq">
+
+  <h2>WiFi QR Code FAQ</h2>
+
+  <details>
+    <summary>What is a WiFi QR code?</summary>
+    <p>
+      A WiFi QR code contains the information needed for a compatible
+      device to connect to a wireless network without manually typing
+      the network name and password.
+    </p>
+  </details>
+
+  <details>
+    <summary>How do I create a WiFi QR code?</summary>
+    <p>
+      Enter your WiFi network name, password and security type above,
+      then click Generate WiFi QR Code.
+    </p>
+  </details>
+
+  <details>
+    <summary>Can I use a WiFi QR code for guests?</summary>
+    <p>
+      Yes. You can display the generated QR code in your home,
+      office, restaurant, hotel, classroom or other suitable location.
+    </p>
+  </details>
+
+  <details>
+    <summary>Does AuraQR store my WiFi password?</summary>
+    <p>
+      The QR code is generated in your browser. AuraQR does not need
+      to send your WiFi information to a server for QR generation.
+    </p>
+  </details>
+
+  <details>
+    <summary>Will every phone automatically connect?</summary>
+    <p>
+      QR scanning and automatic WiFi connection behavior depends on
+      the device, operating system and security configuration.
+    </p>
+  </details>
+
+</section>
+
+<footer>
+
+  <div class="footer-links">
+    <a href="https://auraqr.in/">Generator</a>
+    <a href="/url-qr-code.html">URL QR</a>
+    <a href="/templates.html">Templates</a>
+    <a href="/how-to-use.html">How to Use</a>
+  </div>
+
+  <div>
+    © 2026 AuraQR. Free Online QR Code Generator.
+  </div>
+
+</footer>
+
+<script>
+
+let currentQRCode = null;
+
+function escapeWiFi(value){
+
+  return String(value)
+    .replace(/\\/g,"\\\\")
+    .replace(/;/g,"\\;")
+    .replace(/,/g,"\\,")
+    .replace(/:/g,"\\:");
+
+}
+
+function generateWiFiQR(){
+
+  const ssid = document.getElementById("ssid").value.trim();
+  const password = document.getElementById("password").value;
+  const security = document.getElementById("security").value;
+  const hidden = document.getElementById("hidden").checked;
+  const message = document.getElementById("message");
+  const qrContainer = document.getElementById("qrcode");
+
+  message.textContent = "";
+
+  if(!ssid){
+
+    message.textContent = "Please enter your WiFi network name.";
+    return;
+
+  }
+
+  if(security !== "nopass" && !password){
+
+    message.textContent = "Please enter your WiFi password.";
+    return;
+
+  }
+
+  const wifiString =
+    "WIFI:" +
+    "T:" + security + ";" +
+    "S:" + escapeWiFi(ssid) + ";" +
+    "P:" + escapeWiFi(password) + ";" +
+    "H:" + (hidden ? "true" : "false") +
+    ";;";
+
+  qrContainer.innerHTML = "";
+
+  currentQRCode = new QRCode(qrContainer,{
+
+    text:wifiString,
+
+    width:250,
+
+    height:250,
+
+    colorDark:"#17152b",
+
+    colorLight:"#ffffff",
+
+    correctLevel:QRCode.CorrectLevel.H
+
+  });
+
+}
+
+function downloadQR(){
+
+  const qrContainer = document.getElementById("qrcode");
+  const canvas = qrContainer.querySelector("canvas");
+  const img = qrContainer.querySelector("img");
+  const message = document.getElementById("message");
+
+  if(!canvas && !img){
+
+    message.textContent = "Please generate the WiFi QR code first.";
+    return;
+
+  }
+
+  let dataURL;
+
+  if(canvas){
+
+    dataURL = canvas.toDataURL("image/png");
+
+  }else{
+
+    dataURL = img.src;
+
+  }
+
+  const link = document.createElement("a");
+
+  link.href = dataURL;
+
+  link.download = "auraqr-wifi-qr-code.png";
+
+  document.body.appendChild(link);
+
+  link.click();
+
+  document.body.removeChild(link);
+
+}
+
+</script>
+
+</body>
+</html>
