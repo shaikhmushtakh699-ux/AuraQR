@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Transparent QR Code Generator | AuraQR</title>
+
+<meta name="description" content="Create a transparent QR code online with AuraQR. Customize QR color, size and error correction, then download transparent PNG or SVG QR codes for free.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://auraqr.in/transparent-qr-code.html">
+
+<link rel="icon" type="image/png" href="/favicon.png">
+
+<meta property="og:title" content="Transparent QR Code Generator | AuraQR">
+<meta property="og:description" content="Create transparent QR codes with AuraQR. Customize and download high-quality transparent PNG and SVG QR codes for free.">
+<meta property="og:url" content="https://auraqr.in/transparent-qr-code.html">
+<meta property="og:type" content="website">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f8f7ff;
+    color:#171923;
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.container{
+    width:min(1120px,92%);
+    margin:auto;
+}
+
+/* HEADER */
+
+header{
+    background:#fff;
+    border-bottom:1px solid #eeeaf8;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.nav{
+    min-height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    font-size:20px;
+    font-weight:800;
+}
+
+.logo img{
+    width:28px;
+    height:28px;
+    object-fit:contain;
+}
+
+.logo span{
+    color:#7c3cff;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.nav-links a:hover{
+    color:#7c3cff;
+}
+
+.create-btn{
+    background:linear-gradient(135deg,#7c3cff,#9747ff);
+    color:#fff!important;
+    padding:12px 18px;
+    border-radius:10px;
+    box-shadow:0 8px 20px rgba(124,60,255,.18);
+}
+
+.menu-btn{
+    display:none;
+    border:0;
+    background:transparent;
+    font-size:25px;
+    cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+    text-align:center;
+    padding:70px 20px 45px;
+}
+
+.badge{
+    display:inline-block;
+    background:#eee8ff;
+    color:#7138e8;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.6px;
+    padding:7px 13px;
+    border-radius:20px;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:42px;
+    line-height:1.15;
+    margin-bottom:16px;
+    font-weight:800;
+}
+
+.hero h1 span{
+    color:#7c3cff;
+}
+
+.hero p{
+    max-width:740px;
+    margin:auto;
+    color:#74738a;
+    font-size:15px;
+}
+
+/* GENERATOR */
+
+.generator-card{
+    background:#fff;
+    border:1px solid #ebe7f5;
+    border-radius:18px;
+    box-shadow:0 18px 45px rgba(35,25,75,.08);
+    padding:28px;
+    display:grid;
+    grid-template-columns:1.08fr .92fr;
+    gap:30px;
+    margin-bottom:60px;
+}
+
+.section-title{
+    font-size:17px;
+    font-weight:800;
+    margin-bottom:22px;
+}
+
+.field{
+    margin-bottom:19px;
+}
+
+.field label{
+    display:block;
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:8px;
+    color:#27243b;
+    text-transform:uppercase;
+}
+
+textarea,
+select{
+    width:100%;
+    border:1px solid #ddd8ed;
+    border-radius:9px;
+    background:#fff;
+    padding:13px 14px;
+    font-size:13px;
+    color:#252237;
+    outline:none;
+    transition:.2s;
+}
+
+textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+textarea:focus,
+select:focus{
+    border-color:#7c3cff;
+    box-shadow:0 0 0 3px rgba(124,60,255,.08);
+}
+
+/* COLOR */
+
+.color-box{
+    border:1px solid #e3dff0;
+    border-radius:10px;
+    padding:12px;
+    margin-bottom:18px;
+}
+
+.color-box label{
+    display:block;
+    font-size:11px;
+    font-weight:800;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.color-control{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+input[type="color"]{
+    width:46px;
+    height:36px;
+    padding:2px;
+    border:1px solid #ddd8ed;
+    border-radius:7px;
+    background:#fff;
+    cursor:pointer;
+}
+
+.color-value{
+    font-family:monospace;
+    font-size:11px;
+    color:#77728a;
+}
+
+/* RANGE */
+
+.range-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+input[type="range"]{
+    width:100%;
+    accent-color:#7c3cff;
+    cursor:pointer;
+}
+
+.range-value{
+    min-width:60px;
+    text-align:right;
+    font-size:12px;
+    font-weight:800;
+    color:#7c3cff;
+}
+
+/* TRANSPARENT STATUS */
+
+.transparent-status{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#f3efff;
+    border:1px solid #e3d8ff;
+    border-radius:9px;
+    padding:12px 14px;
+    margin-bottom:18px;
+}
+
+.status-icon{
+    width:25px;
+    height:25px;
+    border-radius:7px;
+    background:#7c3cff;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    font-weight:800;
+}
+
+.transparent-status strong{
+    display:block;
+    font-size:12px;
+}
+
+.transparent-status small{
+    color:#77728a;
+    font-size:10px;
+}
+
+/* BUTTONS */
+
+.button-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:24px;
+}
+
+.btn{
+    border:0;
+    border-radius:9px;
+    padding:12px 18px;
+    font-size:12px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,#7436ff,#9747ff);
+    color:#fff;
+    box-shadow:0 8px 18px rgba(124,60,255,.18);
+}
+
+.btn-secondary{
+    background:#eee9ff;
+    color:#6733d5;
+}
+
+.btn-dark{
+    background:#171923;
+    color:#fff;
+}
+
+/* PREVIEW */
+
+.preview{
+    border:1px solid #ebe7f5;
+    border-radius:14px;
+    min-height:470px;
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+
+    /* checkerboard to make transparency visible */
+    background-color:#fff;
+    background-image:
+        linear-gradient(45deg,#eeeeee 25%,transparent 25%),
+        linear-gradient(-45deg,#eeeeee 25%,transparent 25%),
+        linear-gradient(45deg,transparent 75%,#eeeeee 75%),
+        linear-gradient(-45deg,transparent 75%,#eeeeee 75%);
+    background-size:20px 20px;
+    background-position:0 0,0 10px,10px -10px,-10px 0;
+}
+
+.preview-title{
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:20px;
+}
+
+.qr-wrapper{
+    background:transparent;
+    padding:18px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    max-width:100%;
+}
+
+#qrPreview{
+    line-height:0;
+    max-width:100%;
+}
+
+#qrPreview svg{
+    display:block;
+    max-width:100%;
+    height:auto;
+}
+
+.preview-note{
+    margin-top:18px;
+    font-size:11px;
+    color:#77728a;
+    max-width:360px;
+}
+
+.download-row{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+    margin-top:20px;
+}
+
+/* INFO */
+
+.info-section{
+    margin:65px auto;
+}
+
+.info-section h2{
+    text-align:center;
+    font-size:28px;
+    margin-bottom:15px;
+}
+
+.info-intro{
+    max-width:760px;
+    margin:0 auto 35px;
+    text-align:center;
+    color:#77728a;
+    font-size:14px;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.info-card{
+    background:#fff;
+    border:1px solid #ebe7f5;
+    border-radius:14px;
+    padding:23px;
+}
+
+.info-card h3{
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+.info-card p{
+    font-size:13px;
+    color:#77728a;
+}
+
+/* FAQ */
+
+.faq{
+    margin:70px auto;
+    max-width:850px;
+}
+
+.faq h2{
+    text-align:center;
+    font-size:28px;
+    margin-bottom:28px;
+}
+
+details{
+    background:#fff;
+    border:1px solid #ebe7f5;
+    border-radius:11px;
+    padding:17px 19px;
+    margin-bottom:10px;
+}
+
+summary{
+    cursor:pointer;
+    font-size:14px;
+    font-weight:800;
+}
+
+details p{
+    color:#77728a;
+    font-size:13px;
+    margin-top:12px;
+}
+
+/* CTA */
+
+.cta{
+    background:linear-gradient(135deg,#f0eaff,#faf8ff);
+    border:1px solid #e5ddff;
+    border-radius:18px;
+    padding:40px 25px;
+    text-align:center;
+    margin:60px auto;
+}
+
+.cta h2{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.cta p{
+    color:#77728a;
+    margin-bottom:20px;
+}
+
+/* FOOTER */
+
+footer{
+    background:#171923;
+    color:#fff;
+    margin-top:70px;
+    padding:45px 0 25px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer-brand p{
+    color:#aaa8b7;
+    font-size:13px;
+    max-width:370px;
+    margin-top:13px;
+}
+
+.footer-col h3{
+    font-size:14px;
+    margin-bottom:14px;
+}
+
+.footer-col a{
+    display:block;
+    color:#aaa8b7;
+    font-size:13px;
+    margin-bottom:9px;
+}
+
+.footer-col a:hover{
+    color:#fff;
+}
+
+.footer-bottom{
+    border-top:1px solid #2d2d39;
+    margin-top:35px;
+    padding-top:20px;
+    color:#aaa8b7;
+    font-size:12px;
+    text-align:center;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%) translateY(100px);
+    background:#171923;
+    color:#fff;
+    padding:12px 20px;
+    border-radius:10px;
+    font-size:13px;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:3000;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:72px;
+        left:0;
+        right:0;
+        background:#fff;
+        padding:20px;
+        flex-direction:column;
+        border-bottom:1px solid #eeeaf8;
+        box-shadow:0 15px 30px rgba(20,15,50,.08);
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .generator-card{
+        grid-template-columns:1fr;
+    }
+
+    .preview{
+        min-height:400px;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:560px){
+
+    .hero{
+        padding:50px 15px 35px;
+    }
+
+    .hero h1{
+        font-size:31px;
+    }
+
+    .hero p{
+        font-size:13px;
+    }
+
+    .generator-card{
+        padding:18px;
+    }
+
+    .button-row{
+        flex-direction:column;
+    }
+
+    .button-row .btn{
+        width:100%;
+    }
+
+    .download-row{
+        flex-direction:column;
+        width:100%;
+    }
+
+    .download-row .btn{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="container nav">
+
+    <a href="index.html" class="logo">
+        <img src="/logo.png" alt="AuraQR Logo">
+        Aura<span>QR</span>
+    </a>
+
+    <button
+        class="menu-btn"
+        onclick="toggleMenu()"
+        aria-label="Open menu"
+    >
+        ☰
+    </button>
+
+    <nav class="nav-links" id="navLinks">
+
+        <a href="index.html">
+            Generator
+        </a>
+
+        <a href="templates.html">
+            Templates
+        </a>
+
+        <a href="how-to-use.html">
+            How to Use
+        </a>
+
+        <a href="index.html#faq">
+            FAQ
+        </a>
+
+        <a href="index.html#contact">
+            Contact
+        </a>
+
+        <a href="index.html" class="create-btn">
+            Create QR
+        </a>
+
+    </nav>
+
+</div>
+
+</header>
+
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="badge">
+        AURAQR • TRANSPARENT QR CODE
+    </div>
+
+    <h1>
+        Transparent <span>QR Code</span> Generator
+    </h1>
+
+    <p>
+        Create a QR code with a transparent background.
+        Customize the QR color, size and error correction,
+        then download your transparent QR code as PNG or SVG.
+    </p>
+
+</section>
+
+
+<!-- GENERATOR -->
+
+<section class="container">
+
+<div class="generator-card">
+
+    <!-- CONTROLS -->
+
+    <div>
+
+        <h2 class="section-title">
+            Create Your Transparent QR Code
+        </h2>
+
+
+        <div class="field">
+
+            <label for="qrText">
+                URL or Text
+            </label>
+
+            <textarea
+                id="qrText"
+                placeholder="Enter a website URL, text, contact information or any content..."
+            >https://auraqr.in</textarea>
+
+        </div>
+
+
+        <div class="transparent-status">
+
+            <div class="status-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <strong>
+                    Transparent Background Enabled
+                </strong>
+
+                <small>
+                    Your QR code will have no solid background.
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="size">
+                QR Code Size
+            </label>
+
+            <div class="range-row">
+
+                <input
+                    type="range"
+                    id="size"
+                    min="200"
+                    max="1200"
+                    value="500"
+                    step="10"
+                    oninput="updateSize()"
+                >
+
+                <span
+                    class="range-value"
+                    id="sizeValue"
+                >
+                    500px
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="color-box">
+
+            <label for="darkColor">
+                QR Code Color
+            </label>
+
+            <div class="color-control">
+
+                <input
+                    type="color"
+                    id="darkColor"
+                    value="#111827"
+                    onchange="updateColor();generateQR()"
+                >
+
+                <span
+                    class="color-value"
+                    id="darkValue"
+                >
+                    #111827
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="errorCorrection">
+                Error Correction
+            </label>
+
+            <select
+                id="errorCorrection"
+                onchange="generateQR()"
+            >
+
+                <option value="L">
+                    Low — 7%
+                </option>
+
+                <option value="M">
+                    Medium — 15%
+                </option>
+
+                <option value="Q">
+                    Quartile — 25%
+                </option>
+
+                <option value="H" selected>
+                    High — 30%
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="button-row">
+
+            <button
+                class="btn btn-primary"
+                onclick="generateQR()"
+            >
+                Generate QR Code
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                onclick="resetQR()"
+            >
+                Reset
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PREVIEW -->
+
+    <div class="preview">
+
+        <div class="preview-title">
+            TRANSPARENT QR PREVIEW
+        </div>
+
+
+        <div class="qr-wrapper">
+
+            <div id="qrPreview"></div>
+
+        </div>
+
+
+        <p class="preview-note">
+            The checkerboard preview represents transparency.
+            The downloaded PNG will contain a transparent background.
+        </p>
+
+
+        <div class="download-row">
+
+            <button
+                class="btn btn-primary"
+                onclick="downloadPNG()"
+            >
+                Download Transparent PNG
+            </button>
+
+            <button
+                class="btn btn-dark"
+                onclick="downloadSVG()"
+            >
+                Download SVG
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- INFO -->
+
+<section class="container info-section">
+
+    <h2>
+        Why Use a Transparent QR Code?
+    </h2>
+
+    <p class="info-intro">
+        Transparent QR codes can be placed over different
+        backgrounds and designs without a large white box
+        surrounding the code.
+    </p>
+
+
+    <div class="info-grid">
+
+        <article class="info-card">
+
+            <h3>
+                Marketing Designs
+            </h3>
+
+            <p>
+                Add transparent QR codes to posters, advertisements,
+                social media graphics and promotional artwork.
+            </p>
+
+        </article>
+
+
+        <article class="info-card">
+
+            <h3>
+                Business Branding
+            </h3>
+
+            <p>
+                Place your QR code over branded backgrounds while
+                maintaining a clean visual appearance.
+            </p>
+
+        </article>
+
+
+        <article class="info-card">
+
+            <h3>
+                Presentations
+            </h3>
+
+            <p>
+                Add transparent QR codes to PowerPoint slides,
+                presentations and digital documents.
+            </p>
+
+        </article>
+
+
+        <article class="info-card">
+
+            <h3>
+                Website Graphics
+            </h3>
+
+            <p>
+                Transparent PNG QR codes can be useful when the
+                QR code needs to blend into a website design.
+            </p>
+
+        </article>
+
+
+        <article class="info-card">
+
+            <h3>
+                Custom QR Colors
+            </h3>
+
+            <p>
+                Choose a QR foreground color that fits your
+                brand or visual design.
+            </p>
+
+        </article>
+
+
+        <article class="info-card">
+
+            <h3>
+                SVG Support
+            </h3>
+
+            <p>
+                Download SVG when you need a scalable QR graphic
+                for design and professional workflows.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- FAQ -->
+
+<section class="container faq">
+
+    <h2>
+        Transparent QR Code FAQ
+    </h2>
+
+
+    <details open>
+
+        <summary>
+            What is a transparent QR code?
+        </summary>
+
+        <p>
+            A transparent QR code has no solid background behind
+            the QR modules. This allows the code to be placed over
+            compatible designs and backgrounds.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Is the PNG background actually transparent?
+        </summary>
+
+        <p>
+            Yes. The downloaded PNG is created with an alpha
+            channel and does not add a solid background.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Can I change the QR code color?
+        </summary>
+
+        <p>
+            Yes. Use the QR Code Color selector to choose a custom
+            foreground color before downloading.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Can I download a transparent QR as SVG?
+        </summary>
+
+        <p>
+            Yes. SVG is available as a scalable download format
+            and does not require a solid background.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Is a transparent QR code always scannable?
+        </summary>
+
+        <p>
+            Scannability depends on sufficient contrast between
+            the QR modules and the background. Always test your
+            QR code against its final background before publishing.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Is this QR code dynamic?
+        </summary>
+
+        <p>
+            No. This generator creates a static QR code containing
+            the information you enter. The QR code itself does not
+            require an online redirect service.
+        </p>
+
+    </details>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="container">
+
+    <div class="cta">
+
+        <h2>
+            Need More QR Customization?
+        </h2>
+
+        <p>
+            Create custom QR codes with colors, logos,
+            frames and advanced settings.
+        </p>
+
+        <a
+            href="index.html"
+            class="btn btn-primary"
+        >
+            Open AuraQR Generator
+        </a>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="container">
+
+<div class="footer-grid">
+
+    <div class="footer-brand">
+
+        <a href="index.html" class="logo">
+            <img src="/logo.png" alt="AuraQR Logo">
+            Aura<span>QR</span>
+        </a>
+
+        <p>
+            Create free custom QR codes for websites,
+            businesses, marketing, events and everyday use.
+        </p>
+
+    </div>
+
+
+    <div class="footer-col">
+
+        <h3>
+            QR Tools
+        </h3>
+
+        <a href="index.html">
+            QR Generator
+        </a>
+
+        <a href="url-qr-code.html">
+            URL QR Code
+        </a>
+
+        <a href="qr-code-with-logo.html">
+            QR Code with Logo
+        </a>
+
+        <a href="qr-code-design.html">
+            QR Code Design
+        </a>
+
+        <a href="qr-color-palettes.html">
+            Color Palettes
+        </a>
+
+        <a href="qr-frames.html">
+            QR Frames
+        </a>
+
+        <a href="qr-error-correction.html">
+            Error Correction
+        </a>
+
+        <a href="qr-high-resolution.html">
+            High Resolution QR
+        </a>
+
+    </div>
+
+
+    <div class="footer-col">
+
+        <h3>
+            Resources
+        </h3>
+
+        <a href="templates.html">
+            QR Templates
+        </a>
+
+        <a href="how-to-use.html">
+            How to Use
+        </a>
+
+        <a href="png-svg-pdf-qr-code.html">
+            PNG SVG PDF QR
+        </a>
+
+        <a href="index.html#faq">
+            FAQ
+        </a>
+
+        <a href="index.html#contact">
+            Contact
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="footer-bottom">
+
+    © 2026 AuraQR. All rights reserved.
+
+</div>
+
+</div>
+
+</footer>
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script>
+
+/* MENU */
+
+function toggleMenu(){
+
+    document
+        .getElementById("navLinks")
+        .classList
+        .toggle("active");
+
+}
+
+
+/* TOAST */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        message;
+
+    toast.classList.add("show");
+
+    setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },2500);
+
+}
+
+
+/* SIZE */
+
+function updateSize(){
+
+    const size =
+        document.getElementById("size").value;
+
+    document.getElementById("sizeValue")
+        .textContent =
+        size + "px";
+
+    generateQR();
+
+}
+
+
+/* COLOR */
+
+function updateColor(){
+
+    const color =
+        document.getElementById("darkColor").value;
+
+    document.getElementById("darkValue")
+        .textContent =
+        color.toUpperCase();
+
+}
+
+
+/* CREATE QR */
+
+function createQR(){
+
+    const text =
+        document.getElementById("qrText")
+        .value
+        .trim();
+
+    if(!text){
+
+        showToast(
+            "Please enter URL or text first."
+        );
+
+        return null;
+
+    }
+
+
+    const correction =
+        document.getElementById("errorCorrection")
+        .value;
+
+
+    try{
+
+        /*
+         * Type 0 lets the library automatically
+         * select the QR version.
+         */
+        const qr =
+            qrcode(0, correction);
+
+        qr.addData(text);
+
+        qr.make();
+
+        return qr;
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Content is too long for a QR code."
+        );
+
+        return null;
+
+    }
+
+}
+
+
+/* GENERATE PREVIEW */
+
+function generateQR(){
+
+    updateColor();
+
+    const qr =
+        createQR();
+
+    if(!qr){
+
+        return;
+
+    }
+
+
+    const size =
+        parseInt(
+            document.getElementById("size").value
+        );
+
+
+    const dark =
+        document.getElementById("darkColor").value;
+
+
+    const preview =
+        document.getElementById("qrPreview");
+
+
+    /*
+     * Generate SVG without a background.
+     */
+    let svg =
+        qr.createSvgTag({
+            scalable:true,
+            margin:4
+        });
+
+
+    /*
+     * Change black QR modules
+     * to selected color.
+     */
+    svg =
+        svg.replace(
+            /fill="#000000"/gi,
+            'fill="' + dark + '"'
+        );
+
+
+    /*
+     * Remove white background
+     * so it remains transparent.
+     */
+    svg =
+        svg.replace(
+            /fill="#ffffff"/gi,
+            'fill="none"'
+        );
+
+
+    preview.innerHTML =
+        svg;
+
+
+    const svgElement =
+        preview.querySelector("svg");
+
+
+    if(svgElement){
+
+        svgElement.setAttribute(
+            "width",
+            size
+        );
+
+        svgElement.setAttribute(
+            "height",
+            size
+        );
+
+        svgElement.style.maxWidth =
+            "100%";
+
+        svgElement.style.height =
+            "auto";
+
+        svgElement.style.background =
+            "transparent";
+
+    }
+
+}
+
+
+/* DOWNLOAD SVG */
+
+function downloadSVG(){
+
+    const qr =
+        createQR();
+
+    if(!qr){
+
+        return;
+
+    }
+
+
+    const dark =
+        document.getElementById("darkColor").value;
+
+
+    let svg =
+        qr.createSvgTag({
+            scalable:true,
+            margin:4
+        });
+
+
+    svg =
+        svg.replace(
+            /fill="#000000"/gi,
+            'fill="' + dark + '"'
+        );
+
+
+    svg =
+        svg.replace(
+            /fill="#ffffff"/gi,
+            'fill="none"'
+        );
+
+
+    const blob =
+        new Blob(
+            [svg],
+            {
+                type:"image/svg+xml;charset=utf-8"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement("a");
+
+    link.href =
+        url;
+
+    link.download =
+        "auraqr-transparent-code.svg";
+
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+    URL.revokeObjectURL(url);
+
+
+    showToast(
+        "Transparent SVG downloaded."
+    );
+
+}
+
+
+/* DOWNLOAD PNG */
+
+function downloadPNG(){
+
+    const qr =
+        createQR();
+
+    if(!qr){
+
+        return;
+
+    }
+
+
+    const size =
+        parseInt(
+            document.getElementById("size").value
+        );
+
+
+    const dark =
+        document.getElementById("darkColor").value;
+
+
+    /*
+     * Create QR SVG.
+     */
+    let svg =
+        qr.createSvgTag({
+            scalable:true,
+            margin:4
+        });
+
+
+    svg =
+        svg.replace(
+            /fill="#000000"/gi,
+            'fill="' + dark + '"'
+        );
+
+
+    svg =
+        svg.replace(
+            /fill="#ffffff"/gi,
+            'fill="none"'
+        );
+
+
+    const blob =
+        new Blob(
+            [svg],
+            {
+                type:"image/svg+xml;charset=utf-8"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const image =
+        new Image();
+
+
+    image.onload =
+        function(){
+
+            /*
+             * Canvas starts completely transparent.
+             */
+            const canvas =
+                document.createElement("canvas");
+
+            canvas.width =
+                size;
+
+            canvas.height =
+                size;
+
+
+            const ctx =
+                canvas.getContext("2d");
+
+
+            /*
+             * Do NOT fill the canvas.
+             * This preserves transparency.
+             */
+            ctx.clearRect(
+                0,
+                0,
+                size,
+                size
+            );
+
+
+            ctx.drawImage(
+                image,
+                0,
+                0,
+                size,
+                size
+            );
+
+
+            URL.revokeObjectURL(url);
+
+
+            const png =
+                canvas.toDataURL(
+                    "image/png"
+                );
+
+
+            const link =
+                document.createElement("a");
+
+
+            link.download =
+                "auraqr-transparent-code.png";
+
+
+            link.href =
+                png;
+
+
+            document.body.appendChild(link);
+
+            link.click();
+
+            link.remove();
+
+
+            showToast(
+                "Transparent PNG downloaded."
+            );
+
+        };
+
+
+    image.onerror =
+        function(){
+
+            URL.revokeObjectURL(url);
+
+            showToast(
+                "Could not create PNG."
+            );
+
+        };
+
+
+    image.src =
+        url;
+
+}
+
+
+/* RESET */
+
+function resetQR(){
+
+    document.getElementById("qrText")
+        .value =
+        "https://auraqr.in";
+
+
+    document.getElementById("size")
+        .value =
+        500;
+
+
+    document.getElementById("darkColor")
+        .value =
+        "#111827";
+
+
+    document.getElementById("errorCorrection")
+        .value =
+        "H";
+
+
+    document.getElementById("sizeValue")
+        .textContent =
+        "500px";
+
+
+    updateColor();
+
+    generateQR();
+
+    showToast(
+        "QR settings reset."
+    );
+
+}
+
+
+/* LIVE TEXT */
+
+document
+    .getElementById("qrText")
+    .addEventListener(
+        "input",
+        function(){
+
+            generateQR();
+
+        }
+    );
+
+
+/* INITIAL */
+
+updateColor();
+
+generateQR();
+
+</script>
+
+</body>
+</html>
