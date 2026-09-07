@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QR Code Design Generator – Create Custom QR Codes | AuraQR</title>
+
+<meta name="description" content="Design a custom QR code online with AuraQR. Choose QR colors, background, size and create a stylish QR code for websites, business and marketing.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://auraqr.in/qr-code-design.html">
+<link rel="icon" href="/favicon.png">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f8f9fc;
+    color:#171923;
+}
+
+.container{
+    width:min(1100px,92%);
+    margin:auto;
+}
+
+header{
+    margin-top:18px;
+    background:#fff;
+    border:1px solid #e8e8ef;
+    border-radius:16px;
+    padding:16px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    color:#171923;
+    font-size:20px;
+    font-weight:800;
+}
+
+.logo img{
+    width:30px;
+    height:30px;
+    object-fit:contain;
+}
+
+nav{
+    display:flex;
+    gap:20px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#171923;
+    font-size:14px;
+    font-weight:600;
+}
+
+.hero{
+    text-align:center;
+    padding:65px 10px 35px;
+}
+
+.badge{
+    display:inline-block;
+    background:#eee7ff;
+    color:#7647ff;
+    padding:7px 13px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+h1{
+    font-size:48px;
+    line-height:1.1;
+    margin-bottom:16px;
+}
+
+.gradient{
+    color:#7b4cff;
+}
+
+.hero p{
+    max-width:720px;
+    margin:auto;
+    color:#697080;
+    line-height:1.7;
+    font-size:15px;
+}
+
+.generator{
+    background:#fff;
+    border:1px solid #e8e8ef;
+    border-radius:18px;
+    padding:28px;
+    display:grid;
+    grid-template-columns:1fr 290px;
+    gap:25px;
+    box-shadow:0 15px 40px rgba(80,50,150,.08);
+}
+
+h2{
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    font-size:12px;
+    font-weight:700;
+    margin:15px 0 7px;
+}
+
+input[type="url"]{
+    width:100%;
+    padding:14px;
+    border:1px solid #dddfea;
+    border-radius:9px;
+    outline:none;
+    font-size:14px;
+}
+
+input[type="url"]:focus{
+    border-color:#8555ff;
+}
+
+input[type="color"]{
+    width:100%;
+    height:48px;
+    border:1px solid #dddfea;
+    border-radius:9px;
+    padding:4px;
+    background:#fff;
+    cursor:pointer;
+}
+
+select{
+    width:100%;
+    padding:14px;
+    border:1px solid #dddfea;
+    border-radius:9px;
+    background:#fff;
+    font-size:14px;
+    outline:none;
+}
+
+select:focus{
+    border-color:#8555ff;
+}
+
+.color-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+button{
+    border:none;
+    border-radius:9px;
+    padding:14px 20px;
+    font-weight:700;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.generate{
+    width:100%;
+    margin-top:20px;
+    background:linear-gradient(90deg,#7148ff,#ad45ef);
+    color:#fff;
+}
+
+.download{
+    width:100%;
+    margin-top:10px;
+    background:#15182a;
+    color:#fff;
+}
+
+.preview{
+    min-height:350px;
+    background:#faf9ff;
+    border:1px solid #e9e5f6;
+    border-radius:14px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.preview h3{
+    font-size:14px;
+    margin-bottom:18px;
+}
+
+#qrcode{
+    background:#fff;
+    padding:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.qr-label{
+    margin-top:15px;
+    font-size:12px;
+    color:#777;
+    text-align:center;
+}
+
+.info{
+    background:#fff;
+    border:1px solid #e8e8ef;
+    border-radius:18px;
+    padding:30px;
+    margin:30px 0;
+    line-height:1.8;
+}
+
+.info h2{
+    margin-bottom:12px;
+}
+
+.info p{
+    color:#697080;
+    font-size:14px;
+    margin-bottom:15px;
+}
+
+.faq{
+    margin:30px 0 50px;
+}
+
+.faq-item{
+    background:#fff;
+    border:1px solid #e8e8ef;
+    border-radius:12px;
+    padding:18px 20px;
+    margin-bottom:12px;
+}
+
+.faq-item h3{
+    font-size:15px;
+    margin-bottom:8px;
+}
+
+.faq-item p{
+    color:#697080;
+    font-size:14px;
+    line-height:1.7;
+}
+
+footer{
+    text-align:center;
+    padding:30px 10px;
+    color:#777;
+    font-size:13px;
+}
+
+@media(max-width:750px){
+
+    header{
+        padding:14px 16px;
+    }
+
+    nav{
+        gap:10px;
+        flex-wrap:wrap;
+        justify-content:flex-end;
+    }
+
+    nav a{
+        font-size:12px;
+    }
+
+    .hero{
+        padding-top:45px;
+    }
+
+    h1{
+        font-size:36px;
+    }
+
+    .generator{
+        grid-template-columns:1fr;
+    }
+
+    .color-row{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+
+<a href="https://auraqr.in/" class="logo">
+<img src="/logo.png" alt="AuraQR Logo">
+AuraQR
+</a>
+
+<nav>
+<a href="/">Generator</a>
+<a href="/url-qr-code.html">URL QR</a>
+<a href="/templates.html">Templates</a>
+<a href="/how-to-use.html">How to Use</a>
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div class="badge">AURAQR • FREE QR CODE DESIGNER</div>
+
+<h1>
+QR Code
+<span class="gradient">Design Generator</span>
+</h1>
+
+<p>
+Design a custom QR code online with AuraQR. Choose your QR code color,
+background color and size to create a QR code that matches your brand.
+</p>
+
+</section>
+
+<section class="generator">
+
+<div>
+
+<h2>Design Your QR Code</h2>
+
+<label for="url">WEBSITE URL</label>
+
+<input
+id="url"
+type="url"
+placeholder="https://example.com"
+>
+
+<div class="color-row">
+
+<div>
+
+<label for="foreground">QR CODE COLOR</label>
+
+<input
+id="foreground"
+type="color"
+value="#171923"
+>
+
+</div>
+
+<div>
+
+<label for="background">BACKGROUND COLOR</label>
+
+<input
+id="background"
+type="color"
+value="#ffffff"
+>
+
+</div>
+
+</div>
+
+<label for="size">QR CODE SIZE</label>
+
+<select id="size">
+
+<option value="180">Small – 180 × 180</option>
+<option value="220" selected>Medium – 220 × 220</option>
+<option value="280">Large – 280 × 280</option>
+<option value="350">Extra Large – 350 × 350</option>
+
+</select>
+
+<button class="generate" onclick="generateQR()">
+Generate Designed QR Code
+</button>
+
+<button class="download" onclick="downloadQR()">
+Download QR Code
+</button>
+
+</div>
+
+<div class="preview">
+
+<h3>QR CODE PREVIEW</h3>
+
+<div id="qrcode">
+
+<p style="color:#888;font-size:13px;">
+Your QR code will appear here
+</p>
+
+</div>
+
+<div class="qr-label">
+Preview your custom QR code before downloading.
+</div>
+
+</div>
+
+</section>
+
+<section class="info">
+
+<h2>Free QR Code Design Generator</h2>
+
+<p>
+AuraQR helps you create a customized QR code for websites, businesses,
+marketing campaigns, posters, flyers, packaging, menus and social media.
+</p>
+
+<p>
+Choose your QR code color, background color and QR size. A good contrast
+between the QR code and its background helps smartphones scan the code
+more reliably.
+</p>
+
+<h2>How to Design a QR Code</h2>
+
+<p>
+1. Enter the URL you want to encode.
+<br>
+2. Choose your QR code color.
+<br>
+3. Choose your background color.
+<br>
+4. Select the QR code size.
+<br>
+5. Click <strong>Generate Designed QR Code</strong>.
+<br>
+6. Test the QR code with a smartphone.
+<br>
+7. Download the finished QR code.
+</p>
+
+</section>
+
+<section class="faq">
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq-item">
+
+<h3>Can I customize my QR code?</h3>
+
+<p>
+Yes. You can customize the QR code color, background color and size.
+</p>
+
+</div>
+
+<div class="faq-item">
+
+<h3>What colors can I use?</h3>
+
+<p>
+You can choose custom colors using the built-in color selectors.
+</p>
+
+</div>
+
+<div class="faq-item">
+
+<h3>What QR code size should I choose?</h3>
+
+<p>
+Choose a larger size when the QR code will be printed or displayed from
+a greater distance.
+</p>
+
+</div>
+
+<div class="faq-item">
+
+<h3>Are custom QR codes scannable?</h3>
+
+<p>
+Yes, as long as the QR code maintains sufficient contrast and clear
+scanning areas. Always test the final QR code before publishing it.
+</p>
+
+</div>
+
+<div class="faq-item">
+
+<h3>Can I download my designed QR code?</h3>
+
+<p>
+Yes. You can download the generated QR code as a PNG image.
+</p>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 AuraQR. All rights reserved.
+</footer>
+
+</div>
+
+<script>
+
+function generateQR(){
+
+    let url = document.getElementById("url").value.trim();
+
+    if(!url){
+        alert("Please enter a URL.");
+        return;
+    }
+
+    if(!/^https?:\/\//i.test(url)){
+        url = "https://" + url;
+    }
+
+    const foreground =
+        document.getElementById("foreground").value;
+
+    const background =
+        document.getElementById("background").value;
+
+    const size =
+        parseInt(document.getElementById("size").value);
+
+    const qrContainer =
+        document.getElementById("qrcode");
+
+    qrContainer.innerHTML = "";
+
+    new QRCode(qrContainer,{
+
+        text:url,
+
+        width:size,
+
+        height:size,
+
+        colorDark:foreground,
+
+        colorLight:background,
+
+        correctLevel:QRCode.CorrectLevel.H
+
+    });
+}
+
+
+function downloadQR(){
+
+    const canvas =
+        document.querySelector("#qrcode canvas");
+
+    if(!canvas){
+
+        alert("Please generate the QR code first.");
+
+        return;
+    }
+
+    const link =
+        document.createElement("a");
+
+    link.download =
+        "auraqr-designed-qr-code.png";
+
+    link.href =
+        canvas.toDataURL("image/png");
+
+    link.click();
+
+}
+
+</script>
+
+</body>
+</html>
