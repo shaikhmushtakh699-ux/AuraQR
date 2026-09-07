@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WhatsApp QR Code Generator – Create WhatsApp QR Code | AuraQR</title>
+
+<meta name="description" content="Create a free WhatsApp QR code online with AuraQR. Generate a QR code for your WhatsApp number and pre-filled message. Download your WhatsApp QR code as a PNG image.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://auraqr.in/whatsapp-qr-code.html">
+
+<link rel="icon" type="image/png" href="/favicon.png">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:linear-gradient(135deg,#f8f7ff,#ffffff);
+    color:#17152b;
+    min-height:100vh;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.header{
+    width:min(1100px,92%);
+    margin:22px auto 0;
+    background:#fff;
+    border:1px solid #e9e6f8;
+    border-radius:18px;
+    padding:15px 22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 10px 30px rgba(65,45,130,.08);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:20px;
+    font-weight:800;
+}
+
+.brand img{
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    object-fit:cover;
+}
+
+.brand span{
+    color:#17152b;
+}
+
+.brand strong{
+    color:#7952ff;
+}
+
+.nav{
+    display:flex;
+    gap:22px;
+    align-items:center;
+    font-size:13px;
+    font-weight:700;
+}
+
+.nav a:hover{
+    color:#7952ff;
+}
+
+.hero{
+    text-align:center;
+    width:min(900px,92%);
+    margin:55px auto 35px;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:30px;
+    background:#f0eaff;
+    color:#7952ff;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.4px;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:52px;
+    line-height:1.05;
+    font-weight:900;
+}
+
+.hero h1 span{
+    display:block;
+    background:linear-gradient(90deg,#6f4cff,#c94fff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:700px;
+    margin:18px auto 0;
+    color:#77748b;
+    font-size:15px;
+    line-height:1.7;
+}
+
+.generator{
+    width:min(900px,92%);
+    margin:0 auto 55px;
+    background:#fff;
+    border:1px solid #e7e3f6;
+    border-radius:20px;
+    padding:28px;
+    display:grid;
+    grid-template-columns:1fr 280px;
+    gap:25px;
+    box-shadow:0 18px 50px rgba(66,45,135,.10);
+}
+
+.form h2{
+    font-size:18px;
+    margin-bottom:22px;
+}
+
+label{
+    display:block;
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:8px;
+    color:#4e4a61;
+    text-transform:uppercase;
+}
+
+.input-group{
+    margin-bottom:18px;
+}
+
+input,
+textarea{
+    width:100%;
+    border:1px solid #ddd8ef;
+    border-radius:12px;
+    padding:14px;
+    font-size:14px;
+    outline:none;
+    background:#fff;
+    color:#17152b;
+}
+
+input:focus,
+textarea:focus{
+    border-color:#8055ff;
+    box-shadow:0 0 0 3px rgba(128,85,255,.10);
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.help{
+    margin-top:7px;
+    color:#89869a;
+    font-size:11px;
+    line-height:1.5;
+}
+
+.button{
+    width:100%;
+    border:0;
+    border-radius:11px;
+    padding:15px;
+    font-size:14px;
+    font-weight:800;
+    cursor:pointer;
+    background:linear-gradient(90deg,#7250ff,#b349ef);
+    color:#fff;
+    transition:.2s;
+}
+
+.button:hover{
+    transform:translateY(-1px);
+    box-shadow:0 10px 25px rgba(120,75,255,.25);
+}
+
+.download{
+    margin-top:10px;
+    background:#17152b;
+}
+
+.preview{
+    border:1px solid #e8e4f5;
+    border-radius:16px;
+    background:#faf9ff;
+    min-height:330px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.preview-title{
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+#qrcode{
+    background:#fff;
+    padding:12px;
+    border-radius:8px;
+    min-height:20px;
+}
+
+#qrcode img{
+    display:block;
+    max-width:100%;
+}
+
+.placeholder{
+    color:#aaa6b9;
+    font-size:12px;
+    text-align:center;
+}
+
+.info{
+    width:min(900px,92%);
+    margin:0 auto 50px;
+}
+
+.info-card{
+    background:#fff;
+    border:1px solid #e7e3f6;
+    border-radius:18px;
+    padding:28px;
+    margin-bottom:18px;
+}
+
+.info-card h2{
+    font-size:22px;
+    margin-bottom:12px;
+}
+
+.info-card p,
+.info-card li{
+    color:#6f6b80;
+    font-size:14px;
+    line-height:1.8;
+}
+
+.info-card ul{
+    padding-left:20px;
+}
+
+.faq{
+    width:min(900px,92%);
+    margin:0 auto 60px;
+}
+
+.faq h2{
+    text-align:center;
+    margin-bottom:20px;
+    font-size:28px;
+}
+
+.faq-item{
+    background:#fff;
+    border:1px solid #e7e3f6;
+    border-radius:13px;
+    margin-bottom:10px;
+    overflow:hidden;
+}
+
+.faq-item summary{
+    cursor:pointer;
+    padding:17px 20px;
+    font-weight:800;
+    font-size:14px;
+}
+
+.faq-item p{
+    padding:0 20px 18px;
+    color:#706c80;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.footer{
+    border-top:1px solid #e8e4f2;
+    text-align:center;
+    padding:30px 15px;
+    color:#77738a;
+    font-size:12px;
+}
+
+.footer-links{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:18px;
+    margin-bottom:14px;
+    font-weight:700;
+}
+
+.footer-links a:hover{
+    color:#7952ff;
+}
+
+@media(max-width:750px){
+    .header{
+        padding:13px 15px;
+    }
+
+    .nav{
+        display:none;
+    }
+
+    .hero{
+        margin-top:40px;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .hero p{
+        font-size:13px;
+    }
+
+    .generator{
+        grid-template-columns:1fr;
+        padding:18px;
+    }
+
+    .preview{
+        min-height:290px;
+    }
+
+    .info-card{
+        padding:22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+<a href="https://auraqr.in/" class="brand">
+    <img src="/logo.png" alt="AuraQR logo">
+    <span>Aura<strong>QR</strong></span>
+</a>
+
+<nav class="nav">
+    <a href="https://auraqr.in/">Generator</a>
+    <a href="url-qr-code.html">URL QR</a>
+    <a href="text-qr-code.html">Text QR</a>
+    <a href="wifi-qr-code.html">WiFi QR</a>
+    <a href="how-to-use.html">How to Use</a>
+</nav>
+
+</header>
+
+
+<section class="hero">
+
+<div class="badge">AURAQR • FREE WHATSAPP QR GENERATOR</div>
+
+<h1>
+WhatsApp QR Code
+<span>Generator Online</span>
+</h1>
+
+<p>
+Create a WhatsApp QR code with your phone number and an optional
+pre-filled message. Let customers, friends and visitors scan the QR
+code to open WhatsApp instantly.
+</p>
+
+</section>
+
+
+<section class="generator">
+
+<div class="form">
+
+<h2>Enter WhatsApp Details</h2>
+
+<div class="input-group">
+<label for="country">Country Code</label>
+
+<input
+    type="text"
+    id="country"
+    placeholder="Example: 91"
+    value="91"
+    inputmode="numeric"
+>
+
+<div class="help">
+Enter your country code without + sign.
+Example: India = 91
+</div>
+</div>
+
+
+<div class="input-group">
+
+<label for="phone">WhatsApp Phone Number</label>
+
+<input
+    type="text"
+    id="phone"
+    placeholder="Example: 9876543210"
+    inputmode="numeric"
+>
+
+<div class="help">
+Enter the WhatsApp number without +, spaces or dashes.
+</div>
+
+</div>
+
+
+<div class="input-group">
+
+<label for="message">Pre-filled Message (Optional)</label>
+
+<textarea
+    id="message"
+    placeholder="Hello! I found your WhatsApp QR code."
+></textarea>
+
+</div>
+
+
+<button class="button" onclick="generateQR()">
+Generate WhatsApp QR Code
+</button>
+
+<button
+    class="button download"
+    id="downloadBtn"
+    onclick="downloadQR()"
+    style="display:none;"
+>
+Download QR Code
+</button>
+
+</div>
+
+
+<div class="preview">
+
+<div class="preview-title">
+WHATSAPP QR CODE PREVIEW
+</div>
+
+<div id="qrcode">
+
+<div class="placeholder">
+Your QR code will appear here
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="info">
+
+<div class="info-card">
+
+<h2>Free WhatsApp QR Code Generator</h2>
+
+<p>
+AuraQR lets you create a WhatsApp QR code online for free.
+Instead of manually typing a phone number, users can scan your QR code
+and open a WhatsApp chat directly.
+</p>
+
+</div>
+
+
+<div class="info-card">
+
+<h2>How to Create a WhatsApp QR Code</h2>
+
+<ul>
+<li>Enter your WhatsApp country code.</li>
+<li>Enter your WhatsApp phone number.</li>
+<li>Add a pre-filled message if you want.</li>
+<li>Click Generate WhatsApp QR Code.</li>
+<li>Scan the QR code to test it.</li>
+<li>Download the QR code as a PNG image.</li>
+</ul>
+
+</div>
+
+
+<div class="info-card">
+
+<h2>Where Can You Use a WhatsApp QR Code?</h2>
+
+<p>
+WhatsApp QR codes are useful for businesses, restaurants, shops,
+freelancers, creators, real estate agents, customer support,
+business cards, posters, menus, packaging and social media profiles.
+</p>
+
+</div>
+
+</section>
+
+
+<section class="faq">
+
+<h2>WhatsApp QR Code FAQ</h2>
+
+
+<details class="faq-item">
+
+<summary>Is the WhatsApp QR code free?</summary>
+
+<p>
+Yes. AuraQR provides this WhatsApp QR code generator free of charge.
+</p>
+
+</details>
+
+
+<details class="faq-item">
+
+<summary>Do I need to install WhatsApp?</summary>
+
+<p>
+The QR code opens a WhatsApp chat link. The user needs WhatsApp or
+WhatsApp Web available on their device to continue the conversation.
+</p>
+
+</details>
+
+
+<details class="faq-item">
+
+<summary>Can I add a pre-filled WhatsApp message?</summary>
+
+<p>
+Yes. Enter an optional message before generating the QR code.
+The message will be included in the WhatsApp chat link.
+</p>
+
+</details>
+
+
+<details class="faq-item">
+
+<summary>Does the WhatsApp QR code expire?</summary>
+
+<p>
+The generated QR code contains a WhatsApp chat URL. AuraQR does not
+create a temporary redirect, so the QR image itself does not have an
+expiration date. It will work as long as the encoded WhatsApp number
+and WhatsApp link remain valid.
+</p>
+
+</details>
+
+
+<details class="faq-item">
+
+<summary>Is my phone number uploaded to AuraQR?</summary>
+
+<p>
+The QR code is generated directly in your browser. AuraQR does not
+need to send your phone number to a server to generate the QR code.
+</p>
+
+</details>
+
+</section>
+
+
+<footer class="footer">
+
+<div class="footer-links">
+<a href="https://auraqr.in/">Generator</a>
+<a href="url-qr-code.html">URL QR</a>
+<a href="text-qr-code.html">Text QR</a>
+<a href="wifi-qr-code.html">WiFi QR</a>
+<a href="how-to-use.html">How to Use</a>
+<a href="https://auraqr.in/#faq">FAQ</a>
+<a href="https://auraqr.in/#contact">Contact</a>
+</div>
+
+<div>
+© 2026 AuraQR. Free WhatsApp QR Code Generator.
+</div>
+
+<div style="margin-top:8px;">
+<a href="https://auraqr.in/">auraqr.in</a>
+</div>
+
+</footer>
+
+
+<script>
+
+let qrGenerated = false;
+
+function generateQR(){
+
+    const country = document
+        .getElementById("country")
+        .value
+        .replace(/\D/g,"");
+
+    const phone = document
+        .getElementById("phone")
+        .value
+        .replace(/\D/g,"");
+
+    const message = document
+        .getElementById("message")
+        .value
+        .trim();
+
+    if(!country){
+        alert("Please enter your country code.");
+        return;
+    }
+
+    if(!phone){
+        alert("Please enter your WhatsApp phone number.");
+        return;
+    }
+
+    if(phone.length < 6){
+        alert("Please enter a valid WhatsApp phone number.");
+        return;
+    }
+
+    const fullNumber = country + phone;
+
+    let whatsappURL =
+        "https://wa.me/" + fullNumber;
+
+    if(message){
+        whatsappURL += "?text=" + encodeURIComponent(message);
+    }
+
+    const qrContainer = document.getElementById("qrcode");
+
+    qrContainer.innerHTML = "";
+
+    new QRCode(qrContainer, {
+        text: whatsappURL,
+        width: 210,
+        height: 210,
+        colorDark: "#17152b",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+
+    qrGenerated = true;
+
+    document.getElementById("downloadBtn").style.display = "block";
+}
+
+
+function downloadQR(){
+
+    if(!qrGenerated){
+        alert("Please generate the QR code first.");
+        return;
+    }
+
+    const qrContainer = document.getElementById("qrcode");
+
+    const canvas = qrContainer.querySelector("canvas");
+    const image = qrContainer.querySelector("img");
+
+    let source = null;
+
+    if(canvas){
+        source = canvas.toDataURL("image/png");
+    }else if(image){
+        source = image.src;
+    }
+
+    if(!source){
+        alert("QR code is not ready yet.");
+        return;
+    }
+
+    const link = document.createElement("a");
+
+    link.href = source;
+    link.download = "auraqr-whatsapp-qr.png";
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+</script>
+
+</body>
+</html>
