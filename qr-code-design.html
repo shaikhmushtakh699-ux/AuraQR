@@ -6,12 +6,17 @@
 
 <title>QR Code Design Generator – Create Custom QR Codes | AuraQR</title>
 
-<meta name="description" content="Design a custom QR code online with AuraQR. Choose QR colors, background, size and create a stylish QR code for websites, business and marketing.">
+<meta name="description" content="Design custom QR codes online with AuraQR. Choose QR colors, background, size, error correction and create stylish QR codes for business, marketing and personal use.">
 
 <meta name="robots" content="index, follow">
 
 <link rel="canonical" href="https://auraqr.in/qr-code-design.html">
-<link rel="icon" href="/favicon.png">
+<link rel="icon" type="image/png" href="/favicon.png">
+
+<meta property="og:title" content="QR Code Design Generator | AuraQR">
+<meta property="og:description" content="Create beautiful custom QR codes online with AuraQR.">
+<meta property="og:url" content="https://auraqr.in/qr-code-design.html">
+<meta property="og:type" content="website">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
@@ -22,35 +27,65 @@
     padding:0;
 }
 
+:root{
+    --purple:#7c3cff;
+    --purple2:#9b5cff;
+    --dark:#17132f;
+    --muted:#74708a;
+    --bg:#f8f7ff;
+    --card:#ffffff;
+    --border:#e9e5f5;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     font-family:Arial,Helvetica,sans-serif;
-    background:#f8f9fc;
-    color:#171923;
+    background:var(--bg);
+    color:var(--dark);
+    line-height:1.6;
 }
 
-.container{
-    width:min(1100px,92%);
-    margin:auto;
+a{
+    color:inherit;
+    text-decoration:none;
 }
+
+button,
+input,
+textarea,
+select{
+    font:inherit;
+}
+
+/* HEADER */
 
 header{
-    margin-top:18px;
-    background:#fff;
-    border:1px solid #e8e8ef;
-    border-radius:16px;
-    padding:16px 24px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(255,255,255,.96);
+    border-bottom:1px solid #eeeaf8;
+    backdrop-filter:blur(12px);
+}
+
+.nav{
+    max-width:1180px;
+    margin:auto;
+    min-height:72px;
+    padding:0 22px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    box-shadow:0 8px 25px rgba(0,0,0,.05);
+    gap:25px;
 }
 
 .logo{
     display:flex;
     align-items:center;
     gap:10px;
-    text-decoration:none;
-    color:#171923;
     font-size:20px;
     font-weight:800;
 }
@@ -61,251 +96,545 @@ header{
     object-fit:contain;
 }
 
-nav{
-    display:flex;
-    gap:20px;
+.logo span{
+    background:linear-gradient(90deg,#15122e,#7c3cff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
 }
 
-nav a{
-    text-decoration:none;
-    color:#171923;
-    font-size:14px;
-    font-weight:600;
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:22px;
+    font-size:13px;
+    font-weight:700;
 }
+
+.nav-links a{
+    transition:.2s;
+}
+
+.nav-links a:hover{
+    color:var(--purple);
+}
+
+.create-btn{
+    background:linear-gradient(135deg,#7c3cff,#a04cff);
+    color:#fff!important;
+    padding:12px 18px;
+    border-radius:10px;
+    box-shadow:0 8px 20px rgba(124,60,255,.22);
+}
+
+.menu{
+    display:none;
+    border:0;
+    background:none;
+    font-size:25px;
+    cursor:pointer;
+}
+
+/* HERO */
 
 .hero{
+    max-width:1000px;
+    margin:auto;
     text-align:center;
-    padding:65px 10px 35px;
+    padding:68px 20px 42px;
 }
 
 .badge{
     display:inline-block;
-    background:#eee7ff;
-    color:#7647ff;
-    padding:7px 13px;
-    border-radius:20px;
-    font-size:11px;
+    background:#eee8ff;
+    color:#7040e9;
+    font-size:10px;
     font-weight:800;
+    letter-spacing:.5px;
+    padding:7px 12px;
+    border-radius:20px;
     margin-bottom:18px;
 }
 
-h1{
-    font-size:48px;
-    line-height:1.1;
-    margin-bottom:16px;
+.hero h1{
+    font-size:44px;
+    line-height:1.12;
+    letter-spacing:-1.5px;
+    margin-bottom:18px;
 }
 
-.gradient{
-    color:#7b4cff;
+.hero h1 span{
+    color:var(--purple);
 }
 
 .hero p{
     max-width:720px;
     margin:auto;
-    color:#697080;
-    line-height:1.7;
+    color:var(--muted);
     font-size:15px;
+}
+
+/* GENERATOR */
+
+.generator-section{
+    max-width:1180px;
+    margin:20px auto 70px;
+    padding:0 20px;
 }
 
 .generator{
     background:#fff;
-    border:1px solid #e8e8ef;
-    border-radius:18px;
+    border:1px solid var(--border);
+    border-radius:22px;
     padding:28px;
+    box-shadow:0 20px 55px rgba(54,34,110,.08);
     display:grid;
-    grid-template-columns:1fr 290px;
-    gap:25px;
-    box-shadow:0 15px 40px rgba(80,50,150,.08);
+    grid-template-columns:1fr 390px;
+    gap:30px;
 }
 
-h2{
-    font-size:20px;
+.panel-title{
+    font-size:18px;
+    font-weight:800;
+    margin-bottom:22px;
+}
+
+.field{
     margin-bottom:20px;
 }
 
-label{
+.field label{
     display:block;
     font-size:12px;
-    font-weight:700;
-    margin:15px 0 7px;
+    font-weight:800;
+    margin-bottom:8px;
 }
 
-input[type="url"]{
-    width:100%;
-    padding:14px;
-    border:1px solid #dddfea;
-    border-radius:9px;
-    outline:none;
-    font-size:14px;
-}
-
-input[type="url"]:focus{
-    border-color:#8555ff;
-}
-
-input[type="color"]{
-    width:100%;
-    height:48px;
-    border:1px solid #dddfea;
-    border-radius:9px;
-    padding:4px;
-    background:#fff;
-    cursor:pointer;
-}
-
+textarea,
+input[type="text"],
 select{
     width:100%;
-    padding:14px;
-    border:1px solid #dddfea;
-    border-radius:9px;
-    background:#fff;
-    font-size:14px;
+    border:1px solid #ddd8ec;
+    border-radius:10px;
+    padding:13px 14px;
     outline:none;
+    background:#fff;
+    color:var(--dark);
+    transition:.2s;
 }
 
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+textarea:focus,
+input[type="text"]:focus,
 select:focus{
-    border-color:#8555ff;
+    border-color:var(--purple);
+    box-shadow:0 0 0 3px rgba(124,60,255,.08);
 }
 
-.color-row{
+/* COLORS */
+
+.color-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:15px;
 }
 
-button{
-    border:none;
-    border-radius:9px;
-    padding:14px 20px;
-    font-weight:700;
+.color-box{
+    border:1px solid #e4dfef;
+    border-radius:12px;
+    padding:12px;
+}
+
+.color-box label{
+    margin-bottom:9px;
+}
+
+.color-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+input[type="color"]{
+    width:48px;
+    height:38px;
+    padding:2px;
+    border:1px solid #ddd;
+    border-radius:8px;
     cursor:pointer;
-    font-size:14px;
+    background:#fff;
 }
 
-.generate{
-    width:100%;
-    margin-top:20px;
-    background:linear-gradient(90deg,#7148ff,#ad45ef);
-    color:#fff;
+.color-value{
+    font-size:12px;
+    color:#666174;
+    font-weight:700;
 }
 
-.download{
-    width:100%;
-    margin-top:10px;
-    background:#15182a;
-    color:#fff;
+/* RANGE */
+
+.range-row{
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
+
+input[type="range"]{
+    flex:1;
+    accent-color:var(--purple);
+    cursor:pointer;
+}
+
+.range-value{
+    min-width:50px;
+    color:var(--purple);
+    font-weight:800;
+    font-size:12px;
+}
+
+/* OPTIONS */
+
+.options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.check{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    border:1px solid #e8e3f1;
+    border-radius:10px;
+    padding:11px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:700;
+}
+
+.check input{
+    accent-color:var(--purple);
+}
+
+/* BUTTONS */
+
+.actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:24px;
+}
+
+.primary,
+.secondary{
+    border:0;
+    border-radius:10px;
+    padding:13px 18px;
+    cursor:pointer;
+    font-weight:800;
+    transition:.2s;
+}
+
+.primary{
+    color:#fff;
+    background:linear-gradient(135deg,#7337f6,#a04cff);
+    box-shadow:0 9px 22px rgba(124,60,255,.22);
+}
+
+.secondary{
+    color:#5630b6;
+    background:#f0ebff;
+}
+
+.primary:hover,
+.secondary:hover{
+    transform:translateY(-2px);
+}
+
+/* PREVIEW */
 
 .preview{
-    min-height:350px;
-    background:#faf9ff;
-    border:1px solid #e9e5f6;
-    border-radius:14px;
+    border:1px solid #ebe6f5;
+    border-radius:18px;
+    background:#fcfbff;
+    padding:25px;
+    min-height:500px;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    padding:20px;
 }
 
-.preview h3{
-    font-size:14px;
-    margin-bottom:18px;
+.preview-title{
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:20px;
+    text-transform:uppercase;
 }
 
-#qrcode{
-    background:#fff;
-    padding:12px;
+.qr-wrapper{
+    width:290px;
+    min-height:290px;
     display:flex;
     align-items:center;
     justify-content:center;
-}
-
-.qr-label{
-    margin-top:15px;
-    font-size:12px;
-    color:#777;
-    text-align:center;
-}
-
-.info{
+    padding:20px;
+    border-radius:15px;
     background:#fff;
-    border:1px solid #e8e8ef;
-    border-radius:18px;
-    padding:30px;
-    margin:30px 0;
-    line-height:1.8;
+    border:1px solid #eeeaf7;
+    box-shadow:0 12px 35px rgba(50,30,100,.08);
 }
 
-.info h2{
+#qrcode{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#qrcode img,
+#qrcode canvas{
+    max-width:100%;
+    height:auto;
+}
+
+.preview-note{
+    text-align:center;
+    color:#858096;
+    font-size:11px;
+    margin-top:18px;
+}
+
+/* INFO */
+
+.info-section{
+    max-width:980px;
+    margin:0 auto 70px;
+    padding:0 20px;
+}
+
+.info-section h2{
+    text-align:center;
+    font-size:30px;
     margin-bottom:12px;
 }
 
-.info p{
-    color:#697080;
+.info-section>p{
+    text-align:center;
+    color:var(--muted);
+    max-width:700px;
+    margin:0 auto 30px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.feature{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:23px;
+}
+
+.feature-icon{
+    font-size:25px;
+    margin-bottom:10px;
+}
+
+.feature h3{
+    font-size:16px;
+    margin-bottom:7px;
+}
+
+.feature p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* FAQ */
+
+.faq-section{
+    max-width:900px;
+    margin:0 auto 70px;
+    padding:0 20px;
+}
+
+.faq-section h2{
+    text-align:center;
+    font-size:30px;
+    margin-bottom:28px;
+}
+
+details{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:17px 19px;
+    margin-bottom:12px;
+}
+
+summary{
+    cursor:pointer;
+    font-weight:800;
+    font-size:14px;
+}
+
+details p{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:12px;
+}
+
+/* FOOTER */
+
+footer{
+    background:#15122b;
+    color:#fff;
+    padding:45px 20px 25px;
+}
+
+.footer-inner{
+    max-width:1180px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer-brand p{
+    color:#aaa5bc;
+    font-size:13px;
+    max-width:390px;
+    margin-top:12px;
+}
+
+.footer-col h3{
     font-size:14px;
     margin-bottom:15px;
 }
 
-.faq{
-    margin:30px 0 50px;
-}
-
-.faq-item{
-    background:#fff;
-    border:1px solid #e8e8ef;
-    border-radius:12px;
-    padding:18px 20px;
-    margin-bottom:12px;
-}
-
-.faq-item h3{
-    font-size:15px;
-    margin-bottom:8px;
-}
-
-.faq-item p{
-    color:#697080;
-    font-size:14px;
-    line-height:1.7;
-}
-
-footer{
-    text-align:center;
-    padding:30px 10px;
-    color:#777;
+.footer-col a{
+    display:block;
+    color:#aaa5bc;
     font-size:13px;
+    margin-bottom:9px;
 }
 
-@media(max-width:750px){
+.footer-col a:hover{
+    color:#fff;
+}
 
-    header{
-        padding:14px 16px;
+.copyright{
+    max-width:1180px;
+    margin:35px auto 0;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.1);
+    color:#8e899f;
+    font-size:12px;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:25px;
+    transform:translate(-50%,120px);
+    background:#17132f;
+    color:#fff;
+    padding:13px 20px;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:700;
+    z-index:3000;
+    transition:.3s;
+    opacity:0;
+}
+
+.toast.show{
+    transform:translate(-50%,0);
+    opacity:1;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:72px;
+        left:0;
+        right:0;
+        background:#fff;
+        padding:20px;
+        flex-direction:column;
+        align-items:stretch;
+        border-bottom:1px solid #eee;
     }
 
-    nav{
-        gap:10px;
-        flex-wrap:wrap;
-        justify-content:flex-end;
+    .nav-links.active{
+        display:flex;
     }
 
-    nav a{
-        font-size:12px;
-    }
-
-    .hero{
-        padding-top:45px;
-    }
-
-    h1{
-        font-size:36px;
+    .menu{
+        display:block;
     }
 
     .generator{
         grid-template-columns:1fr;
     }
 
-    .color-row{
+    .preview{
+        min-height:430px;
+    }
+
+    .footer-inner{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:650px){
+
+    .hero{
+        padding-top:45px;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .hero p{
+        font-size:13px;
+    }
+
+    .generator{
+        padding:18px;
+        border-radius:16px;
+    }
+
+    .color-grid,
+    .options,
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .qr-wrapper{
+        width:260px;
+        min-height:260px;
+    }
+
+    .actions button{
+        width:100%;
+    }
+
+    .footer-inner{
         grid-template-columns:1fr;
     }
 }
@@ -314,295 +643,317 @@ footer{
 
 <body>
 
-<div class="container">
-
 <header>
+    <nav class="nav">
 
-<a href="https://auraqr.in/" class="logo">
-<img src="/logo.png" alt="AuraQR Logo">
-AuraQR
-</a>
+        <a href="index.html" class="logo">
+            <img src="/logo.png" alt="AuraQR logo">
+            <span>AuraQR</span>
+        </a>
 
-<nav>
-<a href="/">Generator</a>
-<a href="/url-qr-code.html">URL QR</a>
-<a href="/templates.html">Templates</a>
-<a href="/how-to-use.html">How to Use</a>
-</nav>
+        <button class="menu" id="menuBtn" aria-label="Open menu">☰</button>
 
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Generator</a>
+            <a href="templates.html">Templates</a>
+            <a href="how-to-use.html">How to Use</a>
+            <a href="#faq">FAQ</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="index.html" class="create-btn">Create QR</a>
+        </div>
+
+    </nav>
 </header>
+
+<main>
 
 <section class="hero">
 
-<div class="badge">AURAQR • FREE QR CODE DESIGNER</div>
+    <div class="badge">AURAQR • QR CODE DESIGN</div>
 
-<h1>
-QR Code
-<span class="gradient">Design Generator</span>
-</h1>
+    <h1>
+        QR Code <span>Design</span> Generator
+    </h1>
 
-<p>
-Design a custom QR code online with AuraQR. Choose your QR code color,
-background color and size to create a QR code that matches your brand.
-</p>
-
-</section>
-
-<section class="generator">
-
-<div>
-
-<h2>Design Your QR Code</h2>
-
-<label for="url">WEBSITE URL</label>
-
-<input
-id="url"
-type="url"
-placeholder="https://example.com"
->
-
-<div class="color-row">
-
-<div>
-
-<label for="foreground">QR CODE COLOR</label>
-
-<input
-id="foreground"
-type="color"
-value="#171923"
->
-
-</div>
-
-<div>
-
-<label for="background">BACKGROUND COLOR</label>
-
-<input
-id="background"
-type="color"
-value="#ffffff"
->
-
-</div>
-
-</div>
-
-<label for="size">QR CODE SIZE</label>
-
-<select id="size">
-
-<option value="180">Small – 180 × 180</option>
-<option value="220" selected>Medium – 220 × 220</option>
-<option value="280">Large – 280 × 280</option>
-<option value="350">Extra Large – 350 × 350</option>
-
-</select>
-
-<button class="generate" onclick="generateQR()">
-Generate Designed QR Code
-</button>
-
-<button class="download" onclick="downloadQR()">
-Download QR Code
-</button>
-
-</div>
-
-<div class="preview">
-
-<h3>QR CODE PREVIEW</h3>
-
-<div id="qrcode">
-
-<p style="color:#888;font-size:13px;">
-Your QR code will appear here
-</p>
-
-</div>
-
-<div class="qr-label">
-Preview your custom QR code before downloading.
-</div>
-
-</div>
+    <p>
+        Create a beautiful custom QR code online. Choose your colors,
+        background, size and error correction, then download your QR code
+        instantly.
+    </p>
 
 </section>
 
-<section class="info">
+<section class="generator-section">
 
-<h2>Free QR Code Design Generator</h2>
+<div class="generator">
 
-<p>
-AuraQR helps you create a customized QR code for websites, businesses,
-marketing campaigns, posters, flyers, packaging, menus and social media.
-</p>
+    <div>
 
-<p>
-Choose your QR code color, background color and QR size. A good contrast
-between the QR code and its background helps smartphones scan the code
-more reliably.
-</p>
+        <h2 class="panel-title">Customize Your QR Code</h2>
 
-<h2>How to Design a QR Code</h2>
+        <div class="field">
 
-<p>
-1. Enter the URL you want to encode.
-<br>
-2. Choose your QR code color.
-<br>
-3. Choose your background color.
-<br>
-4. Select the QR code size.
-<br>
-5. Click <strong>Generate Designed QR Code</strong>.
-<br>
-6. Test the QR code with a smartphone.
-<br>
-7. Download the finished QR code.
-</p>
+            <label for="qrText">URL OR TEXT</label>
 
-</section>
+            <textarea id="qrText" placeholder="Enter a website URL, text, contact information or any content...">https://auraqr.in</textarea>
 
-<section class="faq">
+        </div>
 
-<h2>Frequently Asked Questions</h2>
+        <div class="color-grid">
 
-<div class="faq-item">
+            <div class="color-box">
 
-<h3>Can I customize my QR code?</h3>
+                <label>QR CODE COLOR</label>
 
-<p>
-Yes. You can customize the QR code color, background color and size.
-</p>
+                <div class="color-row">
 
-</div>
+                    <input type="color" id="foreground" value="#17132f">
 
-<div class="faq-item">
+                    <span class="color-value" id="foregroundValue">#17132F</span>
 
-<h3>What colors can I use?</h3>
+                </div>
 
-<p>
-You can choose custom colors using the built-in color selectors.
-</p>
+            </div>
 
-</div>
+            <div class="color-box">
 
-<div class="faq-item">
+                <label>BACKGROUND COLOR</label>
 
-<h3>What QR code size should I choose?</h3>
+                <div class="color-row">
 
-<p>
-Choose a larger size when the QR code will be printed or displayed from
-a greater distance.
-</p>
+                    <input type="color" id="background" value="#ffffff">
 
-</div>
+                    <span class="color-value" id="backgroundValue">#FFFFFF</span>
 
-<div class="faq-item">
+                </div>
 
-<h3>Are custom QR codes scannable?</h3>
+            </div>
 
-<p>
-Yes, as long as the QR code maintains sufficient contrast and clear
-scanning areas. Always test the final QR code before publishing it.
-</p>
+        </div>
 
-</div>
+        <div class="field" style="margin-top:20px;">
 
-<div class="faq-item">
+            <label for="size">QR CODE SIZE</label>
 
-<h3>Can I download my designed QR code?</h3>
+            <div class="range-row">
 
-<p>
-Yes. You can download the generated QR code as a PNG image.
-</p>
+                <input
+                    type="range"
+                    id="size"
+                    min="200"
+                    max="800"
+                    step="50"
+                    value="400"
+                >
+
+                <span class="range-value" id="sizeValue">400px</span>
+
+            </div>
+
+        </div>
+
+        <div class="field">
+
+            <label for="errorCorrection">ERROR CORRECTION</label>
+
+            <select id="errorCorrection">
+
+                <option value="L">Low – 7%</option>
+                <option value="M" selected>Medium – 15%</option>
+                <option value="Q">Quartile – 25%</option>
+                <option value="H">High – 30%</option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+
+            <label>QUICK OPTIONS</label>
+
+            <div class="options">
+
+                <label class="check">
+                    <input type="checkbox" id="rounded">
+                    Rounded Preview
+                </label>
+
+                <label class="check">
+                    <input type="checkbox" id="transparent">
+                    Transparent Background
+                </label>
+
+            </div>
+
+        </div>
+
+        <div class="actions">
+
+            <button class="primary" onclick="generateQR()">
+                Generate QR Code
+            </button>
+
+            <button class="secondary" onclick="resetDesign()">
+                Reset
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="preview">
+
+        <div class="preview-title">
+            QR Code Preview
+        </div>
+
+        <div class="qr-wrapper" id="qrWrapper">
+
+            <div id="qrcode"></div>
+
+        </div>
+
+        <p class="preview-note">
+            Scan your QR code after downloading to verify that it works correctly.
+        </p>
+
+        <button
+            class="primary"
+            onclick="downloadQR()"
+            style="margin-top:18px;"
+        >
+            Download PNG
+        </button>
+
+    </div>
 
 </div>
 
 </section>
+
+<section class="info-section">
+
+    <h2>Design QR Codes Your Way</h2>
+
+    <p>
+        AuraQR gives you simple controls to create customized QR codes
+        suitable for websites, business cards, posters, packaging and marketing.
+    </p>
+
+    <div class="features">
+
+        <div class="feature">
+            <div class="feature-icon">🎨</div>
+            <h3>Custom Colors</h3>
+            <p>
+                Choose your QR code and background colors to match your brand.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">📐</div>
+            <h3>Flexible Size</h3>
+            <p>
+                Create QR codes from compact digital sizes to high-resolution downloads.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🛡️</div>
+            <h3>Error Correction</h3>
+            <p>
+                Select the appropriate error correction level for your use case.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="faq-section" id="faq">
+
+    <h2>Frequently Asked Questions</h2>
+
+    <details>
+        <summary>Can I change the QR code color?</summary>
+        <p>
+            Yes. Use the QR Code Color selector to choose a custom color.
+            For reliable scanning, maintain strong contrast between the QR
+            code and its background.
+        </p>
+    </details>
+
+    <details>
+        <summary>Can I change the background color?</summary>
+        <p>
+            Yes. AuraQR lets you select a custom background color. You can
+            also enable the transparent background option.
+        </p>
+    </details>
+
+    <details>
+        <summary>What is QR error correction?</summary>
+        <p>
+            Error correction allows a QR code to remain readable even when
+            part of its data pattern is damaged or obscured. Higher levels
+            provide more recovery capability.
+        </p>
+    </details>
+
+    <details>
+        <summary>Are these QR codes static?</summary>
+        <p>
+            Yes. The QR code contains the content you enter when it is
+            generated. If you change the destination later, you need to
+            create a new QR code.
+        </p>
+    </details>
+
+    <details>
+        <summary>Is my entered data uploaded?</summary>
+        <p>
+            QR generation on this page happens directly in your browser.
+            The page does not need to upload the entered text to AuraQR's
+            server to create the QR code.
+        </p>
+    </details>
+
+</section>
+
+</main>
 
 <footer>
-© 2026 AuraQR. All rights reserved.
-</footer>
 
-</div>
+<div class="footer-inner">
 
-<script>
+    <div class="footer-brand">
 
-function generateQR(){
+        <div class="logo">
+            <img src="/logo.png" alt="AuraQR logo">
+            <span>AuraQR</span>
+        </div>
 
-    let url = document.getElementById("url").value.trim();
+        <p>
+            Create free custom QR codes online for websites, businesses,
+            marketing, events and everyday use.
+        </p>
 
-    if(!url){
-        alert("Please enter a URL.");
-        return;
-    }
+    </div>
 
-    if(!/^https?:\/\//i.test(url)){
-        url = "https://" + url;
-    }
+    <div class="footer-col">
 
-    const foreground =
-        document.getElementById("foreground").value;
+        <h3>QR Tools</h3>
 
-    const background =
-        document.getElementById("background").value;
+        <a href="index.html">QR Generator</a>
+        <a href="url-qr-code.html">URL QR Code</a>
+        <a href="qr-code-with-logo.html">QR with Logo</a>
+        <a href="qr-color-palettes.html">Color Palettes</a>
 
-    const size =
-        parseInt(document.getElementById("size").value);
+    </div>
 
-    const qrContainer =
-        document.getElementById("qrcode");
+    <div class="footer-col">
 
-    qrContainer.innerHTML = "";
+        <h3>Resources</h3>
 
-    new QRCode(qrContainer,{
-
-        text:url,
-
-        width:size,
-
-        height:size,
-
-        colorDark:foreground,
-
-        colorLight:background,
-
-        correctLevel:QRCode.CorrectLevel.H
-
-    });
-}
-
-
-function downloadQR(){
-
-    const canvas =
-        document.querySelector("#qrcode canvas");
-
-    if(!canvas){
-
-        alert("Please generate the QR code first.");
-
-        return;
-    }
-
-    const link =
-        document.createElement("a");
-
-    link.download =
-        "auraqr-designed-qr-code.png";
-
-    link.href =
-        canvas.toDataURL("image/png");
-
-    link.click();
-
-}
-
-</script>
-
-</body>
-</html>
+        <a href="templates.html">Templates</a>
+        <a href="how-to-use.html
