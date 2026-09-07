@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Phone QR Code Generator – Create QR Code for Phone Number | AuraQR</title>
+
+<meta name="description" content="Create a free phone QR code online with AuraQR. Enter a phone number, generate a QR code instantly, and download it as a PNG image.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://auraqr.in/phone-qr-code.html">
+
+<link rel="icon" type="image/png" href="/favicon.png">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#f8f7ff,#ffffff);
+  color:#17152b;
+  min-height:100vh;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+.container{
+  width:min(1180px,92%);
+  margin:auto;
+}
+
+/* HEADER */
+header{
+  width:min(1180px,92%);
+  margin:22px auto 0;
+  background:#fff;
+  border:1px solid #e8e4f7;
+  border-radius:18px;
+  padding:15px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 8px 30px rgba(70,50,130,.08);
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:20px;
+  font-weight:800;
+}
+
+.logo img{
+  width:32px;
+  height:32px;
+  object-fit:contain;
+}
+
+.logo span{
+  background:linear-gradient(90deg,#6046ff,#b548ef);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+nav{
+  display:flex;
+  gap:22px;
+  align-items:center;
+}
+
+nav a{
+  font-size:14px;
+  font-weight:700;
+  color:#242139;
+}
+
+nav a:hover{
+  color:#7147ff;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:72px 20px 38px;
+}
+
+.badge{
+  display:inline-block;
+  padding:7px 13px;
+  border-radius:30px;
+  background:#eee9ff;
+  color:#7048ff;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.4px;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-size:clamp(38px,5vw,64px);
+  line-height:1.05;
+  font-weight:900;
+  margin-bottom:18px;
+}
+
+.hero h1 span{
+  display:block;
+  background:linear-gradient(90deg,#6747ff,#b447ed);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+  max-width:700px;
+  margin:auto;
+  color:#706b85;
+  font-size:15px;
+  line-height:1.7;
+}
+
+/* GENERATOR */
+.generator-card{
+  width:min(900px,100%);
+  margin:25px auto 50px;
+  background:#fff;
+  border:1px solid #e8e4f7;
+  border-radius:20px;
+  padding:20px;
+  display:grid;
+  grid-template-columns:1.45fr .75fr;
+  gap:20px;
+  box-shadow:0 15px 45px rgba(70,50,130,.09);
+}
+
+.form-section{
+  padding:8px;
+}
+
+.form-section h2{
+  font-size:18px;
+  margin-bottom:22px;
+}
+
+label{
+  display:block;
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:8px;
+  color:#302b49;
+  text-transform:uppercase;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  border:1px solid #ddd8ef;
+  border-radius:10px;
+  outline:none;
+  font-size:14px;
+  margin-bottom:7px;
+  transition:.2s;
+}
+
+input:focus{
+  border-color:#754bff;
+  box-shadow:0 0 0 3px rgba(117,75,255,.1);
+}
+
+.help{
+  font-size:10px;
+  color:#89839d;
+  margin-bottom:18px;
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:10px;
+  padding:14px;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.generate-btn{
+  color:#fff;
+  background:linear-gradient(90deg,#7047ff,#b447ed);
+}
+
+.generate-btn:hover{
+  transform:translateY(-1px);
+  box-shadow:0 8px 20px rgba(112,71,255,.25);
+}
+
+.download-btn{
+  margin-top:9px;
+  background:#17152b;
+  color:#fff;
+}
+
+.download-btn:hover{
+  background:#28243f;
+}
+
+.download-btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+/* PREVIEW */
+.preview{
+  min-height:300px;
+  border:1px solid #e8e4f7;
+  border-radius:14px;
+  background:#faf9ff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.preview-title{
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:18px;
+  text-transform:uppercase;
+}
+
+#qrcode{
+  background:#fff;
+  padding:10px;
+  border-radius:8px;
+  min-height:20px;
+}
+
+#qrcode img,
+#qrcode canvas{
+  display:block;
+  max-width:100%;
+}
+
+.placeholder{
+  color:#9993ad;
+  font-size:12px;
+  text-align:center;
+}
+
+/* CONTENT */
+.content-card{
+  width:min(900px,100%);
+  margin:0 auto 30px;
+  background:#fff;
+  border:1px solid #e8e4f7;
+  border-radius:18px;
+  padding:30px;
+  box-shadow:0 10px 35px rgba(70,50,130,.06);
+}
+
+.content-card h2{
+  font-size:24px;
+  margin-bottom:15px;
+}
+
+.content-card h3{
+  font-size:18px;
+  margin:25px 0 10px;
+}
+
+.content-card p,
+.content-card li{
+  color:#68627b;
+  font-size:14px;
+  line-height:1.8;
+}
+
+.content-card ul{
+  padding-left:20px;
+}
+
+/* FAQ */
+.faq{
+  width:min(900px,100%);
+  margin:35px auto 60px;
+}
+
+.faq h2{
+  text-align:center;
+  margin-bottom:20px;
+  font-size:28px;
+}
+
+.faq-item{
+  background:#fff;
+  border:1px solid #e8e4f7;
+  border-radius:12px;
+  margin-bottom:10px;
+  overflow:hidden;
+}
+
+.faq-question{
+  padding:17px 20px;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+}
+
+.faq-answer{
+  display:none;
+  padding:0 20px 18px;
+  color:#6d687e;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.faq-item.active .faq-answer{
+  display:block;
+}
+
+/* FOOTER */
+footer{
+  border-top:1px solid #e8e4f7;
+  margin-top:50px;
+  padding:28px 20px;
+  text-align:center;
+  color:#777188;
+  font-size:12px;
+}
+
+.footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:15px;
+  margin-bottom:14px;
+}
+
+.footer-links a{
+  font-weight:700;
+  color:#28243c;
+}
+
+.footer-links a:hover{
+  color:#7047ff;
+}
+
+/* MOBILE */
+@media(max-width:760px){
+
+  header{
+    padding:13px 15px;
+  }
+
+  nav{
+    gap:11px;
+  }
+
+  nav a{
+    font-size:11px;
+  }
+
+  .hero{
+    padding-top:48px;
+  }
+
+  .hero h1{
+    font-size:38px;
+  }
+
+  .generator-card{
+    grid-template-columns:1fr;
+    padding:14px;
+  }
+
+  .preview{
+    min-height:270px;
+  }
+
+  .content-card{
+    padding:22px;
+  }
+}
+
+@media(max-width:520px){
+
+  header{
+    flex-direction:column;
+    gap:12px;
+  }
+
+  nav{
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .hero h1{
+    font-size:34px;
+  }
+
+  .hero p{
+    font-size:13px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html" class="logo">
+    <img src="/logo.png" alt="AuraQR logo">
+    <span>AuraQR</span>
+  </a>
+
+  <nav>
+    <a href="index.html">Generator</a>
+    <a href="url-qr-code.html">URL QR</a>
+    <a href="templates.html">Templates</a>
+    <a href="how-to-use.html">How to Use</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="badge">AURAQR • FREE PHONE QR GENERATOR</div>
+
+  <h1>
+    Phone QR Code
+    <span>Generator Online</span>
+  </h1>
+
+  <p>
+    Create a free phone QR code with AuraQR. Enter a phone number,
+    generate a scannable QR code instantly, and download it as a PNG image.
+  </p>
+</section>
+
+<section class="generator-card">
+
+  <div class="form-section">
+
+    <h2>Enter Phone Details</h2>
+
+    <label for="phone">Phone Number</label>
+
+    <input
+      type="tel"
+      id="phone"
+      placeholder="+91 9876543210"
+      autocomplete="tel"
+    >
+
+    <div class="help">
+      Enter the complete phone number including country code.
+      Example: +91 9876543210
+    </div>
+
+    <button class="generate-btn" onclick="generateQR()">
+      Generate Phone QR Code
+    </button>
+
+    <button
+      class="download-btn"
+      id="downloadBtn"
+      onclick="downloadQR()"
+      disabled
+    >
+      Download QR Code
+    </button>
+
+  </div>
+
+  <div class="preview">
+
+    <div class="preview-title">
+      Phone QR Code Preview
+    </div>
+
+    <div id="qrcode">
+      <div class="placeholder">
+        Your phone QR code will appear here
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="content-card">
+
+  <h2>Free Phone QR Code Generator</h2>
+
+  <p>
+    AuraQR lets you convert a phone number into a scannable QR code.
+    When someone scans the QR code, their phone can open the number
+    in the phone app so they can quickly make a call.
+  </p>
+
+  <h3>How to Create a Phone QR Code</h3>
+
+  <ul>
+    <li>Enter your phone number with the country code.</li>
+    <li>Click the Generate Phone QR Code button.</li>
+    <li>Scan the generated QR code to test it.</li>
+    <li>Download the QR code as a PNG image.</li>
+  </ul>
+
+  <h3>Where Can You Use a Phone QR Code?</h3>
+
+  <p>
+    Phone QR codes are useful for business cards, posters,
+    advertisements, storefronts, brochures, packaging,
+    event materials and contact information.
+  </p>
+
+</section>
+
+<section class="faq">
+
+  <h2>Phone QR Code FAQ</h2>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">
+      Is the phone QR code free?
+      <span>+</span>
+    </div>
+    <div class="faq-answer">
+      Yes. AuraQR provides this phone QR code generator for free.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">
+      Do I need an account?
+      <span>+</span>
+    </div>
+    <div class="faq-answer">
+      No account is required to create a phone QR code.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">
+      Does the QR code expire?
+      <span>+</span>
+    </div>
+    <div class="faq-answer">
+      The generated QR code contains the phone number directly and
+      does not depend on an AuraQR subscription or account.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">
+      Can I download the phone QR code?
+      <span>+</span>
+    </div>
+    <div class="faq-answer">
+      Yes. After generating the QR code, click Download QR Code
+      to save it as a PNG image.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+
+  <div class="footer-links">
+    <a href="index.html">Generator</a>
+    <a href="url-qr-code.html">URL QR</a>
+    <a href="text-qr-code.html">Text QR</a>
+    <a href="wifi-qr-code.html">WiFi QR</a>
+    <a href="whatsapp-qr-code.html">WhatsApp QR</a>
+    <a href="upi-qr-code.html">UPI QR</a>
+    <a href="vcard-qr-code.html">vCard QR</a>
+    <a href="sms-qr-code.html">SMS QR</a>
+    <a href="email-qr-code.html">Email QR</a>
+    <a href="templates.html">Templates</a>
+    <a href="how-to-use.html">How to Use</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+
+  <div>
+    © 2026 AuraQR. Free Online QR Code Generator.
+  </div>
+
+</footer>
+
+<script>
+
+let currentQR = null;
+
+function generateQR(){
+
+  const phoneInput = document.getElementById("phone");
+  const phone = phoneInput.value.trim();
+
+  if(!phone){
+    alert("Please enter a phone number.");
+    phoneInput.focus();
+    return;
+  }
+
+  const cleanedPhone = phone.replace(/[^\d+]/g,"");
+
+  if(cleanedPhone.length < 7){
+    alert("Please enter a valid phone number.");
+    phoneInput.focus();
+    return;
+  }
+
+  const qrContainer = document.getElementById("qrcode");
+
+  qrContainer.innerHTML = "";
+
+  currentQR = new QRCode(qrContainer,{
+    text:"tel:"+cleanedPhone,
+    width:220,
+    height:220,
+    colorDark:"#17152b",
+    colorLight:"#ffffff",
+    correctLevel:QRCode.CorrectLevel.H
+  });
+
+  document.getElementById("downloadBtn").disabled = false;
+}
+
+function downloadQR(){
+
+  const qrContainer = document.getElementById("qrcode");
+
+  const canvas = qrContainer.querySelector("canvas");
+  const image = qrContainer.querySelector("img");
+
+  if(!canvas && !image){
+    alert("Please generate a QR code first.");
+    return;
+  }
+
+  const link = document.createElement("a");
+
+  link.download = "auraqr-phone-qr-code.png";
+
+  if(canvas){
+    link.href = canvas.toDataURL("image/png");
+  }else{
+    link.href = image.src;
+  }
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function toggleFAQ(element){
+
+  const item = element.parentElement;
+
+  item.classList.toggle("active");
+
+  const symbol = element.querySelector("span");
+
+  symbol.textContent =
+    item.classList.contains("active") ? "−" : "+";
+}
+
+</script>
+
+</body>
+</html>
