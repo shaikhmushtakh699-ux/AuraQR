@@ -899,24 +899,11 @@
   /* =========================
      GET CONTENT
   ========================= */
+  function getItemValue(item) 
+      if (!item) return "";
 
-  function getItemValue(item) {
-
-    if (!item) return "";
-
-    return (
-      item.text ||
-      item.content ||
-      item.data ||
-      item.value ||
-      item.url ||
-      item.qrText ||
-      item.message ||
-      ""
-    );
-
-  }
-
+    return item.payload || "";
+}
 
   /* =========================
      GET IMAGE
