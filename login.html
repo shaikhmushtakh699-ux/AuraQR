@@ -249,378 +249,449 @@
 
 <body>
 
-  <header>
-    <div class="nav">
+<header>
+  <div class="nav">
 
-      <a href="index.html" class="logo">
-        <img src="logo.png" alt="AuraQR Logo">
-        AuraQR
-      </a>
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="AuraQR Logo">
+      AuraQR
+    </a>
 
-      <a href="pricing.html" class="back">
-        View Pricing →
-      </a>
+    <a href="pricing.html" class="back">
+      View Pricing →
+    </a>
+
+  </div>
+</header>
+
+
+<main class="container">
+
+  <div class="auth-card">
+
+    <div class="top">
+
+      <div class="icon">🔐</div>
+
+      <h1 id="title">Welcome back</h1>
+
+      <p id="subtitle">
+        Login to your AuraQR account
+      </p>
 
     </div>
-  </header>
 
 
-  <main class="container">
+    <div class="tabs">
 
-    <div class="auth-card">
-
-      <div class="top">
-        <div class="icon">🔐</div>
-
-        <h1 id="title">Welcome back</h1>
-
-        <p id="subtitle">
-          Login to your AuraQR account
-        </p>
-      </div>
-
-
-      <div class="tabs">
-
-   <button type="button"
+      <button
+        type="button"
         class="tab active"
-        id="loginTab"
-        onclick="showLogin(); return false;">
-  Login
-</button>
+        id="loginTab">
+        Login
+      </button>
 
-<button type="button"
+      <button
+        type="button"
         class="tab"
-        id="signupTab"
-        onclick="showSignup(); return false;">
-  Sign Up
-</button>
-
-      </div>
-
-
-      <form id="authForm">
-
-        <div class="form-group">
-
-          <label for="email">
-            Email address
-          </label>
-
-          <input
-            type="email"
-            id="email"
-            placeholder="you@example.com"
-            required
-            autocomplete="email"
-          >
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label for="password">
-            Password
-          </label>
-
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-            required
-            minlength="6"
-            autocomplete="current-password"
-          >
-
-        </div>
-
-
-        <button
-          type="submit"
-          class="submit-btn"
-          id="submitBtn">
-          Login
-        </button>
-
-      </form>
-
-
-      <div id="message" class="message"></div>
-
-
-      <div class="terms">
-        By continuing, you agree to AuraQR's terms and privacy policy.
-      </div>
+        id="signupTab">
+        Sign Up
+      </button>
 
     </div>
 
-  </main>
+
+    <form id="authForm">
+
+      <div class="form-group">
+
+        <label for="email">
+          Email address
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          placeholder="you@example.com"
+          required
+          autocomplete="email"
+        >
+
+      </div>
 
 
-  <footer>
-    © 2026 AuraQR
-  </footer>
+      <div class="form-group">
+
+        <label for="password">
+          Password
+        </label>
+
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password"
+          required
+          minlength="6"
+          autocomplete="current-password"
+        >
+
+      </div>
 
 
-  <!-- SUPABASE -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+      <button
+        type="submit"
+        class="submit-btn"
+        id="submitBtn">
+        Login
+      </button>
+
+    </form>
 
 
-  <script>
-
-    /* ==========================================
-       SUPABASE CONFIGURATION
-       ========================================== */
-
-    const SUPABASE_URL =
-      "https://vekdkldiujogcrpbefme.supabase.co";
-
-    const SUPABASE_PUBLISHABLE_KEY =
-    sb_publishable_89DqCT4_d43Ow9kY0tscvQ_qrBdkgSI
+    <div id="message" class="message"></div>
 
 
-    const { createClient } = supabase;
+    <div class="terms">
+      By continuing, you agree to AuraQR's terms and privacy policy.
+    </div>
 
-    const supabaseClient = createClient(
+  </div>
+
+</main>
+
+
+<footer>
+  © 2026 AuraQR
+</footer>
+
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+  /* ==========================================
+     SUPABASE CONFIGURATION
+     ========================================== */
+
+  const SUPABASE_URL =
+    "https://vekdkldiujogcrpbefme.supabase.co";
+
+  /*
+    IMPORTANT:
+    Yahan apni Supabase PUBLISHABLE KEY
+    quotes ke andar paste karo.
+    
+    Secret key kabhi yahan mat paste karna.
+  */
+
+  const SUPABASE_PUBLISHABLE_KEY =
+  sb_publishable_89DqCT4_d43Ow9kY0tscvQ_qrBdkgSI
+
+
+  const supabaseClient =
+    supabase.createClient(
       SUPABASE_URL,
       SUPABASE_PUBLISHABLE_KEY
     );
 
 
-    /* ==========================================
-       VARIABLES
-       ========================================== */
+  /* ==========================================
+     ELEMENTS
+     ========================================== */
 
-    let currentMode = "login";
+  const authForm =
+    document.getElementById("authForm");
+
+  const submitBtn =
+    document.getElementById("submitBtn");
+
+  const message =
+    document.getElementById("message");
+
+  const title =
+    document.getElementById("title");
+
+  const subtitle =
+    document.getElementById("subtitle");
+
+  const loginTab =
+    document.getElementById("loginTab");
+
+  const signupTab =
+    document.getElementById("signupTab");
+
+  const passwordInput =
+    document.getElementById("password");
 
 
-    const authForm =
-      document.getElementById("authForm");
+  /* ==========================================
+     MODE
+     ========================================== */
 
-    const submitBtn =
-      document.getElementById("submitBtn");
-
-    const message =
-      document.getElementById("message");
-
-    const title =
-      document.getElementById("title");
-
-    const subtitle =
-      document.getElementById("subtitle");
-
-    const loginTab =
-      document.getElementById("loginTab");
-
-    const signupTab =
-      document.getElementById("signupTab");
+  let currentMode = "login";
 
 
-    /* ==========================================
-       LOGIN TAB
-       ========================================== */
+  /* ==========================================
+     LOGIN TAB
+     ========================================== */
 
-    function showLogin() {
+  function showLogin() {
 
-      currentMode = "login";
+    currentMode = "login";
 
-      title.textContent =
-        "Welcome back";
+    title.textContent =
+      "Welcome back";
 
-      subtitle.textContent =
-        "Login to your AuraQR account";
+    subtitle.textContent =
+      "Login to your AuraQR account";
 
-      submitBtn.textContent =
-        "Login";
+    submitBtn.textContent =
+      "Login";
 
-      loginTab.classList.add("active");
+    loginTab.classList.add("active");
 
-      signupTab.classList.remove("active");
+    signupTab.classList.remove("active");
 
-      document
-        .getElementById("password")
-        .setAttribute(
-          "autocomplete",
-          "current-password"
-        );
+    passwordInput.setAttribute(
+      "autocomplete",
+      "current-password"
+    );
+
+    clearMessage();
+
+  }
+
+
+  /* ==========================================
+     SIGNUP TAB
+     ========================================== */
+
+  function showSignup() {
+
+    currentMode = "signup";
+
+    title.textContent =
+      "Create your account";
+
+    subtitle.textContent =
+      "Start using AuraQR today";
+
+    submitBtn.textContent =
+      "Create Account";
+
+    signupTab.classList.add("active");
+
+    loginTab.classList.remove("active");
+
+    passwordInput.setAttribute(
+      "autocomplete",
+      "new-password"
+    );
+
+    clearMessage();
+
+  }
+
+
+  /* ==========================================
+     TAB CLICK EVENTS
+     ========================================== */
+
+  loginTab.addEventListener(
+    "click",
+    function () {
+      showLogin();
+    }
+  );
+
+
+  signupTab.addEventListener(
+    "click",
+    function () {
+      showSignup();
+    }
+  );
+
+
+  /* ==========================================
+     MESSAGE
+     ========================================== */
+
+  function showMessage(text, type) {
+
+    message.textContent = text;
+
+    message.className =
+      "message " + type;
+
+  }
+
+
+  function clearMessage() {
+
+    message.textContent = "";
+
+    message.className =
+      "message";
+
+  }
+
+
+  /* ==========================================
+     AUTH FORM
+     ========================================== */
+
+  authForm.addEventListener(
+    "submit",
+    async function (event) {
+
+      event.preventDefault();
 
       clearMessage();
-    }
+
+      const email =
+        document
+          .getElementById("email")
+          .value
+          .trim();
+
+      const password =
+        document
+          .getElementById("password")
+          .value;
 
 
-    /* ==========================================
-       SIGNUP TAB
-       ========================================== */
-
-    function showSignup() {
-
-      currentMode = "signup";
-
-      title.textContent =
-        "Create your account";
-
-      subtitle.textContent =
-        "Start using AuraQR today";
-
-      submitBtn.textContent =
-        "Create Account";
-
-      signupTab.classList.add("active");
-
-      loginTab.classList.remove("active");
-
-      document
-        .getElementById("password")
-        .setAttribute(
-          "autocomplete",
-          "new-password"
-        );
-
-      clearMessage();
-    }
+      submitBtn.disabled = true;
 
 
-    /* ==========================================
-       MESSAGE
-       ========================================== */
+      try {
 
-    function showMessage(text, type) {
+        /* ==================================
+           LOGIN
+           ================================== */
 
-      message.textContent = text;
+        if (currentMode === "login") {
 
-      message.className =
-        "message " + type;
-    }
-
-
-    function clearMessage() {
-
-      message.textContent = "";
-
-      message.className =
-        "message";
-    }
-
-
-    /* ==========================================
-       AUTH FORM
-       ========================================== */
-
-    authForm.addEventListener(
-      "submit",
-      async function(event) {
-
-        event.preventDefault();
-
-        clearMessage();
-
-        const email =
-          document
-            .getElementById("email")
-            .value
-            .trim();
-
-        const password =
-          document
-            .getElementById("password")
-            .value;
-
-
-        submitBtn.disabled = true;
-
-
-        try {
-
-          /* LOGIN */
-
-          if (currentMode === "login") {
-
-            const { data, error } =
-              await supabaseClient.auth.signInWithPassword({
+          const {
+            data,
+            error
+          } =
+            await supabaseClient.auth
+              .signInWithPassword({
                 email: email,
                 password: password
               });
 
 
-            if (error) {
-              throw error;
-            }
+          if (error) {
+            throw error;
+          }
 
 
-            showMessage(
-              "Login successful! Redirecting...",
-              "success"
-            );
+          showMessage(
+            "Login successful! Redirecting...",
+            "success"
+          );
 
 
-            setTimeout(function() {
+          setTimeout(
+            function () {
 
               window.location.href =
                 "index.html";
 
-            }, 1000);
-
-          }
-
-
-          /* SIGNUP */
-
-          else {
-
-            const { data, error } =
-              await supabaseClient.auth.signUp({
-                email: email,
-                password: password,
-                options: {
-                  emailRedirectTo:
-                    "https://auraqr.in/index.html"
-                }
-              });
-
-
-            if (error) {
-              throw error;
-            }
-
-
-            showMessage(
-              "Account created! Please check your email and confirm your account.",
-              "success"
-            );
-
-          }
-
-
-        } catch (error) {
-
-          console.error(error);
-
-          showMessage(
-            error.message ||
-            "Something went wrong. Please try again.",
-            "error"
+            },
+            1000
           );
-
-        } finally {
-
-          submitBtn.disabled = false;
 
         }
 
+
+        /* ==================================
+           SIGN UP
+           ================================== */
+
+        else {
+
+          const {
+            data,
+            error
+          } =
+            await supabaseClient.auth
+              .signUp({
+
+                email: email,
+
+                password: password,
+
+                options: {
+
+                  emailRedirectTo:
+                    "https://auraqr.in/index.html"
+
+                }
+
+              });
+
+
+          if (error) {
+            throw error;
+          }
+
+
+          showMessage(
+            "Account created! Please check your email and confirm your account.",
+            "success"
+          );
+
+        }
+
+
       }
-    );
+
+      catch (error) {
+
+        console.error(
+          "Authentication error:",
+          error
+        );
 
 
-    /* ==========================================
-       CHECK EXISTING SESSION
-       ========================================== */
+        showMessage(
+          error.message ||
+          "Something went wrong. Please try again.",
+          "error"
+        );
 
-    async function checkSession() {
+      }
+
+      finally {
+
+        submitBtn.disabled = false;
+
+      }
+
+    }
+  );
+
+
+  /* ==========================================
+     CHECK EXISTING SESSION
+     ========================================== */
+
+  async function checkSession() {
+
+    try {
 
       const {
-        data: { session }
-      } = await supabaseClient.auth.getSession();
+        data: {
+          session
+        }
+      } =
+        await supabaseClient.auth
+          .getSession();
 
 
       if (session) {
@@ -630,21 +701,36 @@
           "success"
         );
 
-        setTimeout(function() {
 
-          window.location.href =
-            "index.html";
+        setTimeout(
+          function () {
 
-        }, 800);
+            window.location.href =
+              "index.html";
+
+          },
+          800
+        );
 
       }
 
     }
 
+    catch (error) {
 
-    checkSession();
+      console.error(
+        "Session check error:",
+        error
+      );
 
-  </script>
+    }
+
+  }
+
+
+  checkSession();
+
+</script>
 
 </body>
 </html>
