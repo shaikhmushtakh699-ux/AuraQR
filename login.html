@@ -580,16 +580,27 @@ const supabaseClient = createClient(
             "success"
           );
 
+setTimeout(async () => {
+  const {
+    data: { user }
+  } = await supabaseClient.auth.getUser();
 
-          setTimeout(
-            function () {
+  if (user) {
+    const { data: profile, error: profileError } =
+      await supabaseClient
+        .from("profiles")
+        .select("plan")
+        .eq("id", user.id)
+        .single();
 
-              window.location.href =
-                "index.html";
+    if (!profileError && profile) {
+      localStorage.setItem("auraqr_plan", profile.plan);
+      localStorage.setItem("auraqr_user_email", user.email);
+    }
+  }
 
-            },
-            1000
-          );
+  window.location.href = "index.html";
+}, 1000);
 
         }
 
