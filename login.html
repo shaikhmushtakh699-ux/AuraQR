@@ -371,28 +371,21 @@
 
 <script>
 
-  /* ==========================================
-     SUPABASE CONFIGURATION
-     ========================================== */
-const SUPABASE_URL =
-  "https://vekdlcdiujogcprbefme.supabase.co";
+<!-- SUPABASE CONFIGURATION -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  /*
-    IMPORTANT:
-    Yahan apni Supabase PUBLISHABLE KEY
-    quotes ke andar paste karo.
-    
-    Secret key kabhi yahan mat paste karna.
-  */
-const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_89DqCT4_d43Ow9kY0tscvQ_qrBdkgSI;
+<script>
+const SUPABASE_URL = "https://vekdlcdiujogcprbefme.supabase.co";
 
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_89DqCT4_d43Ow9kY0tscvQ_qrBdkgSI";
 
-  const supabaseClient =
-    supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
-    );
+const { createClient } = supabase;
+
+const supabaseClient = createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+</script>
 
 
   /* ==========================================
