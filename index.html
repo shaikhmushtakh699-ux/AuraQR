@@ -491,6 +491,21 @@ textarea:focus,.input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(
 </style>
 <link rel="icon" type="image/png" href="/logo.png">
 <link rel="apple-touch-icon" href="/logo.png">
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://vekdlcdiujogcprbefme.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_89DqCT4_d43Ow9kY0tscvQ_qrBdkgSI";
+
+const { createClient } = supabase;
+
+const supabaseClient = createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+</script>
 </head>
 
 <body>
