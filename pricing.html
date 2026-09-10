@@ -526,6 +526,21 @@
       }
     }
   </style>
+  <!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://vekdlcdiujogcprbefme.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_89DqCT4_d43Ow9kY0tscvQ_qrBdkgSI";
+
+const { createClient } = supabase;
+
+const supabaseClient = createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+</script>
 </head>
 
 <body>
@@ -564,7 +579,7 @@
     </h1>
 
     <p>
-      Start for free and upgrade when you need more customization,
+      Start for  and upgrade when you need more customization,
       advanced QR features and business tools.
     </p>
 
@@ -998,21 +1013,31 @@
 
 
     /* UPGRADE */
-    function upgradePlan(plan) {
+async function upgradePlan(plan) {
+  const {
+    data: { session }
+  } = await supabaseClient.auth.getSession();
 
-      /*
-        PAYMENT SYSTEM WILL BE CONNECTED LATER.
+  // User logged out hai
+  if (!session) {
+    localStorage.setItem("auraqr_pending_plan", plan);
+    window.location.href = "login.html";
+    return;
+  }
 
-        IMPORTANT:
-        Do NOT put Razorpay secret/API secret keys in this file.
-        Payment verification must happen on the backend.
-      */
+  // User already logged in hai
+  if (plan === "Pro") {
+    alert("Pro subscription checkout will be connected next.");
+    return;
+  }
 
-      alert(
-        plan +
-        " subscription payment will be available soon."
-      );
-    }
+  if (plan === "Business") {
+    alert("Business subscription checkout will be connected next.");
+    return;
+  }
+
+  startFree();
+}
 
   </script>
 
