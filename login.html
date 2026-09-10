@@ -597,8 +597,15 @@ setTimeout(async () => {
       localStorage.setItem("auraqr_plan", profile.plan);
       localStorage.setItem("auraqr_user_email", user.email);
     }
-  }
+ const pendingPlan = localStorage.getItem("auraqr_pending_plan");
 
+if (pendingPlan) {
+  localStorage.removeItem("auraqr_pending_plan");
+  window.location.href = "pricing.html";
+  return;
+}
+  }
+  
   window.location.href = "index.html";
 }, 1000);
 
