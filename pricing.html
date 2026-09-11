@@ -1013,28 +1013,63 @@ const supabaseClient = createClient(
 
 
     /* UPGRADE */
-async function upgradePlan(plan) {
-  const {
-    data: { session }
-  } = await supabaseClient.auth.getSession();
+    async function upgradePlan(plan) {
+  try {
+    // Check login session
+    const {
+      data: { session },
+      error: sessionError
+    } = await supabaseClient.auth.getSession();
 
-  // User logged out hai
-  if (!session) {
-    localStorage.setItem("auraqr_pending_plan", plan);
-    window.location.href = "login.html";
-    return;
-  }
+    if (sessionError) {
+      alert("Unable to check login status. Please try again.");
+      return;
+    }
 
-  // User already logged in hai
-  if (plan === "Pro") {
-    alert("Pro subscription checkout will be connected next.");
-    return;
-  }
+    // User login nahi hai
+    if (!session) {
+      localStorage.setItem("auraqr_pending_plan", plan);
+      window.location.href = "login.html";
+      return;
+    }
 
-  if (plan === "Business") {
-    alert("Business subscription checkout will be connected next.");
-    return;
+    // Only Pro is enabled for now
+    if (plan !== "Pro") {
+      alert("Business subscription checkout will be connected next.");
+      return;
+    }
+
+    // Call Supabase Edge Function
+    const { data, error } =
+      await supabaseClient.functions.invoke(
+        "create-razorpay-subscription",
+        {
+          body: {
+            plan: "Pro"
+          }
+        }
+      );
+
+    if (error) {
+      console.error("Subscription function error:", error);
+      alert("Unable to start subscription. Please try again.");
+      return;
+    }
+
+    if (!data || !data.short_url) {
+      console.error("Invalid subscription response:", data);
+      alert("Subscription could not be created. Please try again.");
+      return;
+    }
+
+    // Open Razorpay subscription authorization
+    window.location.href = data.short_url;
+
+  } catch (error) {
+    console.error("Upgrade error:", error);
+    alert("Something went wrong. Please try again.");
   }
+}
 
   startFree();
 }
