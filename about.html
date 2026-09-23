@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>About AuraQR – Free QR Code Generator</title>
+
+  <meta name="description"
+        content="Learn about AuraQR, a free QR code generator for creating QR codes for URLs, Wi-Fi, WhatsApp, UPI, contacts, email, social media and more.">
+
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://auraqr.in/about.html">
+
+  <link rel="icon" type="image/png" href="https://auraqr.in/favicon.png">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f7fb;
+      color: #202124;
+      line-height: 1.7;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid #e5e7eb;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #222;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    .brand span {
+      background: linear-gradient(90deg, #244cff, #8b3dff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #3f4650;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: #4b43ff;
+    }
+
+    .hero {
+      padding: 70px 0 35px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      font-size: clamp(34px, 6vw, 56px);
+      line-height: 1.1;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, #2457ff, #8a35ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: #626b78;
+      font-size: 17px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.94);
+      border: 1px solid #e4e7ee;
+      border-radius: 22px;
+      padding: 32px;
+      margin: 24px 0;
+      box-shadow: 0 10px 35px rgba(35, 45, 80, 0.07);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 27px;
+    }
+
+    .card h3 {
+      margin-top: 28px;
+      font-size: 20px;
+    }
+
+    .card p {
+      color: #555f6d;
+    }
+
+    .card ul {
+      color: #555f6d;
+      padding-left: 22px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .feature {
+      border: 1px solid #e6e8ef;
+      border-radius: 16px;
+      padding: 20px;
+      background: #fafbff;
+    }
+
+    .feature h3 {
+      margin: 0 0 8px;
+    }
+
+    .feature p {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 35px 20px;
+    }
+
+    .cta a {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 13px 24px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: white;
+      font-weight: 700;
+      background: linear-gradient(90deg, #3157ff, #823cff);
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 30px 0;
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+      color: #707784;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #4a4fff;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        padding: 12px 0;
+        flex-direction: column;
+      }
+
+      nav {
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .hero {
+        padding-top: 45px;
+      }
+
+      .card {
+        padding: 22px;
+        border-radius: 17px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+
+    <a class="brand" href="index.html">
+      <img src="logo.png" alt="AuraQR logo">
+      <span>AuraQR</span>
+    </a>
+
+    <nav aria-label="Main navigation">
+      <a href="index.html">Generator</a>
+      <a href="url-qr-code.html">URL QR</a>
+      <a href="templates.html">Templates</a>
+      <a href="how-to-use.html">How to Use</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="login.html">Login</a>
+    </nav>
+
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="container">
+      <h1>About <span>AuraQR</span></h1>
+
+      <p>
+        AuraQR is a free online QR code generator designed to make creating,
+        customizing and downloading QR codes simple for everyday users,
+        creators and businesses.
+      </p>
+    </div>
+  </section>
+
+
+  <section class="container">
+
+    <div class="card">
+
+      <h2>What is AuraQR?</h2>
+
+      <p>
+        AuraQR provides an easy way to create QR codes for different types of
+        information. Instead of manually creating QR data formats, users can
+        select a QR type, enter their information, customize the design and
+        generate a scannable QR code.
+      </p>
+
+      <p>
+        The platform supports common QR code use cases including website URLs,
+        text, Wi-Fi credentials, WhatsApp links, UPI payment information,
+        contact details, email, phone numbers, SMS, locations, events and
+        social media links.
+      </p>
+
+      <h3>Our purpose</h3>
+
+      <p>
+        The purpose of AuraQR is to make QR code creation accessible without
+        requiring technical knowledge. The interface is designed so that a
+        user can move from entering information to generating a QR code in a
+        straightforward workflow.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>What can you do with AuraQR?</h2>
+
+      <div class="features">
+
+        <div class="feature">
+          <h3>🌐 Website QR Codes</h3>
+          <p>
+            Create QR codes that open websites, landing pages and other URLs.
+          </p>
+        </div>
+
+        <div class="feature">
+          <h3>📶 Wi-Fi QR Codes</h3>
+          <p>
+            Share Wi-Fi network information through a scannable QR code.
+          </p>
+        </div>
+
+        <div class="feature">
+          <h3>💳 UPI QR Codes</h3>
+          <p>
+            Create QR codes containing supported UPI payment information.
+          </p>
+        </div>
+
+        <div class="feature">
+          <h3>👤 Contact QR Codes</h3>
+          <p>
+            Share contact information using a QR code.
+          </p>
+        </div>
+
+        <div class="feature">
+          <h3>💬 WhatsApp QR Codes</h3>
+          <p>
+            Create QR codes that help users access WhatsApp conversations or
+            links.
+          </p>
+        </div>
+
+        <div class="feature">
+          <h3>📱 Social Media QR Codes</h3>
+          <p>
+            Direct users to social profiles and social media links.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>QR Code Customization</h2>
+
+      <p>
+        QR codes do not have to look identical. Depending on the intended use,
+        a QR code can be customized with different colors, module styles,
+        frames, logos and other visual settings.
+      </p>
+
+      <p>
+        AuraQR includes customization options designed to help users create
+        QR codes that better match their personal projects, printed materials,
+        websites or business branding.
+      </p>
+
+      <h3>Always test before publishing</h3>
+
+      <p>
+        A customized QR code should be tested with a smartphone before it is
+        printed or distributed. Contrast, size, surrounding space and the
+        destination information can affect the scanning experience.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>Designed for different users</h2>
+
+      <p>
+        AuraQR can be used for personal projects, events, restaurants,
+        businesses, creators, educational materials, printed marketing
+        materials and everyday information sharing.
+      </p>
+
+      <ul>
+        <li>Creators can share website and social links.</li>
+        <li>Businesses can place QR codes on printed materials.</li>
+        <li>Restaurants can provide digital access points for customers.</li>
+        <li>Event organizers can share event or location information.</li>
+        <li>Individuals can share Wi-Fi and contact information.</li>
+      </ul>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>Using QR codes responsibly</h2>
+
+      <p>
+        A QR code can make information easier to access, but users should
+        always verify the destination before sharing or scanning a code.
+        Avoid placing unnecessary sensitive information inside a QR code and
+        test codes before publishing them.
+      </p>
+
+      <p>
+        When using a QR code for a website, make sure the destination URL is
+        correct and remains available after the code has been printed or
+        distributed.
+      </p>
+
+    </div>
+
+
+    <div class="card cta">
+
+      <h2>Create Your QR Code</h2>
+
+      <p>
+        Ready to create a QR code? Open the AuraQR generator and choose the
+        QR code type that matches your needs.
+      </p>
+
+      <a href="index.html">Open AuraQR Generator</a>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+  <div class="container">
+
+    <div>
+      © 2026 AuraQR. All rights reserved.
+    </div>
+
+    <div style="margin-top:10px;">
+      <a href="index.html">Generator</a>
+      <a href="how-to-use.html">How to Use</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>
